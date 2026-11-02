@@ -457,3 +457,44 @@ html[data-theme="dark"] .back-button { color: #08222e; }
   .l03-facts { grid-template-columns:1fr; }
   .l03-stat-grid { grid-template-columns:1fr; }
 }
+
+
+/* Lesson 03 — excited carrier pathways, diagrams and inline hole motion */
+.l03-excitation > svg { display:block; width:100%; max-height:250px; }
+.l03-excitation-paths,.l03-mechanism-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+.l03-excitation-path,.l03-mechanism-card { border:1px solid var(--stroke); border-radius:10px; padding:11px; background:var(--surface); min-width:0; }
+.l03-excitation-path strong {display:block; font-size:12px; color:var(--ink);}
+.l03-excitation-path small {display:block; margin:2px 0 8px; color:var(--accent);font-weight:700;font-size:10px;}
+.l03-excitation-path p,.l03-mechanism-card p {font-size:11px!important;line-height:1.58!important;color:var(--ink-soft);margin:5px 0!important;}
+.l03-excitation-path span {display:block; margin-top:8px; font-size:10px; color:var(--accent-dark); font-weight:700;}
+.l03-mechanism-group {margin:14px 0;}
+.l03-mechanism-group h4 {margin:0 0 8px;color:var(--ink);font-size:13px;font-weight:800;}
+.l03-mechanism-card {display:flex; gap:8px; align-items:flex-start;}
+.l03-mechanism-icon {flex:0 0 45px;width:45px;height:42px;color:var(--accent);}
+.l03-mechanism-card > div {min-width:0;}
+.l03-mechanism-card strong {display:block;color:var(--ink);font-size:12px;}
+.l03-mechanism-card .l03-mechanism-flow {font-weight:750; color:var(--accent-dark);font-size:11px!important;}
+.l03-mechanism-card small {display:block; margin-top:8px;font-size:10px;line-height:1.4;color:var(--muted);}
+.l03-hole-sim {margin:16px 0; padding:15px; border:1px solid var(--stroke);border-radius:12px;background:var(--surface-alt);}
+.l03-hole-sim h4 {font-size:15px;margin:0 0 5px;color:var(--ink);}
+.l03-hole-sim p {font-size:12px!important;line-height:1.6!important;color:var(--ink-soft);margin:0 0 9px!important;}
+.l03-hole-motion-svg {display:block;width:100%;height:auto;max-height:190px;background:var(--surface);border-radius:9px;border:1px solid var(--stroke);}
+.l03-hole-motion-track {stroke:var(--stroke);stroke-width:6;}
+.l03-hole-motion-vacant {fill:#b9843b;stroke:var(--surface);stroke-width:3;}
+.l03-hole-motion-electron {fill:#4783a8;stroke:var(--surface);stroke-width:3;}
+.l03-hole-motion-symbol {fill:#fff;font:800 24px sans-serif;}
+.l03-hole-motion-index {fill:var(--ink-soft);font:700 13px sans-serif;}
+.l03-hole-motion-line {stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round;}
+.l03-hole-motion-tip {fill:var(--accent);}
+.l03-hole-sim-controls {display:flex;flex-wrap:wrap;gap:7px;margin:12px 0;}
+.l03-hole-sim-controls button {border:1px solid var(--stroke);background:var(--surface);color:var(--ink);padding:7px 11px;border-radius:8px;font-size:11px;font-weight:750;}
+.l03-hole-sim-controls button:hover:not(:disabled) {border-color:var(--accent);color:var(--accent-dark);}
+.l03-hole-sim-controls button:disabled {opacity:.45;cursor:not-allowed;}
+.l03-hole-status {min-height:2.5em;font-size:12px;color:var(--accent-dark);font-weight:750;line-height:1.5;}
+.l03-hole-sim > section > small {display:block;margin-top:6px;font-size:10px;line-height:1.55;color:var(--muted);}
+@media (max-width:920px) {
+ .l03-excitation-paths,.l03-mechanism-grid {grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce) {
+ .l03-hole-sim * {transition:none!important;animation:none!important;}
+}

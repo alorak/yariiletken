@@ -103,6 +103,16 @@
   }
 
   const progress = loadProgress();
+  // 03 outcomes 8 and 9 changed from wave/dipole analogies to band-gap/excitation skills.
+  // Keep all unaffected completed objectives, but do not silently count changed ones.
+  const outcomeMigrationKey = "yariiletken-lesson03-outcomes-v2";
+  if (readStorage(outcomeMigrationKey, "") !== "1") {
+    if (Array.isArray(progress["03"])) {
+      progress["03"] = progress["03"].filter(index => index !== 7 && index !== 8);
+      writeStorage(progressKey, JSON.stringify(progress));
+    }
+    writeStorage(outcomeMigrationKey, "1");
+  }
   let language = readStorage(languageKey, "tr") === "en" ? "en" : "tr";
   let lessons = language === "en" && lessonsEn.length === lessonsTr.length ? lessonsEn : lessonsTr;
   let pendingScroll = null;
@@ -302,8 +312,10 @@
         ? topic.extraVisual.map(kind => window.SemiconductorLessonExtras.render(kind, language)).join("")
         : "") +
       (lesson.id === "03" && Array.isArray(topic.visual03) && window.Lesson03Figures
-        ? topic.visual03.map(kind => window.Lesson03Figures.render(kind, language)).join("")
+        ? topic.visual03.map(kind => window.Lesson03Mechanisms?.render(kind, language) ||
+            window.Lesson03Figures.render(kind, language)).join("")
         : "") +
+      (lesson.id === "03" && index === 2 ? '<div id="lesson03-hole-inline"></div>' : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
 
@@ -329,6 +341,7 @@
       '</aside></div>';
 
     setupTopicStepper(lesson);
+    if (lesson.id === "03") window.Lesson03HoleSim?.mount($("#lesson03-hole-inline"), language);
     $("#content-panel").querySelectorAll("[data-outcome]").forEach(checkbox => {
       checkbox.addEventListener("change", () => {
         const current = new Set(getChecked(lesson));
@@ -368,6 +381,7 @@
     const { lessonId, tabId } = selectedRoute();
     const lesson = lessons.find(item => item.id === lessonId);
     if (!lesson) return;
+    window.Lesson03HoleSim?.cleanup();
     clearTopicNavigation();
     document.documentElement.lang = language;
     document.title = lesson.navTitle + " | " + t().site;

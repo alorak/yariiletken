@@ -143,8 +143,6 @@ Kontrol komutu: `node --test tests/*.test.mjs`.
 
 `lec03.pdf` sunumunun şu temaları, konu anlatımına doğrudan yerleştirildi:
 
-- **Where does the energy come from?** Örgü elastik dalgalarının girişimi için iki kaynaktan yayılan dalga SVG'si.
-- **A vibrating atom as an oscillating dipole.** Elektron bulutu–çekirdek göreli hareketi, dalga ve foton ayrımı. Saf merkez simetrili Si'nin birinci mertebe tek-fonon IR dipol soğurumu için istisna açıklanıyor.
 - **Generation and recombination.** Valans/iletim bantları arasında üretim ve geri birleşme yönlerini gösteren iki ayrı bant diyagramı.
 - **Recombination is not scattering.** Saçılma olayında momentumun değişmesi, yeniden birleşmede elektron–hol çiftinin kaybolması yan yana şemalarla anlatılıyor.
 - **The bond model.** Dolu kovalent bağ ve boş bağ/hol temsili, neler açıkladığı ve hesaplayamadıkları.
@@ -168,3 +166,20 @@ Test komutu: `node --test tests/*.test.mjs`. Canlı tarayıcıda mobil/masaüst�
 - Konu verisi, mevcut 02–06 içerikleri, TR/EN, light/dark tema, grafik/simülasyonlar ve ilerleme kaydı değiştirilmedi.
 
 Regresyon kontrolü: `node --test tests/sticky-layout.test.mjs tests/topic-stepper.test.mjs`.
+
+
+## Ders 03 — Uyarılma koşulları, hol simülasyonu, üretim ve rekombinasyon yolları
+
+- Sıcaklık bölümünden **slayt atfı / dalga girişimi paragrafı** ve **salınan dipol** anlatımı ile görünür görselleri kaldırıldı. Fononların örgü titreşimlerini ifade ettiği kısa ve doğru fiziksel açıklama korundu.
+- **E₉(Si, 300 K) ≈ 1,12 eV**, valans bandı üst sınırı ile iletim bandı alt sınırının elektronik enerji farkı olarak açıklanır; kimyasal Si–Si bağını ayırma enerjisi değildir. Işıkla bir elektron–hol çifti oluşturmak için uygun foton enerjisi/izinli geçiş ve dolaylı Si'de momentum koşulları gerekir. 300 K'de eşik foton dalga boyu yaklaşık 1107 nm'dir; yalnız enerji eşiği absorpsiyon garantisi değildir.
+- **Elektron–hol çifti nasıl oluşur?** başlığında ışıkla üretim, ısıl üretim, impact ionization ve güçlü alanlarda bantlar arası tünelleme anlatılır. Yeni bant geçişi diyagramı bu koşulları gösterir.
+- **Hol gerçekten hareket eder mi?** içine çalışır bir **adım adım/otomatik ilerletilebilir** simülasyon eklendi: sağ/sol komşu elektron hareketi, holün ters yer değiştirmesi, duraklatma ve sıfırlama, TR/EN ve erişilebilir durum metni. Simülasyon 1B kavramsal bir modeldir, gerçek Si Bloch dalga taşınımı değildir; 03 Simülasyonlar sekmesindeki eski simülasyon da korunur.
+- **Üretim ve yeniden birleşme** altında üç üretim örneği (fotogeneration, impact ionization, thermal generation) ve üç yeniden birleşme örneği (radiative, SRH, Auger) ayrı açıklamalı kartlarda gösterilir. Enerji nereye gidiyor ve hangi cihazda görülüyor soruları cevaplanır. Bant diyagramında **elektron (−)** ve **hol (+)** işaretlerinin başlangıç/son konumları düzeltildi.
+- İlgisiz iki soru ve iki kazanım, elektronik bant aralığı/uyarılma konularıyla değiştirildi; bu iki eski işaretleme ve soru yanıtı, kullanıcıda yanlış öğrenme ilerlemesi gösterilmemesi için bir kereliğine temizlenir. Diğer ilerleme, soru ve kazanım kayıtları korunur.
+
+**Doğrulama**: `node --test tests/*.test.mjs`. 03 konularının sırası ve 15 soru / 13 kazanım sayısı değişmez.
+
+Bilimsel kaynaklar:
+- <https://doi.org/10.1063/1.4923379> — kristal Si'de dolaylı bantlar arası optik soğurulmada fonon katılımı.
+- <https://optics.ansys.com/hc/en-us/articles/360034919113-Semiconductor-Material-Model-Properties> — termal/ışınımsal/SRH/Auger/impact modelleri.
+- <https://www.cambridge.org/core/books/abs/physics-of-semiconductors/generation-and-recombination-processes-in-semiconductors/1C347FC5BB8D656BDF285415C55C8B18> — mekanizmaların fiziksel sınıflandırması.

@@ -97,21 +97,23 @@ window.COURSE_LESSONS = [
       {
         title: "Sıcaklık kristalde neyi değiştirir?",
         paragraphs: [
-          "İdeal öz yarıiletkenin bağ modeli açısından 0 K'de termal elektron–hol çiftleri bulunmaz; sıfır nokta titreşimleri ise kuantum mekaniği nedeniyle sürebilir. Sıcaklık yükseldikçe atomların örgü titreşimlerinin termal uyarımı artar. <strong>Where does the energy come from?</strong> slaytında farklı noktalardan gelen elastik dalgaların girişimi kullanılır; fononlar bu örgü titreşimlerinin kuantumlarıdır.",
-          "Örgü titreşimleri ve fotonlar farklı enerji aktarım kanallarıdır. <strong>Salınan dipol</strong> modeli, pozitif ve negatif yük merkezleri birbirine göre salınırken elektromanyetik ışınımın nasıl oluşabileceğini anlatır; saf, merkez simetrili Si'nin her titreşimi ışınım yapan dipol değildir. Termal uyarılmada bant geçişlerinin gerçek açıklaması kuantum mekanikseldir. 300 K'deki yaklaşık <strong>1,12 eV elektronik bant aralığı</strong> tek Si–Si kimyasal bağını koparma enerjisi değildir."
+          "Öz yarıiletkenin ideal bant modelinde 0 K'de termal olarak üretilmiş elektron–hol çiftleri bulunmaz. Sıcaklık yükseldiğinde örgü titreşimlerinin (fononların) ve elektronların termal uyarılma olasılığı artar. Termal enerji tek tek elektronlara eşit biçimde dağıtılmaz; taşıyıcı yoğunluğu izinli enerji durumları ve istatistiksel dolulukla belirlenir.",
+          "Silisyumda yaklaşık 300 K'de <strong>E<sub>g</sub> ≈ 1,12 eV</strong>, valans bandının en yüksek dolu durumları ile iletim bandının en düşük boş durumları arasındaki <strong>enerji farkıdır</strong>. Bu aralığı aşan uygun elektronik uyarılma, iletimde elektron ve valansta hol oluşturabilir. Kristalde atomları birbirine bağlayan Si–Si kovalent bağının kimyasal kopma enerjisi ise farklı bir fiziksel niceliktir: tek bir bağın ayrılması, elektriksel taşıyıcı oluşturma geçişiyle aynı olay değildir."
         ],
         equation: "E<sub>g,Si</sub> ≈ 1,12 eV (300 K civarı)",
-        visual03: ["interference", "dipole"],
+        visual03: [],
         key: "Sıcaklık, enerji durumlarının doluluğunu ve termal taşıyıcı oluşumunu etkiler."
       },
       {
         title: "Elektron–hol çifti nasıl oluşur?",
         paragraphs: [
           "Bir elektron valans bandından iletim bandına uyarıldığında iletimde hareket edebilen bir elektron ve valans bandında boş kalan bir durum oluşur. Bu boş durumu <strong>hol (delik)</strong> olarak adlandırırız.",
-          "Öz malzemede bu tür bir üretim olayı elektron ile holü birlikte oluşturur. Denge ve belirgin katkılama olmaması koşullarında elektron ve hol yoğunlukları eşittir."
+          "<strong>Bu geçiş hangi koşullarda olur?</strong> (1) <strong>Işık soğurulursa</strong>, foton enerjisinin yaklaşık hν ≥ E<sub>g</sub> olması gerekir; Si dolaylı bant aralıklı olduğundan enerjiye ek olarak kristal momentumunun korunmasında fonon katılımı önemli olabilir. (2) <strong>Isıl üretimde</strong> sonlu sıcaklıktaki enerji dağılımı bantlar arası uyarılmaları mümkün kılar. (3) <strong>Yüksek elektrik alanında</strong> hızlanan bir taşıyıcı çarpışma iyonlaşmasıyla ek elektron–hol çifti oluşturabilir. (4) Çok güçlü alanlarda bantlar arası tünelleme de mümkündür. Bunlar farklı fiziksel mekanizmalardır; yalnızca hν ≥ E<sub>g</sub> olması her fotonun mutlaka soğurulacağı anlamına gelmez.",
+          "300 K'de E<sub>g</sub> ≈ 1,12 eV, foton için yaklaşık <strong>λ ≈ 1107 nm</strong> eşik dalga boyuna karşılık gelir (E = hc/λ). Daha kısa dalga boyu daha yüksek enerji taşır; ancak absorpsiyon olasılığı dalga boyuna, malzemeye ve kalınlığa bağlıdır. Öz malzemede çift üretimi elektron ve holü birlikte oluşturur; termal dengede n<sub>0</sub> = p<sub>0</sub> = n<sub>i</sub> olur."
         ],
         equation: "n<sub>i</sub> = p<sub>i</sub>",
-        key: "Termal bantlar arası üretimde elektron ve hol bir çift olarak ortaya çıkar."
+        visual03: ["excitation"],
+        key: "Foton soğurulması, termal uyarılma veya yüksek enerjili taşıyıcı çarpışması uygun koşullarda bir elektron–hol çifti oluşturabilir."
       },
       {
         title: "Hol gerçekten hareket eder mi?",
@@ -125,9 +127,10 @@ window.COURSE_LESSONS = [
         title: "Üretim ve yeniden birleşme",
         paragraphs: [
           "<strong>Üretim (generation)</strong> yeni elektron–hol çiftleri oluşturur. <strong>Yeniden birleşme (recombination)</strong> ise iletim elektronunun valans bandındaki boşluğu doldurmasıyla serbest bir elektron–hol çiftini ortadan kaldırır.",
-          "Isıl ve optik üretim ile çarpışma iyonlaşması farklı kanallardır. Bunlara karşılık ışınımsal, Auger ve kusur düzeyleri aracılığıyla Shockley–Read–Hall (SRH) yeniden birleşmesi bulunur. Si dolaylı bant aralıklı olduğundan ışınımsal yol çoğu koşulda zayıftır. <strong>Dengede üretim = yeniden birleşme hızı</strong> olması aynı elektronun hemen geri döndüğü anlamına gelmez; arada bir yaşam süresi vardır."
+          "<strong>Üretim örnekleri:</strong> Güneş hücresi/fotodiyotta soğurulan ışığın oluşturduğu <strong>fotogeneration</strong>; yüksek alanlı çığ fotodiyotunda hızlanmış taşıyıcının yeni çiftler oluşturduğu <strong>impact ionization</strong>; sıcaklığın oluşturduğu <strong>termal üretim</strong>. <strong>Yeniden birleşme örnekleri:</strong> LED'de enerji foton olarak çıkabilir (<strong>radiative</strong>); kusur seviyeleri ara durak olur (<strong>SRH</strong>); <strong>Auger</strong> olayında enerji üçüncü bir elektrona veya hole aktarılır. Si dolaylı bant aralıklı olduğundan ışınımsal yeniden birleşme birçok koşulda zayıftır.",
+          "Termal dengede toplam üretim ve yeniden birleşme hızları eşittir (<strong>G = R</strong>); süreçler yine de sürer. Sabit aydınlatmada zamanla değişmeyen bir kararlı duruma ulaşılması, termal dengeye dönüldüğü anlamına gelmez. Her mekanizmanın hızı malzemeye, sıcaklığa, kusurlara ve taşıyıcı yoğunluğuna bağlıdır."
         ],
-        visual03: ["generation"],
+        visual03: ["generation", "mechanisms"],
         key: "Dengede toplam üretim ve yeniden birleşme hızları eşit olabilir; süreçler yine de sürer."
       },
       {
@@ -187,9 +190,9 @@ window.COURSE_LESSONS = [
       "Denge durumunda üretim–rekombinasyonun sürebileceğini açıklarım.",
       "Taşıyıcı yaşam süresi ile momentum saçılmasını ayırırım.",
       "Bağ modelinin nicel taşıyıcı hesabında neden sınırlı olduğunu belirtirim.",
-      "Kristalde elastik dalga girişimini ve fononların örgü titreşimleriyle ilişkisini açıklarım.",
-      "Salınan dipol–foton ilişkisini ve saf Si'deki merkez simetrisi sınırlamasını yorumlarım.",
-      "Üretim ve yeniden birleşmeyi bant çizimi üzerinde gösterir, saçılmadan ayırırım.",
+      "Elektronik bant aralığını kimyasal bağ kopma enerjisinden ayırt eder, 1,12 eV değerini açıklarım.",
+      "Foton enerjisi, ısıl uyarılma ve çarpışma iyonlaşmasıyla elektron–hol üretim koşullarını ayırt ederim.",
+      "Üretim ve yeniden birleşme bant çizimlerini yorumlar; fotogeneration, impact ionization, radiative, SRH ve Auger mekanizmalarını karşılaştırırım.",
       "Elektron ve hol etkin kütlesini, iletkenlik ve durum yoğunluğu kütlesi ayrımıyla açıklarım.",
       "300 K'de Si atom yoğunluğunu nᵢ ile karşılaştırıp yaklaşık 5 × 10¹² oranını bulurum.",
       "nᵢ=N·p^(E/kT) nitel modelinden ln(nᵢ/N) – 1/T ilişkisini türetir, bant modeliyle sınırlarını karşılaştırırım."

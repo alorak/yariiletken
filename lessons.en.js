@@ -79,14 +79,15 @@
       topics: [
         [
           "What changes in a crystal as temperature rises?",
-          "In the ideal intrinsic bond picture there are no thermally excited electron–hole pairs at 0 K, although quantum zero-point lattice motion remains possible. As temperature rises, lattice vibrations become thermally excited. The lecture's <strong>Where does the energy come from?</strong> analogy describes the superposition of elastic disturbances from many atoms; phonons are the quantized excitations of those vibrations.",
-          "Lattice vibrations and photons are distinct energy-transfer channels. The <strong>oscillating dipole</strong> model describes radiation from relative motion of positive and negative charge centers; not every lattice mode in centrosymmetric pure Si radiates as a dipole. Interband excitations are quantum transitions. Near 300 K, <strong>1.12 eV is the electronic band gap</strong> of silicon, not the energy of dissociating an individual Si–Si chemical bond.",
+          "In the ideal intrinsic band picture there are no thermally generated electron–hole pairs at 0 K. Raising temperature increases the thermal excitation of lattice vibrations (phonons) and the probability of exciting electronic states. Energy is not shared equally among individual electrons; carrier concentrations depend on allowed states and statistical occupations.",
+          "Near 300 K, <strong>E<sub>g</sub> ≈ 1.12 eV</strong> is the <strong>energy separation</strong> between the highest valence-band states and the lowest conduction-band states in silicon. An appropriate electronic excitation across that gap can produce a conduction electron and valence hole. The chemical energy associated with breaking an atomic Si–Si covalent bond is a different quantity: removing an atomic bond and exciting an electronic carrier are not the same physical event.",
           "Temperature influences the occupancy of electronic states and the creation of thermal carriers."
         ],
         [
           "How is an electron–hole pair created?",
           "When an electron is excited from the valence band into the conduction band, a mobile conduction electron and an empty valence-band state remain. The empty state is called a <strong>hole</strong>.",
-          "In an intrinsic material, this excitation creates electrons and holes together. Under equilibrium and without dominant doping, electron and hole concentrations are equal.",
+          "<strong>Under what conditions can the transition occur?</strong> (1) <strong>Absorbed light</strong> can promote a valence electron if photon energy is approximately hν ≥ E<sub>g</sub>; indirect-gap Si also needs crystal momentum conservation, often involving a phonon. (2) <strong>Thermal generation</strong> is possible because the finite-temperature energy distribution allows interband excitations. (3) In a <strong>high electric field</strong>, an energetic carrier can generate another pair by impact ionization. (4) Very strong fields may also cause band-to-band tunneling. These are distinct mechanisms; hν ≥ E<sub>g</sub> alone never guarantees absorption.",
+          "At 300 K, E<sub>g</sub> ≈ 1.12 eV corresponds to a photon threshold wavelength of about <strong>λ ≈ 1107 nm</strong> (E = hc/λ). Shorter wavelengths have higher photon energy, but actual absorption depends on wavelength, material and thickness. Pair generation creates one electron and one hole; at intrinsic thermal equilibrium n<sub>0</sub> = p<sub>0</sub> = n<sub>i</sub>.",
           "Thermal interband generation creates an electron and a hole as a pair."
         ],
         [
@@ -98,7 +99,8 @@
         [
           "Generation and recombination",
           "<strong>Generation</strong> creates new electron–hole pairs. <strong>Recombination</strong> occurs when a conduction electron fills a valence-band vacancy, eliminating a free electron–hole pair.",
-          "Thermal and optical generation and impact ionization are distinct pathways. Recombination channels include radiative, Auger and defect-assisted Shockley–Read–Hall (SRH) processes. Radiative recombination is often weak in indirect-gap Si. <strong>Generation and recombination rates can balance at equilibrium</strong> without each electron recombining immediately; a carrier lifetime separates individual events.",
+          "<strong>Generation examples:</strong> <strong>photogeneration</strong> in solar cells or photodiodes when light is absorbed, <strong>impact ionization</strong> when energetic carriers create additional pairs in avalanche photodiodes, and <strong>thermal generation</strong> due to temperature. <strong>Recombination examples:</strong> in an LED energy may leave as a photon (<strong>radiative</strong>); defects supply intermediate states (<strong>SRH</strong>); in an <strong>Auger</strong> event energy is transferred to a third electron or hole. Silicon's indirect gap often makes radiative recombination weak.",
+          "At thermal equilibrium the total generation and recombination rates balance (<strong>G = R</strong>), while both processes remain active. A time-independent illuminated steady state is not necessarily thermal equilibrium. Mechanism rates depend on material, temperature, defects and carrier concentrations.",
           "At equilibrium, overall generation and recombination rates can be equal even though both processes continue."
         ],
         [
@@ -143,9 +145,9 @@
         "I can explain why generation and recombination can continue at equilibrium.",
         "I can distinguish carrier lifetime from momentum relaxation.",
         "I can explain the limitations of the bond model for quantitative carrier calculations.",
-        "I can describe elastic-wave interference in a crystal and relate phonons to lattice vibrations.",
-        "I can relate oscillating dipoles to photons and explain the centrosymmetry limitation in pure Si.",
-        "I can interpret generation and recombination on band diagrams and distinguish them from scattering.",
+        "I can distinguish the electronic band gap from chemical bond dissociation and explain the meaning of 1.12 eV.",
+        "I can distinguish photon absorption, thermal generation and impact ionization as different ways of creating electron–hole pairs.",
+        "I can interpret band transition diagrams and compare photogeneration, impact ionization, radiative, SRH and Auger processes.",
         "I can explain electron and hole effective masses and distinguish conductivity from DOS effective mass.",
         "I can compare nᵢ with Si atomic density at 300 K and calculate the approximate 5 × 10¹² ratio.",
         "I can derive the ln(nᵢ/N) vs 1/T trend from the toy model nᵢ=N·p^(E/kT) and contrast it with the band model."

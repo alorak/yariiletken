@@ -25,6 +25,7 @@ test("Turkish diacritics and English words search the correct localized sources"
   const typed=api.search(tr,"oz tasiyici");
   assert.ok(typed.some(x=>x.lessonId==="03"&&x.title.includes("nᵢ")));
   assert.ok(api.search(tr,"öz taşıyıcı").some(x=>x.lessonId==="03"));
+  assert.ok(api.search(tr,"n_i").some(x=>x.lessonId==="03"));
   assert.ok(api.search(en,"intrinsic carrier").some(x=>x.lessonId==="03"));
   assert.ok(api.search(en,"Fermi").some(x=>x.lessonId==="05"));
   assert.ok(api.search(tr,"band aralığı").some(x=>x.lessonId==="03"));
@@ -42,7 +43,7 @@ test("body text and equations are searchable with stable lesson/topic coordinate
 
 test("query lengths, accents, no-result behavior and HTML escaping are safe",()=>{
   assert.equal(api.search(tr,"x").length,0);
-  assert.equal(api.search(tr,""),0);
+  assert.equal(api.search(tr,"").length,0);
   assert.equal(api.search(tr,"truly impossible query 97531").length,0);
   assert.equal(api.normalize("FİZİK ve taşıyıcı"),"fizik ve tasiyici");
   assert.equal(api.plain("E<sub>g</sub> &nbsp; <b>yarıiletken</b>"),"Eg yarıiletken");

@@ -116,7 +116,9 @@
   let language = readStorage(languageKey, "tr") === "en" ? "en" : "tr";
   let lessons = language === "en" && lessonsEn.length === lessonsTr.length ? lessonsEn : lessonsTr;
   let pendingScroll = null;
+  let pendingTopic = null;
   let topicNavCleanup = null;
+  let searchUI = null;
   const t = () => ui[language];
 
   function selectedRoute() {
@@ -129,8 +131,34 @@
 
   function navigate(lessonId, tabId = "anlatim") {
     if (!lessonIds.has(lessonId) || !tabIds.has(tabId)) return;
+    pendingTopic = null;
     const target = "#ders-" + lessonId + "/" + tabId;
     pendingScroll = "#content-panel";
+    if (location.hash === target) render();
+    else location.hash = target;
+  }
+
+  // Align topics directly beneath all three sticky layers; CSS scroll-padding
+  // and scroll-margin are additive with scrollIntoView in some browsers.
+  function scrollToCourseTopic(target) {
+    if (!target) return false;
+    const siteHeight = $(".site-header")?.getBoundingClientRect().height || 0;
+    const stickyHeight = $("#lesson-sticky")?.getBoundingClientRect().height || 0;
+    const guideHeight = $("#topic-guide")?.getBoundingClientRect().height || 0;
+    const boundary = siteHeight + stickyHeight + guideHeight + 9;
+    const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - boundary);
+    window.scrollTo({ top, behavior: "instant" });
+    return true;
+  }
+
+  function navigateToTopic(lessonId, topicIndex, query = "") {
+    if (!lessonIds.has(lessonId)) return;
+    const lesson = lessons.find(item => item.id === lessonId);
+    if (!lesson || !Number.isInteger(topicIndex) || topicIndex < 0 ||
+        topicIndex >= lesson.topics.length) return;
+    pendingScroll = null;
+    pendingTopic = { lessonId, topicIndex, query };
+    const target = "#ders-" + lessonId + "/anlatim";
     if (location.hash === target) render();
     else location.hash = target;
   }
@@ -252,12 +280,14 @@
     };
     const updateActive = () => {
       animationFrame = 0;
-      const threshold = guide.getBoundingClientRect().bottom + 12;
+      const threshold = guide.getBoundingClientRect().bottom + 16;
       let index = 0;
       topics.forEach((topic, i) => {
         if (topic && topic.getBoundingClientRect().top <= threshold) index = i;
       });
-      markActive(index);
+      const atPageEnd = window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 10;
+      markActive(atPageEnd ? topics.length - 1 : index);
     };
     const scheduleUpdate = () => {
       if (!animationFrame) animationFrame = requestAnimationFrame(updateActive);
@@ -265,10 +295,7 @@
     buttons.forEach((button, index) => {
       button.addEventListener("click", () => {
         markActive(index);
-        topics[index]?.scrollIntoView({
-          behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-          block: "start"
-        });
+        scrollToCourseTopic(topics[index]);
       });
       button.addEventListener("keydown", event => {
         if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
@@ -408,7 +435,15 @@
     else renderPlanned(lesson, tabId);
     // Refresh immediately after localized titles reflow, before scrolling into the reading pane.
     refreshStickyOffsets();
-    if (pendingScroll) {
+    if (pendingTopic && tabId === "anlatim" && pendingTopic.lessonId === lesson.id) {
+      const { topicIndex, query } = pendingTopic;
+      pendingTopic = null;
+      requestAnimationFrame(() => {
+        const target = document.getElementById("konu-" + lesson.id + "-" + (topicIndex + 1));
+        const match = window.CourseSearch?.highlightTopic(target, query);
+        scrollToCourseTopic(match || target);
+      });
+    } else if (pendingScroll) {
       document.querySelector(pendingScroll)?.scrollIntoView({ behavior: "smooth", block: "start" });
       pendingScroll = null;
     }
@@ -441,6 +476,7 @@
       lessons = language === "en" ? lessonsEn : lessonsTr;
       writeStorage(languageKey, language);
       updateButtons();
+      searchUI?.refresh();
       // Stay on the same lesson, tab, and reading position.
       render();
     }));
@@ -471,6 +507,11 @@
   if (lessonsTr.length === 0 || lessonsEn.length !== lessonsTr.length) return;
   setupTheme();
   setupLanguage();
+  searchUI = window.CourseSearch?.setup({
+    getLessons: () => lessons,
+    getLanguage: () => language,
+    onSelect: navigateToTopic
+  });
   window.addEventListener("hashchange", render);
   if (!/^#ders-\d{2}\/[a-z]+$/.test(location.hash)) {
     history.replaceState(null, "", location.pathname + location.search + "#ders-02/anlatim");

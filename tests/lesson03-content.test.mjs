@@ -6,7 +6,8 @@ import { runInNewContext } from "node:vm";
 const read = name => readFileSync(new URL("../" + name, import.meta.url), "utf8");
 const window = {};
 for(const file of [
-  "lessons.js", "lessons.en.js", "activities.js", "lesson03-questions.js", "lesson03-figures.js"
+  "lessons.js", "lessons.en.js", "activities.js", "lesson03-questions.js",
+  "lesson03-figures.js", "lesson03-mechanisms.js", "lesson03-hole-sim.js"
 ]) runInNewContext(read(file), { window }, { filename:file });
 
 const getLesson = (id,locale) =>
@@ -34,33 +35,42 @@ test("original six topic positions and first seven learning objectives are prese
   assert.equal(getLesson("06","tr").outcomes.length,10);
 });
 
-test("the eight visuals are attached to their intended topics and translate completely",()=>{
-  const expected = [
-    ["interference","dipole"],[],[],["generation"],["scattering"],
-    ["bond"],["mass"],["concentration"],["equation"]
-  ];
+test("Lesson 03 displays excitation and mechanism figures without dipole material", () => {
+  const expected=[[],["excitation"],[],["generation","mechanisms"],["scattering"],
+    ["bond"],["mass"],["concentration"],["equation"]];
   for(const locale of ["tr","en"]){
     const topics=getLesson("03",locale).topics;
     for(let i=0;i<expected.length;i++){
-      assert.deepEqual(Array.from(topics[i].visual03 || []), expected[i]);
+      assert.deepEqual(Array.from(topics[i].visual03 || []),expected[i]);
       for(const kind of expected[i]){
-        const html = window.Lesson03Figures.render(kind,locale);
-        assert.match(html,/class="lesson-figure l03-figure"/);
-        assert.ok(html.length>500, "Figure missing content: "+kind+"/"+locale);
+        const html=window.Lesson03Mechanisms.render(kind,locale) ||
+          window.Lesson03Figures.render(kind,locale);
+        assert.match(html,/class="lesson-figure l03-figure/);
+        assert.ok(html.length>500,"Figure missing "+kind+"/"+locale);
         assert.match(html,/lesson-figure-note/);
-        assert.match(html,/role="img"|class="l03-stat-grid"/);
       }
     }
+    const removed=[...topics[0].paragraphs].join(" ");
+    assert.doesNotMatch(removed,/Where does the energy come from\?|oscillating dipole|Salınan dipol|salınan dipol/);
+    assert.ok(!topics[0].visual03.length);
   }
 });
 
-test("thermal waves and dipole visuals explicitly state physical limitations",()=>{
-  const tr=window.Lesson03Figures.render("interference","tr");
-  const en=window.Lesson03Figures.render("dipole","en");
-  assert.match(tr,/nitel bir benzetme/);
-  assert.match(tr,/momentum korunumu/);
-  assert.match(en,/centrosymmetric/);
-  assert.match(en,/one-phonon/);
+test("gap meaning, excitation conditions and mechanisms are grounded in illustrations",()=>{
+  for(const locale of ["tr","en"]){
+    const intro=getLesson("03",locale).topics[0].paragraphs.join(" ");
+    assert.match(intro,/1[,.]12 eV/);
+    assert.match(intro,/band/i);
+    const conditions=window.Lesson03Mechanisms.render("excitation",locale);
+    const mechanisms=window.Lesson03Mechanisms.render("mechanisms",locale);
+    assert.match(conditions,/1107 nm/);
+    assert.match(conditions,/l03-electron/);
+    assert.match(conditions,/l03-hole/);
+    for(const label of ["Photogeneration","Impact ionization","Thermal generation",
+      "Radiative recombination","SRH recombination","Auger recombination"])
+      assert.ok(mechanisms.includes(label),"Missing "+label+" in "+locale);
+    assert.match(mechanisms,/G = R/);
+  }
 });
 
 test("generation/recombination and scattering are distinct diagrams",()=>{
@@ -116,6 +126,28 @@ test("expanded quiz covers all nine topics in both languages, with feedback",()=
   assert.equal(window.COURSE_ACTIVITIES["02"].questions.length,8);
 });
 
+test("inline hole simulation moves vacancies opposite to electrons and respects bounds",()=>{
+  const model=window.Lesson03HoleSim.createModel();
+  assert.equal(model.position,2);
+  assert.equal(model.step(1),true);
+  assert.equal(model.position,3);
+  assert.equal(model.lastMove.electronFrom,3);
+  assert.equal(model.lastMove.electronTo,2);
+  assert.equal(model.lastMove.holeFrom,2);
+  assert.equal(model.lastMove.holeTo,3);
+  assert.equal(model.step(-1),true);
+  assert.equal(model.position,2);
+  for(let i=0;i<2;i++)assert.equal(model.step(-1),true);
+  assert.equal(model.position,0);
+  assert.equal(model.step(-1),false);
+  for(let i=0;i<6;i++)assert.equal(model.step(1),true);
+  assert.equal(model.position,6);
+  assert.equal(model.step(1),false);
+  model.reset();
+  assert.equal(model.position,2);
+  assert.equal(model.lastMove,null);
+});
+
 test("script load order ensures translations, question additions and diagrams work",()=>{
   const html=read("index.html");
   const app=read("app.js");
@@ -126,5 +158,9 @@ test("script load order ensures translations, question additions and diagrams wo
   const router=html.indexOf("app.js");
   assert.ok(activities<questions&&questions<engine);
   assert.ok(visuals<router);
+  assert.ok(html.indexOf("lesson03-mechanisms.js")<router);
+  assert.ok(html.indexOf("lesson03-hole-sim.js")<router);
+  assert.match(app,/Lesson03HoleSim\\?\\.mount/);
+  assert.match(app,/Lesson03Mechanisms\\?\\.render/);
   assert.match(app,/Lesson03Figures\.render/);
 });

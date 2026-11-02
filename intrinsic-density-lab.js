@@ -62,7 +62,7 @@
   const escape=s=>String(s).replace(/[&<>"']/g, ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   function compute(p){
     const T=Number(p.T),eg300=Number(p.eg300),nc300=Number(p.nc300),nv300=Number(p.nv300);
-    if(!Number.isFinite(T)||T<180||T>550||eg300<=0||nc300<=0||nv300<=0)throw Error("Invalid parameters");
+    if(![T,eg300,nc300,nv300].every(Number.isFinite)||T<180||T>550||eg300<=0||nc300<=0||nv300<=0)throw Error("Invalid parameters");
     const varshni=p.gapMode==="varshni";
     const eg=eg300+(varshni?ALPHA*(300**2/(300+BETA)-T**2/(T+BETA)):0);
     const multiplier=(T/300)**1.5;
@@ -147,8 +147,9 @@
   }
   function simulation(p,l){
     const m=compute(p),energy=m.gapExponent;
+    const nextT=Math.min(500,p.T+20);
     const cases=[
-      [l.hotter,{...p,T:Math.min(500,p.T+20)}],
+      [l.hotter.replace("20",String(nextT-p.T))+" ("+nextT+" K)",{...p,T:nextT}],
       [l.wider,{...p,eg300:Math.min(1.65,p.eg300+.10)}],
       [l.doubleNc,{...p,nc300:p.nc300*2}],
       [l.doubleNv,{...p,nv300:p.nv300*2}]

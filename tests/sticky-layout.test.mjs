@@ -27,11 +27,11 @@ test("offsets adapt to header and translated lesson-title heights", () => {
   assert.match(css, /--reading-offset:\s*calc\(var\(--site-header-height\) \+ var\(--lesson-sticky-height\) \+ 12px\)/);
 });
 
-test("learning outcomes remain sticky below the topic strip and scroll internally", () => {
-  assert.match(css, /\.outcomes-card\s*\{[^}]*position:\s*sticky;[^}]*top:\s*calc\(var\(--reading-offset\) \+ var\(--topic-navigation-height\) \+ 8px\)/s);
+test("learning outcomes stay sticky on desktop independently from the left strip", () => {
+  assert.match(css, /\.outcomes-card\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--reading-offset\)/s);
   assert.match(css, /\.outcomes-list\s*\{[^}]*overflow-y:\s*auto;/s);
   assert.match(css, /@media \(max-width:\s*960px\)/);
-  assert.match(css, /\.outcomes-card\s*\{ position:\s*sticky; grid-row:\s*1;/);
+  assert.match(css, /\.outcomes-card\s*\{ position:\s*static; grid-row:\s*auto;/);
   assert.match(css, /@media \(max-width:\s*600px\)/);
 });
 

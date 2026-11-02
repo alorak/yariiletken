@@ -5,10 +5,10 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 ## Özellikler (ilk aşama)
 
 - Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
-- Sağ üstte **TR / EN** dil anahtarı: arayüz, 34 konu anlatımı, 42 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 37 konu anlatımı, 48 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **34 açıklamalı konu başlığı** ve **42 ölçülebilir öğrenme kazanımı**.
+- Beş ders için **37 açıklamalı konu başlığı** ve **48 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
@@ -22,7 +22,7 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 | Ders | Konu | Başlık | Kazanım |
 |---|---|---:|---:|
 | 02 | Yarıiletken malzemeler, kristal yapısı, termal denge | 6 | 10 |
-| 03 | Elektron, hol, üretim/rekombinasyon, bağ modelinin sınırları | 6 | 7 |
+| 03 | Elektron, hol, fonon/foton, üretim/rekombinasyon, etkin kütle ve nᵢ | 9 | 13 |
 | 04 | Kuantum durumları, bant teorisi ve etkin kütleye giriş | 7 | 7 |
 | 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 8 |
 | 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 10 |
@@ -75,7 +75,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 | Ders | Grafikler | Simülasyonlar | Sorular |
 |---|---|---|---|
 | **02 · Kristal ve Denge** | nᵢ–T (Si/Ge/GaAs), Eᵍ–nᵢ duyarlılığı | 3B tetrahedral Si bağlarının izdüşümü, termal denge / dış uyarımlı kararlı durum | 8 soruluk açıklamalı test |
-| **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 8 soruluk açıklamalı test |
+| **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 15 soruluk açıklamalı test |
 
 ### Bilimsel kapsam ve sınırlamalar
 
@@ -133,7 +133,27 @@ Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece 
 
 - **02 · Öz taşıyıcı yoğunluğu – sıcaklık:** Y ekseni artık doğrudan `nᵢ (cm⁻³)` gösterir; `log₁₀` dönüşümü uygulanmaz. Si/Ge/GaAs malzeme seçicisi her malzemenin eğrisini **kendi doğrusal ölçeğinde** gösterir. Sıcaklık kontrolü seçilen noktanın çevresinde yaklaşık ±50 K aralığına odaklanır; sağa/sola sınırda 200–500 K aralığına kırpılır. Eksen değerleri bilimsel gösterimde (örn. 2×10¹¹) yazılabilir; bu bir logaritmik eksen değildir.
 - Sıcaklığa bağlı nᵢ hesaplarında 300 K referansları ve sabit bant aralığı yaklaşımı değişmedi. Ayrı **bant aralığı duyarlılığı** grafiğinin `log₁₀` gösterimi bu PR kapsamında değiştirilmedi.
-- Kazanımlar anlatım ve şekillerle eşleştirildi: **02 → 10**, **06 → 10**; 03/04/05 içerikleri ve sıraları değişmedi. İlk kazanımların indeksleri korunduğu için `localStorage` işaretlemeleri kaymaz. Önceki konu başlığı sayısı **34**, toplam kazanım sayısı **42**.
+- Kazanımlar anlatım ve şekillerle eşleştirildi: **02 → 10**, **06 → 10**; 03/04/05 içerikleri ve sıraları değişmedi. İlk kazanımların indeksleri korunduğu için `localStorage` işaretlemeleri kaymaz. Önceki konu başlığı sayısı **34**, toplam kazanım sayısı **48**.
 - 02'de Si atom yoğunluğu ile yaklaşık öz taşıyıcı yoğunluğunun fiziksel mertebe farkı da konu anlatımına eklendi. Varsayımlara uygun yaklaşık hesaplar kullanılır; bunlar tam malzeme ölçümü değildir.
 
 Kontrol komutu: `node --test tests/*.test.mjs`.
+
+
+## Ders 03 — Konu anlatımı, şekiller ve kazanımların tamamlanması
+
+`lec03.pdf` sunumunun şu temaları, konu anlatımına doğrudan yerleştirildi:
+
+- **Where does the energy come from?** Örgü elastik dalgalarının girişimi için iki kaynaktan yayılan dalga SVG'si.
+- **A vibrating atom as an oscillating dipole.** Elektron bulutu–çekirdek göreli hareketi, dalga ve foton ayrımı. Saf merkez simetrili Si'nin birinci mertebe tek-fonon IR dipol soğurumu için istisna açıklanıyor.
+- **Generation and recombination.** Valans/iletim bantları arasında üretim ve geri birleşme yönlerini gösteren iki ayrı bant diyagramı.
+- **Recombination is not scattering.** Saçılma olayında momentumun değişmesi, yeniden birleşmede elektron–hol çiftinin kaybolması yan yana şemalarla anlatılıyor.
+- **The bond model.** Dolu kovalent bağ ve boş bağ/hol temsili, neler açıkladığı ve hesaplayamadıkları.
+- **Effective mass.** Örnek Si iletkenlik kütleleri 0.26 m₀ elektron, yaklaşık 0.35–0.37 m₀ hol; parabolik E(k) eğriliği ve DOS kütlesi farkı.
+- **How large is nᵢ?** 300 K'de nᵢ ≈ 10¹⁰ cm⁻³ ve atom yoğunluğu ≈ 5×10²² cm⁻³; ≈ 5×10¹² oranı.
+- **The model as an equation.** Slaytın nᵢ=N·p^(E/kT) **nitel** modeli ve ln(nᵢ/N)–1/T doğrusu; nicel bant modeli nᵢ=√(NᶜNᵛ)exp(−Eᵍ/2kT) ile açık karşılaştırma.
+
+**Bilimsel sınırlama:** Slaytın “42 parçacık aynı bağda buluşur” anlatısı nicel fizik mekanizması olarak aktarılmaz; `E/kT≈42` yalnızca sezgisel oran olarak açıklanır. 1,1–1,12 eV değeri doğrudan kimyasal Si–Si bağ kopma enerjisiyle özdeşleştirilmez.
+
+Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Böylece depoda toplam **37 konu, 48 kazanım** bulunur.
+
+Test komutu: `node --test tests/*.test.mjs`. Canlı tarayıcıda mobil/masaüstü görsel test ayrıca yapılmalıdır.

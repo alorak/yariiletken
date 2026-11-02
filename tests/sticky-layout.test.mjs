@@ -20,8 +20,8 @@ test("lesson title and all five tabs share one sticky container", () => {
 
 test("offsets adapt to header and translated lesson-title heights", () => {
   assert.match(app, /new ResizeObserver\(refreshStickyOffsets\)/);
-  assert.match(app, /observer\.observe\(header\)/);
-  assert.match(app, /observer\.observe\(stickyCourse\)/);
+  assert.match(app, /observer\.observe\(\$\("\.site-header"\)\)/);
+  assert.match(app, /observer\.observe\(\$\("#lesson-sticky"\)\)/);
   assert.match(app, /window\.addEventListener\("resize", refreshStickyOffsets\)/);
   assert.match(app, /refreshStickyOffsets\(\);\s*if \(pendingScroll\)/);
   assert.match(css, /--reading-offset:\s*calc\(var\(--site-header-height\) \+ var\(--lesson-sticky-height\) \+ 12px\)/);
@@ -41,7 +41,7 @@ test("redundant hero kicker and two explanatory outcome sentences are removed in
   assert.doesNotMatch(app, /İşaretlemeler bir sınav sonucu değildir/);
   assert.doesNotMatch(app, /Check what you can explain after completing this lesson/);
   assert.doesNotMatch(app, /These checks are self-assessment, not exam results/);
-  assert.match(app, /'<h1 id="lesson-title">' \+ lesson\.title/);
+  assert.match(app, /<h1 id="lesson-title">' \+ lesson\.title/);
   assert.match(app, /'<h2>' \+ strings\.overview \+ '<\/h2><p>' \+ lesson\.description/);
 });
 

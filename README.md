@@ -105,3 +105,16 @@ Testler dört fizik grafiğinin tutarlılığını, iki dildeki soru açıklamal
 - Paneldeki iki açıklama cümlesi kaldırıldı; kazanım işaretleme ve ilerleme göstergesi değişmedi.
 - Sabit alanların yükseklikleri `ResizeObserver` ile ölçülüp CSS değişkenlerine yazılır. Bu nedenle TR/EN dil değişimi, mobil navbar veya uzun ders başlığı sonrasında sekmeler ve kazanımlar üst üste binmemelidir.
 - İlgili yapı testleri: `node --test tests/sticky-layout.test.mjs`. Fizik modeli testleriyle birlikte `node --test tests/*.test.mjs` çalıştırılabilir.
+
+## Ders 02: Slaytlarla içerik eşleştirmesi
+
+Semiconductor Physics *lec02.pdf* sunumunun 5–8, 12 ve 15–16. slaytlarına göre Konu Anlatımı güncellendi:
+
+- **Pure · Intrinsic · Extrinsic (s. 8):** saflık (kusur/safsızlık), öz denge taşıyıcı rejimi (n₀=p₀=nᵢ) ve katkılamanın üç ayrı sınıflandırma sorusu olduğu üçlü görünüm. Aydınlatılmış saf örneğin denge dışında olabileceği notu.
+- **Bond model / Two-dimensional representation (s. 15–16):** kare örgü çiziminin 2B öğretim şeması olduğu, kesişim=atom ve çizgi=bağ gösterimi; karşısında gerçek tetrahedral komşuluk. a≈5,43 Å, 8 atomluk geleneksel hücre ve iki fcc alt örgü bilgisi anlatımda korunur.
+- **Steady state vs equilibrium (s. 12):** `equilibrium ⊂ steady state` ifadesini ve süreklilik/denge farkını gösteren iç içe görünüm.
+- **Majority carriers vs temperature (s. 5–6):** ders 02'de n-tipi/p-tipi taşıyıcıların kısa tanıtımı ve *freeze-out → extrinsic plateau → intrinsic* üçlüsü. Nicel katkı iyonlaşması ve yük nötrlüğü **Ders 06** için bırakılmıştır.
+
+**Bilimsel açıklık:** Sunumun 16. slaytında 1,12 eV ifadesi Si–Si bağ kırılmasıyla bir tutulmuş olsa da uygulama bunu Si'nin *elektronik bant aralığı* olarak ayırır. 2B kare ağın gerçek diamond-kübik kristal açısını temsil etmediği açıkça belirtilir.
+
+Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece Ders 02'de ilgili konularla birlikte render eder. Konu ve kazanım sayıları değişmediğinden mevcut soru–konu eşleştirmeleri korunur. Regresyon testi: `node --test tests/lesson02-alignment.test.mjs`.

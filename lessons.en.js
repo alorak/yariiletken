@@ -349,12 +349,20 @@
       focus: translation.focus,
       topics: source.topics.map((original, index) => {
         const [title, first, second, key, equation] = translation.topics[index];
+        // Equations are shared verbatim except for language-specific annotations.
+        const translatedEquations = {
+          "02-4": "Thermal equilibrium ⊂ Steady state",
+          "06-1": "Donor: D⁰ → D⁺ + e⁻ &nbsp;·&nbsp; Acceptor: A⁰ → A⁻ + h⁺",
+          "06-3": "p₀ = n<sub>i</sub>² / n₀  (n-type, equilibrium, non-degenerate)"
+        };
+        const eqKey = source.id + "-" + index;
         return {
           ...original,
           title,
           paragraphs: [first, second],
           key,
-          ...(equation === undefined ? {} : {equation})
+          ...(equation === undefined ? {} : { equation }),
+          ...(Object.hasOwn(translatedEquations, eqKey) ? { equation: translatedEquations[eqKey] } : {})
         };
       }),
       outcomes: translation.outcomes,

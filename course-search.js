@@ -3,8 +3,10 @@
   "use strict";
   const normalize = value => String(value ?? "")
     .normalize("NFKD").toLowerCase().replace(/\u0131/g,"i")
-    .replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim();
+    .replace(/[\u0300-\u036f]/g,"").replace(/([a-z])_([a-z])/g,"$1$2")
+    .replace(/\s+/g," ").trim();
   const plain = value => String(value ?? "")
+    .replace(/<\/?(?:sub|sup)>/gi,"")
     .replace(/<[^>]*>/g," ").replace(/&(?:nbsp|#160);/gi," ")
     .replace(/&(?:lt|#60);/gi,"<").replace(/&(?:gt|#62);/gi,">")
     .replace(/&(?:amp|#38);/gi,"&").replace(/\s+/g," ").trim();

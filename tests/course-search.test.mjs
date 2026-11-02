@@ -89,3 +89,83 @@ test("local offline search updates without a network request",()=>{
   assert.match(js,/Escape/);
   assert.match(js,/ctrlKey\|\|event\.metaKey/);
 });
+
+
+test("dropdown interaction searches in the selected language and opens the matching lesson topic",()=>{
+  const elements={},events={};
+  const makeElement=()=>({
+    attrs:{},handlers:{},hidden:false,innerHTML:"",value:"",
+    setAttribute(k,v){this.attrs[k]=v;},
+    addEventListener(k,fn){this.handlers[k]=fn;},
+    focus(){this.focused=true;},
+    contains(){return false;}
+  });
+  for(const id of ["course-search-toggle","course-search-panel","course-search-input","course-search-results","course-search-close"])
+    elements[id]=makeElement();
+  elements["course-search-panel"].hidden=true;
+  elements["course-search-toggle"].click=()=>elements["course-search-toggle"].handlers.click();
+  const doc={
+    getElementById(id){return elements[id];},
+    addEventListener(name,handler){events[name]=handler;}
+  };
+  const live={};
+  runInNewContext(read("course-search.js"),{window:live,document:doc});
+  let language="tr",selected=null;
+  const ui=live.CourseSearch.setup({
+    getLessons:()=>language==="tr"?window.COURSE_LESSONS:window.COURSE_LESSONS_EN,
+    getLanguage:()=>language,
+    onSelect:(lessonId,index,query)=>{selected={lessonId,index,query};}
+  });
+  const toggle=elements["course-search-toggle"],panel=elements["course-search-panel"],
+    input=elements["course-search-input"],results=elements["course-search-results"];
+  toggle.click();
+  assert.equal(panel.hidden,false);
+  assert.equal(toggle.attrs["aria-expanded"],"true");
+  assert.equal(input.focused,true);
+  input.value="öz taşıyıcı";
+  input.handlers.input();
+  assert.match(results.innerHTML,/data-search-result="0"/);
+  assert.match(results.innerHTML,/Öz taşıyıcı/);
+  results.handlers.click({target:{closest:()=>({dataset:{searchResult:"0"}})}});
+  assert.deepEqual(selected,{lessonId:"03",index:7,query:"öz taşıyıcı"});
+  assert.equal(panel.hidden,true);
+  language="en";
+  input.value="intrinsic carrier";
+  ui.refresh();
+  assert.match(results.innerHTML,/Intrinsic carrier/);
+  assert.equal(input.placeholder,"Search topics or concepts…");
+  toggle.click();
+  input.handlers.keydown({key:"Escape",preventDefault(){}});
+  assert.equal(panel.hidden,true);
+  assert.equal(toggle.focused,true);
+});
+
+test("selected multiword Turkish phrase is highlighted without rewriting physics markup",()=>{
+  const content="Öz taşıyıcı yoğunluğu sıcaklıkla artar.";
+  let replaced=null;
+  const node={
+    nodeValue:content,
+    parentElement:{closest(){return null;}},
+    parentNode:{replaceChild(fragment){replaced=fragment;}}
+  };
+  const doc={
+    createTreeWalker(root,kind,filter) {
+      assert.equal(filter.acceptNode(node),1);
+      let used=false;
+      return {nextNode(){if(used)return false;used=true;this.currentNode=node;return true;}};
+    },
+    createDocumentFragment(){return{children:[],append(v){this.children.push(v);}};},
+    createTextNode(text){return{nodeValue:text};},
+    createElement(tag){return{tagName:tag,className:"",textContent:""};}
+  };
+  const live={};
+  runInNewContext(read("course-search.js"),{
+    window:live,document:doc,NodeFilter:{SHOW_TEXT:4,FILTER_ACCEPT:1,FILTER_REJECT:2}
+  });
+  const first=live.CourseSearch.highlightTopic({},"oz tasiyici");
+  assert.ok(first);
+  assert.equal(first.tagName,"mark");
+  assert.equal(first.className,"course-search-highlight");
+  assert.equal(first.textContent,"Öz taşıyıcı");
+  assert.ok(replaced.children.map(x=>x.nodeValue||x.textContent).join("")===content);
+});

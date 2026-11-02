@@ -29,7 +29,7 @@
         [
           "Diamond-cubic crystal structure",
           "Silicon crystallizes in the <em>diamond cubic</em> structure. Think of two face-centered cubic sublattices with an offset (a/4, a/4, a/4) along the [111] direction. Each atom has four nearest neighbors in tetrahedral directions. The lecture's unit-cell drawing and height-annotated projection are distinct from the flat bond-model cartoon.",
-          "Near room temperature the lattice constant is approximately <strong>5.43 Å</strong>, with eight Si atoms in the conventional cubic unit cell. The atomic concentration is roughly 5 × 10²² cm⁻³.",
+          "Near room temperature the lattice constant is approximately <strong>5.43 Å</strong>, with eight Si atoms in the conventional cubic unit cell. The atomic concentration is roughly 5 × 10²² cm⁻³. In intrinsic Si near 300 K, nᵢ is of order 10¹⁰ cm⁻³: the free-electron density is about 5 × 10¹² times smaller than the atomic density. Not every atom supplies a free carrier.",
           "Crystal geometry shows why electrons occupy a periodic environment instead of isolated atoms."
         ],
         [
@@ -55,9 +55,13 @@
         "I can classify Si, Ge and GaAs as elemental or compound semiconductors.",
         "I can distinguish pure, intrinsic and extrinsic semiconductor concepts.",
         "I can explain silicon's four valence electrons and covalent-bond arrangement.",
-        "I can interpret diamond-cubic geometry and the lattice constant.",
-        "I can distinguish equilibrium from steady state using temperature gradients, illumination and applied-bias examples.",
-        "I can match photons, phonons and electrons to their wave–particle properties."
+        "I can interpret a ≈ 5.43 Å, eight atoms per conventional cell and tetrahedral coordination in 3D Si.",
+        "I can distinguish thermal equilibrium from steady state and interpret temperature-gradient, illumination and applied-bias examples.",
+        "I can match photons, phonons and electrons to their wave–particle properties.",
+        "I can distinguish a 2D bonding cartoon from real tetrahedral Si and interpret atomic heights in a [001] projection.",
+        "I can compare silicon's atomic density (≈ 5 × 10²² cm⁻³) with nᵢ ≈ 10¹⁰ cm⁻³ by calculating their ratio.",
+        "I can explain why opposing drift and diffusion currents cancel in an equilibrium p–n junction.",
+        "I can read the actual nᵢ values (cm⁻³) and temperature dependence from a linear nᵢ–T graph."
       ],
       future: {
         grafikler: ["3D schematic of the silicon crystal lattice", "Thermal equilibrium versus steady state"],
@@ -319,11 +323,13 @@
         "I can explain uniform doping and the dilute-impurity approximation.",
         "I can identify the carrier and ion charges involved in donor/acceptor ionization.",
         "I can compare dopant ionization energies with the band gap.",
-        "I can distinguish majority from minority carriers.",
+        "I can distinguish majority/minority carriers in n- and p-type material and interpret n₀p₀ = nᵢ² at equilibrium.",
         "I can use Nᴅ, Nᴀ, Nᴅ⁺ and Nᴀ⁻ to construct charge-neutrality equations.",
         "I can calculate compensation under the full-ionization approximation.",
-        "I can recognize freeze-out, extrinsic and intrinsic regimes on a temperature plot.",
-        "I can explain why the bond model cannot calculate partial ionization by itself."
+        "I can interpret freeze-out, extrinsic and intrinsic temperature regimes and the limits of the n₀ ≈ Nᴅ approximation.",
+        "I can explain why the bond model cannot calculate partial ionization by itself.",
+        "At 300 K, I can estimate majority electron and minority hole densities from Nᴅ using nᵢ ≈ 10¹⁰ cm⁻³ under full ionization.",
+        "I can calculate an atomic dopant fraction of about 20 ppb from Nᴅ = 10¹⁵ cm⁻³ and a Si atomic density of ≈ 5 × 10²² cm⁻³."
       ],
       future: {
         grafikler: ["n versus 1000/T for three dopant concentrations", "Band diagram with donor and acceptor levels"],

@@ -23,7 +23,7 @@ test("offsets adapt to header and translated lesson-title heights", () => {
   assert.match(app, /observer\.observe\(\$\("\.site-header"\)\)/);
   assert.match(app, /observer\.observe\(\$\("#lesson-sticky"\)\)/);
   assert.match(app, /window\.addEventListener\("resize", refreshStickyOffsets\)/);
-  assert.match(app, /refreshStickyOffsets\(\);\s*if \(pendingScroll\)/);
+  assert.match(app, /refreshStickyOffsets\(\);\s*if \(pendingTopic/);
   assert.match(css, /--reading-offset:\s*calc\(var\(--site-header-height\) \+ var\(--lesson-sticky-height\) \+ 12px\)/);
 });
 

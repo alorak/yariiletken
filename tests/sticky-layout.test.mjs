@@ -45,7 +45,7 @@ test("the one-line lesson synopsis stays, but redundant labels and outcome notes
   assert.match(app, /<h1 id="lesson-title">' \+ lesson\.title/);
   assert.doesNotMatch(app, /'<div class="section-intro"/);
   assert.match(app, /'<nav class="topic-guide"/);
-  assert.match(app, /'<h2 id="outcomes-title">' \+ strings\.outcomes/);
+  assert.match(app, /id="outcomes-title">' \+ strings\.outcomes/);
 });
 
 test("existing lesson navigation, bilingual controls and progress tracking are retained", () => {

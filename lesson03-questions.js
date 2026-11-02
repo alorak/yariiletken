@@ -10,24 +10,24 @@
     reasons:reasons.map(([tr,en])=>({tr,en}))
   });
   d.questions.push(
-    mk(0,1,
-      "Dersin dalga girişimi benzetmesi hakkında hangisi doğrudur?",
-      "Which statement best describes the lecture's wave-interference analogy?",
-      [["Her uyarılma için tam 42 fonon tek bağda toplanmalıdır.","Every excitation requires exactly 42 phonons at one bond."],
-       ["Girişim nitel benzetmedir; gerçek geçişler kuantum mekaniğine uyar.","Superposition is a qualitative analogy; actual transitions obey quantum mechanics."],
-       ["Fonon elektromanyetik alanın kuantumudur.","A phonon is a quantum of the electromagnetic field."]],
-      [["42, E/kT oranına dayalı öğretim benzetmesidir; zorunlu fonon sayısı değildir.","42 is an illustrative energy ratio, not a mandatory phonon count."],
-       ["Doğru. Gerçek elektronik geçişler enerji ve momentum korunumu ile belirlenir.","Correct. Real electronic transitions obey energy and momentum conservation."],
-       ["Fonon örgü titreşimi; foton elektromanyetik alan kuantumudur.","A phonon is a lattice quantum; a photon is the EM-field quantum."]]),
-    mk(0,1,
-      "Saf Si'deki salınan dipol benzetmesi için hangi sınır önemlidir?",
-      "What limitation matters for oscillating dipoles in pure Si?",
-      [["Her Si fononu güçlü tek-fonon IR ışınımı üretir.","Every Si phonon creates strong one-phonon IR radiation."],
-       ["Merkez simetrisi tek-fonon elektrik-dipol geçişini sınırlar.","Centrosymmetry restricts first-order one-phonon electric-dipole transitions."],
-       ["Kristalde hiç foton bulunmaz.","No photons can exist in a crystal."]],
-      [["Saf Si'de birinci mertebe tek-fonon elektrik-dipol soğurumu yasaklıdır.","First-order one-phonon electric-dipole absorption is forbidden in pure Si."],
-       ["Doğru. Dipol benzetmesi uygun polar modlar için geçerlidir, tüm Si titreşimleri için değil.","Correct. The dipole analogy fits suitable polar modes, not all Si vibrations."],
-       ["Si de termal elektromanyetik ışınım yayabilir.","Silicon can still emit thermal EM radiation."]]),
+    mk(1,1,
+      "Si'de 300 K'de E₉≈1,12 eV neyi ifade eder?",
+      "In Si near 300 K, what does E₉≈1.12 eV represent?",
+      [["Bir Si–Si kimyasal bağını koparmanın kesin enerjisidir.","It is the exact energy needed to break a Si–Si chemical bond."],
+       ["Valans bandı üstü ile iletim bandı altı arasındaki elektronik enerji farkıdır.","It is the electronic energy separation between valence and conduction band edges."],
+       ["Her foton Si'de mutlaka soğurulur.","Every photon is necessarily absorbed in silicon."]],
+      [["Bağ koparma enerjisi ve elektronik bant aralığı farklı fiziksel niceliklerdir.","Bond dissociation energy and the electronic band gap are different quantities."],
+       ["Doğru. Bu bant aralığı uygun uyarılmada elektron–hol çifti oluşturmak için gereken elektronik enerji ölçeğidir.","Correct. This is the electronic energy scale for an allowed excitation creating an electron–hole pair."],
+       ["Fotonun soğurulması olası geçişlere ve özellikle Si'de momentum koşullarına bağlıdır.","Photon absorption depends on allowed transitions and momentum conditions, particularly in Si."]]),
+    mk(1,1,
+      "Si'de ışıkla elektron–hol çifti üretmek için hangisi gereklidir?",
+      "What is required for photon-driven electron–hole pair generation in silicon?",
+      [["hν<E₉ olması tek başına yeterlidir.","A photon energy hν<E₉ alone suffices."],
+       ["Fotonun uygun enerjide soğurulması ve Si'nin dolaylı geçişinde momentumun korunması gerekir.","An allowed photon absorption with sufficient energy and momentum conservation for indirect-gap Si is needed."],
+       ["Elektrik alan uygulanırsa bütün fotonlar otomatik soğurulur.","An electric field makes all photons absorb automatically."]],
+      [["Bantlar arası tek-foton geçişinde enerji koşulu yaklaşık hν≳E₉'dir.","A one-photon interband transition generally needs photon energy hν≳E₉."],
+       ["Doğru. E₉ yaklaşık 1,12 eV (≈1107 nm), fakat Si dolaylı bantlıdır ve fonon yardımı önemli olabilir.","Correct. E₉≈1.12 eV (≈1107 nm), and Si has an indirect gap where phonon assistance can be important."],
+       ["Soğurulma seçilim kurallarına, malzemeye ve foton enerjisine bağlıdır.","Absorption depends on selection rules, material and photon energy."]]),
     mk(3,0,
       "Rekombinasyon bant diyagramında neyi ifade eder?",
       "What does recombination represent on a band diagram?",
@@ -74,4 +74,16 @@
        ["E/kT sıcaklığa bağlıdır, bu yüzden nᵢ değişir.","E/kT depends on temperature, so nᵢ changes."],
        ["Modelin sınırlaması p'yi hesaplayamamasıdır.","The model cannot calculate p from first principles."]])
   );
+  // Reset only answers to the two replaced concept questions (indices 8 and 9).
+  try {
+    const migrationKey="yariiletken-lesson03-questions-v2";
+    if(!localStorage.getItem(migrationKey)){
+      const state=JSON.parse(localStorage.getItem("yariiletken-quiz-v1")||"{}");
+      if(state&&typeof state==="object"&&state["03"]){
+        delete state["03"]["8"];delete state["03"]["9"];
+        localStorage.setItem("yariiletken-quiz-v1",JSON.stringify(state));
+      }
+      localStorage.setItem(migrationKey,"1");
+    }
+  } catch { /* localStorage can be disabled */ }
 })();

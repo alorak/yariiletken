@@ -326,14 +326,14 @@
     ).join("");
 
     $("#content-panel").innerHTML =
+      '<div class="learning-layout"><div class="topics-column">' +
       '<nav class="topic-guide" id="topic-guide" aria-label="' + strings.topicNav + '">' +
       '<div class="topic-index">' + lesson.topics.map((topic, index) =>
         '<button class="topic-step" type="button" data-topic="' + (index + 1) +
         '" aria-label="' + strings.topic + ' ' + (index + 1) + ': ' + topic.title +
         '" title="' + topic.title + '"' + (index === 0 ? ' aria-current="step"' : '') +
         '><span aria-hidden="true">' + (index + 1) + '</span></button>'
-      ).join("") + '</div></nav>' +
-      '<div class="learning-layout"><div class="topics-column">' + topics + '</div>' +
+      ).join("") + '</div></nav>' + topics + '</div>' +
       '<aside class="outcomes-card" aria-labelledby="outcomes-title">' +
       '<div class="outcomes-header"><h2 id="outcomes-title">' + strings.outcomes + '</h2>' +
       '<span class="outcome-counter" id="outcome-counter"></span></div>' +

@@ -221,3 +221,15 @@ Kaynaklar / yaklaşık parametre referansları:
 - [Silicon Varshni parameterization — Si material model](https://www.oghma-nano.com/manual/material-scripts/Inorganic/Si/Si.html)
 
 **Doğrulama**: `node --test tests/*.test.mjs` ve özellikle `tests/intrinsic-density-lab.test.mjs`. Simülasyon 200–500 K ve belirtilen dejenere olmayan yaklaşık bant modeli kapsamında eğitim amaçlıdır; bir deneysel cihaz/tüm yarıiletken malzemeler için tam doğruluk iddiası değildir.
+
+
+## Navbar'da konu arama ve konu gezgini senkronizasyonu
+
+- Üst menüde tema ve dil seçicilerinin yanında tek renkli **büyüteç düğmesi** yer alır. Düğmeye basınca aşağı açılan erişilebilir metin arama kutusu görünür. `Ctrl+K` / `⌘K` ile açılır, `Esc` ile kapanır. Sonuçlarda klavyeyle yukarı/aşağı gezinme ve Enter ile seçme desteklenir.
+- Arama **yalnızca cihazda**, mevcut `lessons.js` / `lessons.en.js` verilerinden yapılır. 02–06 derslerindeki 37 konu başlığı, açıklama paragrafı, temel denklem ve ana fikir taranır. İnternet API'si, sunucuya gönderilen sorgu veya bağımsız arama veritabanı kullanılmaz.
+- Türkçe karakterler / aksanlar normalize edilir; örneğin `oz tasiyici` ile `öz taşıyıcı`, `n_i` ile `nᵢ` aranabilir. Dil değişince indeks ve sonuçlar o dile güncellenir; boş aramalarda açıklama, eşleşmeyenlerde sonuç yok mesajı görünür.
+- Her sonuçta **ders adı, konu numarası, başlık ve bağlam metni** yer alır. Sonuca basıldığında ilgili `#ders-XX/anlatim` sayfasına gidilir, metindeki eşleşme `<mark>` ile vurgulanır ve doğrudan aranan noktaya kaydırılır.
+- Önceden konu numarasına tıklanınca sonraki konu başlığının olması gerekenden aşağıda kalması ve önceki konu numarasının aktif görünmesi, `scrollIntoView` için `scroll-margin` ile `scroll-padding` boşluklarının iki kez hesaplanmasından kaynaklanıyordu. Yeni `scrollToCourseTopic`, gerçek sabit header + ders başlığı/sekmeler + sol konu gezgininin yüksekliklerini ölçer ve **tek bir kaydırma ofseti** kullanır. Son sayfa sınırında son konu numarası seçilir. Gezinme mevcut sağ kazanımlar panelinden bağımsızdır.
+- UI varsayılan TR, EN, açık/koyu tema ve mobil yatay konu gezginiyle uyumludur. Arama açıkken dışarı tıklamak paneli kapatır; arama girdisi kullanıcıya aittir ve HTML olarak çalıştırılmaz.
+
+Testler: `node --test tests/course-search.test.mjs tests/topic-stepper.test.mjs tests/sticky-layout.test.mjs`; tam regresyon: `node --test tests/*.test.mjs`.

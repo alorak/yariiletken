@@ -210,6 +210,9 @@
       '</span><h3>' + topic.title + '</h3></div>' +
       topic.paragraphs.map(paragraph => '<p>' + paragraph + '</p>').join("") +
       (topic.equation ? '<div class="math-line" role="note" aria-label="' + strings.formula + '">' + topic.equation + '</div>' : "") +
+      (lesson.id === "02" && Array.isArray(topic.visual) && window.CourseLessonVisuals
+        ? topic.visual.map(kind => window.CourseLessonVisuals.render(kind, language)).join("")
+        : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
 

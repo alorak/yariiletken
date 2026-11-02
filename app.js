@@ -229,7 +229,7 @@
     $("#content-panel").innerHTML =
       '<div class="learning-layout"><div class="topics-column">' +
       '<div class="section-intro"><span class="eyebrow">' + strings.heading + '</span>' +
-      '<h2>' + strings.overview + '</h2><p>' + lesson.description + '</p>' +
+      '<h2>' + strings.overview + '</h2><p>' + strings.intro + '</p>' +
       '<div class="topic-index">' + lesson.topics.map((_, index) =>
         '<button class="topic-jump" type="button" data-topic="' + (index + 1) + '">' +
         String(index + 1).padStart(2, "0") + '. ' + strings.topic + '</button>'

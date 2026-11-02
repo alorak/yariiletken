@@ -118,7 +118,9 @@
       '<title>'+escape(label.title)+'</title>'+
       edges.join("")+active+intersections.join("")+
       links+atoms+'<circle cx="465" cy="119" r="17" class="bond-tetra-core"/>'+
-      '<text x="465" y="123" text-anchor="middle" class="bond-tetra-text">Si</text></svg>';
+      '<text x="465" y="123" text-anchor="middle" class="bond-tetra-text">Si</text>'+
+      '<text x="148" y="224" text-anchor="middle" class="bond-figure-label">'+escape(label.left)+'</text>'+
+      '<text x="465" y="224" text-anchor="middle" class="bond-figure-label">'+escape(label.right)+'</text></svg>';
   }
 
   function render(kind,lang="tr"){

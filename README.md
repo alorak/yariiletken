@@ -67,3 +67,32 @@ Yeni içerik eklerken `lessons.js` ve `lessons.en.js` birlikte güncellenmelidir
 4. **Oyunlar:** seviyeli etkinlikler, kavram yanılgılarına geri bildirim ve erişilebilir etkileşimler.
 
 Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilmeli; arayüzde çalışan model ile yalnızca kavramsal şema ayırt edilmelidir.
+
+## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–03
+
+İlk iki dersin üç etkinlik sekmesi çalışır durumdadır (TR/EN).
+
+| Ders | Grafikler | Simülasyonlar | Sorular |
+|---|---|---|---|
+| **02 · Kristal ve Denge** | nᵢ–T (Si/Ge/GaAs), Eᵍ–nᵢ duyarlılığı | 3B tetrahedral Si bağlarının izdüşümü, termal denge / dış uyarımlı kararlı durum | 8 soruluk açıklamalı test |
+| **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 8 soruluk açıklamalı test |
+
+### Bilimsel kapsam ve sınırlamalar
+
+- Grafik 02-1, 300 K'deki yaklaşık referans nᵢ değerlerinden ölçeklenir ve **Eᵍ değerini sıcaklık boyunca sabit** tutar. Bu bir eğitim yaklaşımıdır, geniş T aralığı için doğrulanmış tam malzeme modeli değildir.
+- Grafik 02-2, bant aralığının etkisini ayırmak için diğer malzeme parametrelerini sabit tutar; Si, Ge ve GaAs arasındaki tüm farkları yalnızca Eᵍ'ye indirgemez.
+- Denge/kararlı durum modelinde dış üretim açık olduğunda, net üretim sıfıra yaklaşsa bile örnek **termal dengeye dönüşmüş sayılmaz**.
+- 03 grafiklerinde sabit etkin ömürlü tek üstel sönüm ve sabit süreli üretim darbesi yaklaşımları kullanılır.
+- Hol hareketi simülasyonu **bir boyutlu bağ benzetmesidir**; atomistik taşıyıcı hareketi çözücüsü değildir.
+- Elektron–hol görseli, **hν≥Eᵍ gerekli enerji koşulunu** test eder. Si dolaylı bant aralıklı olduğundan foton soğurulması için momentum/olası fonon koşulları ayrıca önemlidir. Görsel soğurulma olasılığı iddia etmez.
+- Sorularda doğru **ve yanlış** her seçenek için TR/EN gerekçe bulunur. Yanıtlar `yariiletken-quiz-v1` anahtarında yerel tarayıcıya kaydedilir; dil değişiminde korunur.
+
+Ders **04–06** için Grafikler, Simülasyonlar ve Sorular sekmeleri henüz plan görünümündedir. Oyunlar sekmesi bu aşamada geliştirilmemiştir.
+
+### Tests
+
+```bash
+node --test tests/activity-model.test.mjs
+```
+
+Testler dört fizik grafiğinin tutarlılığını, iki dildeki soru açıklamalarını, ders/kazanım kapsamını ve referans değerlerini kontrol eder. Etkileşimli görsel testleri ayrıca gerçek tarayıcıda yapılmalıdır.

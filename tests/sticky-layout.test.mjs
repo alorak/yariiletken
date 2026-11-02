@@ -35,14 +35,15 @@ test("learning outcomes are fixed beneath tabs and scroll internally", () => {
   assert.match(css, /@media \(max-width:\s*600px\)/);
 });
 
-test("redundant hero kicker and two explanatory outcome sentences are removed in both languages", () => {
-  assert.doesNotMatch(app, /hero-kicker|hero-description|outcomes-caption|outcomes-note/);
+test("the one-line lesson synopsis stays, but redundant labels and outcome notes stay removed", () => {
+  assert.doesNotMatch(app, /hero-kicker|outcomes-caption|outcomes-note/);
+  assert.match(app, /hero-description/);
   assert.doesNotMatch(app, /Bu dersi bitirdiğinde neleri açıklayabildiğini işaretle/);
   assert.doesNotMatch(app, /İşaretlemeler bir sınav sonucu değildir/);
   assert.doesNotMatch(app, /Check what you can explain after completing this lesson/);
   assert.doesNotMatch(app, /These checks are self-assessment, not exam results/);
   assert.match(app, /<h1 id="lesson-title">' \+ lesson\.title/);
-  assert.match(app, /'<h2>' \+ strings\.overview \+ '<\/h2><p>' \+ lesson\.description/);
+  assert.match(app, /'<h2>' \+ strings\.overview \+ '<\/h2><p>' \+ strings\.intro/);
 });
 
 test("existing lesson navigation, bilingual controls and progress tracking are retained", () => {

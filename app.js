@@ -262,6 +262,7 @@
   }
 
   function renderPlanned(lesson, tabId) {
+    if (window.CourseActivity?.render({ lessonId: lesson.id, tabId, language, container: $("#content-panel") })) return;
     const strings = t();
     const tab = tabDefinitions.find(item => item.id === tabId);
     const proposed = Array.isArray(lesson.future[tabId]) ? lesson.future[tabId] : [];

@@ -33,7 +33,7 @@ window.COURSE_LESSONS = [
         extraVisual: ["silicon-cell"],
         paragraphs: [
           "Silisyum, elmas-kübik (<em>diamond cubic</em>) yapıda kristalleşir. Düzen, birbiri boyunca [111] doğrultusunda (a/4, a/4, a/4) kadar ötelenmiş iki yüzey merkezli kübik (fcc) alt örgü olarak düşünülebilir. Her atomun dört en yakın komşusu tetrahedral yönlerde bulunur. Slayttaki birim hücre çizimi ve yükseklik belirtilmiş izdüşüm, düzlemsel bağ şemasından farklı gösterimlerdir.",
-          "Oda sıcaklığı civarında örgü sabiti yaklaşık <strong>5,43 Å</strong>; geleneksel kübik birim hücrede sekiz Si atomu vardır. Atom yoğunluğu yaklaşık 5 × 10²² cm⁻³'tür."
+          "Oda sıcaklığı civarında örgü sabiti yaklaşık <strong>5,43 Å</strong>; geleneksel kübik birim hücrede sekiz Si atomu vardır. Atom yoğunluğu yaklaşık 5 × 10²² cm⁻³'tür. Öz Si'de 300 K civarında nᵢ ≈ 10¹⁰ cm⁻³ mertebesindedir: serbest elektron yoğunluğu, atom yoğunluğundan yaklaşık 5 × 10¹² kat küçüktür. Bu, her atomun serbest taşıyıcı oluşturmadığını gösterir."
         ],
         equation: "a ≈ 5,43 Å   ·   N<sub>Si</sub> ≈ 5 × 10²² cm⁻³",
         key: "Kristal geometriyi bilmek, elektronların tek atom yerine periyodik bir ortamda bulunduğunu görmeyi sağlar."
@@ -71,9 +71,13 @@ window.COURSE_LESSONS = [
       "Si, Ge ve GaAs örneklerini elementel/bileşik olarak sınıflandırırım.",
       "Saf, öz ve katkılı yarıiletken kavramlarını birbirinden ayırırım.",
       "Si atomunun dört değerlik elektronunu ve kovalent bağ düzenini açıklarım.",
-      "Elmas-kübik yapının temel geometrisini ve örgü sabitini yorumlarım.",
-      "Termal denge ile kararlı durumu; sıcaklık gradyanı, aydınlatma ve dış kutuplama örneklerinde ayırt ederim.",
-      "Foton, fonon ve elektronun temel dalga-parçacık özelliklerini eşleştiririm."
+      "Elmas-kübik Si'de a ≈ 5,43 Å, sekiz atom/hücre ve 3B tetrahedral komşuluğu yorumlarım.",
+      "Termal dengeyi kararlı durumdan ayırır, sıcaklık gradyanı, aydınlatma ve dış kutuplama örneklerini yorumlarım.",
+      "Foton, fonon ve elektronun temel dalga-parçacık özelliklerini eşleştiririm.",
+      "İki boyutlu bağ çizimini gerçek tetrahedral Si yapısından ayırır, [001] izdüşümünde atom yüksekliklerini yorumlarım.",
+      "Si atom yoğunluğu (≈ 5 × 10²² cm⁻³) ile öz taşıyıcı yoğunluğunu (nᵢ ≈ 10¹⁰ cm⁻³) oranlayabilirim.",
+      "Ayrıntılı dengede p–n eklemindeki sürüklenme ve difüzyon akımlarının neden birbirini dengelediğini açıklarım.",
+      "nᵢ–T grafiğinde cm⁻³ birimindeki gerçek taşıyıcı yoğunluğunu ve sıcaklığa bağlı artışı yorumlarım."
     ],
     future: {
       grafikler: ["Silisyum kristalinin 3B örgü şeması", "Termal denge ve kararlı durum karşılaştırması"],
@@ -416,11 +420,13 @@ window.COURSE_LESSONS = [
       "Uniform katkılama ve seyreltik katkı yaklaşımını açıklarım.",
       "Donör/akseptör iyonlaşmasında oluşan taşıyıcı ve iyon yükünü belirlerim.",
       "Katkı iyonlaşma enerjisi ile bant aralığını karşılaştırırım.",
-      "Çoğunluk ve azınlık taşıyıcılarını ayırt ederim.",
+      "n/p tipi çoğunluk–azınlık taşıyıcılarını ve dengedeki n₀p₀ = nᵢ² bağıntısını yorumlarım.",
       "Nᴅ, Nᴀ, Nᴅ⁺ ve Nᴀ⁻ terimlerini doğru kullanarak yük nötrlüğü kurarım.",
       "Tam iyonlaşma varsayımında kompanzasyon hesabı yaparım.",
-      "Freeze-out, extrinsic ve intrinsic rejimlerini sıcaklık grafiğinde tanırım.",
-      "Bağ modelinin kısmi iyonlaşmayı neden tek başına hesaplayamadığını açıklarım."
+      "Freeze-out, extrinsic ve intrinsic sıcaklık rejimlerini ve n₀ ≈ Nᴅ yaklaşımının sınırlarını yorumlarım.",
+      "Bağ modelinin kısmi iyonlaşmayı neden tek başına hesaplayamadığını açıklarım.",
+      "300 K'de nᵢ ≈ 10¹⁰ cm⁻³ ve tam iyonlaşma varsayımıyla Nᴅ'den çoğunluk elektronları ve azınlık hol yoğunluğunu hesaplarım.",
+      "Nᴅ = 10¹⁵ cm⁻³ katkı ile ≈ 5 × 10²² cm⁻³ Si atom yoğunluğundan yaklaşık 20 ppb atom oranını hesaplarım."
     ],
     future: {
       grafikler: ["Üç katkı yoğunluğu için n – 1000/T", "Donör ve akseptör enerji seviyelerinin bant diyagramı"],

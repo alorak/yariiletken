@@ -5,27 +5,27 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 ## Özellikler (ilk aşama)
 
 - Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
-- Sağ üstte **TR / EN** dil anahtarı: arayüz, 34 konu anlatımı, 36 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 34 konu anlatımı, 42 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **34 açıklamalı konu başlığı** ve **36 ölçülebilir öğrenme kazanımı**.
+- Beş ders için **34 açıklamalı konu başlığı** ve **42 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
 - URL hash ile doğrudan ders/sekme bağlantısı (ör. `#ders-05/anlatim`).
 - Harici kütüphane, derleme, API veya izleme gerektirmez.
 
-**Önemli:** Grafikler, simülasyonlar, sorular ve oyunlar henüz **uygulanmış değildir**. Bu sekmelerde, seçili derse özel bir sonraki aşama planı görünür. Çalışmayan görseller, sahte grafikler veya sözde sınav sonuçları gösterilmez. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
+**Güncel durum:** Grafikler, simülasyonlar ve açıklamalı sorular 02–03 bölümlerinde çalışır. 04–06 için bu etkinlikler plan aşamasındadır; Oyunlar henüz uygulanmamıştır. Bu sekmelerde, seçili derse özel bir sonraki aşama planı görünür. Çalışmayan görseller, sahte grafikler veya sözde sınav sonuçları gösterilmez. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
 
 ## Ders haritası
 
 | Ders | Konu | Başlık | Kazanım |
 |---|---|---:|---:|
-| 02 | Yarıiletken malzemeler, kristal yapısı, termal denge | 6 | 6 |
+| 02 | Yarıiletken malzemeler, kristal yapısı, termal denge | 6 | 10 |
 | 03 | Elektron, hol, üretim/rekombinasyon, bağ modelinin sınırları | 6 | 7 |
 | 04 | Kuantum durumları, bant teorisi ve etkin kütleye giriş | 7 | 7 |
 | 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 8 |
-| 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 8 |
+| 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 10 |
 
 İçerik, ders 02–06 PDF notlarındaki kavramlar temel alınarak **ön koşul sırasına göre yeniden düzenlenmiştir**. Metinler doğrudan ders notlarının tam kopyası değildir. İlgili yaklaşımların geçerlilik sınırları gerektiğinde açıklanır.
 
@@ -128,3 +128,12 @@ Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece 
 - Tüm yeni anlatım ve şekiller **Türkçe/İngilizce**. Mevcut ders/konu/kazanım sayısı ve 02–03 soru indeksleri değiştirilmedi.
 
 Şekiller `lesson-extras.js` içinde bağımsızdır; `app.js` bunları yalnızca ders içeriğindeki `extraVisual` anahtarlarına göre gösterir. Regresyon için `node --test tests/*.test.mjs` komutunu kullanın.
+
+## Doğrusal öz taşıyıcı grafiği ve güncel kazanımlar
+
+- **02 · Öz taşıyıcı yoğunluğu – sıcaklık:** Y ekseni artık doğrudan `nᵢ (cm⁻³)` gösterir; `log₁₀` dönüşümü uygulanmaz. Si/Ge/GaAs malzeme seçicisi her malzemenin eğrisini **kendi doğrusal ölçeğinde** gösterir. Sıcaklık kontrolü seçilen noktanın çevresinde yaklaşık ±50 K aralığına odaklanır; sağa/sola sınırda 200–500 K aralığına kırpılır. Eksen değerleri bilimsel gösterimde (örn. 2×10¹¹) yazılabilir; bu bir logaritmik eksen değildir.
+- Sıcaklığa bağlı nᵢ hesaplarında 300 K referansları ve sabit bant aralığı yaklaşımı değişmedi. Ayrı **bant aralığı duyarlılığı** grafiğinin `log₁₀` gösterimi bu PR kapsamında değiştirilmedi.
+- Kazanımlar anlatım ve şekillerle eşleştirildi: **02 → 10**, **06 → 10**; 03/04/05 içerikleri ve sıraları değişmedi. İlk kazanımların indeksleri korunduğu için `localStorage` işaretlemeleri kaymaz. Önceki konu başlığı sayısı **34**, toplam kazanım sayısı **42**.
+- 02'de Si atom yoğunluğu ile yaklaşık öz taşıyıcı yoğunluğunun fiziksel mertebe farkı da konu anlatımına eklendi. Varsayımlara uygun yaklaşık hesaplar kullanılır; bunlar tam malzeme ölçümü değildir.
+
+Kontrol komutu: `node --test tests/*.test.mjs`.

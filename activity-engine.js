@@ -17,7 +17,7 @@
       generation: "Dış üretim", pulse: "Üretim şiddeti", angle: "Döndürme açısı",
       showBonds: "Bağları göster", photon: "Foton enerjisi", photonUnit: "eV",
       valueAt: "Seçilen noktadaki değerler", material: "Malzeme",
-      density: "Taşıyıcı yoğunluğu", logDensity: "log₁₀[nᵢ / (cm⁻³)]",
+      density: "Taşıyıcı yoğunluğu", densityNi: "nᵢ (cm⁻³)", logDensity: "log₁₀[nᵢ / (cm⁻³)]",
       photonAvailable: "Enerji eşiği sağlanıyor; idealize edilmiş geçiş tetiklenebilir.",
       photonUnavailable: "hν < Eᵍ olduğundan bu tek-fotonlu bantlar arası geçiş için enerji yetersiz.",
       photonIndirect: "Si dolaylı bant aralıklıdır: enerji yeterli olsa da fonon desteği gerekebilir.",
@@ -56,7 +56,7 @@
       generation: "External generation", pulse: "Generation intensity", angle: "Rotation angle",
       showBonds: "Show bonds", photon: "Photon energy", photonUnit: "eV",
       valueAt: "Values at the selected point", material: "Material",
-      density: "Carrier density", logDensity: "log₁₀[nᵢ / (cm⁻³)]",
+      density: "Carrier density", densityNi: "nᵢ (cm⁻³)", logDensity: "log₁₀[nᵢ / (cm⁻³)]",
       photonAvailable: "The energy threshold is met; an idealized transition can be triggered.",
       photonUnavailable: "hν < Eᵍ: insufficient energy for this single-photon interband transition.",
       photonIndirect: "Si has an indirect gap: phonon assistance may be needed even if the energy is sufficient.",
@@ -113,21 +113,38 @@
   const graphModels = {
     "intrinsic-temperature": {
       controls: l => [ ["temp", labels[l].temperature, 200, 500, 10, 300, "K"] ],
+      // n_i is calculated and plotted directly in cm^-3: no log axis or log-transformed data.
       config: (p,l) => {
         const material = [
           { name:"Si", eg:1.12, baseline:1e10, c:0 },
           { name:"Ge", eg:0.66, baseline:2.4e13, c:1 },
           { name:"GaAs", eg:1.42, baseline:1.8e6, c:2 }
         ];
-        const logni = (mat,T) => Math.log10(mat.baseline) +
-          1.5*Math.log10(T/300) - (mat.eg/(2*K*LN10))*(1/T-1/300);
+        const selectedIndex = Math.min(2,Math.max(0,Number.isInteger(p.material)?p.material:0));
+        const selected = material[selectedIndex];
+        const ni = (mat,T) => mat.baseline * Math.pow(T/300, 1.5) *
+          Math.exp(-mat.eg/(2*K) * (1/T - 1/300));
+        // On a linear axis one material could completely mask the others.
+        // Display one at a time, focusing on a local window around selected T.
+        const xMin = Math.max(200,p.temp-50);
+        const xMax = Math.min(500,p.temp+50);
+        const maxValue = ni(selected,xMax) * 1.12;
+        const exponent = Math.floor(Math.log10(maxValue));
+        const unit = Math.pow(10,exponent);
+        const leading = maxValue/unit;
+        const rounded = [1,2,2.5,5,10].find(n=>n>=leading-1e-10) || 10;
+        const yMax = rounded*unit;
         return {
-          xMin:200,xMax:500,yMin:-3,yMax:20,
-          xTicks:[200,250,300,350,400,450,500],
-          yTicks:[-2,2,6,10,14,18], xLabel:"T (K)", yLabel:labels[l].logDensity,
-          lines:material.map(mat=>({label:mat.name,c:mat.c,fn:T=>logni(mat,T)})),
+          xMin,xMax,yMin:0,yMax,
+          xTicks:Array.from({length:5},(_,i)=>xMin+(xMax-xMin)*i/4),
+          yTicks:Array.from({length:5},(_,i)=>yMax*i/4),
+          yTickFormat:"scientific",
+          xLabel:"T (K)", yLabel:labels[l].densityNi,
+          lines:[{label:selected.name,c:selected.c,fn:T=>ni(selected,T)}],
           markerX:p.temp,
-          readout:material.map(mat=>({name:mat.name,value:"nᵢ ≈ "+fmt(Math.pow(10,logni(mat,p.temp)),2)+" cm⁻³",c:mat.c}))
+          readout:material.map(mat=>({
+            name:mat.name, value:"nᵢ ≈ "+fmt(ni(mat,p.temp),2)+" cm⁻³", c:mat.c
+          }))
         };
       }
     },
@@ -188,6 +205,16 @@
     }
   };
 
+  const superscript = value => String(value).split("").map(digit =>
+    ({ "-":"⁻", "+":"⁺", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴",
+       "5":"⁵", "6":"⁶", "7":"⁷", "8":"⁸", "9":"⁹" }[digit] || digit)).join("");
+  function linearScientific(value) {
+    if(value===0)return "0";
+    const exp=Math.floor(Math.log10(Math.abs(value)));
+    const coefficient=Number((value/Math.pow(10,exp)).toFixed(2));
+    return coefficient+"×10"+superscript(exp);
+  }
+
   function svgPlot(conf, lang) {
     const W=840,H=342,L=87,R=24,T=23,B=62,plotW=W-L-R,plotH=H-T-B;
     const xScale=x=>L+plotW*(x-conf.xMin)/(conf.xMax-conf.xMin);
@@ -197,7 +224,7 @@
       '<text class="lab-plot-tick" x="'+xScale(n)+'" y="'+(H-B+20)+'" text-anchor="middle">'+fmt(n,2)+'</text>').join("");
     const gridY=conf.yTicks.map(n=>
       '<line class="lab-grid-line" x1="'+L+'" y1="'+yScale(n)+'" x2="'+(W-R)+'" y2="'+yScale(n)+'"/>'+
-      '<text class="lab-plot-tick" x="'+(L-12)+'" y="'+(yScale(n)+4)+'" text-anchor="end">'+fmt(n,2)+'</text>').join("");
+      '<text class="lab-plot-tick" x="'+(L-12)+'" y="'+(yScale(n)+4)+'" text-anchor="end">'+(conf.yTickFormat==="scientific"?linearScientific(n):fmt(n,2))+'</text>').join("");
     const paths=conf.lines.map(line=>{
       let d="";
       const segments=150;
@@ -228,6 +255,7 @@
   function chartCard(item, lang, ix) {
     const model=graphModels[item.id];
     const p=Object.fromEntries(model.controls(lang).map(([id, , , , ,v])=>[id,v]));
+    if (item.id==="intrinsic-temperature") p.material=0;
     const id="chart-"+item.id;
     const node=document.createElement("article");
     node.className="lab-card";node.id=id;
@@ -235,7 +263,13 @@
       '<div class="lab-card-head"><span class="lab-card-index">'+String(ix+1).padStart(2,"0")+
       '</span><div><h3>'+escapeText(t(item.title,lang))+'</h3><p>'+escapeText(t(item.description,lang))+'</p></div></div>'+
       '<div class="lab-controls">'+model.controls(lang).map(([key,name,min,max,step,v,unit])=>
-        slider(id+"-"+key,name,min,max,step,v,unit)).join("")+'</div>'+
+        slider(id+"-"+key,name,min,max,step,v,unit)).join("")+
+        (item.id==="intrinsic-temperature"
+          ? '<label class="lab-control lab-material-control" for="'+id+'-material"><span class="lab-control-top">'+
+            escapeText(labels[lang].material)+'</span><select id="'+id+'-material" data-material aria-label="'+
+            escapeText(labels[lang].material)+'"><option value="0">Si</option><option value="1">Ge</option>'+
+            '<option value="2">GaAs</option></select></label>'
+          : "")+'</div>'+
       '<div class="lab-plot-container" data-chart></div><div class="lab-legend" data-legend></div>'+
       '<div class="lab-readouts" data-readouts aria-live="polite"></div>'+
       noteBox(t(item.note,lang),lang);
@@ -254,6 +288,11 @@
       if(out)out.textContent=fmt(p[key],2)+" "+definition[6];
       update();
     }));
+    const materialSelect=$(node,"[data-material]");
+    if(materialSelect)materialSelect.addEventListener("change",()=>{
+      p.material=Number(materialSelect.value);
+      update();
+    });
     update();return node;
   }
 

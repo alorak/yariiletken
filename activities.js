@@ -7,12 +7,12 @@ window.COURSE_ACTIVITIES = {
         id: "intrinsic-temperature",
         title: { tr: "Öz taşıyıcı yoğunluğu – sıcaklık", en: "Intrinsic carrier density vs temperature" },
         description: {
-          tr: "Si, Ge ve GaAs için nᵢ'nin sıcaklıkla nasıl değiştiğini logaritmik eksende karşılaştır. Seçilen sıcaklıktaki yaklaşık değerler eğrilerin altında gösterilir.",
-          en: "Compare the temperature dependence of nᵢ in Si, Ge and GaAs on a logarithmic axis. Approximate values at the selected temperature appear below the plot."
+          tr: "Si, Ge veya GaAs seçerek öz taşıyıcı yoğunluğunu gerçek nᵢ (cm⁻³) değerleriyle doğrusal eksende incele. Sıcaklık değişince grafik seçilen T çevresinde ±50 K'lik bir pencereye odaklanır; üç malzemenin sayısal değerleri altta korunur.",
+          en: "Select Si, Ge or GaAs to plot the actual intrinsic carrier concentration nᵢ (cm⁻³) on a linear axis. Changing temperature focuses the plot within a ±50 K window; numerical values for all three materials remain below."
         },
         note: {
-          tr: "Model: nᵢ(T) = nᵢ(300 K)(T/300)³ᐟ² exp[−Eᵍ/(2k)(1/T−1/300)]. Burada Eᵍ sabit kabul edilir; bu gerçek bir geniş sıcaklık aralığı malzeme kestirimi değildir. 300 K referansları yaklaşık: Si 10¹⁰, Ge 2,4×10¹³, GaAs 1,8×10⁶ cm⁻³.",
-          en: "Model: nᵢ(T) = nᵢ(300 K)(T/300)³ᐟ² exp[−Eᵍ/(2k)(1/T−1/300)]. Eᵍ is held constant, so this is not a precise materials prediction across a broad temperature range. Approximate 300 K references: Si 10¹⁰, Ge 2.4×10¹³, GaAs 1.8×10⁶ cm⁻³."
+          tr: "Model: nᵢ(T) = nᵢ(300 K)(T/300)³ᐟ² exp[−Eᵍ/(2k)(1/T−1/300)]. Dikey eksen doğrusaldır ve nᵢ sayısal değerlerini (cm⁻³) gösterir; log₁₀ kullanılmaz. Çok farklı büyüklükleri aynı doğrusal eksende saklamamak için her defasında tek malzeme çizilir. Eᵍ sabit kabul edilir; geniş sıcaklık aralığı için hassas malzeme kestirimi değildir. 300 K referansları: Si ≈ 10¹⁰, Ge ≈ 2,4×10¹³, GaAs ≈ 1,8×10⁶ cm⁻³.",
+          en: "Model: nᵢ(T) = nᵢ(300 K)(T/300)³ᐟ² exp[−Eᵍ/(2k)(1/T−1/300)]. The y-axis is linear and shows actual nᵢ values (cm⁻³); no log₁₀ transform is used. One material is plotted at a time to avoid hiding other curves with much smaller magnitudes. Eᵍ is held constant, so this is not an accurate prediction over a broad temperature range. Approximate 300 K references: Si 10¹⁰, Ge 2.4×10¹³, GaAs 1.8×10⁶ cm⁻³."
         }
       },
       {

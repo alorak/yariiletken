@@ -103,6 +103,16 @@
   }
 
   const progress = loadProgress();
+  // 03 outcomes 8 and 9 changed from wave/dipole analogies to band-gap/excitation skills.
+  // Keep all unaffected completed objectives, but do not silently count changed ones.
+  const outcomeMigrationKey = "yariiletken-lesson03-outcomes-v2";
+  if (readStorage(outcomeMigrationKey, "") !== "1") {
+    if (Array.isArray(progress["03"])) {
+      progress["03"] = progress["03"].filter(index => index !== 7 && index !== 8);
+      writeStorage(progressKey, JSON.stringify(progress));
+    }
+    writeStorage(outcomeMigrationKey, "1");
+  }
   let language = readStorage(languageKey, "tr") === "en" ? "en" : "tr";
   let lessons = language === "en" && lessonsEn.length === lessonsTr.length ? lessonsEn : lessonsTr;
   let pendingScroll = null;

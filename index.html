@@ -19,6 +19,7 @@
   <script src="./lesson03-mechanisms.js" defer></script>
   <script src="./lesson03-hole-sim.js" defer></script>
   <script src="./intrinsic-density-lab.js" defer></script>
+  <script src="./course-search.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -37,6 +38,18 @@
         <select id="lesson-mobile-select" class="lesson-mobile-select" aria-label="Ders seç"></select>
       </nav>
       <div class="header-actions">
+        <div class="site-search">
+          <button type="button" id="course-search-toggle" class="icon-button" aria-label="Konu anlatımlarında ara" title="Konu anlatımlarında ara" aria-expanded="false" aria-controls="course-search-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7"/><path d="m16 16 5 5"/></svg>
+          </button>
+          <div id="course-search-panel" class="course-search-panel" role="search" aria-label="Konu anlatımlarında ara" hidden>
+            <div class="course-search-input-row">
+              <input id="course-search-input" class="course-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Konu veya kavram ara…" aria-label="Konu anlatımlarında ara" aria-controls="course-search-results"/>
+              <button type="button" id="course-search-close" class="course-search-close" aria-label="Aramayı kapat" title="Aramayı kapat">×</button>
+            </div>
+            <div id="course-search-results" class="course-search-results" aria-label="Arama sonuçları"></div>
+          </div>
+        </div>
         <div class="language-control" role="group" aria-label="Language / Dil">
           <button type="button" id="language-tr" class="language-button" data-lang="tr" aria-pressed="true" lang="tr">TR</button>
           <button type="button" id="language-en" class="language-button" data-lang="en" aria-pressed="false" lang="en">EN</button>

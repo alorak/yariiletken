@@ -361,3 +361,21 @@ html[data-theme="dark"] .back-button { color: #08222e; }
   .non-eq-diagram { max-height: 140px; }
   .majority-regimes { grid-template-columns: 1fr; }
 }
+
+
+/* Linear n_i(T): select one semiconductor at a time so large magnitude gaps
+   between Si, Ge and GaAs do not hide their curves on the same linear scale. */
+.lab-material-control select {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--stroke);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 9px;
+  padding: 7px 11px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lab-material-control select:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }

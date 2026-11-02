@@ -34,12 +34,34 @@ test("02 and 03 each include two graphs, two simulations, and eight questions", 
   }
 });
 
-test("temperature model: intrinsic concentration increases with T", () => {
-  const model = window.CourseActivity.graphModels["intrinsic-temperature"].config({ temp: 300 }, "tr");
-  const [si, ge, gaas] = model.lines;
-  assert.ok(Math.abs(si.fn(300) - 10) < 1e-9);
-  assert.ok(ge.fn(300) > si.fn(300));
-  assert.ok(gaas.fn(300) < si.fn(300));
+test("n_i(T) uses actual carrier concentration on a linear y-axis, not log10", () => {
+  const plot = window.CourseActivity.graphModels["intrinsic-temperature"];
+  const references = [1e10, 2.4e13, 1.8e6];
+  for (const locale of ["tr", "en"]) {
+    for (let material = 0; material < 3; material++) {
+      for (const temp of [200, 300, 500]) {
+        const c = plot.config({ temp, material }, locale);
+        assert.equal(c.lines.length, 1);
+        assert.equal(c.yMin, 0);
+        assert.ok(c.yMax > 0);
+        assert.equal(c.yTickFormat, "scientific");
+        assert.ok(c.yLabel.includes("cm⁻³"));
+        assert.ok(!c.yLabel.includes("log"));
+        assert.equal(c.markerX, temp);
+        assert.ok(c.xMin <= temp && temp <= c.xMax);
+        assert.ok(c.xMax-c.xMin <= 100);
+        assert.ok(c.yTicks.every(n => n >= 0 && n <= c.yMax));
+        for (const x of [c.xMin,temp,c.xMax]) {
+          assert.ok(c.lines[0].fn(x) > 0 && c.lines[0].fn(x) <= c.yMax);
+        }
+        if (temp === 300) {
+          assert.ok(Math.abs(c.lines[0].fn(300)/references[material]-1) < 1e-12);
+        }
+        assert.equal(c.readout.length, 3);
+      }
+    }
+  }
+  const si = plot.config({ temp: 300, material: 0 }, "tr").lines[0];
   assert.ok(si.fn(400) > si.fn(300));
   assert.ok(si.fn(200) < si.fn(300));
 });

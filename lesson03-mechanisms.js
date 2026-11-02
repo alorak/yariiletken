@@ -26,7 +26,7 @@ const copy = {
     {group:"rec",kind:"trap",head:"SRH recombination",flow:"Elektron → kusur seviyesi → hol",example:"Si içindeki tuzak ve kusur merkezleri",detail:"Yasak aralık içindeki kusur seviyesi ara durak olur; enerji çoğunlukla fononlara aktarılır."},
     {group:"rec",kind:"auger",head:"Auger recombination",flow:"Elektron + hol → üçüncü taşıyıcıya enerji",example:"Yüksek enjeksiyonlu veya yoğun katkılanmış bölge",detail:"Yok olan çiftin enerjisi ışık yerine üçüncü elektrona veya hole aktarılır; yüksek taşıyıcı yoğunluklarında önem kazanabilir."}
    ],
-   note:"Saçılmada serbest çift sayısı zorunlu olarak değişmez; rekombinasyonda bir serbest elektron–hol çifti ortadan kalkar. Termal dengede toplam üretim hızı G ile toplam yeniden birleşme hızı R eşittir; ışık altında sabit bir kararlı durum dengeyle aynı değildir."
+   note:"Saçılmada serbest çift sayısı zorunlu olarak değişmez; rekombinasyonda bir serbest elektron–hol çifti ortadan kalkar. Termal dengede toplam üretim ve yeniden birleşme hızları eşittir (G = R); ışık altında sabit bir kararlı durum dengeyle aynı değildir."
   }
  },
  en:{
@@ -51,7 +51,7 @@ const copy = {
     {group:"rec",kind:"trap",head:"SRH recombination",flow:"Electron → defect trap → hole",example:"Trap centers and defects in silicon",detail:"A gap-state defect acts as an intermediate step; energy is often transferred to lattice vibrations (phonons)."},
     {group:"rec",kind:"auger",head:"Auger recombination",flow:"Electron + hole → energy to a third carrier",example:"High-injection or heavily doped regions",detail:"Energy from the recombining pair is transferred to another electron or hole instead of being emitted directly as light."}
    ],
-   note:"Scattering need not change the free-pair count; recombination removes a free electron–hole pair. At thermal equilibrium total generation G equals total recombination R, while a steady illuminated state is not necessarily equilibrium."
+   note:"Scattering need not change the free-pair count; recombination removes a free electron–hole pair. At thermal equilibrium G = R, while a steady illuminated state is not necessarily equilibrium."
   }
  }
 };

@@ -27,8 +27,8 @@ test("offsets adapt to header and translated lesson-title heights", () => {
   assert.match(css, /--reading-offset:\s*calc\(var\(--site-header-height\) \+ var\(--lesson-sticky-height\) \+ 12px\)/);
 });
 
-test("learning outcomes are fixed beneath tabs and scroll internally", () => {
-  assert.match(css, /\.outcomes-card\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--reading-offset\)/s);
+test("learning outcomes remain sticky below the topic strip and scroll internally", () => {
+  assert.match(css, /\.outcomes-card\s*\{[^}]*position:\s*sticky;[^}]*top:\s*calc\(var\(--reading-offset\) \+ var\(--topic-navigation-height\) \+ 8px\)/s);
   assert.match(css, /\.outcomes-list\s*\{[^}]*overflow-y:\s*auto;/s);
   assert.match(css, /@media \(max-width:\s*960px\)/);
   assert.match(css, /\.outcomes-card\s*\{ position:\s*sticky; grid-row:\s*1;/);
@@ -43,7 +43,9 @@ test("the one-line lesson synopsis stays, but redundant labels and outcome notes
   assert.doesNotMatch(app, /Check what you can explain after completing this lesson/);
   assert.doesNotMatch(app, /These checks are self-assessment, not exam results/);
   assert.match(app, /<h1 id="lesson-title">' \+ lesson\.title/);
-  assert.match(app, /'<h2>' \+ strings\.overview \+ '<\/h2><p>' \+ strings\.intro/);
+  assert.doesNotMatch(app, /'<div class="section-intro"/);
+  assert.match(app, /'<nav class="topic-guide"/);
+  assert.match(app, /id="outcomes-title">' \+ strings\.outcomes/);
 });
 
 test("existing lesson navigation, bilingual controls and progress tracking are retained", () => {

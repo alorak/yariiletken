@@ -15,7 +15,7 @@ window.COURSE_LESSONS = [
           "Yarıiletkenler <strong>elementel</strong> (Si, Ge) veya <strong>bileşik</strong> (GaAs, InP) olabilir. Bu ayrım, kristali oluşturan atom türlerine dayanır. Ayrıca bir malzemenin iç hacmi (<em>bulk</em>) ile arayüzünün (<em>interface</em>) elektronik özellikleri aynı olmak zorunda değildir.",
           "<strong>Saf (pure)</strong> yapısal bir ölçüttür: ideal durumda yabancı atom ve kusur bulunmamasını anlatır. <strong>Öz (intrinsic)</strong> taşıyıcı rejiminde termal dengede n₀ = p₀ = nᵢ olur; saflık ve taşıyıcı dengesi aynı soru değildir. <strong>Katkılı (extrinsic)</strong> malzemede donör veya akseptörler vardır ve genellikle bir taşıyıcı türü baskındır. Ancak yüksek sıcaklıkta katkılı bir malzeme de öz taşıyıcı rejimine yaklaşabilir. Aydınlatılmış saf bir örnek ise saflığını koruduğu halde termal dengede olmayabilir."
         ],
-        visual: ["classification", "temperature-preview"],
+        visual: ["classification"],
         key: "Malzemenin kimyasal türü, saflığı ve taşıyıcı davranışı farklı sınıflandırma eksenleridir."
       },
       {
@@ -30,6 +30,7 @@ window.COURSE_LESSONS = [
       },
       {
         title: "Diamond kristal yapısı",
+        extraVisual: ["silicon-cell"],
         paragraphs: [
           "Silisyum, elmas-kübik (<em>diamond cubic</em>) yapıda kristalleşir. Düzen, birbiri boyunca [111] doğrultusunda (a/4, a/4, a/4) kadar ötelenmiş iki yüzey merkezli kübik (fcc) alt örgü olarak düşünülebilir. Her atomun dört en yakın komşusu tetrahedral yönlerde bulunur. Slayttaki birim hücre çizimi ve yükseklik belirtilmiş izdüşüm, düzlemsel bağ şemasından farklı gösterimlerdir.",
           "Oda sıcaklığı civarında örgü sabiti yaklaşık <strong>5,43 Å</strong>; geleneksel kübik birim hücrede sekiz Si atomu vardır. Atom yoğunluğu yaklaşık 5 × 10²² cm⁻³'tür."
@@ -39,9 +40,10 @@ window.COURSE_LESSONS = [
       },
       {
         title: "Termal denge ve ayrıntılı denge ilkesi",
+        extraVisual: ["non-equilibrium", "equilibrium-value"],
         paragraphs: [
-          "<strong>Termal denge</strong>, dış uyarıların bulunmadığı ve makroskopik net akışların oluşmadığı başvuru durumudur. Denge, mikroskobik olayların durması demek değildir: termal üretim ve rekombinasyon sürebilir.",
-          "<strong>Ayrıntılı denge (detailed balance)</strong> ilkesinde, dengedeki bir süreç karşıt süreciyle uygun şekilde dengelenir. Elektron–hol üretimi ve yeniden birleşmesi bunun yarıiletkenlerdeki temel örneğidir."
+          "<strong>Termal denge</strong>, dış uyarıların bulunmadığı ve makroskopik net akışların oluşmadığı başvuru durumudur. Denge, mikroskobik olayların durması demek değildir: termal üretim ve rekombinasyon sürebilir. Örneğin iki uç arasında sıcaklık farkı, sürekli ışıkla taşıyıcı üretimi veya akım taşıyan dış kutuplama termal dengeden sapmaya yol açar.",
+          "<strong>Ayrıntılı denge (detailed balance)</strong> ilkesinde, dengedeki bir süreç karşıt süreciyle uygun şekilde dengelenir. Elektron–hol üretimi ve yeniden birleşmesi bunun yarıiletkenlerdeki temel örneğidir. Dengede p–n eklemindeki birbirine zıt sürüklenme ve difüzyon akımları net sıfırdır; küçük bir dış kutuplama bu eşitliği değiştirir ve diyot akımı doğar."
         ],
         key: "Denge, hareketsizlik değil; mikroskobik süreçlerin birbirini dengelemesidir."
       },
@@ -70,7 +72,7 @@ window.COURSE_LESSONS = [
       "Saf, öz ve katkılı yarıiletken kavramlarını birbirinden ayırırım.",
       "Si atomunun dört değerlik elektronunu ve kovalent bağ düzenini açıklarım.",
       "Elmas-kübik yapının temel geometrisini ve örgü sabitini yorumlarım.",
-      "Termal denge ile kararlı durumu fiziksel örneklerde ayırt ederim.",
+      "Termal denge ile kararlı durumu; sıcaklık gradyanı, aydınlatma ve dış kutuplama örneklerinde ayırt ederim.",
       "Foton, fonon ve elektronun temel dalga-parçacık özelliklerini eşleştiririm."
     ],
     future: {
@@ -392,9 +394,11 @@ window.COURSE_LESSONS = [
       },
       {
         title: "Sıcaklığa göre üç çalışma rejimi",
+        visual: ["temperature-preview"],
+        extraVisual: ["majority-numbers"],
         paragraphs: [
           "<strong>I — Freeze-out:</strong> düşük sıcaklıkta katkıların önemli bölümü iyonlaşmamıştır; taşıyıcı yoğunluğu sıcaklıkla artar. <strong>II — Extrinsic:</strong> iyonlaşma büyük ölçüde tamamlanmış ve öz taşıyıcılar daha az etkilidir; örneğin kompanzasyonsuz n-tipi Si'de n₀≈N<sub>D</sub> olabilir.",
-          "<strong>III — Intrinsic:</strong> yüksek sıcaklıkta termal olarak üretilen elektron–hol çiftleri katkıdan baskın hale gelir; hem elektron hem hol yoğunluğu n<sub>i</sub> mertebesine yaklaşır. Rejim sınırları katkı seviyesine ve kullanılan fiziksel modele bağlıdır."
+          "<strong>III — Intrinsic:</strong> yüksek sıcaklıkta termal olarak üretilen elektron–hol çiftleri katkıdan baskın hale gelir; hem elektron hem hol yoğunluğu n<sub>i</sub> mertebesine yaklaşır. Rejim sınırları katkı seviyesine ve kullanılan fiziksel modele bağlıdır. Örneğin 300 K'de, n<sub>i</sub> ≈ 10¹⁰ cm⁻³ ve tam iyonlaşmış, kompanze edilmemiş n-tipi Si için N<sub>D</sub> = 10¹⁵ cm⁻³ olduğunda n₀ ≈ 10¹⁵, p₀ ≈ 10⁵ cm⁻³ olur. Bu sayılar yalnızca uygun ekstrinsik rejime ait yaklaşık örnektir."
         ],
         equation: "I: n₀ ≈ N<sub>D</sub><sup>+</sup> &nbsp;·&nbsp; II: n₀ ≈ N<sub>D</sub> &nbsp;·&nbsp; III: n₀ ≈ p₀ ≈ n<sub>i</sub>",
         key: "Tek bir n≈Nᴅ formülünü bütün sıcaklıklara uygulamak doğru değildir."

@@ -33,9 +33,7 @@
       formula: "Temel bağıntı",
       objectives: "HEDEFLER",
       outcomes: "Kazanımlar",
-      outcomesHint: "Bu dersi bitirdiğinde neleri açıklayabildiğini işaretle.",
       progress: "İşaretlenen kazanımlar",
-      outcomesNote: "İşaretlemeler bir sınav sonucu değildir; ilerlemen yalnızca bu tarayıcıda saklanır.",
       planned: "SONRAKİ GELİŞTİRME AŞAMASI",
       proposed: "PLANLANAN",
       proposedNote: "Bu etkinlik için arayüz alanı ayrıldı; henüz etkin değildir.",
@@ -64,9 +62,7 @@
       formula: "Key equation",
       objectives: "GOALS",
       outcomes: "Learning Outcomes",
-      outcomesHint: "Check what you can explain after completing this lesson.",
       progress: "Completed learning outcomes",
-      outcomesNote: "These checks are self-assessment, not exam results. Your progress is saved only in this browser.",
       planned: "NEXT DEVELOPMENT PHASE",
       proposed: "PLANNED",
       proposedNote: "Space has been reserved for this activity; it is not yet interactive.",
@@ -121,7 +117,7 @@
   function navigate(lessonId, tabId = "anlatim") {
     if (!lessonIds.has(lessonId) || !tabIds.has(tabId)) return;
     const target = "#ders-" + lessonId + "/" + tabId;
-    pendingScroll = selectedRoute().lessonId !== lessonId ? "#hero" : "#content-tabs";
+    pendingScroll = "#content-panel";
     if (location.hash === target) render();
     else location.hash = target;
   }
@@ -162,10 +158,8 @@
   }
 
   function renderHero(lesson) {
-    $("#hero").innerHTML =
-      '<div class="hero-copy"><div class="hero-kicker">' + lesson.kicker +
-      '</div><h1 id="lesson-title">' + lesson.title +
-      '</h1><p class="hero-description">' + lesson.description + '</p></div>';
+    // Keep only the lesson title in the pinned region; place the summary in the content.
+    $("#hero").innerHTML = '<div class="hero-copy"><h1 id="lesson-title">' + lesson.title + '</h1></div>';
   }
 
   function renderTabs(lessonId, currentTab) {
@@ -228,7 +222,7 @@
     $("#content-panel").innerHTML =
       '<div class="learning-layout"><div class="topics-column">' +
       '<div class="section-intro"><span class="eyebrow">' + strings.heading + '</span>' +
-      '<h2>' + strings.overview + '</h2><p>' + strings.intro + '</p>' +
+      '<h2>' + strings.overview + '</h2><p>' + lesson.description + '</p>' +
       '<div class="topic-index">' + lesson.topics.map((_, index) =>
         '<button class="topic-jump" type="button" data-topic="' + (index + 1) + '">' +
         String(index + 1).padStart(2, "0") + '. ' + strings.topic + '</button>'
@@ -236,10 +230,8 @@
       '<aside class="outcomes-card" aria-labelledby="outcomes-title">' +
       '<div class="outcomes-header"><div><span class="eyebrow">' + strings.objectives + '</span><h2 id="outcomes-title">' + strings.outcomes + '</h2></div>' +
       '<span class="outcome-counter" id="outcome-counter"></span></div>' +
-      '<p class="outcomes-caption">' + strings.outcomesHint + '</p>' +
       '<div class="progress-track" role="progressbar" aria-label="' + strings.progress + '" aria-valuemin="0"><div class="progress-fill" id="progress-fill"></div></div>' +
       '<ul class="outcomes-list">' + outcomes + '</ul>' +
-      '<p class="outcomes-note">' + strings.outcomesNote + '</p>' +
       '</aside></div>';
 
     $("#content-panel").querySelectorAll("[data-topic]").forEach(button => {
@@ -344,6 +336,24 @@
     updateButtons();
   }
 
+  function setupStickyOffsets() {
+    const header = $(".site-header");
+    const stickyCourse = $("#lesson-sticky");
+    const refresh = () => {
+      document.documentElement.style.setProperty("--site-header-height",
+        Math.ceil(header.getBoundingClientRect().height) + "px");
+      document.documentElement.style.setProperty("--lesson-sticky-height",
+        Math.ceil(stickyCourse.getBoundingClientRect().height) + "px");
+    };
+    refresh();
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(refresh);
+      observer.observe(header);
+      observer.observe(stickyCourse);
+    }
+    window.addEventListener("resize", refresh);
+  }
+
   if (lessonsTr.length === 0 || lessonsEn.length !== lessonsTr.length) return;
   setupTheme();
   setupLanguage();
@@ -352,4 +362,5 @@
     history.replaceState(null, "", location.pathname + location.search + "#ders-02/anlatim");
   }
   render();
+  setupStickyOffsets();
 })();

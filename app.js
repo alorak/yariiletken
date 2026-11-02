@@ -37,6 +37,7 @@
     } catch { return {}; }
   }
   const progress = loadProgress();
+  let pendingScroll = null;
 
   function selectedRoute() {
     const match = location.hash.match(/^#ders-(\d{2})\/([a-z]+)$/);
@@ -48,6 +49,7 @@
   function navigate(lessonId, tabId = "anlatim") {
     if (!lessonIds.has(lessonId) || !tabIds.has(tabId)) return;
     const target = "#ders-" + lessonId + "/" + tabId;
+    pendingScroll = selectedRoute().lessonId !== lessonId ? ".page-intro" : "#content-tabs";
     if (location.hash === target) render();
     else location.hash = target;
   }
@@ -212,6 +214,10 @@
     $("#lesson-count").textContent = lesson.topics.length + " konu · " + lesson.outcomes.length + " kazanım";
     if (tabId === "anlatim") renderNarration(lesson);
     else renderPlanned(lesson, tabId);
+    if (pendingScroll) {
+      document.querySelector(pendingScroll)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      pendingScroll = null;
+    }
   }
 
   function setupTheme() {

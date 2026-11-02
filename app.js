@@ -30,6 +30,7 @@
       overview: "Temelden ileriye, adım adım",
       intro: "Başlıklar birbirinin ön koşuludur. Önce kavramı oku, sonra karşıdaki kazanımlardan öğrendiklerini işaretle.",
       topic: "konu",
+      topicNav: "Konu başlıkları",
       formula: "Temel bağıntı",
       objectives: "HEDEFLER",
       outcomes: "Kazanımlar",
@@ -59,6 +60,7 @@
       overview: "From fundamentals to applications",
       intro: "Each topic builds on the previous one. Read the explanations, then check the learning outcomes you can demonstrate.",
       topic: "topic",
+      topicNav: "Lesson topics",
       formula: "Key equation",
       objectives: "GOALS",
       outcomes: "Learning Outcomes",
@@ -104,6 +106,7 @@
   let language = readStorage(languageKey, "tr") === "en" ? "en" : "tr";
   let lessons = language === "en" && lessonsEn.length === lessonsTr.length ? lessonsEn : lessonsTr;
   let pendingScroll = null;
+  let topicNavCleanup = null;
   const t = () => ui[language];
 
   function selectedRoute() {
@@ -201,6 +204,87 @@
     }
   }
 
+  function refreshTopicNavigationOffsets() {
+    const guide = $("#topic-guide");
+    document.documentElement.style.setProperty("--topic-navigation-height",
+      (guide ? Math.ceil(guide.getBoundingClientRect().height) : 0) + "px");
+  }
+
+  function clearTopicNavigation() {
+    if (topicNavCleanup) topicNavCleanup();
+    topicNavCleanup = null;
+    document.documentElement.style.setProperty("--topic-navigation-height", "0px");
+  }
+
+  function setupTopicStepper(lesson) {
+    const guide = $("#topic-guide");
+    const strip = guide.querySelector(".topic-index");
+    const buttons = [...strip.querySelectorAll("[data-topic]")];
+    const topics = lesson.topics.map((_, index) =>
+      document.getElementById("konu-" + lesson.id + "-" + (index + 1)));
+    let current = -1;
+    let animationFrame = 0;
+    const markActive = index => {
+      if (index === current || index < 0) return;
+      current = index;
+      buttons.forEach((button, i) => {
+        if (i === index) button.setAttribute("aria-current", "step");
+        else button.removeAttribute("aria-current");
+      });
+      // Keep the numbered step visible inside the horizontally scrollable strip.
+      const button = buttons[index];
+      const left = button.offsetLeft;
+      const right = left + button.offsetWidth;
+      if (left < strip.scrollLeft + 8)
+        strip.scrollLeft = Math.max(0, left - 8);
+      else if (right > strip.scrollLeft + strip.clientWidth - 8)
+        strip.scrollLeft = right - strip.clientWidth + 8;
+    };
+    const updateActive = () => {
+      animationFrame = 0;
+      const threshold = guide.getBoundingClientRect().bottom + 12;
+      let index = 0;
+      topics.forEach((topic, i) => {
+        if (topic && topic.getBoundingClientRect().top <= threshold) index = i;
+      });
+      markActive(index);
+    };
+    const scheduleUpdate = () => {
+      if (!animationFrame) animationFrame = requestAnimationFrame(updateActive);
+    };
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        markActive(index);
+        topics[index]?.scrollIntoView({
+          behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start"
+        });
+      });
+      button.addEventListener("keydown", event => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1
+          : (index + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+        buttons[next].focus({ preventScroll: true });
+        buttons[next].click();
+      });
+    });
+    const resizeObserver = typeof ResizeObserver !== "undefined"
+      ? new ResizeObserver(() => { refreshTopicNavigationOffsets(); scheduleUpdate(); })
+      : null;
+    resizeObserver?.observe(guide);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    refreshTopicNavigationOffsets();
+    scheduleUpdate();
+    topicNavCleanup = () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
+  }
+
   function renderNarration(lesson) {
     const strings = t();
     const checked = new Set(getChecked(lesson));
@@ -230,26 +314,21 @@
     ).join("");
 
     $("#content-panel").innerHTML =
-      '<div class="learning-layout"><div class="topics-column">' +
-      '<div class="section-intro"><span class="eyebrow">' + strings.heading + '</span>' +
-      '<h2>' + strings.overview + '</h2><p>' + strings.intro + '</p>' +
-      '<div class="topic-index">' + lesson.topics.map((_, index) =>
-        '<button class="topic-jump" type="button" data-topic="' + (index + 1) + '">' +
-        String(index + 1).padStart(2, "0") + '. ' + strings.topic + '</button>'
-      ).join("") + '</div></div>' + topics + '</div>' +
+      '<nav class="topic-guide" id="topic-guide" aria-label="' + strings.topicNav + '">' +
+      '<div class="topic-index">' + lesson.topics.map((topic, index) =>
+        '<button class="topic-step" type="button" data-topic="' + (index + 1) +
+        '" aria-label="' + strings.topic + ' ' + (index + 1) + ': ' + topic.title +
+        '" title="' + topic.title + '"' + (index === 0 ? ' aria-current="step"' : '') +
+        '><span aria-hidden="true">' + (index + 1) + '</span></button>'
+      ).join("") + '</div></nav>' +
+      '<div class="learning-layout"><div class="topics-column">' + topics + '</div>' +
       '<aside class="outcomes-card" aria-labelledby="outcomes-title">' +
-      '<div class="outcomes-header"><div><span class="eyebrow">' + strings.objectives + '</span><h2 id="outcomes-title">' + strings.outcomes + '</h2></div>' +
+      '<div class="outcomes-header"><h2 id="outcomes-title">' + strings.outcomes + '</h2>' +
       '<span class="outcome-counter" id="outcome-counter"></span></div>' +
-      '<div class="progress-track" role="progressbar" aria-label="' + strings.progress + '" aria-valuemin="0"><div class="progress-fill" id="progress-fill"></div></div>' +
       '<ul class="outcomes-list">' + outcomes + '</ul>' +
       '</aside></div>';
 
-    $("#content-panel").querySelectorAll("[data-topic]").forEach(button => {
-      button.addEventListener("click", () => {
-        document.getElementById("konu-" + lesson.id + "-" + button.dataset.topic)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
+    setupTopicStepper(lesson);
     $("#content-panel").querySelectorAll("[data-outcome]").forEach(checkbox => {
       checkbox.addEventListener("change", () => {
         const current = new Set(getChecked(lesson));
@@ -289,6 +368,7 @@
     const { lessonId, tabId } = selectedRoute();
     const lesson = lessons.find(item => item.id === lessonId);
     if (!lesson) return;
+    clearTopicNavigation();
     document.documentElement.lang = language;
     document.title = lesson.navTitle + " | " + t().site;
     $("#site-brand-title").textContent = t().site;
@@ -356,6 +436,7 @@
       Math.ceil(header.getBoundingClientRect().height) + "px");
     document.documentElement.style.setProperty("--lesson-sticky-height",
       Math.ceil(stickyCourse.getBoundingClientRect().height) + "px");
+    refreshTopicNavigationOffsets();
   }
 
   function setupStickyOffsets() {

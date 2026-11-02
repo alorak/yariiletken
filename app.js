@@ -297,6 +297,8 @@
     renderTabs(lesson.id, tabId);
     if (tabId === "anlatim") renderNarration(lesson);
     else renderPlanned(lesson, tabId);
+    // Refresh immediately after localized titles reflow, before scrolling into the reading pane.
+    refreshStickyOffsets();
     if (pendingScroll) {
       document.querySelector(pendingScroll)?.scrollIntoView({ behavior: "smooth", block: "start" });
       pendingScroll = null;
@@ -336,22 +338,24 @@
     updateButtons();
   }
 
-  function setupStickyOffsets() {
+  function refreshStickyOffsets() {
     const header = $(".site-header");
     const stickyCourse = $("#lesson-sticky");
-    const refresh = () => {
-      document.documentElement.style.setProperty("--site-header-height",
-        Math.ceil(header.getBoundingClientRect().height) + "px");
-      document.documentElement.style.setProperty("--lesson-sticky-height",
-        Math.ceil(stickyCourse.getBoundingClientRect().height) + "px");
-    };
-    refresh();
+    if (!header || !stickyCourse) return;
+    document.documentElement.style.setProperty("--site-header-height",
+      Math.ceil(header.getBoundingClientRect().height) + "px");
+    document.documentElement.style.setProperty("--lesson-sticky-height",
+      Math.ceil(stickyCourse.getBoundingClientRect().height) + "px");
+  }
+
+  function setupStickyOffsets() {
+    refreshStickyOffsets();
     if (typeof ResizeObserver !== "undefined") {
-      const observer = new ResizeObserver(refresh);
-      observer.observe(header);
-      observer.observe(stickyCourse);
+      const observer = new ResizeObserver(refreshStickyOffsets);
+      observer.observe($(".site-header"));
+      observer.observe($("#lesson-sticky"));
     }
-    window.addEventListener("resize", refresh);
+    window.addEventListener("resize", refreshStickyOffsets);
   }
 
   if (lessonsTr.length === 0 || lessonsEn.length !== lessonsTr.length) return;

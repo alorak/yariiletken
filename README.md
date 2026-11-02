@@ -157,3 +157,14 @@ Kontrol komutu: `node --test tests/*.test.mjs`.
 Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Böylece depoda toplam **37 konu, 48 kazanım** bulunur.
 
 Test komutu: `node --test tests/*.test.mjs`. Canlı tarayıcıda mobil/masaüstü görsel test ayrıca yapılmalıdır.
+
+
+## Sabit numaralı konu gezgini ve kompakt kazanım başlığı
+
+- **Konu Anlatımı** sekmesinde tüm derslerin üstündeki eski “Temelden ileriye, adım adım” metin kartı kaldırıldı. Yerine dersin **gerçek konu sayısına göre** otomatik oluşturulan, aynı renk ailesindeki **1, 2, 3…** kutulardan oluşan yatay bir gezgin eklendi.
+- Gezgin, ders başlığı ve beş sekmenin hemen altında **sticky** kalır. Numara tıklanınca ilgili konuya düzgün ofsetle kaydırılır; ok tuşları, Home/End ve Enter/Space ile klavye üzerinden de kullanılabilir. Okuma sırasında etkin bölüm `aria-current="step"` ve tek renkli vurgu ile belirtilir.
+- Küçük ekranlarda satır kırılmaz, yatay kaydırılabilir; scrollbar görünmez. `ResizeObserver` ile yüksekliği ölçülür, sabit kazanımlar paneli ve `scrollIntoView` ofsetleri buna göre ayarlanır.
+- Kazanımlar panelinde büyük “HEDEFLER / Kazanımlar” başlığı **tek küçük “KAZANIMLAR”** başlığına dönüştürüldü. İlerleme çizgisi kaldırıldı; **0 / N** sayacı ve kazanım checkbox'ları aynen korunur. Mobilde kazanımların yüksekliği sınırlandırılır.
+- Konu verisi, mevcut 02–06 içerikleri, TR/EN, light/dark tema, grafik/simülasyonlar ve ilerleme kaydı değiştirilmedi.
+
+Regresyon kontrolü: `node --test tests/sticky-layout.test.mjs tests/topic-stepper.test.mjs`.

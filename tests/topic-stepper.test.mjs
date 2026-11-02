@@ -21,13 +21,31 @@ test("all five lessons have numbered steps generated from their actual topic cou
   assert.doesNotMatch(app, /'<div class="section-intro"/);
 });
 
-test("one-color topic boxes remain sticky below the lesson title and tabs", () => {
-  assert.match(css, /\.topic-guide\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--reading-offset\);/s);
+test("numbered topic boxes stay sticky directly beneath the lesson tabs within the left column", () => {
+  assert.match(css, /\.topic-guide\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--topic-sticky-top\);/s);
   assert.match(css, /\.topic-step\[aria-current="step"\]/);
   assert.match(css, /\.topic-index\s*\{[^}]*flex-wrap:\s*nowrap;[^}]*overflow-x:\s*auto;/s);
   assert.match(css, /\.topic-index::-webkit-scrollbar\s*\{\s*display:\s*none;/s);
   assert.match(css, /\.topic-step::after\s*\{[^}]*border-top:/s);
-  assert.match(css, /\.topic-card\s*\{[^}]*scroll-margin-top:\s*calc\(var\(--topic-navigation-height\) \+ 10px\)/s);
+  assert.match(css, /\.topic-card\s*\{[^}]*scroll-margin-top:\s*calc\(var\(--topic-navigation-height\) \+ 20px\)/s);
+});
+
+test("the step strip occupies only the left column; right outcomes are separate", () => {
+  assert.match(app, /'<div class="learning-layout"><div class="topics-column">'/);
+  const guideStart = app.indexOf('id="topic-guide"');
+  const endLeft = app.indexOf("topics + '</div>'", guideStart);
+  const aside = app.indexOf("'<aside class=\"outcomes-card\"", guideStart);
+  assert.ok(guideStart > 0 && endLeft > guideStart && aside > endLeft,
+    "Topic stepper and topics belong to the left column; outcomes start after it");
+  assert.match(css, /\.topics-column\s*\{[^}]*min-width:\s*0;/s);
+  assert.match(css, /--topic-sticky-top:\s*calc\(var\(--site-header-height\) \+ var\(--lesson-sticky-height\)\)/);
+  assert.match(css, /\.topic-guide\s*\{[^}]*background:\s*var\(--bg\);[^}]*box-shadow:\s*0 -6px 0 var\(--bg\)/s);
+});
+
+test("a one-column viewport stacks reading before outcomes without overlapping sticky panels", () => {
+  assert.match(css, /@media \(max-width:\s*960px\)\s*\{[\s\S]*?\.learning-layout\s*\{\s*grid-template-columns:\s*1fr;/);
+  assert.match(css, /\.outcomes-card\s*\{\s*position:\s*static;\s*grid-row:\s*auto;/);
+  assert.match(css, /\.outcomes-card\s*\{[^}]*top:\s*var\(--reading-offset\)/);
 });
 
 test("step controls scroll to topic, show current article and permit keyboard navigation", () => {
@@ -51,9 +69,9 @@ test("learning outcomes have a single compact title and keep completion counters
   assert.match(css, /\.outcomes-list li:first-child\s*\{[^}]*border-top:\s*0;/s);
 });
 
-test("sticky outcomes offset incorporates the topic strip height across viewports", () => {
+test("outcomes stay independent of the left sticky topic strip at all viewport sizes", () => {
   assert.match(css, /--topic-navigation-height:\s*0px/);
-  assert.match(css, /\.outcomes-card\s*\{[^}]*top:\s*calc\(var\(--reading-offset\) \+ var\(--topic-navigation-height\) \+ 8px\)/s);
+  assert.match(css, /\.outcomes-card\s*\{[^}]*top:\s*var\(--reading-offset\)/s);
   assert.match(css, /@media \(max-width:\s*960px\)/);
   assert.match(css, /@media \(max-width:\s*600px\)/);
   assert.match(app, /document\.documentElement\.style\.setProperty\("--topic-navigation-height"/);

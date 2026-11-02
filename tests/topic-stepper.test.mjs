@@ -66,3 +66,68 @@ test("other learning modes and translations remain reachable", () => {
   assert.match(app, /yariiletken-progress-v1/);
   assert.match(app, /language === "en"/);
 });
+
+
+test("click, scroll tracking and cleanup work with a minimal DOM harness", () => {
+  const fragment = app.slice(
+    app.indexOf("  function refreshTopicNavigationOffsets()"),
+    app.indexOf("  function renderNarration(")
+  );
+  assert.ok(fragment.includes("function setupTopicStepper"));
+  const listeners = {};
+  const properties = {};
+  const buttons = Array.from({ length:3 }, (_, i) => ({
+    offsetLeft:i*76, offsetWidth:70, attrs:{}, events:{},
+    setAttribute(key,value){this.attrs[key]=value;},
+    removeAttribute(key){delete this.attrs[key];},
+    addEventListener(type,handler){this.events[type]=handler;},
+    focus(){this.focused=true;}
+  }));
+  const strip = {scrollLeft:0,clientWidth:125,querySelectorAll(){return buttons;}};
+  const guide = {querySelector(){return strip;},getBoundingClientRect(){return {height:52,bottom:170};}};
+  let positions=[200,700,1300];
+  const topics=positions.map((_, i) => ({
+    getBoundingClientRect(){return {top:positions[i]};},
+    scrollIntoView(options){this.lastScroll=options;}
+  }));
+  const document = {
+    documentElement:{style:{setProperty(key,value){properties[key]=value;}}},
+    getElementById(id){return topics[Number(id.split("-").at(-1))-1];}
+  };
+  let frames=[],nextFrame=1;
+  const raf=handler=>{const id=nextFrame++;frames.push({id,handler});return id;};
+  const cancelFrame=id=>{frames=frames.filter(frame=>frame.id!==id);};
+  const runFrames=()=>{while(frames.length)frames.shift().handler();};
+  const window={
+    matchMedia:()=>({matches:false}),
+    addEventListener(type,handler){listeners[type]=handler;},
+    removeEventListener(type,handler){if(listeners[type]===handler)delete listeners[type];}
+  };
+  const Observer = class {
+    constructor(handler){this.handler=handler;}
+    observe(){}
+    disconnect(){this.disconnected=true;}
+  };
+  const create = new Function("$","document","window","ResizeObserver","requestAnimationFrame","cancelAnimationFrame",
+    '"use strict";let topicNavCleanup=null;\n'+fragment+
+    "\nreturn {setupTopicStepper,clearTopicNavigation};");
+  const controller=create(
+    selector=>selector==="#topic-guide"?guide:null,
+    document,window,Observer,raf,cancelFrame
+  );
+  controller.setupTopicStepper({id:"02",topics:[{},{},{}]});
+  runFrames();
+  assert.equal(buttons[0].attrs["aria-current"],"step");
+  assert.equal(properties["--topic-navigation-height"],"52px");
+  buttons[2].events.click();
+  assert.equal(topics[2].lastScroll.block,"start");
+  positions=[-700,-100,90];
+  listeners.scroll();
+  runFrames();
+  assert.equal(buttons[2].attrs["aria-current"],"step");
+  assert.equal(buttons[0].attrs["aria-current"],undefined);
+  assert.ok(strip.scrollLeft>0);
+  controller.clearTopicNavigation();
+  assert.equal(listeners.scroll,undefined);
+  assert.equal(properties["--topic-navigation-height"],"0px");
+});

@@ -183,3 +183,15 @@ Bilimsel kaynaklar:
 - <https://doi.org/10.1063/1.4923379> — kristal Si'de dolaylı bantlar arası optik soğurulmada fonon katılımı.
 - <https://optics.ansys.com/hc/en-us/articles/360034919113-Semiconductor-Material-Model-Properties> — termal/ışınımsal/SRH/Auger/impact modelleri.
 - <https://www.cambridge.org/core/books/abs/physics-of-semiconductors/generation-and-recombination-processes-in-semiconductors/1C347FC5BB8D656BDF285415C55C8B18> — mekanizmaların fiziksel sınıflandırması.
+
+
+## Konu gezgini: sol sütuna sabitleme ve kaydırmada örtüşmeyi önleme
+
+Konu Anlatımı üstündeki 1–N kutuları artık `learning-layout > .topics-column > .topic-guide` yapısındadır; sağdaki Kazanımlar paneli ile aynı üst satırı kaplamaz. Konu gezgini sol sütunda kaydırılırken görünür kalır; konular, numaraya tıklanınca sabit navbar, ders başlığı, sekmeler ve konu gezgininin **altında** başlayacak şekilde konumlanır.
+
+- Konu gezgininin sticky üst sınırı, ders sekmelerinin gerçek alt sınırına bağlandı. Aradaki 12 piksel boşluk kaldırıldı; opak arka plan ve üst kenar maskelemesi sayesinde kayan anlatım metni üst bölümde görünmez.
+- Sağ kazanımlar kutusunun sticky ofseti artık konu gezgininin yüksekliğine bağlı değildir; masaüstünde bağımsız sağ sütundadır.
+- 960 piksel ve altı tek sütun yerleşiminde önce anlatım (sol gezgin dahil), ardından kazanımlar gösterilir; üst üste binen iki sticky panel kullanılmaz.
+- Mevcut TR/EN, dark/light, ilerleme işaretleri ve numaralı gezinme davranışları korunur.
+
+Test: `node --test tests/*.test.mjs` (özellikle `topic-stepper` ve `sticky-layout`).

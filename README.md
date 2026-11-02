@@ -4,7 +4,9 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 
 ## Özellikler (ilk aşama)
 
-- Üstten **02 / 03 / 04 / 05 / 06** dersleri arasında geçiş.
+- Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 34 konu anlatımı, 36 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
 - Beş ders için **34 açıklamalı konu başlığı** ve **36 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
@@ -51,10 +53,11 @@ GitHub Pages yapılandırmasının daha önce etkin olup olmadığı bu kod tara
 
 - `index.html` — tek sayfa iskeleti ve semantik navigasyon
 - `styles.css` — tasarım, responsive düzen, temalar
-- `lessons.js` — ders başlıkları, anlatımlar, bağıntılar, kazanımlar ve gelecek etkinlik planları
+- `lessons.js` — Türkçe ders başlıkları, anlatımlar, bağıntılar, kazanımlar ve gelecek etkinlik planları
+- `lessons.en.js` — aynı derslerin eksiksiz İngilizce karşılıkları; konu ve kazanım sıraları korunur
 - `app.js` — ders/sekme geçişi, URL rotası, kazanım ilerlemesi ve tema
 
-Yeni içerik için genellikle yalnızca `lessons.js` düzenlenir. Yeni etkinlik kodları ayrı modüller halinde eklenebilir.
+Yeni içerik eklerken `lessons.js` ve `lessons.en.js` birlikte güncellenmelidir; dil seçimi yeni bir URL rotası açmaz. Yeni etkinlik kodları ayrı modüller halinde eklenebilir.
 
 ## Sonraki geliştirme sırası
 

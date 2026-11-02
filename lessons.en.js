@@ -34,8 +34,8 @@
         ],
         [
           "Thermal equilibrium and detailed balance",
-          "<strong>Thermal equilibrium</strong> is the reference state without external driving forces or macroscopic net flows. Equilibrium does not mean that microscopic activity stops: thermal generation and recombination may continue.",
-          "Under <strong>detailed balance</strong>, a process is balanced by its reverse process at equilibrium. Electron–hole generation and recombination provide an important semiconductor example.",
+          "<strong>Thermal equilibrium</strong> is the reference state without external driving forces or macroscopic net flows. Equilibrium does not mean that microscopic activity stops: thermal generation and recombination may continue. A temperature difference across a sample, sustained illumination, or a current driven by an applied voltage can take the sample out of equilibrium.",
+          "Under <strong>detailed balance</strong>, a process is balanced by its reverse process at equilibrium. Electron–hole generation and recombination provide an important semiconductor example. In an equilibrium p–n junction, the opposing drift and diffusion current components cancel. A small applied bias breaks that balance and produces diode current.",
           "Equilibrium means balanced microscopic processes, not the absence of motion."
         ],
         [
@@ -56,7 +56,7 @@
         "I can distinguish pure, intrinsic and extrinsic semiconductor concepts.",
         "I can explain silicon's four valence electrons and covalent-bond arrangement.",
         "I can interpret diamond-cubic geometry and the lattice constant.",
-        "I can distinguish thermal equilibrium from steady state using examples.",
+        "I can distinguish equilibrium from steady state using temperature gradients, illumination and applied-bias examples.",
         "I can match photons, phonons and electrons to their wave–particle properties."
       ],
       future: {
@@ -305,7 +305,7 @@
         [
           "Three temperature regimes",
           "<strong>I — Freeze-out:</strong> at low temperatures many dopants remain unionized, and the carrier density increases with temperature. <strong>II — Extrinsic:</strong> dopants are largely ionized and intrinsic carriers remain less important; for uncompensated n-type Si, n₀≈N<sub>D</sub> may hold.",
-          "<strong>III — Intrinsic:</strong> at high temperature, thermally generated electron–hole pairs overwhelm the effect of doping; electron and hole concentrations approach the n<sub>i</sub> scale. Regime boundaries depend on dopant concentration and the physical model.",
+          "<strong>III — Intrinsic:</strong> at high temperature, thermally generated electron–hole pairs overwhelm the effect of doping; electron and hole concentrations approach the n<sub>i</sub> scale. Regime boundaries depend on dopant concentration and the physical model. For example at 300 K, with n<sub>i</sub> ≈ 10¹⁰ cm⁻³ and fully ionized, uncompensated n-type Si doped to N<sub>D</sub> = 10¹⁵ cm⁻³, n₀ ≈ 10¹⁵ and p₀ ≈ 10⁵ cm⁻³. These are approximate example values for the appropriate extrinsic regime.",
           "Using n≈Nᴅ at every temperature is incorrect."
         ],
         [

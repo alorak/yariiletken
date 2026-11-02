@@ -133,7 +133,7 @@ Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece 
 
 - **02 · Öz taşıyıcı yoğunluğu – sıcaklık:** Y ekseni artık doğrudan `nᵢ (cm⁻³)` gösterir; `log₁₀` dönüşümü uygulanmaz. Si/Ge/GaAs malzeme seçicisi her malzemenin eğrisini **kendi doğrusal ölçeğinde** gösterir. Sıcaklık kontrolü seçilen noktanın çevresinde yaklaşık ±50 K aralığına odaklanır; sağa/sola sınırda 200–500 K aralığına kırpılır. Eksen değerleri bilimsel gösterimde (örn. 2×10¹¹) yazılabilir; bu bir logaritmik eksen değildir.
 - Sıcaklığa bağlı nᵢ hesaplarında 300 K referansları ve sabit bant aralığı yaklaşımı değişmedi. Ayrı **bant aralığı duyarlılığı** grafiğinin `log₁₀` gösterimi bu PR kapsamında değiştirilmedi.
-- Kazanımlar anlatım ve şekillerle eşleştirildi: **02 → 10**, **06 → 10**; 03/04/05 içerikleri ve sıraları değişmedi. İlk kazanımların indeksleri korunduğu için `localStorage` işaretlemeleri kaymaz. Önceki konu başlığı sayısı **34**, toplam kazanım sayısı **48**.
+- Önceki aşamada 02 ve 06 kazanımları genişletildi; bu PR ile 03'ün yeni anlatımı da eklendi. Güncel toplam **37 konu, 48 kazanım**. Önceki işaretlemelerin indeksleri korunur.
 - 02'de Si atom yoğunluğu ile yaklaşık öz taşıyıcı yoğunluğunun fiziksel mertebe farkı da konu anlatımına eklendi. Varsayımlara uygun yaklaşık hesaplar kullanılır; bunlar tam malzeme ölçümü değildir.
 
 Kontrol komutu: `node --test tests/*.test.mjs`.

@@ -12,11 +12,11 @@ for (const file of ["lessons.js", "lessons.en.js", "lesson-figures.js"]) {
 const tr = window.COURSE_LESSONS.find(lesson => lesson.id === "02");
 const en = window.COURSE_LESSONS_EN.find(lesson => lesson.id === "02");
 
-test("lesson 02 retains six original topics and aligned outcomes in both languages", () => {
+test("lesson 02 retains six topics and ten aligned outcomes in both languages", () => {
   assert.equal(tr.topics.length, 6);
   assert.equal(en.topics.length, 6);
-  assert.equal(tr.outcomes.length, 6);
-  assert.equal(en.outcomes.length, 6);
+  assert.equal(tr.outcomes.length, 10);
+  assert.equal(en.outcomes.length, 10);
   assert.deepEqual(Array.from(tr.topics[0].visual), ["classification"]);
   assert.deepEqual(Array.from(tr.topics[1].visual), ["bond2d"]);
   assert.deepEqual(Array.from(tr.topics[4].visual), ["steady-subset"]);

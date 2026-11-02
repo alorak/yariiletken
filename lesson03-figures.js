@@ -24,7 +24,7 @@
         gen: "Üretim (generation)", rec: "Yeniden birleşme (recombination)",
         genText: "Enerji alan valans elektronu iletim bandına geçer ve valans bandında hol bırakır.",
         recText: "İletim elektronu bir valans boşluğunu doldurur: serbest elektron–hol çifti ortadan kalkar.",
-        conduction: "İletim bandı", valence: "Valans bandı",
+        conduction: "İletim bandı", valence: "Valans bandı", before: "Önce", after: "Sonra",
         note: "Bu bant şeması olayların yönünü gösterir; Si dolaylı bant aralıklı olduğundan fotonla geçişte fonon/momentum koşulları önemlidir. Rekombinasyon enerjisi ışık, fononlar veya başka taşıyıcılara aktarılabilir. Dengede toplam üretim ve rekombinasyon hızları eşittir."
       },
       scattering: {
@@ -78,7 +78,7 @@
         gen: "Generation", rec: "Recombination",
         genText: "An energized valence electron reaches the conduction band, leaving behind a valence-band hole.",
         recText: "A conduction electron fills a valence-band vacancy: the free electron–hole pair disappears.",
-        conduction: "Conduction band", valence: "Valence band",
+        conduction: "Conduction band", valence: "Valence band", before: "Before", after: "After",
         note: "This diagram shows transition directions, not transition probabilities. Silicon has an indirect band gap, so phonon/momentum constraints matter in optical transitions. Recombination energy may go to light, phonons or other carriers. At equilibrium the overall generation and recombination rates balance."
       },
       scattering: {
@@ -151,19 +151,30 @@
       '</svg><div class="l03-facts">'+d.types.map(s=>'<span>'+escape(s)+'</span>').join('')+'</div>';
   }
   function bandDiagram(d,up) {
-    const x=178;
+    // Each panel shows actual BEFORE and AFTER occupations:
+    // generation: VB electron -> CB electron + VB hole;
+    // recombination: CB electron + VB hole -> occupied VB state.
+    const panel = (x,after) => {
+      const paired = up ? after : !after;
+      const electronBand = paired ? "cb" : "vb";
+      const electronY = electronBand === "cb" ? 71 : 195;
+      return '<g transform="translate('+x+' 0)">'+
+        '<rect x="0" y="47" width="135" height="49" rx="7" class="l03-band-conduction"/>'+
+        '<rect x="0" y="170" width="135" height="49" rx="7" class="l03-band-valence"/>'+
+        txt(8,65,d.conduction,'l03-band-name','start')+
+        txt(8,188,d.valence,'l03-band-name','start')+
+        '<circle cx="106" cy="'+electronY+'" r="14" class="l03-electron"/>'+
+        txt(106,electronY+6,'−','l03-charge')+
+        (paired?'<circle cx="106" cy="195" r="14" class="l03-hole"/>'+
+          txt(106,201,'+','l03-charge'):'')+
+        txt(67,29,after?d.after:d.before,'l03-small')+'</g>';
+    };
     return '<svg viewBox="0 0 356 254" role="img" aria-label="'+escape(up?d.gen:d.rec)+'">'+
-      '<rect x="23" y="37" width="310" height="57" rx="7" class="l03-band-conduction"/>'+
-      '<rect x="23" y="170" width="310" height="57" rx="7" class="l03-band-valence"/>'+
-      txt(39,57,d.conduction,'l03-band-name','start')+
-      txt(39,191,d.valence,'l03-band-name','start')+
-      '<circle cx="'+x+'" cy="'+(up?185:67)+'" r="15" class="l03-electron"/>'+txt(x,(up?191:73),'−','l03-charge')+
-      (up?'<circle cx="'+x+'" cy="69" r="15" class="l03-hole"/>'+
-          '<path d="M178 154 V111 m-7 9 7 -9 7 9" class="l03-arrow"/>':
-          '<circle cx="'+x+'" cy="185" r="15" class="l03-hole"/>'+
-          '<path d="M178 111 V154 m-7 -9 7 9 7 -9" class="l03-arrow"/>')+
-      '<text x="279" y="141" text-anchor="middle" class="l03-small">Eᵍ</text>'+
-      '</svg>';
+      '<title>'+escape(up?d.gen:d.rec)+'</title>'+
+      panel(18,false)+panel(203,true)+
+      (up?'<path d="M179 166 V110 m-8 9 8 -9 8 9" class="l03-arrow"/>':
+          '<path d="M179 109 V166 m-8 -9 8 9 8 -9" class="l03-arrow"/>')+
+      txt(179,142,'Eᵍ','l03-small')+'</svg>';
   }
   function transition(d) {
     const cards=[["gen",d.gen,d.genText,true],["rec",d.rec,d.recText,false]];

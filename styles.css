@@ -547,3 +547,49 @@ html[data-theme="dark"] .back-button { color: #08222e; }
  .intrinsic-lab {padding:15px;}
 }
 @media (max-width:390px){.ni-readouts {grid-template-columns:1fr;}}
+
+
+/* Global offline lesson search, anchored beneath the header icon. */
+.site-search { position:relative; }
+.course-search-panel[hidden] { display:none; }
+.course-search-panel {
+  position:absolute; z-index:35; top:calc(100% + 10px); right:0;
+  width:min(470px,calc(100vw - 30px)); max-height:min(70dvh,550px);
+  display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid var(--stroke); border-radius:13px;
+  background:var(--surface); box-shadow:0 16px 44px rgba(0,0,0,.2);
+}
+.course-search-input-row { display:flex; align-items:center; gap:8px; padding:12px; border-bottom:1px solid var(--stroke); }
+.course-search-input {
+  flex:1; min-width:0; height:39px; padding:7px 11px;
+  border:1px solid var(--stroke); border-radius:9px;
+  background:var(--surface-alt); color:var(--ink); font-size:13px;
+}
+.course-search-input::placeholder { color:var(--muted); opacity:1; }
+.course-search-close {
+  flex:0 0 34px; height:34px; display:grid; place-items:center;
+  border:0; border-radius:8px; background:transparent; color:var(--ink-soft);
+  font-size:23px; line-height:1;
+}
+.course-search-close:hover { background:var(--surface-alt); }
+.course-search-results { overflow-y:auto; overscroll-behavior:contain; padding:6px; scrollbar-width:thin; }
+.course-search-message { margin:5px 9px 9px; color:var(--muted); font-size:11px; }
+.course-search-result {
+  width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:3px;
+  padding:10px 12px; border:1px solid transparent; border-radius:9px;
+  background:transparent; color:var(--ink); text-align:left; white-space:normal;
+}
+.course-search-result:hover,.course-search-result:focus-visible {
+  background:var(--accent-soft); border-color:var(--accent);
+}
+.course-search-path { color:var(--accent-dark); font-size:11px; font-weight:750; }
+.course-search-result strong { font-size:13px; line-height:1.42; }
+.course-search-result small { color:var(--muted); font-size:11px; line-height:1.5; }
+.course-search-highlight { color:var(--ink); background:rgba(244,192,74,.36); border-radius:2px; padding:0 2px; }
+html[data-theme="dark"] .course-search-highlight { color:#fff; background:rgba(247,189,48,.35); }
+@media (max-width:700px) {
+  .course-search-panel {
+    position:fixed; top:calc(var(--site-header-height) + 5px);
+    left:12px; right:12px; width:auto; max-height:min(75dvh,600px);
+  }
+}

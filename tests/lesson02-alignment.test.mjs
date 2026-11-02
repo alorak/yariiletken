@@ -17,7 +17,7 @@ test("lesson 02 retains six original topics and aligned outcomes in both languag
   assert.equal(en.topics.length, 6);
   assert.equal(tr.outcomes.length, 6);
   assert.equal(en.outcomes.length, 6);
-  assert.deepEqual(Array.from(tr.topics[0].visual), ["classification", "temperature-preview"]);
+  assert.deepEqual(Array.from(tr.topics[0].visual), ["classification"]);
   assert.deepEqual(Array.from(tr.topics[1].visual), ["bond2d"]);
   assert.deepEqual(Array.from(tr.topics[4].visual), ["steady-subset"]);
 });
@@ -61,4 +61,12 @@ test("majority-temperature preview retains the detailed treatment in lesson 06",
   }
   assert.equal(window.COURSE_LESSONS.find(x=>x.id==="06").topics.length,8);
   assert.equal(window.COURSE_LESSONS_EN.find(x=>x.id==="06").topics.length,8);
+});
+
+test("majority-temperature visualization is now attached to lesson 06", () => {
+  const tr06 = window.COURSE_LESSONS.find(x => x.id === "06");
+  const en06 = window.COURSE_LESSONS_EN.find(x => x.id === "06");
+  assert.deepEqual(Array.from(tr06.topics[6].visual), ["temperature-preview"]);
+  assert.deepEqual(Array.from(en06.topics[6].visual), ["temperature-preview"]);
+  assert.ok(!tr.topics.some(t => t.visual?.includes("temperature-preview")));
 });

@@ -217,6 +217,9 @@
       (Array.isArray(topic.extraVisual) && window.SemiconductorLessonExtras
         ? topic.extraVisual.map(kind => window.SemiconductorLessonExtras.render(kind, language)).join("")
         : "") +
+      (lesson.id === "03" && Array.isArray(topic.visual03) && window.Lesson03Figures
+        ? topic.visual03.map(kind => window.Lesson03Figures.render(kind, language)).join("")
+        : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
 

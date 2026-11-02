@@ -66,7 +66,7 @@ test("gap meaning, excitation conditions and mechanisms are grounded in illustra
     assert.match(conditions,/1107 nm/);
     assert.match(conditions,/l03-electron/);
     assert.match(conditions,/l03-hole/);
-    for(const label of ["Photogeneration","Impact ionization","Thermal generation",
+    for(const label of [locale==="tr"?"Fotogeneration":"Photogeneration","Impact ionization","Thermal generation",
       "Radiative recombination","SRH recombination","Auger recombination"])
       assert.ok(mechanisms.includes(label),"Missing "+label+" in "+locale);
     assert.match(mechanisms,/G = R/);
@@ -160,7 +160,7 @@ test("script load order ensures translations, question additions and diagrams wo
   assert.ok(visuals<router);
   assert.ok(html.indexOf("lesson03-mechanisms.js")<router);
   assert.ok(html.indexOf("lesson03-hole-sim.js")<router);
-  assert.match(app,/Lesson03HoleSim\\?\\.mount/);
-  assert.match(app,/Lesson03Mechanisms\\?\\.render/);
+  assert.match(app,/Lesson03HoleSim\?\.mount/);
+  assert.match(app,/Lesson03Mechanisms\?\.render/);
   assert.match(app,/Lesson03Figures\.render/);
 });

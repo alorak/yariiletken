@@ -69,9 +69,9 @@ test("visual additions preserve original outcome indices and question mapping", 
   for (const locale of ["tr","en"]) {
     const modules=locale==="tr"?window.COURSE_LESSONS:window.COURSE_LESSONS_EN;
     assert.equal(modules.find(x=>x.id==="02").topics.length,6);
-    assert.equal(modules.find(x=>x.id==="02").outcomes.length,6);
+    assert.equal(modules.find(x=>x.id==="02").outcomes.length,10);
     assert.equal(modules.find(x=>x.id==="06").topics.length,8);
-    assert.equal(modules.find(x=>x.id==="06").outcomes.length,8);
+    assert.equal(modules.find(x=>x.id==="06").outcomes.length,10);
   }
   assert.ok(html.indexOf("lesson-extras.js")>html.indexOf("lesson-figures.js"));
   assert.ok(html.indexOf("lesson-extras.js")<html.indexOf("app.js"));

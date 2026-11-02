@@ -49,7 +49,7 @@
   function navigate(lessonId, tabId = "anlatim") {
     if (!lessonIds.has(lessonId) || !tabIds.has(tabId)) return;
     const target = "#ders-" + lessonId + "/" + tabId;
-    pendingScroll = selectedRoute().lessonId !== lessonId ? ".page-intro" : "#content-tabs";
+    pendingScroll = selectedRoute().lessonId !== lessonId ? "#hero" : "#content-tabs";
     if (location.hash === target) render();
     else location.hash = target;
   }
@@ -62,11 +62,12 @@
     const element = $("#lesson-navigation");
     element.innerHTML = lessons.map(lesson => {
       const selected = lesson.id === current.id;
-      return '<button type="button" class="lesson-button" role="tab" id="lesson-choice-' + lesson.id +
-        '" aria-controls="hero" aria-selected="' + selected + '" tabindex="' + (selected ? "0" : "-1") +
-        '" data-lesson="' + lesson.id + '"><small>DERS ' + lesson.id +
-        '</small><strong>' + lesson.navTitle + '</strong></button>';
+      return '<button type="button" class="lesson-button" id="lesson-choice-' + lesson.id +
+        '" data-lesson="' + lesson.id + '"' + (selected ? ' aria-current="page"' : '') +
+        '><span class="lesson-number">' + lesson.id +
+        '</span><span class="lesson-name">' + lesson.navTitle + '</span></button>';
     }).join("");
+
     element.querySelectorAll("[data-lesson]").forEach(button => {
       button.addEventListener("click", () => navigate(button.dataset.lesson));
       button.addEventListener("keydown", event => {
@@ -79,21 +80,20 @@
         requestAnimationFrame(() => document.getElementById("lesson-choice-" + lessons[next].id)?.focus());
       });
     });
+
+    const mobileSelect = $("#lesson-mobile-select");
+    mobileSelect.innerHTML = lessons.map(lesson =>
+      '<option value="' + lesson.id + '">' + lesson.id + ' · ' + lesson.navTitle + '</option>'
+    ).join("");
+    mobileSelect.value = current.id;
+    mobileSelect.onchange = () => navigate(mobileSelect.value);
   }
 
   function renderHero(lesson) {
     $("#hero").innerHTML =
-      '<div class="hero-copy"><div class="hero-kicker">Bölüm ' + lesson.id + ' &nbsp; / &nbsp; ' +
+      '<div class="hero-copy"><div class="hero-kicker">DERS ' + lesson.id + ' · ' +
       lesson.kicker + '</div><h1 id="lesson-title">' + lesson.title +
-      '</h1><p>' + lesson.description +
-      '</p><div class="hero-meta"><span>' + lesson.topics.length +
-      ' konu başlığı</span><span>' + lesson.outcomes.length +
-      ' öğrenme kazanımı</span><span>' + lesson.focus + '</span></div></div>' +
-      '<div class="orbit-illustration" aria-hidden="true"><i class="orbit orbit-one"></i>' +
-      '<i class="orbit orbit-two"></i><i class="orbit orbit-three"></i>' +
-      '<i class="orbit-dot dot-one"></i><i class="orbit-dot dot-two"></i>' +
-      '<i class="orbit-dot dot-three"></i><div class="orbit-core">Si</div>' +
-      '<span class="orbit-label">SEMICONDUCTOR PHYSICS</span></div>';
+      '</h1><p class="hero-description">' + lesson.description + '</p></div>';
   }
 
   function renderTabs(lessonId, currentTab) {
@@ -211,7 +211,6 @@
     renderLessonNav(lesson);
     renderHero(lesson);
     renderTabs(lesson.id, tabId);
-    $("#lesson-count").textContent = lesson.topics.length + " konu · " + lesson.outcomes.length + " kazanım";
     if (tabId === "anlatim") renderNarration(lesson);
     else renderPlanned(lesson, tabId);
     if (pendingScroll) {

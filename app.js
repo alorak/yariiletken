@@ -158,8 +158,9 @@
   }
 
   function renderHero(lesson) {
-    // Keep only the lesson title in the pinned region; place the summary in the content.
-    $("#hero").innerHTML = '<div class="hero-copy"><h1 id="lesson-title">' + lesson.title + '</h1></div>';
+    // Keep the lesson title and its single-line summary in the pinned region.
+    $("#hero").innerHTML = '<div class="hero-copy"><h1 id="lesson-title">' + lesson.title + '</h1>' +
+      '<p class="hero-description">' + lesson.description + '</p></div>';
   }
 
   function renderTabs(lessonId, currentTab) {
@@ -210,8 +211,11 @@
       '</span><h3>' + topic.title + '</h3></div>' +
       topic.paragraphs.map(paragraph => '<p>' + paragraph + '</p>').join("") +
       (topic.equation ? '<div class="math-line" role="note" aria-label="' + strings.formula + '">' + topic.equation + '</div>' : "") +
-      (lesson.id === "02" && Array.isArray(topic.visual) && window.CourseLessonVisuals
+      (Array.isArray(topic.visual) && window.CourseLessonVisuals
         ? topic.visual.map(kind => window.CourseLessonVisuals.render(kind, language)).join("")
+        : "") +
+      (Array.isArray(topic.extraVisual) && window.SemiconductorLessonExtras
+        ? topic.extraVisual.map(kind => window.SemiconductorLessonExtras.render(kind, language)).join("")
         : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");

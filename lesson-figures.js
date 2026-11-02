@@ -1,4 +1,4 @@
-/* Lesson 02 visuals — 2D bond-model drawing, classifications, equilibrium and a
+/* Lesson visual explanations — 2D bond-model drawing, classifications, equilibrium and a
  * qualitative introduction to majority carriers across temperature regimes.
  * These are explanatory diagrams, not a numerical crystal or transport solver. */
 (() => {
@@ -40,7 +40,7 @@
           {head:"II · Extrinsic",desc:"Orta T: katkılar yaklaşık tamamen iyonlaşmıştır; n ≈ Nᴅ (uygun n-tipi koşullarda)."},
           {head:"III · Intrinsic",desc:"Yüksek T: termal elektron–hol üretimi baskınlaşır; n ve p birbirine yaklaşır."}
         ],
-        foot:"Ders 02'de yalnızca eğrinin fiziksel anlamı tanıtılıyor. Sıcaklığa göre n, p, Nᴅ⁺, Nᴀ⁻ ve yük nötrlüğü hesapları Ders 06'da incelenecek. Rejim sınırları katkı miktarına bağlıdır."
+        foot:"Ders 06'da üç çalışma rejimi gösteriliyor. Aşağıdaki sayısal karşılaştırma, 300 K'de ve ekstrinsik rejimde geçerli basitleştirilmiş örnekler içerir; freeze-out ve intrinsik rejimler için iyonlaşma ve yük nötrlüğü yeniden hesaplanmalıdır."
       }
     },
     en: {
@@ -78,7 +78,7 @@
           {head:"II · Extrinsic",desc:"Intermediate T: dopants are largely ionized; n ≈ Nᴅ under suitable n-type assumptions."},
           {head:"III · Intrinsic",desc:"High T: thermally generated pairs dominate; n and p approach one another."}
         ],
-        foot:"Lesson 02 introduces the physical meaning of these regimes. Calculations using n, p, Nᴅ⁺, Nᴀ⁻ and charge neutrality belong in Lesson 06. Transition temperatures depend on the dopant concentration."
+        foot:"Lesson 06 compares three operating regimes. The numerical example below applies to simplified conditions at 300 K in the extrinsic regime; freeze-out and intrinsic regimes require ionization and charge neutrality to be calculated again."
       }
     }
   };

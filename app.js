@@ -302,8 +302,10 @@
         ? topic.extraVisual.map(kind => window.SemiconductorLessonExtras.render(kind, language)).join("")
         : "") +
       (lesson.id === "03" && Array.isArray(topic.visual03) && window.Lesson03Figures
-        ? topic.visual03.map(kind => window.Lesson03Figures.render(kind, language)).join("")
+        ? topic.visual03.map(kind => window.Lesson03Mechanisms?.render(kind, language) ||
+            window.Lesson03Figures.render(kind, language)).join("")
         : "") +
+      (lesson.id === "03" && index === 2 ? '<div id="lesson03-hole-inline"></div>' : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
 
@@ -329,6 +331,7 @@
       '</aside></div>';
 
     setupTopicStepper(lesson);
+    if (lesson.id === "03") window.Lesson03HoleSim?.mount($("#lesson03-hole-inline"), language);
     $("#content-panel").querySelectorAll("[data-outcome]").forEach(checkbox => {
       checkbox.addEventListener("change", () => {
         const current = new Set(getChecked(lesson));
@@ -368,6 +371,7 @@
     const { lessonId, tabId } = selectedRoute();
     const lesson = lessons.find(item => item.id === lessonId);
     if (!lesson) return;
+    window.Lesson03HoleSim?.cleanup();
     clearTopicNavigation();
     document.documentElement.lang = language;
     document.title = lesson.navTitle + " | " + t().site;

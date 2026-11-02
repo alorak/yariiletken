@@ -205,9 +205,17 @@ window.COURSE_ACTIVITIES = {
         correct:0,reasons:[{tr:"Doğru. e^(−t/τ) içinde τ büyüdükçe aynı t anındaki kalan oran artar.",en:"Correct. In e^(−t/τ), a larger τ leaves a greater fraction at the same time."},{tr:"Daha büyük τ, daha küçük değil daha yavaş bir bozunma hızını gösterir.",en:"A larger τ means slower, not faster, decay."},{tr:"Başlangıç yoğunluğu seçilen uyarım koşuludur; τ ile zorunlu bir orantısı yoktur.",en:"Initial density depends on excitation conditions and does not necessarily scale with τ."}],topic:4
       },
       {
-        q:{tr:"Silisyumda ışınımsal rekombinasyon neden çoğu durumda zayıftır?",en:"Why is radiative recombination often weak in silicon?"},
-        options:[{tr:"Silisyumun dolaylı bant aralığı vardır.",en:"Silicon has an indirect band gap."},{tr:"Silisyumda hiçbir elektron bulunmaz.",en:"Silicon contains no electrons."},{tr:"Silisyumda enerji korunumu yoktur.",en:"Energy is not conserved in silicon."}],
-        correct:0,reasons:[{tr:"Doğru. Dolaylı bant geçişlerinde momentum koşulları nedeniyle fonon desteği önemli olabilir.",en:"Correct. Momentum constraints in indirect transitions may require phonon assistance."},{tr:"Silisyumda elektronlar vardır; sorun geçiş kuralları ve rekombinasyon kanallarıyla ilgilidir.",en:"Silicon does contain electrons; the issue is transition selection and recombination channels."},{tr:"Enerji korunumu tüm fiziksel geçişlerde geçerlidir.",en:"Energy conservation still applies to physical transitions."}],topic:3
+        q:{tr:"Bağ modeli öz taşıyıcı yoğunluğunu neden güvenilir biçimde nicel hesaplayamaz?",en:"Why can the bond model not reliably calculate intrinsic carrier concentration quantitatively?"},
+        options:[
+          {tr:"Elektron ve hol kavramlarını hiçbir biçimde açıklayamaz.",en:"It cannot explain electrons and holes at all."},
+          {tr:"İzinli enerji durumlarını ve onların doluluk olasılıklarını nicel olarak içermez.",en:"It lacks a quantitative description of allowed energy states and their occupation probabilities."},
+          {tr:"Bir kristalde sıcaklığın hiçbir etkisi yoktur.",en:"Temperature has no effect on a crystal."}
+        ],
+        correct:1,reasons:[
+          {tr:"Bağ modeli elektron–hol oluşumunu nitel olarak açıklar; eksikliği nicel taşıyıcı hesabındadır.",en:"The bond model qualitatively explains electron–hole generation; its limitation is quantitative carrier counting."},
+          {tr:"Doğru. Nicel nᵢ için bant durum yoğunluğu N(E) ve Fermi–Dirac doluluğu f(E,T) gerekir.",en:"Correct. Quantitative nᵢ calculations require band density of states N(E) and Fermi–Dirac occupancy f(E,T)."},
+          {tr:"Sıcaklık termal uyarılmayı etkiler; bağ modeli bu etkiyi nitel olarak anlatabilir.",en:"Temperature influences thermal excitation, and the bond model can describe the trend qualitatively."}
+        ],topic:5
       },
       {
         q:{tr:"Termal dengede üretim ve rekombinasyon hakkında hangisi doğrudur?",en:"Which statement is correct about generation and recombination at equilibrium?"},

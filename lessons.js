@@ -13,23 +13,25 @@ window.COURSE_LESSONS = [
         title: "Yarıiletkenleri nasıl sınıflandırırız?",
         paragraphs: [
           "Yarıiletkenler <strong>elementel</strong> (Si, Ge) veya <strong>bileşik</strong> (GaAs, InP) olabilir. Bu ayrım, kristali oluşturan atom türlerine dayanır. Ayrıca bir malzemenin iç hacmi (<em>bulk</em>) ile arayüzünün (<em>interface</em>) elektronik özellikleri aynı olmak zorunda değildir.",
-          "<strong>Saf (pure)</strong> ifadesi safsızlık ve kusurlarla; <strong>öz (intrinsic)</strong> ifadesi ise katkı atomlarının baskın olmadığı öz taşıyıcı davranışıyla ilgilidir. <strong>Katkılı (extrinsic)</strong> malzemede donör veya akseptörler taşıyıcı dengesini değiştirir. Bu kavramlar aynı ölçütü anlatmaz."
+          "<strong>Saf (pure)</strong> yapısal bir ölçüttür: ideal durumda yabancı atom ve kusur bulunmamasını anlatır. <strong>Öz (intrinsic)</strong> taşıyıcı rejiminde termal dengede n₀ = p₀ = nᵢ olur; saflık ve taşıyıcı dengesi aynı soru değildir. <strong>Katkılı (extrinsic)</strong> malzemede donör veya akseptörler vardır ve genellikle bir taşıyıcı türü baskındır. Ancak yüksek sıcaklıkta katkılı bir malzeme de öz taşıyıcı rejimine yaklaşabilir. Aydınlatılmış saf bir örnek ise saflığını koruduğu halde termal dengede olmayabilir."
         ],
+        visual: ["classification", "temperature-preview"],
         key: "Malzemenin kimyasal türü, saflığı ve taşıyıcı davranışı farklı sınıflandırma eksenleridir."
       },
       {
         title: "Silisyum atomu ve dört değerlik elektronu",
         paragraphs: [
           "Silisyumun atom numarası 14'tür. Elektron dizilimi 1s² 2s² 2p⁶ 3s² 3p² biçimindedir. Dış kabuğundaki dört değerlik elektronu, komşu atomlarla bağ yaparken belirleyicidir.",
-          "Kristalde her Si atomu dört komşusuyla <strong>kovalent bağ</strong> kurar. İki boyutlu bağ çizimleri bu ilişkiyi öğretmek için yararlıdır; gerçek kristalin uzaydaki geometrisini birebir göstermez."
+          "Kristalde her Si atomu dört en yakın komşusuyla <strong>kovalent bağ</strong> kurar. Ders 02'deki <em>Two-dimensional representation</em>, kesişimleri atom, çizgi parçalarını bağ olarak gösteren öğretici bir şemadır. Bu düzlemde dört komşu çizilmesi, gerçek Si kristalinde bağların 90°'lik düzlemsel açılar yaptığı anlamına gelmez; gerçek düzen tetrahedraldir (yaklaşık 109,47°)."
         ],
         equation: "Si: 1s² 2s² 2p⁶ 3s² 3p²",
+        visual: ["bond2d"],
         key: "Dört değerlik elektronu, silisyumun tetrahedral bağ düzeninin başlangıç noktasıdır."
       },
       {
         title: "Diamond kristal yapısı",
         paragraphs: [
-          "Silisyum, elmas-kübik (<em>diamond cubic</em>) yapıda kristalleşir. Bu düzen, birbirine göre kaydırılmış iki yüzey merkezli kübik (fcc) alt örgü üzerinden açıklanabilir. Her atomun dört en yakın komşusu tetrahedral yönlerde bulunur.",
+          "Silisyum, elmas-kübik (<em>diamond cubic</em>) yapıda kristalleşir. Düzen, birbiri boyunca [111] doğrultusunda (a/4, a/4, a/4) kadar ötelenmiş iki yüzey merkezli kübik (fcc) alt örgü olarak düşünülebilir. Her atomun dört en yakın komşusu tetrahedral yönlerde bulunur. Slayttaki birim hücre çizimi ve yükseklik belirtilmiş izdüşüm, düzlemsel bağ şemasından farklı gösterimlerdir.",
           "Oda sıcaklığı civarında örgü sabiti yaklaşık <strong>5,43 Å</strong>; geleneksel kübik birim hücrede sekiz Si atomu vardır. Atom yoğunluğu yaklaşık 5 × 10²² cm⁻³'tür."
         ],
         equation: "a ≈ 5,43 Å   ·   N<sub>Si</sub> ≈ 5 × 10²² cm⁻³",
@@ -47,9 +49,10 @@ window.COURSE_LESSONS = [
         title: "Kararlı durum (steady state) neden denge değildir?",
         paragraphs: [
           "Bir sistemin taşıyıcı yoğunlukları zamana göre değişmiyorsa <strong>kararlı durumdadır</strong>. Ancak sürekli aydınlatılan bir güneş hücresinde ya da sabit gerilim uygulanan bir diyotta akım veya üretim sürebilir; bunlar genel olarak termal denge değildir.",
-          "Bu nedenle termal denge, kararlı durumun özel bir örneğidir. Sonraki derslerde hesaplanan denge taşıyıcı yoğunluklarını kullanırken bu ayrımı korumak gerekir."
+          "Bu nedenle <strong>her termal denge durumu bir kararlı durumdur, fakat her kararlı durum termal denge değildir.</strong> Kümeler açısından <em>equilibrium ⊂ steady state</em>. Örneğin sabit gerilimli diyotta veya sürekli aydınlatılmış güneş hücresinde ölçümler zamanla değişmeyebilir; yine de sistemde dış sürücü ve net akış bulunur."
         ],
         equation: "Termal denge ⊂ Kararlı durum",
+        visual: ["steady-subset"],
         key: "Zamanda sabit olmak, net akışın sıfır olduğu anlamına gelmez."
       },
       {

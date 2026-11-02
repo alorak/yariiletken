@@ -17,18 +17,18 @@
         [
           "How do we classify semiconductors?",
           "Semiconductors may be <strong>elemental</strong> (Si, Ge) or <strong>compound</strong> (GaAs, InP), depending on the elements making up the crystal. The electronic properties of the material's interior (<em>bulk</em>) and its <em>interface</em> need not be identical.",
-          "<strong>Pure</strong> refers to impurities and defects; <strong>intrinsic</strong> describes carrier behavior not dominated by dopants. In an <strong>extrinsic</strong> material, donors or acceptors alter the carrier balance. These terms refer to different criteria.",
+          "<strong>Pure</strong> is a structural criterion: in the ideal case the crystal contains no foreign atoms or defects. In the <strong>intrinsic</strong> carrier regime at thermal equilibrium, n₀ = p₀ = nᵢ; material purity and carrier balance answer different questions. An <strong>extrinsic</strong> semiconductor contains donors or acceptors, so one carrier type usually dominates. At sufficiently high temperature even a doped crystal may approach the intrinsic regime. A pure crystal under illumination can remain pure without remaining in thermal equilibrium.",
           "Composition, purity and carrier behavior are distinct ways to classify a material."
         ],
         [
           "The silicon atom and its four valence electrons",
           "Silicon has atomic number 14 and electron configuration 1s² 2s² 2p⁶ 3s² 3p². Its four outer-shell valence electrons determine how it bonds with neighboring atoms.",
-          "In the crystal, each Si atom forms <strong>covalent bonds</strong> with four neighbors. Two-dimensional bond drawings are useful teaching models, not literal pictures of the three-dimensional structure.",
+          "In the crystal, each Si atom forms <strong>covalent bonds</strong> with four nearest neighbors. The lecture's <em>Two-dimensional representation</em> shows atoms at intersections and bonds as line segments. Four neighbors in a flat drawing do not mean actual silicon bonds meet at 90° in one plane: the real geometry is tetrahedral (about 109.47°).",
           "Four valence electrons are the starting point for silicon's tetrahedral bonding."
         ],
         [
           "Diamond-cubic crystal structure",
-          "Silicon crystallizes in the <em>diamond cubic</em> structure. It can be described as two face-centered cubic sublattices displaced relative to each other. Each atom has four nearest neighbors in tetrahedral directions.",
+          "Silicon crystallizes in the <em>diamond cubic</em> structure. Think of two face-centered cubic sublattices with an offset (a/4, a/4, a/4) along the [111] direction. Each atom has four nearest neighbors in tetrahedral directions. The lecture's unit-cell drawing and height-annotated projection are distinct from the flat bond-model cartoon.",
           "Near room temperature the lattice constant is approximately <strong>5.43 Å</strong>, with eight Si atoms in the conventional cubic unit cell. The atomic concentration is roughly 5 × 10²² cm⁻³.",
           "Crystal geometry shows why electrons occupy a periodic environment instead of isolated atoms."
         ],
@@ -41,7 +41,7 @@
         [
           "Why is steady state not necessarily equilibrium?",
           "A system is in <strong>steady state</strong> when its observable carrier populations do not change with time. Yet a continuously illuminated solar cell or a diode under constant bias can sustain current and generation without being in thermal equilibrium.",
-          "Thermal equilibrium is therefore a special case of steady state. Keep this distinction in mind when applying equilibrium carrier-density formulas in later lessons.",
+          "Therefore <strong>every thermal equilibrium state is a steady state, but not every steady state is in thermal equilibrium</strong>: equilibrium ⊂ steady state. A diode under constant bias or a steadily illuminated solar cell may show time-independent readings while external driving and net flows persist.",
           "Time independence does not imply zero net flow."
         ],
         [

@@ -96,3 +96,12 @@ node --test tests/activity-model.test.mjs
 ```
 
 Testler dört fizik grafiğinin tutarlılığını, iki dildeki soru açıklamalarını, ders/kazanım kapsamını ve referans değerlerini kontrol eder. Etkileşimli görsel testleri ayrıca gerçek tarayıcıda yapılmalıdır.
+
+## Sabit ders başlığı, sekmeler ve kazanımlar
+
+- Navbar üstte sabit kalır. Ders başlığı ve beş içerik sekmesi, altında tek bir **sticky** alan olarak içerik kaydırılırken görünür.
+- Başlığın üzerindeki turkuaz bölüm etiketi kaldırıldı. Ders özeti kaybolmaz; Konu Anlatımı sekmesindeki giriş kartına taşındı.
+- **Kazanımlar** paneli masaüstünde içerik yanında sabit kalır. Liste ekrana sığmazsa kendi içinde kaydırılır. Dar ekranlarda metni kaplamaması için panelin görünür yüksekliği sınırlandırılır.
+- Paneldeki iki açıklama cümlesi kaldırıldı; kazanım işaretleme ve ilerleme göstergesi değişmedi.
+- Sabit alanların yükseklikleri `ResizeObserver` ile ölçülüp CSS değişkenlerine yazılır. Bu nedenle TR/EN dil değişimi, mobil navbar veya uzun ders başlığı sonrasında sekmeler ve kazanımlar üst üste binmemelidir.
+- İlgili yapı testleri: `node --test tests/sticky-layout.test.mjs`. Fizik modeli testleriyle birlikte `node --test tests/*.test.mjs` çalıştırılabilir.

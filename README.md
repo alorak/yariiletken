@@ -195,3 +195,29 @@ Konu Anlatımı üstündeki 1–N kutuları artık `learning-layout > .topics-co
 - Mevcut TR/EN, dark/light, ilerleme işaretleri ve numaralı gezinme davranışları korunur.
 
 Test: `node --test tests/*.test.mjs` (özellikle `topic-stepper` ve `sticky-layout`).
+
+
+## Ders 03 — Öz taşıyıcı yoğunluğu (nᵢ) matematik, grafikler ve hesaplama laboratuvarı
+
+**Tanım:** Öz yarıiletkenin **termal dengede** birim hacimdeki serbest elektron ve hol yoğunluklarının ortak değeri: `n₀ = p₀ = nᵢ` (cm⁻³). Bu, birim zamanda üretilen çift sayısı veya toplam atom sayısı değildir. İdeal dejenere olmayan denge modelinde katkılanmış malzemede `n₀p₀=nᵢ²` geçerlidir; gerçek nonequilibrium elektron ve hol yoğunlukları `nᵢ`'den farklı olabilir.
+
+03'ün son iki konu anlatımı **tanım, sıcaklık, bant aralığı, Nᶜ/Nᵛ ve model sınırları** ile iki dilde genişletildi. Mevcut 9 konu/13 kazanım sırası korundu. **Grafikler** sekmesinin başına iki bilimsel model grafiği eklendi:
+
+1. **Doğrusal `nᵢ(T)` ekseni (cm⁻³)**: Seçili sıcaklığın ±65 K çevresinde gerçek yoğunluklar; kullanıcı T, E₉(300), Nᶜ(300), Nᵛ(300) ve sabit/Varshni bant aralığı seçeneğini değiştirir. Grafik gerçek yoğunluğu gösterir, `log₁₀(nᵢ)` değil.
+2. **Ters sıcaklık analizi**: `ln[nᵢ/√(NᶜNᵛ)] = −E₉(T)/(2kT)` ifadesi `1000/T`'ye karşı gösterilir. Buradaki logaritma **boyutsuz oran üzerinde** alınır; sabit E₉'de tam doğru, Varshni E₉(T)'de eğimli/bozulmuş doğrudur. Bu, ilk grafiğin doğrusal ekseniyle karıştırılmamalıdır.
+
+**Simülasyonlar** sekmesinin başına adım adım hesaplayıcı eklendi:
+- `Nᶜ(T)=Nᶜ(300)(T/300)^(3/2)`, `Nᵛ(T)=Nᵛ(300)(T/300)^(3/2)` (parabolik bant ve yaklaşık sabit etkin kütle)
+- `nᵢ=√(NᶜNᵛ)exp[−E₉(T)/(2kT)]`, `k=8.617333262145×10⁻⁵ eV/K`.
+- Sıcaklık (+20 K), bant aralığı (+0,10 eV), iletim veya valans durum yoğunluğu (×2) karşılaştırma kartları: yeni/başlangıç nᵢ oranları hesaplanır.
+- Varsayılan 300 K Si-benzeri parametreler: `Nᶜ=2,8×10¹⁹`, `Nᵛ=1,04×10¹⁹ cm⁻³`, `E₉=1,12 eV` → **yaklaşık `6,68×10⁹ cm⁻³`**. Ders slaytındaki `~10¹⁰ cm⁻³` yuvarlatılmış mertebe değeridir; referans ile birebir çakışma zorlanmadı.
+- İsteğe bağlı Si-benzeri Varshni düzeltmesi: `E₉(T)=E₉(300)+α[300²/(300+β) − T²/(T+β)]` (`α=4,73×10⁻⁴ eV/K`, `β=636 K`). E₉ veya DOS kaydırıcılarını değiştirmek **fiziksel olarak kalibre edilmiş farklı gerçek malzeme modeli oluşturmaz**.
+- Her iki sekmede yeni iki dilli, responsive, kütüphane gerektirmeyen `intrinsic-density-lab.js` kullanılır. Eski grafikler, simülasyonlar ve kayıtlı sorular korunur.
+- 03 **Sorular** sekmesine mevcut soruların **sonuna dört sayısal/pedagojik soru** eklenir (toplam 19). Her doğru/yanlış seçeneğinde açıklama vardır ve önceki yanıt indeksleri değişmez.
+
+Kaynaklar / yaklaşık parametre referansları:
+- [University of Michigan — Semiconductor Reference Equations](https://eecs311.eecs.umich.edu/exam1/prep/summary.html)
+- [METU — Silicon material parameters table (300 K)](https://etd.lib.metu.edu.tr/upload/1258383/index.pdf)
+- [Silicon Varshni parameterization — Si material model](https://www.oghma-nano.com/manual/material-scripts/Inorganic/Si/Si.html)
+
+**Doğrulama**: `node --test tests/*.test.mjs` ve özellikle `tests/intrinsic-density-lab.test.mjs`. Simülasyon 200–500 K ve belirtilen dejenere olmayan yaklaşık bant modeli kapsamında eğitim amaçlıdır; bir deneysel cihaz/tüm yarıiletken malzemeler için tam doğruluk iddiası değildir.

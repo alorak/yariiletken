@@ -162,20 +162,21 @@ window.COURSE_LESSONS = [
         key: "Etkin kütle, kristal bantlarının taşıyıcının dış kuvvete verdiği tepkiyi nasıl değiştirdiğini tanımlar."
       },
       {
-        title: "Öz taşıyıcı yoğunluğu nᵢ ne kadar büyüktür?",
+        title: "Öz taşıyıcı yoğunluğu nᵢ: tanımı ve büyüklüğü",
         paragraphs: [
-          "300 K civarında silisyumun atom yoğunluğu yaklaşık <strong>5 × 10²² cm⁻³</strong> iken öz elektron yoğunluğu <strong>nᵢ ≈ 10¹⁰ cm⁻³</strong> mertebesindedir; öz hol yoğunluğu da aynı değerdedir. Bu nedenle yaklaşık <strong>5 × 10¹² Si atomuna karşı bir serbest elektron</strong> bulunur. Buradaki oran bir taşıyıcıya bir atomun kimyasal bağını koparma olasılığı olarak okunmamalıdır.",
-          "Slayttaki <strong>42 enerji katkısı</strong> sayısı, 300 K'de kT ≈ 0,026 eV ve karakteristik enerji olarak yaklaşık 1,1 eV alındığında 1,1/0,026 ≈ 42 bulunmasına dayanan sezgisel modeldir. Bu, elektronun gerçek uyarılma yolunda tam 42 fononun aynı noktaya gelmesi gerektiği anlamına gelmez. Neden az taşıyıcı oluştuğunu nitel olarak düşünmek içindir."
+          "Öz taşıyıcı yoğunluğu <strong>n<sub>i</sub></strong>, katkısız (intrinsik) bir yarıiletkende <strong>termal dengede</strong> birim hacim başına bulunan <strong>iletim elektronu yoğunluğunun</strong> ve aynı zamanda <strong>hol yoğunluğunun</strong> ortak değeridir: <strong>n<sub>0</sub> = p<sub>0</sub> = n<sub>i</sub></strong>. Birimi cm⁻³'tür; üretim hızı, toplam atom sayısı veya yalnızca elektron–hol çiftlerinin oluşma olasılığı değildir. Örneğin n<sub>i</sub>=10¹⁰ cm⁻³ denildiğinde 1 cm³'te yaklaşık 10¹⁰ serbest elektron ve ayrı ayrı 10¹⁰ hol vardır. Burada elektriksel yük nötrlüğü sağlanır; taşıyıcıların bulunması tek başına net elektrik akımı olduğu anlamına gelmez.",
+          "Silisyumda 300 K civarında yaklaşık <strong>5 × 10²² atom/cm³</strong> ve <strong>n<sub>i</sub> ≈ 10¹⁰ cm⁻³</strong> mertebesi alınır: 5×10²² / 10¹⁰ ≈ <strong>5×10¹² atom/elektron</strong>. Bu oran 'her 5 trilyon atomdan biri kimyasal olarak kırılır' anlamına gelmez. n<sub>i</sub> başlıca <strong>sıcaklık T</strong>, <strong>elektronik bant aralığı E<sub>g</sub></strong> ve <strong>etkin durum yoğunluklarına N<sub>c</sub>, N<sub>v</sub></strong> bağlıdır. Denge dışı ışık altında gerçek n, p değerleri n<sub>i</sub>'ye eşit olmak zorunda değildir. İdeal dejenere olmayan denge modelinde katkılanmış malzemede de n<sub>0</sub>p<sub>0</sub>=n<sub>i</sub>² geçerlidir.",
+          "Sıcaklığın enerji ölçeği 300 K'de <strong>kT ≈ 0,0259 eV</strong> iken Si bant aralığı yaklaşık <strong>1,12 eV</strong>'tur. E<sub>g</sub>/kT ≈ 43 değeri yalnızca iki enerji ölçeğinin oranıdır; 'tam 43 fononun aynı bağda birleşmesi' şartı değildir. Nicel taşıyıcı yoğunluğu <strong>n<sub>i</sub> = √(N<sub>c</sub>N<sub>v</sub>)exp[−E<sub>g</sub>/(2kT)]</strong> ile yaklaşık hesaplanır. N<sub>c</sub>(300 K)=2,8×10¹⁹, N<sub>v</sub>(300 K)=1,04×10¹⁹ cm⁻³ ve E<sub>g</sub>=1,12 eV alınırsa yaklaşık <strong>6,7×10⁹ cm⁻³</strong> bulunur. 10¹⁰ cm⁻³ ise dersteki yuvarlatılmış referans mertebesidir; parametre/model seçimi sayısal sonucu etkiler."
         ],
         equation: "nᵢ(300 K) ≈ 10¹⁰ cm⁻³ &nbsp;·&nbsp; N<sub>Si</sub>/nᵢ ≈ 5 × 10¹²",
         visual03: ["concentration"],
-        key: "Öz Si'de 300 K'deki serbest taşıyıcı yoğunluğu, atom yoğunluğundan trilyonlarca kat küçüktür."
+        key: "Öz taşıyıcı yoğunluğu termal dengede n₀=p₀=nᵢ olarak tanımlanır; T, E₉, Nᶜ ve Nᵛ değerleriyle hesaplanır."
       },
       {
         title: "Bağ modeli bir denklem olarak: sıcaklık ve nᵢ",
         paragraphs: [
           "Sunumun <em>The model as an equation</em> yaklaşımı, her küçük enerji katkısına p<1 olasılık çarpanı atayarak <strong>nᵢ = N · p^(E/kT)</strong> biçiminde nitel bir model kurar. Logaritması alındığında <strong>ln(nᵢ/N) = (E ln p/k)·(1/T)</strong> bulunur; seçilen sabit p için ln(nᵢ/N) – 1/T grafiği yaklaşık bir doğru verir. Ancak model p'yi fiziksel ilkelerden hesaplayamaz.",
-          "Gerçek yarıiletken hesabında parabolik bant ve Boltzmann yaklaşımı altında <strong>nᵢ = √(N<sub>c</sub>N<sub>v</sub>) exp(−E<sub>g</sub>/2kT)</strong> kullanılır. N<sub>c</sub>, N<sub>v</sub> ve bant aralığı da sıcaklığa bağlı olabilir; bu yüzden ölçülmüş ln(nᵢ) – 1/T grafiği kusursuz doğru olmak zorunda değildir. Ayrıntılı hesap Ders 05'tedir."
+          "Nicel yarıiletken hesabında parabolik bantlar ve dejenere olmayan Boltzmann yaklaşımı altında <strong>n<sub>i</sub>=√(N<sub>c</sub>N<sub>v</sub>)exp[−E<sub>g</sub>/(2kT)]</strong> kullanılır. <strong>N<sub>c</sub>(T) ve N<sub>v</sub>(T) yaklaşık T<sup>3/2</sup></strong> ile artar; E<sub>g</sub>(T) sıcaklıkla değişebilir. Grafikler sekmesindeki doğrusal n<sub>i</sub>–T grafiği gerçek yoğunluğu gösterir. Diğer grafikte <strong>ln[n<sub>i</sub>/√(N<sub>c</sub>N<sub>v</sub>)] = −E<sub>g</sub>/(2kT)</strong> ifadesi 1000/T'ye karşı çizilir: E<sub>g</sub> sabitse doğru, sıcaklığa bağlıysa eğrilik beklenir. Simülasyonlar sekmesinde T, E<sub>g</sub>, N<sub>c</sub>, N<sub>v</sub> değiştirilerek adım adım hesap yapılabilir. Ayrıntılı istatistik Ders 05'tedir."
         ],
         equation: "nᵢ = N · p<sup>E/(kT)</sup> (nitel) &nbsp;·&nbsp; nᵢ = √(N<sub>c</sub>N<sub>v</sub>)e<sup>−E<sub>g</sub>/(2kT)</sup> (bant modeli)",
         visual03: ["equation"],
@@ -194,7 +195,7 @@ window.COURSE_LESSONS = [
       "Foton enerjisi, ısıl uyarılma ve çarpışma iyonlaşmasıyla elektron–hol üretim koşullarını ayırt ederim.",
       "Üretim ve yeniden birleşme bant çizimlerini yorumlar; fotogeneration, impact ionization, radiative, SRH ve Auger mekanizmalarını karşılaştırırım.",
       "Elektron ve hol etkin kütlesini, iletkenlik ve durum yoğunluğu kütlesi ayrımıyla açıklarım.",
-      "300 K'de Si atom yoğunluğunu nᵢ ile karşılaştırıp yaklaşık 5 × 10¹² oranını bulurum.",
+      "Öz taşıyıcı yoğunluğunu n₀=p₀=nᵢ olarak tanımlar; atom yoğunluğuyla oranını ve T, E₉, Nᶜ, Nᵛ bağımlılıklarını yorumlarım.",
       "nᵢ=N·p^(E/kT) nitel modelinden ln(nᵢ/N) – 1/T ilişkisini türetir, bant modeliyle sınırlarını karşılaştırırım."
     ],
     future: {

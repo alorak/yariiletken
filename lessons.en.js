@@ -123,16 +123,16 @@
           "m* ≈ ℏ² / (d²E/dk²) &nbsp;·&nbsp; (parabolic band, 1D)"
         ],
         [
-          "How large is intrinsic carrier density nᵢ?",
-          "Near 300 K, the silicon atomic density is roughly <strong>5 × 10²² cm⁻³</strong>, while intrinsic electron density is of order <strong>nᵢ ≈ 10¹⁰ cm⁻³</strong>; intrinsic hole density has the same value. Thus there is approximately <strong>one conduction electron for every 5 × 10¹² Si atoms</strong>. This ratio is not a literal probability that a single chemical bond must dissociate.",
-          "The lecture's <strong>42 energy contributions</strong> estimate comes from kT ≈ 0.026 eV at 300 K and a characteristic energy near 1.1 eV: 1.1/0.026 ≈ 42. This is a qualitative analogy for why excitations are rare, not a microscopic requirement that exactly 42 phonons gather at one site.",
-          "At room temperature, the number of free carriers in intrinsic Si is trillions of times smaller than its atomic density.",
+          "What is intrinsic carrier density nᵢ and how large is it?",
+          "The <strong>intrinsic carrier concentration n<sub>i</sub></strong> is the shared number density of <strong>conduction electrons</strong> and <strong>holes</strong> per unit volume in an undoped semiconductor at <strong>thermal equilibrium</strong>: <strong>n<sub>0</sub> = p<sub>0</sub> = n<sub>i</sub></strong>. It has units cm⁻³: it is not a generation rate, an atomic concentration or an excitation probability. For example, n<sub>i</sub>=10¹⁰ cm⁻³ means about 10¹⁰ free electrons and separately 10¹⁰ holes in one cubic centimeter. Charge neutrality holds; the existence of carriers alone does not imply a net electric current.",
+          "Silicon near 300 K has about <strong>5 × 10²² atoms/cm³</strong> and <strong>n<sub>i</sub> ≈ 10¹⁰ cm⁻³</strong> as an order-of-magnitude reference: 5×10²²/10¹⁰ ≈ <strong>5×10¹² atoms per conduction electron</strong>. This is not a literal probability of chemical bond dissociation. n<sub>i</sub> depends mainly on <strong>temperature T</strong>, <strong>electronic band gap E<sub>g</sub></strong>, and the <strong>effective densities of states N<sub>c</sub>, N<sub>v</sub></strong>. Under illumination, nonequilibrium n and p need not equal n<sub>i</sub>. In the ideal nondegenerate equilibrium model, doped samples still satisfy n<sub>0</sub>p<sub>0</sub>=n<sub>i</sub>². At 300 K, the thermal energy scale is <strong>kT ≈ 0.0259 eV</strong> and the Si electronic band gap is about <strong>1.12 eV</strong>. E<sub>g</sub>/kT ≈ 43 is a ratio of two energy scales, not a requirement that exactly 43 phonons converge on one bond. A quantitative approximation is <strong>n<sub>i</sub> = √(N<sub>c</sub>N<sub>v</sub>)exp[−E<sub>g</sub>/(2kT)]</strong>. Choosing N<sub>c</sub>(300 K)=2.8×10¹⁹, N<sub>v</sub>(300 K)=1.04×10¹⁹ cm⁻³ and E<sub>g</sub>=1.12 eV gives <strong>≈6.7×10⁹ cm⁻³</strong>; ≈10¹⁰ cm⁻³ is the rounded order-of-magnitude lecture reference. The exact number depends on chosen parameters and models.",
+          "Intrinsic concentration means n₀=p₀=nᵢ at equilibrium; its quantitative value depends on T, E₉, Nᶜ and Nᵛ.",
           "nᵢ(300 K) ≈ 10¹⁰ cm⁻³ &nbsp;·&nbsp; N<sub>Si</sub>/nᵢ ≈ 5 × 10¹²"
         ],
         [
           "The bond model as an equation: temperature and nᵢ",
           "The lecture's <em>The model as an equation</em> assumes a probability factor p<1 for each small energy contribution, giving the qualitative model <strong>nᵢ = N · p^(E/kT)</strong>. Taking a logarithm yields <strong>ln(nᵢ/N) = (E ln p/k)·(1/T)</strong>; with fixed p, plotting ln(nᵢ/N) against 1/T gives a straight line. The toy model cannot calculate p from first principles.",
-          "For a real nondegenerate semiconductor with approximately parabolic bands, the quantitative expression is <strong>nᵢ = √(N<sub>c</sub>N<sub>v</sub>) exp(−E<sub>g</sub>/2kT)</strong>. The effective densities of states and band gap may depend on temperature, so measured ln(nᵢ) versus 1/T is not necessarily a perfect straight line. Lesson 05 develops the quantitative calculation.",
+          "For approximately parabolic bands and nondegenerate Boltzmann occupations, <strong>n<sub>i</sub>=√(N<sub>c</sub>N<sub>v</sub>)exp[−E<sub>g</sub>/(2kT)]</strong>. <strong>N<sub>c</sub>(T) and N<sub>v</sub>(T) scale roughly as T<sup>3/2</sup></strong>, while E<sub>g</sub>(T) may vary. The linear n<sub>i</sub>–T plot in Graphs shows the actual number density. A second plot shows <strong>ln[n<sub>i</sub>/√(N<sub>c</sub>N<sub>v</sub>)] = −E<sub>g</sub>/(2kT)</strong> versus 1000/T: a straight line for constant E<sub>g</sub>, with curvature when E<sub>g</sub> changes with T. In Simulations, vary T, E<sub>g</sub>, N<sub>c</sub> and N<sub>v</sub> and see the calculation step by step. See Lesson 05 for the deeper statistical model.",
           "The bond model explains the temperature trend; reliable carrier concentrations require band theory and statistics.",
           "nᵢ = N · p<sup>E/(kT)</sup> (qualitative) &nbsp;·&nbsp; nᵢ = √(N<sub>c</sub>N<sub>v</sub>)e<sup>−E<sub>g</sub>/(2kT)</sup> (band model)"
         ],
@@ -149,7 +149,7 @@
         "I can distinguish photon absorption, thermal generation and impact ionization as different ways of creating electron–hole pairs.",
         "I can interpret band transition diagrams and compare photogeneration, impact ionization, radiative, SRH and Auger processes.",
         "I can explain electron and hole effective masses and distinguish conductivity from DOS effective mass.",
-        "I can compare nᵢ with Si atomic density at 300 K and calculate the approximate 5 × 10¹² ratio.",
+        "I can define intrinsic concentration as n₀=p₀=nᵢ and explain its atomic-scale ratio and dependence on T, E₉, Nᶜ and Nᵛ.",
         "I can derive the ln(nᵢ/N) vs 1/T trend from the toy model nᵢ=N·p^(E/kT) and contrast it with the band model."
       ],
       future: {

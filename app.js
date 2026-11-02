@@ -356,7 +356,12 @@
   }
 
   function renderPlanned(lesson, tabId) {
-    if (window.CourseActivity?.render({ lessonId: lesson.id, tabId, language, container: $("#content-panel") })) return;
+    if (window.CourseActivity?.render({ lessonId: lesson.id, tabId, language, container: $("#content-panel") })) {
+      if (lesson.id === "03") window.IntrinsicDensityLab?.mount({
+        container: $("#content-panel"), language, tabId
+      });
+      return;
+    }
     const strings = t();
     const tab = tabDefinitions.find(item => item.id === tabId);
     const proposed = Array.isArray(lesson.future[tabId]) ? lesson.future[tabId] : [];

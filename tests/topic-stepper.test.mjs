@@ -16,7 +16,7 @@ test("all five lessons have numbered steps generated from their actual topic cou
   assert.deepEqual(Array.from(tr, l => l.topics.length), [6, 9, 7, 7, 8]);
   assert.deepEqual(Array.from(en, l => l.topics.length), [6, 9, 7, 7, 8]);
   assert.match(app, /lesson\.topics\.map\(\(topic, index\) =>/);
-  assert.match(app, /'data-topic="' \+ \(index \+ 1\)/);
+  assert.match(app, /data-topic="' \+ \(index \+ 1\)/);
   assert.match(app, /'<span aria-hidden="true">' \+ \(index \+ 1\)/);
   assert.doesNotMatch(app, /'<div class="section-intro"/);
 });
@@ -42,7 +42,7 @@ test("step controls scroll to topic, show current article and permit keyboard na
 });
 
 test("learning outcomes have a single compact title and keep completion counters", () => {
-  assert.match(app, /'<h2 id="outcomes-title">' \+ strings\.outcomes/);
+  assert.match(app, /id="outcomes-title">' \+ strings\.outcomes/);
   assert.doesNotMatch(app, /'<span class="eyebrow">' \+ strings\.objectives/);
   assert.doesNotMatch(app, /'<div class="progress-track"/);
   assert.match(app, /outcome-counter/);

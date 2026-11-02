@@ -97,10 +97,11 @@ window.COURSE_LESSONS = [
       {
         title: "Sıcaklık kristalde neyi değiştirir?",
         paragraphs: [
-          "İdeal öz yarıiletkenin basit bağ modelinde 0 K'de termal olarak uyarılmış serbest taşıyıcı yoktur. Sıcaklık arttığında örgü atomları denge konumları çevresinde titreşir; örgü titreşimleri fononlarla tanımlanır.",
-          "Termal enerji, elektronları bağlı durumlarından iletim durumlarına uyarmaya katkı verebilir. Bu süreç bant modeliyle daha doğru anlatılır; yaklaşık 1,12 eV değeri silisyumun 300 K civarındaki <strong>elektronik bant aralığıdır</strong>, kimyasal bir Si–Si bağının kopma enerjisiyle özdeş değildir."
+          "İdeal öz yarıiletkenin bağ modeli açısından 0 K'de termal elektron–hol çiftleri bulunmaz; sıfır nokta titreşimleri ise kuantum mekaniği nedeniyle sürebilir. Sıcaklık yükseldikçe atomların örgü titreşimlerinin termal uyarımı artar. <strong>Where does the energy come from?</strong> slaytında farklı noktalardan gelen elastik dalgaların girişimi kullanılır; fononlar bu örgü titreşimlerinin kuantumlarıdır.",
+          "Örgü titreşimleri ve fotonlar farklı enerji aktarım kanallarıdır. <strong>Salınan dipol</strong> modeli, pozitif ve negatif yük merkezleri birbirine göre salınırken elektromanyetik ışınımın nasıl oluşabileceğini anlatır; saf, merkez simetrili Si'nin her titreşimi ışınım yapan dipol değildir. Termal uyarılmada bant geçişlerinin gerçek açıklaması kuantum mekanikseldir. 300 K'deki yaklaşık <strong>1,12 eV elektronik bant aralığı</strong> tek Si–Si kimyasal bağını koparma enerjisi değildir."
         ],
         equation: "E<sub>g,Si</sub> ≈ 1,12 eV (300 K civarı)",
+        visual03: ["interference", "dipole"],
         key: "Sıcaklık, enerji durumlarının doluluğunu ve termal taşıyıcı oluşumunu etkiler."
       },
       {
@@ -116,7 +117,7 @@ window.COURSE_LESSONS = [
         title: "Hol gerçekten hareket eder mi?",
         paragraphs: [
           "Bir valans elektronu komşu boş kuantum durumuna geçtiğinde boşluk ters yönde yer değiştirmiş gibi görünür. Çok sayıdaki valans elektronunun ortak davranışını, <strong>pozitif yüklü ve hareketli bir hol</strong> ile hesaplamak daha kolaydır.",
-          "Bu bir fiziksel kuaziparçacık tanımıdır; pozitif bir atom çekirdeğinin kristal boyunca yürüdüğü anlamına gelmez. Hol hareketi elektriksel ölçümlerde gerçek sonuç üretir."
+          "Bu bir fiziksel kuaziparçacık tanımıdır; pozitif bir çekirdeğin yürüdüğü anlamına gelmez. <strong>Kabarcık benzetmesinde</strong> sıvı bir yöne akarken kabarcık diğer yönde hareket eder: gerçekte hareket eden elektronlardır; hol az sayıdaki boş durumu izleyerek hesabı sadeleştirir. Hall ölçümleri hol taşıyıcısının elektriksel etkisini ortaya koyar."
         ],
         key: "Hol, valans bandındaki eksik elektronun hareketini pozitif taşıyıcı olarak temsil eder."
       },
@@ -124,8 +125,9 @@ window.COURSE_LESSONS = [
         title: "Üretim ve yeniden birleşme",
         paragraphs: [
           "<strong>Üretim (generation)</strong> yeni elektron–hol çiftleri oluşturur. <strong>Yeniden birleşme (recombination)</strong> ise iletim elektronunun valans bandındaki boşluğu doldurmasıyla serbest bir elektron–hol çiftini ortadan kaldırır.",
-          "Isıl, optik ve yüksek enerjili taşıyıcılarla ilişkili süreçler farklı mekanizmalara sahiptir. Silisyum dolaylı bant aralıklı olduğundan ışınımsal birleşme birçok koşulda zayıftır; kusur aracılı birleşme önemli olabilir."
+          "Isıl ve optik üretim ile çarpışma iyonlaşması farklı kanallardır. Bunlara karşılık ışınımsal, Auger ve kusur düzeyleri aracılığıyla Shockley–Read–Hall (SRH) yeniden birleşmesi bulunur. Si dolaylı bant aralıklı olduğundan ışınımsal yol çoğu koşulda zayıftır. <strong>Dengede üretim = yeniden birleşme hızı</strong> olması aynı elektronun hemen geri döndüğü anlamına gelmez; arada bir yaşam süresi vardır."
         ],
+        visual03: ["generation"],
         key: "Dengede toplam üretim ve yeniden birleşme hızları eşit olabilir; süreçler yine de sürer."
       },
       {
@@ -134,16 +136,48 @@ window.COURSE_LESSONS = [
           "<strong>Saçılma</strong> bir taşıyıcının momentumunu veya enerji durumunu değiştirebilir, fakat taşıyıcı sayısını zorunlu olarak azaltmaz. <strong>Yeniden birleşmede</strong> bir elektron–hol çifti ortadan kalkar. Bu iki olay birbirine karıştırılmamalıdır.",
           "Taşıyıcının yeniden birleşmeden önce geçirdiği karakteristik zaman, uygun koşullarda <strong>taşıyıcı yaşam süresi</strong> ile ifade edilir. Momentum gevşemesi ve yeniden birleşme farklı zaman ölçekleridir."
         ],
+        visual03: ["scattering"],
         key: "Mobiliteyi sınırlayan saçılma ile taşıyıcı ömrünü belirleyen rekombinasyon farklı mekanizmalardır."
       },
       {
         title: "Bağ modeli neden tek başına yeterli değil?",
         paragraphs: [
-          "Bağ modeli, elektron ve hollerin neden birlikte ortaya çıktığını ve taşıyıcı yoğunluğunun sıcaklıkla neden artabildiğini sezgisel olarak açıklar. Ders notlarındaki çok sayıda düşük enerjili titreşimin katkısını gösteren olasılık benzetmesi de <strong>nitel</strong> bir yaklaşımdır.",
-          "Ancak taşıyıcıların hangi enerjilerde bulunabileceğini ve bu durumların doluluk olasılığını nicel olarak hesaplamak için enerji bantlarına, durum yoğunluğuna ve Fermi–Dirac istatistiğine ihtiyaç duyarız."
+          "<strong>Bağ modeli nedir?</strong> Si'nin dört değerlik elektronu dört en yakın komşuyla kovalent bağları kurar. İki boyutlu öğretim çiziminde dolu bağlar ideal 0 K valans durumlarını temsil eder. Enerjiyle bir elektron iletim durumuna uyarıldığında bağın gösterdiği yerde boş valans durumu (hol) kalır. Komşu bağlı elektronlar bu boşluğu doldurabilir; hol karşı yönde ilerliyormuş gibi davranır.",
+          "<strong>Neyi açıklar?</strong> Elektron ve holün çift halinde üretimini, öz dengede nᵢ=pᵢ olmasını, küçük öz taşıyıcı yoğunluğunu ve sıcaklıkla hızlı artışı nitel olarak anlatır. <strong>Neden yetmez?</strong> Çok sayıda küçük enerjinin tek bağda toplanması benzetmesi nicel bir mikroskobik mekanizma değildir; durum yoğunluğu, doluluk olasılığı, etkin kütle ve doğru nᵢ hesabı için bant teorisi ile Fermi–Dirac istatistiği gerekir."
         ],
+        visual03: ["bond"],
         key: "Bir modelin başarılı olması, hem açıklayabildiğini hem de hesaplayamadığını bilmeyi gerektirir."
-      }
+      },
+      {
+        title: "Etkin kütle (effective mass) neyi anlatır?",
+        paragraphs: [
+          "Kristalde hareket eden elektron veya hol, dış kuvvete vakumdaki serbest parçacık gibi yanıt vermeyebilir. <strong>Etkin kütle m*</strong>, bant yapısının kuvvet–ivme ilişkisine etkisini ifade eder. Tek boyutlu parabolik bantta eğrilik büyüdükçe m* küçülür; bu kristal yapısının taşıyıcının gerçek durgun kütlesini değiştirmesi değildir.",
+          "Ders slaytındaki Si için yaklaşık iletkenlik etkin kütleleri elektron için <strong>0,26 m₀</strong>, hol için <strong>0,35–0,37 m₀</strong> olarak verilir. Bunlar seçilen yön ve yaklaşıma bağlı örnek değerlerdir: Si elektron vadileri anizotropiktir, hol bantlarında birden fazla dal bulunur. Durum yoğunluğu etkin kütlesi farklı tanımlanır; 04–05. derste ayrıntılandırılır."
+        ],
+        equation: "m* ≈ ℏ² / (d²E/dk²) &nbsp;·&nbsp; (parabolik bant, 1B)",
+        visual03: ["mass"],
+        key: "Etkin kütle, kristal bantlarının taşıyıcının dış kuvvete verdiği tepkiyi nasıl değiştirdiğini tanımlar."
+      },
+      {
+        title: "Öz taşıyıcı yoğunluğu nᵢ ne kadar büyüktür?",
+        paragraphs: [
+          "300 K civarında silisyumun atom yoğunluğu yaklaşık <strong>5 × 10²² cm⁻³</strong> iken öz elektron yoğunluğu <strong>nᵢ ≈ 10¹⁰ cm⁻³</strong> mertebesindedir; öz hol yoğunluğu da aynı değerdedir. Bu nedenle yaklaşık <strong>5 × 10¹² Si atomuna karşı bir serbest elektron</strong> bulunur. Buradaki oran bir taşıyıcıya bir atomun kimyasal bağını koparma olasılığı olarak okunmamalıdır.",
+          "Slayttaki <strong>42 enerji katkısı</strong> sayısı, 300 K'de kT ≈ 0,026 eV ve karakteristik enerji olarak yaklaşık 1,1 eV alındığında 1,1/0,026 ≈ 42 bulunmasına dayanan sezgisel modeldir. Bu, elektronun gerçek uyarılma yolunda tam 42 fononun aynı noktaya gelmesi gerektiği anlamına gelmez. Neden az taşıyıcı oluştuğunu nitel olarak düşünmek içindir."
+        ],
+        equation: "nᵢ(300 K) ≈ 10¹⁰ cm⁻³ &nbsp;·&nbsp; N<sub>Si</sub>/nᵢ ≈ 5 × 10¹²",
+        visual03: ["concentration"],
+        key: "Öz Si'de 300 K'deki serbest taşıyıcı yoğunluğu, atom yoğunluğundan trilyonlarca kat küçüktür."
+      },
+      {
+        title: "Bağ modeli bir denklem olarak: sıcaklık ve nᵢ",
+        paragraphs: [
+          "Sunumun <em>The model as an equation</em> yaklaşımı, her küçük enerji katkısına p<1 olasılık çarpanı atayarak <strong>nᵢ = N · p^(E/kT)</strong> biçiminde nitel bir model kurar. Logaritması alındığında <strong>ln(nᵢ/N) = (E ln p/k)·(1/T)</strong> bulunur; seçilen sabit p için ln(nᵢ/N) – 1/T grafiği yaklaşık bir doğru verir. Ancak model p'yi fiziksel ilkelerden hesaplayamaz.",
+          "Gerçek yarıiletken hesabında parabolik bant ve Boltzmann yaklaşımı altında <strong>nᵢ = √(N<sub>c</sub>N<sub>v</sub>) exp(−E<sub>g</sub>/2kT)</strong> kullanılır. N<sub>c</sub>, N<sub>v</sub> ve bant aralığı da sıcaklığa bağlı olabilir; bu yüzden ölçülmüş ln(nᵢ) – 1/T grafiği kusursuz doğru olmak zorunda değildir. Ayrıntılı hesap Ders 05'tedir."
+        ],
+        equation: "nᵢ = N · p<sup>E/(kT)</sup> (nitel) &nbsp;·&nbsp; nᵢ = √(N<sub>c</sub>N<sub>v</sub>)e<sup>−E<sub>g</sub>/(2kT)</sup> (bant modeli)",
+        visual03: ["equation"],
+        key: "Basit model sıcaklık eğilimini açıklar; güvenilir taşıyıcı hesabı için bant modeli ve istatistik gerekir."
+      },
     ],
     outcomes: [
       "Öz kristalde termal uyarılma ile elektron–hol çifti oluşumunu açıklarım.",
@@ -152,7 +186,13 @@ window.COURSE_LESSONS = [
       "Generation, recombination ve scattering süreçlerini karşılaştırırım.",
       "Denge durumunda üretim–rekombinasyonun sürebileceğini açıklarım.",
       "Taşıyıcı yaşam süresi ile momentum saçılmasını ayırırım.",
-      "Bağ modelinin nicel taşıyıcı hesabında neden sınırlı olduğunu belirtirim."
+      "Bağ modelinin nicel taşıyıcı hesabında neden sınırlı olduğunu belirtirim.",
+      "Kristalde elastik dalga girişimini ve fononların örgü titreşimleriyle ilişkisini açıklarım.",
+      "Salınan dipol–foton ilişkisini ve saf Si'deki merkez simetrisi sınırlamasını yorumlarım.",
+      "Üretim ve yeniden birleşmeyi bant çizimi üzerinde gösterir, saçılmadan ayırırım.",
+      "Elektron ve hol etkin kütlesini, iletkenlik ve durum yoğunluğu kütlesi ayrımıyla açıklarım.",
+      "300 K'de Si atom yoğunluğunu nᵢ ile karşılaştırıp yaklaşık 5 × 10¹² oranını bulurum.",
+      "nᵢ=N·p^(E/kT) nitel modelinden ln(nᵢ/N) – 1/T ilişkisini türetir, bant modeliyle sınırlarını karşılaştırırım."
     ],
     future: {
       grafikler: ["Üretim ve yeniden birleşme hızlarının zaman grafiği", "Öz taşıyıcı yoğunluğunun sıcaklıkla nitel değişimi"],

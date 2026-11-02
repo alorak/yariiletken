@@ -79,8 +79,8 @@
       topics: [
         [
           "What changes in a crystal as temperature rises?",
-          "In the simple bond model, an ideal intrinsic semiconductor has no thermally excited free carriers at 0 K. At higher temperatures, lattice atoms vibrate about their equilibrium positions; phonons describe the quantized lattice vibrations.",
-          "Thermal energy can contribute to electronic transitions into conduction states. The band model describes this more accurately: about 1.12 eV is silicon's <strong>electronic band gap</strong> near 300 K, not an energy identical to breaking a chemical Si–Si bond.",
+          "In the ideal intrinsic bond picture there are no thermally excited electron–hole pairs at 0 K, although quantum zero-point lattice motion remains possible. As temperature rises, lattice vibrations become thermally excited. The lecture's <strong>Where does the energy come from?</strong> analogy describes the superposition of elastic disturbances from many atoms; phonons are the quantized excitations of those vibrations.",
+          "Lattice vibrations and photons are distinct energy-transfer channels. The <strong>oscillating dipole</strong> model describes radiation from relative motion of positive and negative charge centers; not every lattice mode in centrosymmetric pure Si radiates as a dipole. Interband excitations are quantum transitions. Near 300 K, <strong>1.12 eV is the electronic band gap</strong> of silicon, not the energy of dissociating an individual Si–Si chemical bond.",
           "Temperature influences the occupancy of electronic states and the creation of thermal carriers."
         ],
         [
@@ -92,13 +92,13 @@
         [
           "Does a hole really move?",
           "When a valence electron moves into a neighboring empty quantum state, that vacancy appears to move in the opposite direction. Treating the collective motion of many valence electrons as a <strong>mobile positively charged hole</strong> makes calculations simpler.",
-          "A hole is a physical quasiparticle description; it does not mean a positive atomic nucleus travels through the crystal. Hole motion produces measurable electrical effects.",
+          "A hole is a measurable quasiparticle description, not a positively charged nucleus moving through the crystal. In the <strong>bubble analogy</strong>, liquid moves one way while the bubble appears to move the other: only electrons actually change their states, while tracking the few holes simplifies the calculation. Hall measurements reveal their electrical response.",
           "A hole represents the motion of a missing valence electron as a positive carrier."
         ],
         [
           "Generation and recombination",
           "<strong>Generation</strong> creates new electron–hole pairs. <strong>Recombination</strong> occurs when a conduction electron fills a valence-band vacancy, eliminating a free electron–hole pair.",
-          "Thermal, optical and energetic-carrier mechanisms involve different processes. Since silicon has an indirect band gap, radiative recombination is often weak; defect-assisted recombination can be important.",
+          "Thermal and optical generation and impact ionization are distinct pathways. Recombination channels include radiative, Auger and defect-assisted Shockley–Read–Hall (SRH) processes. Radiative recombination is often weak in indirect-gap Si. <strong>Generation and recombination rates can balance at equilibrium</strong> without each electron recombining immediately; a carrier lifetime separates individual events.",
           "At equilibrium, overall generation and recombination rates can be equal even though both processes continue."
         ],
         [
@@ -109,10 +109,31 @@
         ],
         [
           "Why is the bond model insufficient on its own?",
-          "The bond model qualitatively explains why electrons and holes are created together and why carrier concentrations can rise with temperature. The probability analogy in the lecture notes, involving contributions from many small-energy vibrations, is also <strong>qualitative</strong>.",
-          "For quantitative calculations we need to know which electronic energies are available and their occupancy probabilities. This leads to energy bands, density of states and Fermi–Dirac statistics.",
+          "<strong>What is the bond model?</strong> Silicon has four valence electrons and forms covalent bonds with four nearest neighbors. In a flat teaching cartoon, filled bonds represent the ideal low-temperature valence states. When an electron is excited to a conduction state, an empty valence state (hole) remains. Neighboring bound electrons can refill the vacancy, so the hole appears to propagate in the opposite direction.",
+          "<strong>What can it explain?</strong> Pair generation, nᵢ=pᵢ at intrinsic equilibrium, low carrier density, and a steep rise with temperature. <strong>Why is it insufficient?</strong> The picture of many small contributions converging on one bond is a qualitative analogy, not a literal universal mechanism. To compute density of states, occupation probabilities, effective mass and accurate nᵢ, we require band theory and Fermi–Dirac statistics.",
           "A useful model must be understood both through what it explains and what it cannot calculate."
-        ]
+        ],
+        [
+          "What does effective mass describe?",
+          "Electrons and holes inside a crystal can respond to an applied force differently from a free electron in vacuum. <strong>Effective mass m*</strong> summarizes the influence of the band structure on the force–acceleration relation. For a simple 1D parabolic band, larger E(k) curvature means smaller m*. The carrier's literal rest mass has not changed.",
+          "The lecture gives approximate Si conductivity effective masses of <strong>0.26 m₀</strong> for electrons and <strong>0.35–0.37 m₀</strong> for holes. These are illustrative and depend on the approximation: Si electron valleys are anisotropic and hole bands are multiband. Density-of-states effective mass is a distinct quantity; Lessons 04–05 expand on it.",
+          "Effective mass describes how the crystal's band structure changes the carrier's response to an external force.",
+          "m* ≈ ℏ² / (d²E/dk²) &nbsp;·&nbsp; (parabolic band, 1D)"
+        ],
+        [
+          "How large is intrinsic carrier density nᵢ?",
+          "Near 300 K, the silicon atomic density is roughly <strong>5 × 10²² cm⁻³</strong>, while intrinsic electron density is of order <strong>nᵢ ≈ 10¹⁰ cm⁻³</strong>; intrinsic hole density has the same value. Thus there is approximately <strong>one conduction electron for every 5 × 10¹² Si atoms</strong>. This ratio is not a literal probability that a single chemical bond must dissociate.",
+          "The lecture's <strong>42 energy contributions</strong> estimate comes from kT ≈ 0.026 eV at 300 K and a characteristic energy near 1.1 eV: 1.1/0.026 ≈ 42. This is a qualitative analogy for why excitations are rare, not a microscopic requirement that exactly 42 phonons gather at one site.",
+          "At room temperature, the number of free carriers in intrinsic Si is trillions of times smaller than its atomic density.",
+          "nᵢ(300 K) ≈ 10¹⁰ cm⁻³ &nbsp;·&nbsp; N<sub>Si</sub>/nᵢ ≈ 5 × 10¹²"
+        ],
+        [
+          "The bond model as an equation: temperature and nᵢ",
+          "The lecture's <em>The model as an equation</em> assumes a probability factor p<1 for each small energy contribution, giving the qualitative model <strong>nᵢ = N · p^(E/kT)</strong>. Taking a logarithm yields <strong>ln(nᵢ/N) = (E ln p/k)·(1/T)</strong>; with fixed p, plotting ln(nᵢ/N) against 1/T gives a straight line. The toy model cannot calculate p from first principles.",
+          "For a real nondegenerate semiconductor with approximately parabolic bands, the quantitative expression is <strong>nᵢ = √(N<sub>c</sub>N<sub>v</sub>) exp(−E<sub>g</sub>/2kT)</strong>. The effective densities of states and band gap may depend on temperature, so measured ln(nᵢ) versus 1/T is not necessarily a perfect straight line. Lesson 05 develops the quantitative calculation.",
+          "The bond model explains the temperature trend; reliable carrier concentrations require band theory and statistics.",
+          "nᵢ = N · p<sup>E/(kT)</sup> (qualitative) &nbsp;·&nbsp; nᵢ = √(N<sub>c</sub>N<sub>v</sub>)e<sup>−E<sub>g</sub>/(2kT)</sup> (band model)"
+        ],
       ],
       outcomes: [
         "I can explain thermal generation of an electron–hole pair in an intrinsic crystal.",
@@ -121,7 +142,13 @@
         "I can compare generation, recombination and scattering.",
         "I can explain why generation and recombination can continue at equilibrium.",
         "I can distinguish carrier lifetime from momentum relaxation.",
-        "I can explain the limitations of the bond model for quantitative carrier calculations."
+        "I can explain the limitations of the bond model for quantitative carrier calculations.",
+        "I can describe elastic-wave interference in a crystal and relate phonons to lattice vibrations.",
+        "I can relate oscillating dipoles to photons and explain the centrosymmetry limitation in pure Si.",
+        "I can interpret generation and recombination on band diagrams and distinguish them from scattering.",
+        "I can explain electron and hole effective masses and distinguish conductivity from DOS effective mass.",
+        "I can compare nᵢ with Si atomic density at 300 K and calculate the approximate 5 × 10¹² ratio.",
+        "I can derive the ln(nᵢ/N) vs 1/T trend from the toy model nᵢ=N·p^(E/kT) and contrast it with the band model."
       ],
       future: {
         grafikler: ["Generation and recombination rates over time", "Qualitative temperature dependence of intrinsic carrier density"],

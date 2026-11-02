@@ -18,6 +18,8 @@ test("02 and 03 each include two graphs, two simulations, and eight questions", 
     assert.equal(activities[id].simulations.length, 2);
     assert.equal(activities[id].questions.length, 8);
     const outcomes = window.COURSE_LESSONS.find(lesson => lesson.id === id).topics.length;
+    assert.equal(new Set(activities[id].questions.map(q => q.topic)).size, outcomes,
+      "Each lesson topic needs at least one assessment question");
     for (const question of activities[id].questions) {
       assert.ok(question.topic >= 0 && question.topic < outcomes);
       assert.equal(question.options.length, 3);

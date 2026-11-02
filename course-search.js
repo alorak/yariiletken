@@ -1,10 +1,10 @@
 /* Offline, bilingual search across locally maintained 02–06 course narratives. */
 (() => {
   "use strict";
-  const normalize = value => String(value ?? "")
+  const fold = value => String(value ?? "")
     .normalize("NFKD").toLowerCase().replace(/\u0131/g,"i")
-    .replace(/[\u0300-\u036f]/g,"").replace(/([a-z])_([a-z])/g,"$1$2")
-    .replace(/\s+/g," ").trim();
+    .replace(/[\u0300-\u036f]/g,"").replace(/([a-z])_([a-z])/g,"$1$2");
+  const normalize = value => fold(value).replace(/\s+/g," ").trim();
   const plain = value => String(value ?? "")
     .replace(/<\/?(?:sub|sup)>/gi,"")
     .replace(/<[^>]*>/g," ").replace(/&(?:nbsp|#160);/gi," ")
@@ -48,7 +48,7 @@
   function offsetMap(text) {
     let normalized="",offsets=[],at=0;
     for(const char of text) {
-      const norm=normalize(char);
+      const norm=fold(char);
       for(let j=0;j<norm.length;j++){normalized+=norm[j];offsets.push([at,at+char.length]);}
       at+=char.length;
     }

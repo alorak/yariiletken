@@ -110,6 +110,7 @@ html[data-theme="dark"] .moon-icon { display: none; }
 .placeholder { background: var(--surface); border: 1px solid var(--stroke); border-radius: 16px; padding: 35px; }
 .placeholder-top { display: flex; align-items: center; gap: 11px; }
 .placeholder-icon { width: 46px; height: 46px; display: grid; place-items: center; background: var(--accent-soft); border-radius: 13px; font-size: 20px; color: var(--accent); }
+.placeholder-icon svg { width: 24px; height: 24px; }
 .placeholder h2 { font: 700 27px/1.22 Georgia,Cambria,serif; margin: 21px 0 8px; }
 .placeholder p { font-size: 14px; color: var(--ink-soft); max-width: 650px; }
 .planned-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 24px; max-width: 800px; }

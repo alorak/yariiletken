@@ -5,18 +5,18 @@ import { runInNewContext } from "node:vm";
 
 const window = {};
 const context = { window, Math, Number, Array, Object, String, Set, JSON };
-for (const name of ["lessons.js", "lessons.en.js", "activities.js", "lesson03-questions.js", "activity-engine.js"]) {
+for (const name of ["lessons.js", "lessons.en.js", "activities.js", "lesson03-questions.js", "intrinsic-density-questions.js", "activity-engine.js"]) {
   runInNewContext(readFileSync(new URL("../" + name, import.meta.url), "utf8"), context, {
     filename: name
   });
 }
 
-test("02 and 03 retain two graphs and two simulations, with expanded 03 questions", () => {
+test("02 and 03 retain two graphs and two simulations, with expanded intrinsic-density questions", () => {
   const activities = window.COURSE_ACTIVITIES;
   for (const id of ["02", "03"]) {
     assert.equal(activities[id].graphs.length, 2);
     assert.equal(activities[id].simulations.length, 2);
-    assert.equal(activities[id].questions.length, id === "03" ? 15 : 8);
+    assert.equal(activities[id].questions.length, id === "03" ? 19 : 8);
     const outcomes = window.COURSE_LESSONS.find(lesson => lesson.id === id).topics.length;
     assert.equal(new Set(activities[id].questions.map(q => q.topic)).size, outcomes,
       "Each lesson topic needs at least one assessment question");

@@ -95,7 +95,7 @@ test("qualitative p-model and quantitative band model are separated",()=>{
     assert.match(html,/exp\[/);
     assert.match(html,/1\/T/);
     assert.match(html,/p=0[,.]5|p=0\.5/);
-    assert.match(html,/qualitative|nitel/);
+    assert.match(html,/qualitative|sezgisel/);
   }
 });
 

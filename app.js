@@ -113,6 +113,19 @@
     }
     writeStorage(outcomeMigrationKey, "1");
   }
+  // Lesson 04 was expanded/reordered: remap old completed skills to equivalent
+  // new learning outcomes rather than silently reusing old numeric indexes.
+  const bandTheoryProgressMigration="yariiletken-lesson04-outcomes-v2";
+  if (readStorage(bandTheoryProgressMigration, "") !== "1") {
+    if (Array.isArray(progress["04"])) {
+      const mapping={0:2,1:1,2:4,3:5,4:6,5:8,6:10};
+      progress["04"]=[...new Set(progress["04"]
+        .filter(v=>Number.isInteger(v)&&Object.hasOwn(mapping,v))
+        .map(v=>mapping[v]))].sort((a,b)=>a-b);
+      writeStorage(progressKey,JSON.stringify(progress));
+    }
+    writeStorage(bandTheoryProgressMigration,"1");
+  }
   let language = readStorage(languageKey, "tr") === "en" ? "en" : "tr";
   let lessons = language === "en" && lessonsEn.length === lessonsTr.length ? lessonsEn : lessonsTr;
   let pendingScroll = null;

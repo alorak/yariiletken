@@ -13,8 +13,8 @@ runInNewContext(read("lessons.en.js"), { window });
 test("all five lessons have numbered steps generated from their actual topic counts", () => {
   const tr = window.COURSE_LESSONS, en = window.COURSE_LESSONS_EN;
   assert.deepEqual(Array.from(tr, l => l.id), ["02", "03", "04", "05", "06"]);
-  assert.deepEqual(Array.from(tr, l => l.topics.length), [6, 9, 7, 7, 8]);
-  assert.deepEqual(Array.from(en, l => l.topics.length), [6, 9, 7, 7, 8]);
+  assert.deepEqual(Array.from(tr, l => l.topics.length), [6, 9, 8, 7, 8]);
+  assert.deepEqual(Array.from(en, l => l.topics.length), [6, 9, 8, 7, 8]);
   assert.match(app, /lesson\.topics\.map\(\(topic, index\) =>/);
   assert.match(app, /data-topic="' \+ \(index \+ 1\)/);
   assert.match(app, /span aria-hidden="true">' \+ \(index \+ 1\)/);

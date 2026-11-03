@@ -593,3 +593,40 @@ html[data-theme="dark"] .course-search-highlight { color:#fff; background:rgba(2
     left:12px; right:12px; width:auto; max-height:min(75dvh,600px);
   }
 }
+
+
+/* 04 band theory schematics: spin states, N-atom level splitting, proportional Si scale. */
+.band04-figure { overflow:hidden; }
+.band04-figure svg { display:block; width:100%; max-width:100%; height:auto; border-radius:8px; margin:9px 0; background:var(--surface); }
+.band04-figure figcaption {color:var(--ink);font-size:clamp(13px,1.5vw,17px);font-weight:800;line-height:1.4;}
+.band04-figure .lesson-figure-note {margin:10px 0 0!important;}
+.band04-principles {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0;}
+.band04-principles article {border:1px solid var(--stroke);background:var(--surface);padding:12px;border-radius:9px;min-width:0;}
+.band04-principles b {display:block;color:var(--accent-dark);font-size:13px;}
+.band04-principles p {font-size:12px!important;color:var(--ink-soft);line-height:1.65!important;margin:8px 0!important;}
+.band04-principles code {font-size:12px;color:var(--ink);white-space:normal;overflow-wrap:anywhere;}
+.b04-text,.b04-label,.b04-small,.b04-orbital {fill:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+.b04-label {font-size:13px;font-weight:750;}
+.b04-small {font-size:11px;}
+.b04-orbital {font-size:18px;font-family:Georgia,Cambria,serif;font-style:italic;}
+.b04-line,.b04-axis {stroke:var(--ink-soft);stroke-width:2;fill:none;}
+.b04-axis {stroke-width:2.4;}
+.b04-dash {stroke:var(--accent);stroke-width:2;stroke-dasharray:6 6;fill:none;}
+.b04-state {fill:var(--surface);stroke:var(--ink);stroke-width:1.6;}
+.b04-tiny-state {fill:var(--surface);stroke:var(--ink-soft);stroke-width:1.1;}
+.b04-cross,.b04-thin {stroke:var(--ink);stroke-width:1.5;}
+.b04-thin {stroke-width:1.1;}
+.b04-upper {fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.7;}
+.b04-lower {fill:var(--surface-alt);stroke:var(--ink-soft);stroke-width:1.7;}
+.b04-gap {fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5;opacity:.75;}
+.b04-arrow {stroke:var(--accent);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.b04-bond {stroke:var(--ink-soft);stroke-width:5;stroke-linecap:round;}
+.b04-atom {fill:var(--accent-soft);stroke:var(--accent);stroke-width:2;}
+.b04-si {font:800 13px system-ui;fill:var(--ink);}
+.b04-hole {fill:#b9843b;stroke:var(--surface);stroke-width:3;}
+.b04-electron {fill:#3d89b0;stroke:var(--surface);stroke-width:3;}
+.b04-symbol {font:800 19px system-ui;fill:#fff;}
+@media (max-width:750px) {
+ .band04-principles {grid-template-columns:1fr;}
+ .band04-figure svg {min-width:0;}
+}

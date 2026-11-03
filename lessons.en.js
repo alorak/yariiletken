@@ -160,69 +160,106 @@
       }
     },
     "04": {
-      navTitle: "Band Theory",
-      title: "Quantum States and Energy Band Theory",
-      kicker: "From atoms to solids",
-      description: "Go from the discrete energy levels of an isolated silicon atom to valence and conduction bands in a crystal. Learn the quantum concepts behind reading band diagrams.",
-      focus: "Draw band diagrams",
-      topics: [
+      "navTitle": "Band Theory",
+      "title": "Quantum States and Energy Band Theory",
+      "kicker": "From atoms to solids",
+      "description": "Move from the bond model to bands: count states in one Si atom, track N-atom level splitting, and read scaled silicon band-edge energies.",
+      "focus": "Read bands",
+      "topics": [
         [
-          "Allowed quantum states and the Pauli principle",
-          "Electrons in an isolated atom occupy allowed quantum states rather than arbitrary energies. The Pauli exclusion principle states that two identical electrons cannot occupy <strong>the same quantum state</strong>; different states may share the same energy.",
-          "An <strong>energy level</strong> is therefore not identical to a <strong>quantum state</strong>. Many states can share a level, which matters for counting carriers in band theory.",
-          "Pauli exclusion forbids sharing the same quantum state, not merely the same energy."
+          "Why leave the bond model?",
+          "The bond picture shows local covalent bonds, electron–hole pair creation and vacancy-like hole motion, but it does not determine <strong>which electron energies are allowed, how many states exist per unit volume, or how likely they are to be occupied</strong>.",
+          "It therefore cannot predict quantitative minority carrier populations, the Fermi level, intrinsic carrier concentrations or temperature dependence on its own. Bands describe extended crystal quantum states and their occupations, rather than individual Si–Si chemical bonds.",
+          "Band-gap energy E<sub>g</sub> must not be identified with the dissociation energy of a single Si–Si chemical bond. The two models are complementary.",
+          "The bond picture gives intuition; band theory provides the quantitative state-energy and occupancy framework."
         ],
         [
-          "From one silicon atom to N atoms",
-          "A silicon atom has the valence configuration 3s²3p². With many widely separated Si atoms, each atom has similar energy levels, while the total number of electrons and states scales with N.",
-          "When the atoms approach, electronic states interact. The originally discrete energies split into many closely spaced energies; in a macroscopic crystal they appear as <strong>bands</strong>.",
-          "Bands arise from quantum-mechanical interactions among atoms."
+          "Three principles of the band model",
+          "<strong>1. Allowed quantum states.</strong> Electron states arise from the crystal Hamiltonian; they do not span every energy. Several spatial or spin states can have the same energy; an ideal gap has no bulk band states.",
+          "<strong>2. Pauli exclusion.</strong> Two electrons cannot occupy the exact same quantum state. Each spatial orbital has two possible spin states, so three 3p orbitals contain six spin states.",
+          "<strong>3. Energy-dependent occupation.</strong> At 0 K electrons fill the lowest accessible states consistent with Pauli. At nonzero temperature Fermi–Dirac statistics describes occupancy.",
+          "Allowed states, Pauli exclusion and occupation determine the filled valence and empty conduction bands."
         ],
         [
-          "Why do energy levels split?",
-          "As interatomic interactions grow, states originating at the same initial energy spread across different energies. The normal modes of coupled oscillators offer a useful mechanical analogy.",
-          "With more atoms, the levels become more closely spaced. Bandwidth is not determined by atom count alone: the nature of interatomic coupling and the crystal structure also matter.",
-          "Band broadening and closer spacing of individual levels are distinct effects."
+          "One isolated silicon atom: electronic energy states",
+          "Silicon has Z=14 and ground-state configuration <strong>1s² 2s² 2p⁶ 3s² 3p²</strong>; four 3s/3p electrons are valence electrons.",
+          "The diagram counts spin states, each circle representing one: 1s 2/2, 2s 2/2, 2p 6/6, 3s 2/2 and 3p 2/6. Hund's rule favors two 3p electrons in distinct spatial p orbitals. The diagram simplifies their spin arrangement.",
+          "Vertical level spacing is schematic, not to scale; isolated atom levels are not yet crystal bands.",
+          "Two of six 3p spin states are occupied, and the total occupied state count is 14."
         ],
         [
-          "Valence band, conduction band and forbidden gap",
-          "The simplified band picture of ideal silicon at 0 K has a filled <strong>valence band</strong> and an empty <strong>conduction band</strong>. The interval containing no allowed band states is called the <strong>forbidden energy gap</strong> or band gap.",
-          "Metals may have partially filled bands or overlapping bands. The band-gap size and the availability of thermally excited carriers help distinguish semiconductors from insulators.",
-          "The band gap is the energy difference between the conduction-band minimum and valence-band maximum."
+          "Bring N silicon atoms together",
+          "For N widely separated Si atoms the 3s subshell provides <strong>2N spin states / 2N electrons</strong>, while 3p provides <strong>6N states / 2N electrons</strong>; the valence total is 8N states and 4N electrons.",
+          "Approaching atoms cause orbital overlap and quantum coupling. Initially identical levels split into closely spaced energies; valence-derived bands broaden and mix. At equilibrium spacing bonding and antibonding branches become distinct.",
+          "Core 1s, 2s and 2p levels remain relatively narrow in this schematic. The actual electronic structure depends on the periodic potential and wave vector k.",
+          "State count scales with N, while bandwidth depends on the coupling between atoms."
         ],
         [
-          "Energy labels in a band diagram",
-          "<strong>E<sub>c</sub></strong> denotes the conduction-band edge, <strong>E<sub>v</sub></strong> the valence-band edge, and <strong>E<sub>0</sub></strong> the vacuum level. <strong>Electron affinity (χ)</strong> is the energy difference between the vacuum level and the conduction-band edge.",
-          "Near 300 K silicon has E<sub>g</sub> ≈ 1.12 eV and χ ≈ 4.05 eV. These are distinct quantities and should not be confused on an energy diagram.",
-          "The vacuum level and the two band edges define different physically meaningful energy differences."
+          "4N full valence and 4N empty conduction states",
+          "In the simplified silicon band model, 3s/3p-derived <strong>8N spin states</strong> separate into a lower group of 4N valence states and an upper group of 4N conduction states.",
+          "Four valence electrons per atom give <strong>4N electrons</strong>, filling the 4N lower states at ideal 0 K; the upper 4N states are empty. The forbidden gap separates the allowed bands.",
+          "The 4N count refers to this simplified valence-derived band grouping, not all higher bands. Defects may produce localized states inside a real gap.",
+          "At ideal 0 K the lower 4N states are full and the upper 4N states are empty."
         ],
         [
-          "Representing bond-model events with bands",
-          "An electron excited from the valence band to the conduction band leaves behind a hole in the lower band. Upon recombination, an electron returns to a lower-energy state and fills the hole.",
-          "The bond-model picture from Lesson 03 can therefore be reinterpreted in terms of energy transitions. This should not equate the chemical bond dissociation energy with the electronic band gap.",
-          "The same electron–hole event is described as local motion in the bond model and as a transition between quantum states in the band model."
+          "Band diagram: E₀, Eᶜ, Eᵛ, χ and Eᵍ",
+          "A conventional edge diagram displays the vacuum level E<sub>0</sub>, conduction minimum E<sub>c</sub> and valence maximum E<sub>v</sub>. In an ideal bulk crystal the gap between E<sub>c</sub> and E<sub>v</sub> has no allowed extended band states.",
+          "<strong>E<sub>g</sub>=E<sub>c</sub>−E<sub>v</sub></strong>, whereas <strong>χ=E<sub>0</sub>−E<sub>c</sub></strong>. Thus E<sub>0</sub>−E<sub>v</sub>=χ+E<sub>g</sub>. Electron affinity is surface-dependent in practice.",
+          "This is an energy-axis edge diagram, not a dispersion E(k) plot; silicon's indirect gap cannot be inferred from these horizontal lines.",
+          "Do not confuse the gap between bands with electron affinity to vacuum."
         ],
         [
-          "Introduction to band curvature and effective mass",
-          "The response of an electron to an applied force inside a crystal differs from that of a free electron in vacuum. <strong>Effective mass</strong> captures the influence of the band structure on this response.",
-          "Near a simple band extremum, effective mass is related to the curvature of the E(k) dispersion. Conductivity and density-of-states effective masses serve different purposes, which are developed in Lesson 05.",
-          "Effective mass is a property of the crystal dispersion, not the literal mass of an atom."
+          "Silicon at 300 K, drawn to scale",
+          "Using common 300 K reference values <strong>E<sub>g</sub>≈1.12 eV</strong> and <strong>χ≈4.05 eV</strong>, and setting E<sub>0</sub>=0, one obtains <strong>E<sub>c</sub>=−4.05 eV</strong> and <strong>E<sub>v</sub>=−5.17 eV</strong>.",
+          "The figure makes the <strong>4.05 eV vacuum-to-conduction</strong> and <strong>1.12 eV conduction-to-valence</strong> distances proportional in height. Therefore E<sub>0</sub>−E<sub>v</sub>=5.17 eV. This difference is not the energy of separating an individual Si–Si bond.",
+          "The gap varies with temperature. Real electron affinity changes with surface orientation, termination and dipoles. Only the displayed reference edge separations, not the full band widths, are drawn to scale.",
+          "With E₀=0, the reference edges are Eᶜ=−4.05 eV and Eᵛ=−5.17 eV."
+        ],
+        [
+          "Bond model ↔ band model: complementary pictures",
+          "The bond model shows localized covalent bonds: exciting an electron leaves an empty valence bond, and neighboring electron transfers offer a useful picture of hole motion.",
+          "In the band model the same pair creation corresponds to an electron occupying a conduction state and a missing electron (hole) in a valence state. Recombination fills that vacancy, without necessarily breaking or restoring a particular isolated chemical bond.",
+          "Band theory and statistical occupations are required to calculate n, p, temperature effects, Fermi levels and effective masses; the local bond drawing alone cannot.",
+          "Local electron/vacancy pictures correspond to occupied/empty quantum states in the band description."
+        ],
+        [
+          "Band curvature, k and effective mass",
+          "An energy-edge diagram gives the positions of band edges, but the full dispersion is <strong>E(k)</strong>. Silicon's conduction minimum and valence maximum occur at different crystal wave vectors, making it an indirect-gap semiconductor.",
+          "Near a parabolic one-dimensional band extremum, <strong>m*=ℏ²/(d²E/dk²)</strong> describes the effect of band curvature on the carrier response to force, not a change to the electron's rest mass.",
+          "Density-of-states and conductivity effective masses represent distinct concepts; these are developed in Lesson 05.",
+          "Scaled edge diagrams cannot replace the k-dependent dispersion or describe effective mass by themselves."
         ]
       ],
-      outcomes: [
-        "I can distinguish energy levels from individual quantum states.",
-        "I can apply Pauli exclusion when describing electronic-state occupancy.",
-        "I can explain how the interaction of N atoms produces energy bands.",
-        "I can locate valence, conduction and forbidden-gap regions on a band diagram.",
-        "I can correctly identify E₀, Eᶜ, Eᵛ, Eᵍ and χ.",
-        "I can represent electron–hole generation and recombination on a band diagram.",
-        "I can qualitatively relate band curvature to effective mass."
+      "outcomes": [
+        "I can explain why the bond model cannot calculate allowed states, minority populations or a Fermi level.",
+        "I can explain allowed quantum states, Pauli exclusion and occupation as three band-model principles.",
+        "I can count occupied and available spin states for one Si atom with 1s²2s²2p⁶3s²3p².",
+        "I can derive 2N/6N states and 2N/2N electrons for 3s and 3p of N Si atoms.",
+        "I can describe level splitting, spreading, mixing and the formation of crystal bands.",
+        "I can explain the 4N occupied valence and 4N empty conduction states at ideal 0 K.",
+        "I can label E₀, Eᶜ, Eᵛ, χ and Eᵍ on a band diagram.",
+        "I can calculate 4.05+1.12=5.17 eV and interpret an appropriately scaled Si edge diagram.",
+        "I can connect electron–hole creation, hole motion and recombination in bond and band models.",
+        "I can distinguish the electronic gap from chemical Si–Si bond dissociation.",
+        "I can explain why E(k) and band curvature matter for effective mass."
       ],
-      future: {
-        grafikler: ["Evolution from atomic levels to bands", "Silicon band diagram with realistic energy scale"],
-        simulasyonlar: ["Interatomic separation and energy-level splitting", "Valence-to-conduction excitation animation"],
-        sorular: ["Pauli exclusion and state counting", "Band-diagram questions using Eᶜ, Eᵛ, Eᵍ and χ"],
-        oyunlar: ["Complete the band diagram", "Compare metals, semiconductors and insulators"]
+      "future": {
+        "grafikler": [
+          "Evolution of isolated atomic states into bands",
+          "Silicon band edges at realistic energy scale"
+        ],
+        "simulasyonlar": [
+          "Separation-dependent orbital overlap and splitting",
+          "Valence-to-conduction electronic excitation"
+        ],
+        "sorular": [
+          "Pauli exclusion, spin state and 4N state counting",
+          "Band-edge equations E₀, Eᶜ, Eᵛ, χ and Eᵍ"
+        ],
+        "oyunlar": [
+          "Complete the band diagram",
+          "Compare the bond picture with the band picture"
+        ]
       }
     },
     "05": {
@@ -383,6 +420,11 @@
       description: translation.description,
       focus: translation.focus,
       topics: source.topics.map((original, index) => {
+        if (source.id === "04") {
+          const [title, ...parts] = translation.topics[index];
+          const key = parts.pop();
+          return { ...original, title, paragraphs: parts, key };
+        }
         const [title, first, second, key, equation] = translation.topics[index];
         // Equations are shared verbatim except for language-specific annotations.
         const translatedEquations = {

@@ -8,14 +8,14 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 - Sağ üstte **TR / EN** dil anahtarı: arayüz, 39 konu anlatımı, 55 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **39 açıklamalı konu başlığı** ve **52 ölçülebilir öğrenme kazanımı**.
+- Beş ders için **39 açıklamalı konu başlığı** ve **54 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
 - URL hash ile doğrudan ders/sekme bağlantısı (ör. `#ders-05/anlatim`).
 - Harici kütüphane, derleme, API veya izleme gerektirmez.
 
-**Güncel durum:** 02–03 için grafikler ve simülasyonlar; **02, 03, 04 için güncel açıklamalı sorular** çalışır. **04 Bant Teorisi için beş etkileşimli grafik ve dört simülasyon** eklenmiştir; 04'ün Oyunlar sekmesi ve 05–06'nın etkinlikleri plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
+**Güncel durum:** 02–06 için çalışan grafikler, simülasyonlar ve açıklamalı sorular vardır. **04 Bant Teorisi için beş grafik ve dört simülasyon; 05 Fermi–DOS için dört grafik ve iki simülasyon; 06 Katkılama için iki grafik ve bir yük-nötrlüğü simülasyonu** eklenmiştir. 05–06 derslerinde 16'şar açıklamalı soru bulunur. Oyunlar sekmesindeki etkinlikler plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
 
 ## Ders haritası
 
@@ -70,13 +70,15 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 
 ## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–04
 
-02 ve 03'ün üç etkinlik sekmesi; 04'ün grafik ve simülasyon sekmeleri çalışır durumdadır (TR/EN).
+02–06 derslerinin Grafikler, Simülasyonlar ve Sorular sekmeleri çalışır durumdadır (TR/EN).
 
 | Ders | Grafikler | Simülasyonlar | Sorular |
 |---|---|---|---|
 | **02 · Kristal ve Denge** | nᵢ–T (Si/Ge/GaAs), Eᵍ–nᵢ duyarlılığı | 3B tetrahedral Si bağlarının izdüşümü, termal denge / dış uyarımlı kararlı durum | 13 soruluk açıklamalı test |
 | **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 25 soruluk açıklamalı test |
 | **04 · Bant Teorisi** | 5 grafik: durum sayımı, N-seviye ayrışması, kuplaj modları, N(E), E(k)/m* | 4 simülasyon: 4N dolu/boş durum, üç osilatör modu, ölçekli Si bantları, altı bant olayı | 22 soruluk açıklamalı test |
+| **05 · Fermi ve DOS** | Bant kenarı DOS, 0/300/600 K Fermi, N(E)f(E), nᵢ–1000/T | 3kT hata deneyi; Nᶜ/Nᵛ ve n/p hesaplayıcı | 16 soruluk açıklamalı test |
+| **06 · Katkılama** | Üç Nᴅ düzeyinde n–1000/T, doğrusal T ve iki taşıyıcı kaynağı | Nᴅ/Nᴀ/T ile kısmi iyonlaşma ve yük nötrlüğü | 16 soruluk açıklamalı test |
 
 ### Bilimsel kapsam ve sınırlamalar
 
@@ -88,7 +90,16 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 - Elektron–hol görseli, **hν≥Eᵍ gerekli enerji koşulunu** test eder. Si dolaylı bant aralıklı olduğundan foton soğurulması için momentum/olası fonon koşulları ayrıca önemlidir. Görsel soğurulma olasılığı iddia etmez.
 - Sorularda doğru **ve yanlış** her seçenek için TR/EN gerekçe bulunur. Yanıtlar `yariiletken-quiz-v1` anahtarında yerel tarayıcıya kaydedilir; dil değişiminde korunur.
 
-Ders **04** için Grafikler, Simülasyonlar ve Sorular çalışır; **05–06** için Grafikler, Simülasyonlar ve Sorular henüz planlanmıştır. Oyunlar henüz geliştirilmemiştir.
+Ders **02–06** için Grafikler, Simülasyonlar ve Sorular çalışır. Oyunlar sekmesindeki etkinlikler henüz geliştirilmemiştir.
+
+### Ders 05–06: Slaytların kapsanması ve model sınırları
+
+- Kaynaklar: **lec05.pdf (18 sayfa)** ve **lec06(1).pdf (14 sayfa)**. Her iki derste konu sırası ve TR/EN eşlemesi korunarak ayrıntılı açıklamalar ve konu içine yerleştirilmiş grafikler eklendi.
+- 05: N(E)dE ve birimler; kova benzetmesi; bant kenarında karekök DOS; f(E,T), 3kT/%5 sınırı; N(E)f(E) integrandı ve kT/2 tepe noktası; Nᶜ/Nᵛ ∝T³ᐟ², n·p=nᵢ² ve öz Fermi seviyesi. 300 K Si nᵢ grafiği **9,65×10⁹ cm⁻³** ölçüm referansıyla ölçeklenir; farklı eski tablo değerleri karıştırılmaz.
+- 06: Poisson katkı dağılımı (N±√N), 46 nm seyreltik örneği, donör/akseptör yükleri, hidrojen-benzeri enerji, telafi, n+Nᴀ⁻=p+Nᴅ⁺, düşük/orta/yüksek T rejimleri ve üç Nᴅ seviyesindeki eğriler.
+- Katkı simülasyonu **non-degenerate parabolik bant**, sabit Si Eᵍ=1,12 eV, Nᶜ/Nᵛ∝T³ᐟ² ve izole sığ katkı kabul eder. Donör/akseptör işgal çarpanları öğretici olarak gᴅ=2/gᴀ=4 seçilmiştir. Yük nötrlüğü sayısal kök aramayla çözülür, n·p=nᵢ² korunur. Ağır katkı, gerçek bant daralması, mobilite ve kesin geçiş sıcaklıkları iddia edilmez.
+- **Not:** Slaytlardaki '1,1 eV ile Si–Si bağını koparmak' ifadesi elektronik bant aralığı ile kimyasal bağ koparma enerjisini eşitlemek için kullanılmadı.
+- Yeni doğrulama: `node --test tests/lecture05-06-slides.test.mjs` ve tüm testler için `node --test tests/*.test.mjs`.
 
 ### Tests
 

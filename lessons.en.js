@@ -176,43 +176,50 @@
           "The three principles of the band model",
           "<strong>1. Allowed energy states:</strong> Quantum mechanics determines which electron energies are allowed; an ideal bulk crystal has no band states inside a forbidden gap. <strong>2. Density of states g(E):</strong> The number of available one-electron states per unit volume and energy (cm⁻³ eV⁻¹), whether occupied or not.",
           "<strong>3. Occupation probability f(E):</strong> At thermal equilibrium, the Fermi–Dirac distribution specifies how likely each allowed electronic state is occupied. Conduction electron density follows <strong>n = ∫<sub>Eᶜ</sub>∞ gᶜ(E)f(E)dE</strong>; the valence-hole density follows <strong>p = ∫<sub>−∞</sub><sup>Eᵛ</sup> gᵛ(E)[1−f(E)]dE</strong>. These principles motivate the later DOS/Fermi–Dirac lesson.",
-          "Allowed states, number of states, and occupied fraction are three different questions."
+          "Allowed states, number of states, and occupied fraction are three different questions.",
+          "Allowed states · g(E) = states / (volume · energy) · f(E) = occupation probability"
         ],
         [
           "One isolated silicon atom: levels and occupied states",
           "An isolated Si atom has <strong>1s² 2s² 2p⁶ 3s² 3p²</strong> (14 electrons). Counting spin, each s subshell has <strong>2</strong> one-electron states; each p subshell has <strong>6</strong>. Hence 1s: 2/2, 2s: 2/2, 2p: 6/6, 3s: 2/2, and 3p: <strong>2/6 occupied</strong>.",
           "Each circle in the figure represents one spin-resolved state: × is occupied and an open circle is unoccupied. Six 3p states do not mean six different energies. Spacings are schematic, and the spin/orbital arrangement of the two 3p electrons is additionally constrained by Hund's rules.",
-          "Si has 14 electrons, including four valence electrons in eight possible 3s/3p spin states."
+          "Si has 14 electrons, including four valence electrons in eight possible 3s/3p spin states.",
+          "Si (Z = 14): 1s² 2s² 2p⁶ 3s² 3p² &nbsp;·&nbsp; 3s: 2/2 &nbsp;·&nbsp; 3p: 2/6"
         ],
         [
           "When N Si atoms approach: splitting into bands",
           "For N separated Si atoms, 3s supplies <strong>2N</strong> and 3p supplies <strong>6N</strong> spin-resolved states: a total of <strong>8N</strong> valence states for <strong>4N</strong> valence electrons. As atoms approach, interacting wavefunctions split, spread and may merge into closely spaced allowed energies.",
           "In the lecture's schematic crystal model, the 8N states separate into a <strong>4N-state filled valence band</strong> and a <strong>4N-state conduction band empty at ideal 0 K</strong>. The deeper 1s, 2s and 2p core levels stay relatively narrow owing to shielding. Crystal spacing is chosen by the minimum of total energy; this picture is not a numerically computed Si E(k) dispersion.",
-          "N atoms supply 8N valence states and 4N valence electrons, filling a 4N-state lower band at ideal 0 K."
+          "N atoms supply 8N valence states and 4N valence electrons, filling a 4N-state lower band at ideal 0 K.",
+          "3s: 2N + 3p: 6N = 8N states &nbsp;·&nbsp; 4N e⁻ &nbsp;→&nbsp; valence 4N (filled) + conduction 4N (empty at ideal 0 K)"
         ],
         [
           "Reading the band diagram: vacuum, conduction and valence",
           "The vertical axis represents <strong>electron energy</strong>. <strong>E₀</strong> is the vacuum reference, <strong>Eᶜ</strong> the conduction-band minimum and <strong>Eᵛ</strong> the valence-band maximum. <strong>E₉ = Eᶜ − Eᵛ</strong> is the band gap, while <strong>χ = E₀ − Eᶜ</strong> is the electron affinity. These are different energy separations.",
           "For ideal intrinsic Si at 0 K, valence-band states are filled and conduction-band states are empty. At nonzero T, electrons can populate conduction states while holes remain in valence states. The <strong>Fermi level</strong> controls occupancy and is neither the vacuum reference nor a band edge.",
-          "E₀, Eᶜ and Eᵛ are energy references; E₉ and χ are two distinct energy differences."
+          "E₀, Eᶜ and Eᵛ are energy references; E₉ and χ are two distinct energy differences.",
+          "E₉ = Eᶜ − Eᵛ &nbsp;·&nbsp; χ = E₀ − Eᶜ"
         ],
         [
           "Silicon, drawn to an electron-energy scale",
           "Using common illustrative Si values near <strong>300 K</strong>, choose <strong>χ ≈ 4.05 eV</strong> and <strong>E₉ ≈ 1.12 eV</strong>. Setting vacuum energy <strong>E₀ = 0 eV</strong> yields <strong>Eᶜ = −4.05 eV</strong> and <strong>Eᵛ = −5.17 eV</strong>. The 4.05-eV vacuum-to-conduction interval must therefore appear about <strong>3.62 times longer</strong> than the 1.12-eV gap on a properly scaled electron-energy axis.",
           "These are educational reference values, not universal for all silicon surfaces. <strong>Electron affinity χ</strong> may vary with surface orientation, termination and dipoles. The <strong>work function Φ = E₀ − Eᶠ</strong> instead depends on the Fermi level and is not synonymous with χ.",
-          "At 300 K, χ≈4.05 eV and E₉≈1.12 eV imply Eᶜ≈−4.05 eV and Eᵛ≈−5.17 eV relative to vacuum."
+          "At 300 K, χ≈4.05 eV and E₉≈1.12 eV imply Eᶜ≈−4.05 eV and Eᵛ≈−5.17 eV relative to vacuum.",
+          "E₀ = 0 eV &nbsp;·&nbsp; Eᶜ = −4.05 eV &nbsp;·&nbsp; Eᵛ = −5.17 eV &nbsp;·&nbsp; E₉ = 1.12 eV"
         ],
         [
           "Bond model ↔ band model: two descriptions of one process",
           "<strong>Bond view:</strong> Each Si has four covalent nearest-neighbor links; N atoms yield approximately <strong>2N distinct bonds</strong> shared among atoms, holding <strong>4N valence electrons</strong>. Exciting an electron produces a local vacancy; another valence electron filling it makes a hole appear to move.",
           "<strong>Band view:</strong> The same 4N electrons fill valence-band states at ideal 0 K. An allowed excitation creates a <strong>conduction electron (−)</strong> and a <strong>valence hole (+)</strong>; recombination fills the empty valence state. Bonds are a useful local cartoon, while actual extended-crystal carriers can be expressed as Bloch states. <strong>The gap is not the energy required to chemically break one Si–Si bond.</strong>",
-          "An empty bond and a valence-band hole describe the same carrier using different approximations."
+          "An empty bond and a valence-band hole describe the same carrier using different approximations.",
+          "2N bonds × 2 e⁻/bond = 4N valence e⁻ &nbsp;↔&nbsp; 4N occupied valence states"
         ],
         [
           "Band curvature and effective mass",
           "The crystal electronic energy depends on the wavevector k. <strong>Band curvature E(k)</strong> determines a carrier's response to external force, allowing a solid-state electron to accelerate differently from a free electron.",
           "For a simple 1D parabolic extremum, <strong>m* = ℏ²/(d²E/dk²)</strong>. Real Si has anisotropic conduction valleys and multiband valence states; conductivity mass, density-of-states mass and a simple one-band approximation cannot always be interchanged.",
-          "Effective mass describes a band-dispersion response, not a change in an electron's rest mass."
+          "Effective mass describes a band-dispersion response, not a change in an electron's rest mass.",
+          "m* = ℏ² / (d²E/dk²) &nbsp;—&nbsp; parabolic band, 1D approximation"
         ]
       ],
       "outcomes": [

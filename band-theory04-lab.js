@@ -11,6 +11,11 @@ const L={
   n:"Atom sayısı N",r:"Kuplaj kᶜ/k",W:"Valans bant genişliği W",nAtom:"Atom yoğunluğu (×10²² cm⁻³)",
   t:"Atlama enerjisi t",a:"Örgü aralığı a",ka:"Seçili ka",chi:"Elektron ilgisi χ",Eg:"Bant aralığı Eᵍ",
   pairs:"Elektron–hol çifti",energy:"Verilen enerji ΔE",mode:"Olay türü",
+  G5:"N atom yaklaşırken enerji düzeylerinin ayrışması",G5d:"N eşdeğer atomik durumun, kuplaj t arttıkça N farklı izinli enerjiye nasıl ayrıldığını incele.",
+  limit5:"N adet tek-orbitali açık uçlu 1B sıkı-bağ zinciri: εⱼ=−2t cos(jπ/(N+1)). t=0'da N dejenere durum, t>0'da N ayrık seviye vardır. Bu elektronik öğretim modeli, Si'nin gerçek 3s/3p karışımı veya 3B bant hesabı değildir.",
+  S4:"Üç bağlı kütlenin normal modları",S4d:"Üç kütlenin birlikte, orta kütle sabit ve ters fazlı hareketlerini mod ve faz sürgüsüyle incele.",
+  modeSelect:"Normal mod",phase:"Salınım fazı",modeNames:["Birlikte","Orta kütle durur","Orta kütle ters fazda"],
+  limitS4:"Üç m kütlesi yere k yaylarıyla, komşularına kᶜ yaylarıyla bağlıdır. Faz görseli normal modların özvektörlerini gösterir. ω₀=√(k/m), ω₁=√((k+kᶜ)/m), ω₂=√((k+3kᶜ)/m). Gerçek örgü fononları veya bant yapısı hesaplanmaz.",
   G1:"Atom sayısı ve izinli spin durumları",G1d:"1s–3p durumları ile 4N değerlik elektronunun N ile nasıl ölçeklendiğini gör.",
   G2:"Üç ve yirmi bağlı osilatörün frekansları",G2d:"Kuplaj, frekans bandının genişliğini; atom sayısı seviyelerin sıklığını değiştirir.",
   G3:"Valans bandında N(E) ve toplam durum sayısı",G3d:"Bant genişliği değişirken DOS eğrisinin alanını ve yüksekliğini karşılaştır.",
@@ -39,6 +44,11 @@ const L={
   n:"Number of atoms N",r:"Coupling kᶜ/k",W:"Valence-band width W",nAtom:"Atomic density (×10²² cm⁻³)",
   t:"Hopping energy t",a:"Lattice spacing a",ka:"Selected ka",chi:"Electron affinity χ",Eg:"Band gap Eᵍ",
   pairs:"Electron–hole pairs",energy:"Supplied energy ΔE",mode:"Process",
+  G5:"How N atomic levels split as atoms interact",G5d:"See N degenerate atomic states separate into N allowed energies as electronic coupling t increases.",
+  limit5:"Open-end nearest-neighbor 1D chain with one orbital per site: εⱼ=−2t cos(jπ/(N+1)). At t=0, N states share one energy; for t>0 they split into N levels. This teaching model is not the real 3s/3p hybridization or 3D silicon band structure.",
+  S4:"Normal modes of three coupled masses",S4d:"Change the mode and phase to inspect in-phase, stationary-center and out-of-phase patterns.",
+  modeSelect:"Normal mode",phase:"Oscillation phase",modeNames:["In phase","Middle mass stationary","Middle mass opposite"],
+  limitS4:"Three equal masses m have grounding springs k and neighbor coupling springs kᶜ. The plot shows mode eigenvectors: ω₀=√(k/m), ω₁=√((k+kᶜ)/m), ω₂=√((k+3kᶜ)/m). This is a mechanical analogy, not a measured silicon phonon or band structure.",
   G1:"Atom count and available spin states",G1d:"Study how 1s–3p state counts and 4N valence electrons scale with N.",
   G2:"Frequency modes of three and twenty coupled oscillators",G2d:"Coupling controls the frequency spread; system size controls mode density.",
   G3:"Valence N(E) and its integrated state count",G3d:"Change band width and compare the DOS peak to its conserved integrated area.",
@@ -66,6 +76,7 @@ const esc=e,escH=e;
 const stat=(name,value)=>'<div class="b04lab-stat"><span>'+esc(name)+'</span><strong>'+esc(value)+'</strong></div>';
 const specs=[
  {key:"counts",title:"G1",desc:"G1d",topic:"3–5",note:"limit1",def:{N:5},control:[["N","n",1,20,1]]},
+ {key:"splitting",title:"G5",desc:"G5d",topic:"4",note:"limit5",def:{N:8,t:.5},control:[["N","n",2,20,1],["t","t",0,1.2,.05]]},
  {key:"modes",title:"G2",desc:"G2d",topic:"4",note:"limit2",def:{r:.8},control:[["r","r",0,2,.05]]},
  {key:"dos",title:"G3",desc:"G3d",topic:"6, 9",note:"limit3",def:{W:12,nAtom:5},control:[["W","W",8,16,.5],["nAtom","nAtom",4,6,.1]]},
  {key:"dispersion",title:"G4",desc:"G4d",topic:"9",note:"limit4",def:{t:.8,a:.54,ka:0},control:[["t","t",.2,1.2,.05],["a","a",.3,.6,.01],["ka","ka",-3.14,3.14,.157]]}
@@ -118,7 +129,9 @@ function graphCard(meta,lang,i){
  const update=()=>{
   const c=M.graph(meta.key,p,lang);
   node.querySelector("[data-plot]").innerHTML=plot(c,q[meta.title]);
-  node.querySelector("[data-legend]").innerHTML=meta.key==="modes"
+  node.querySelector("[data-legend]").innerHTML=meta.key==="splitting"
+   ?"<span>N="+p.N+" · "+(lang==="en"?"allowed levels":"izinli seviye")+"</span>"
+   :meta.key==="modes"
    ?'<span class="ghost">N=20 (20)</span><span>N=3 (3)</span>'
    :c.curves.map((v,i)=>'<span class="line-'+i%5+'">'+esc(v.label)+'</span>').join("");
   node.querySelector("[data-stats]").innerHTML=c.info.map(([a,b])=>stat(a,b)).join("");

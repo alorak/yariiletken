@@ -206,88 +206,135 @@ window.COURSE_LESSONS = [
     }
   },
   {
-    id: "04",
-    navTitle: "Bant Teorisi",
-    title: "Kuantum Durumları ve Enerji Bant Teorisi",
-    kicker: "Atomdan katıya",
-    description: "Tek bir Si atomunun ayrık enerji seviyelerinden, kristaldeki valans ve iletim bantlarına geç. Bant diyagramını doğru okuyabilmek için gerekli kuantum dilini oluştur.",
-    focus: "Bantları çiz",
-    topics: [
+    "id": "04",
+    "navTitle": "Bant Teorisi",
+    "title": "Kuantum Durumları ve Enerji Bant Teorisi",
+    "kicker": "Atomdan katıya",
+    "description": "Bağ modelinin sınırlarını, üç bant ilkesiyle nicel fiziğe geçişi, Si atomundan N atomlu kristale bantların oluşumunu ve vakuma göre ölçekli bant diyagramlarını öğren.",
+    "focus": "Bantları çiz",
+    "topics": [
       {
-        title: "İzinli kuantum durumları ve Pauli ilkesi",
-        paragraphs: [
-          "Yalıtılmış atomdaki elektronlar rastgele enerjiye değil, izinli kuantum durumlarına yerleşir. Pauli dışarlama ilkesi iki özdeş elektronun <strong>aynı kuantum durumunda</strong> olamayacağını söyler; aynı enerjiye sahip fakat farklı kuantum durumları bulunabilir.",
-          "Bu yüzden <strong>enerji seviyesi</strong> ile <strong>kuantum durumu</strong> aynı şey değildir. Bir seviyenin çok sayıda durumu barındırabilmesi, bant teorisinde taşıyıcı sayımı için kritiktir."
+        "title": "Bağ modeli neden tek başına yeterli değil?",
+        "paragraphs": [
+          "Bağ modeli, Si atomlarının dört kovalent bağı, uyarılmayla elektron–hol çiftinin oluşmasını ve holü bir <em>boş bağ</em> gibi izlemeyi sezgisel olarak açıklar. Ancak tek bir bağ resmi, bir kristalde elektronun <strong>hangi enerjilerde bulunabileceğini</strong>, her enerjide <strong>kaç durum</strong> olduğunu ve bu durumların <strong>ne kadar dolduğunu</strong> söylemez. Bu yüzden nᵢ, sıcaklık bağımlılığı, taşıyıcı sayısı ve iletkenliği tek başına güvenilir şekilde hesaplayamaz.",
+          "Bant modeli, bağ modelini yanlışlamaz: aynı elektronları atomların birleşmesinden doğan <strong>kristal kuantum durumları</strong> üzerinden ele alır. Yerel bağ/boşluk resmi günlük sezgi için; enerji bantları, durum yoğunluğu ve doluluk olasılığı ise nicel hesaplar için kullanılır. Silisyumdaki 1,12 eV <strong>elektronik bant aralığıdır</strong>; tek bir Si–Si bağının kimyasal kopma enerjisi değildir."
         ],
-        key: "Pauli ilkesi aynı enerjiyi değil, aynı kuantum durumunu paylaşmayı yasaklar."
+        "key": "Bağ modeli taşıyıcının nasıl düşünüleceğini, bant modeli hangi enerjilerde kaç taşıyıcı bulunabileceğini açıklar.",
+        "visual04": [
+          "why"
+        ]
       },
       {
-        title: "Tek Si atomundan N atoma",
-        paragraphs: [
-          "Bir Si atomunun değerlik elektronları 3s²3p² konfigürasyonundadır. Çok sayıda birbirinden uzak Si atomu düşünülürse her atomda benzer enerji seviyeleri vardır; toplam durum ve elektron sayısı N ile ölçeklenir.",
-          "Atomlar birbirine yaklaşınca elektronik durumlar etkileşir. Başlangıçtaki ayrık enerjiler birbirine çok yakın pek çok enerjiye ayrılır; makroskopik kristalde bu sık seviyeler <strong>bant</strong> olarak görünür."
+        "title": "Bant modelinin üç temel ilkesi",
+        "paragraphs": [
+          "<strong>1. İzinli enerji durumları:</strong> Atom veya kristalde elektronlar yalnızca kuantum mekaniğinin izin verdiği durumlara yerleşir; bant aralığında ideal hacimsel kristalin izinli bant durumu bulunmaz. <strong>2. Durum yoğunluğu g(E):</strong> Belirli bir enerji aralığında kaç elektron durumu bulunduğunu söyler (cm⁻³ eV⁻¹); <em>durum sayısını</em> verir, dolu sayısını değil.",
+          "<strong>3. Doluluk oranı f(E):</strong> Termal dengede her izinli elektron durumunun dolu olma olasılığı Fermi–Dirac fonksiyonu ile belirlenir. Dolayısıyla elektron yoğunluğu <strong>n = ∫<sub>Eᶜ</sub>∞ gᶜ(E) f(E) dE</strong>; hol yoğunluğu ise valans bandındaki <strong>boş</strong> durumlar üzerinden <strong>p = ∫<sub>−∞</sub><sup>Eᵛ</sup> gᵛ(E)[1−f(E)] dE</strong> olarak elde edilir. Bu üç ilke sonraki dersin DOS ve Fermi–Dirac hesaplarının temelidir."
         ],
-        equation: "N atom → çok sayıda yakın enerji durumu → bant",
-        key: "Bant oluşumu, atomların birbirleriyle kuantum mekaniksel etkileşiminden kaynaklanır."
+        "equation": "İzinli durumlar · g(E) = durum sayısı / (hacim · enerji) · f(E) = dolu olma olasılığı",
+        "key": "Bant modeli üç ayrı soruyu cevaplar: hangi enerjiler izinli, kaç durum var ve bunların ne kadarı dolu?",
+        "visual04": [
+          "principles"
+        ]
       },
       {
-        title: "Bantlar neden ayrışır?",
-        paragraphs: [
-          "Atomlar arası etkileşim arttığında aynı başlangıç enerjisinden gelen durumlar farklı enerjilere yayılır. Bağlı osilatörlerin normal modlara ayrılması, bu olayı anlamak için yararlı bir mekanik analojidir.",
-          "Atom sayısı arttıkça seviyeler daha sıklaşır; bant genişliğini yalnızca atom sayısı değil, atomlar arası etkileşimin niteliği ve kristal yapısı belirler."
+        "title": "Tek bir Si atomu: tüm enerji seviyeleri ve doluluk",
+        "paragraphs": [
+          "Yalıtılmış silisyum atomunun elektron dizilimi <strong>1s² 2s² 2p⁶ 3s² 3p²</strong> olup toplam 14 elektrondur. Spin dâhil bir s alt kabuğunda <strong>2</strong>, p alt kabuğunda <strong>6</strong> tek-elektron kuantum durumu vardır. Böylece 1s: 2/2, 2s: 2/2, 2p: 6/6, 3s: 2/2 ve 3p: <strong>2/6</strong> doludur; 3p'de dört durum boştur.",
+          "Şemadaki <strong>her çember tek bir spin durumu</strong> temsil eder; × dolu, boş çember kullanılabilir ama dolu olmayan durumu gösterir. Aynı 3p enerjisinde altı spin durumu bulunması, altı ayrı enerji değeri olduğu anlamına gelmez. Çemberlerin yerleşimi gerçek enerji aralıklarına göre ölçekli değildir; 3p² dağılımının ayrıntılı orbital/spin eşleşmesi için Hund kuralları ayrıca dikkate alınır."
         ],
-        key: "Bant genişliği ile tekil enerji seviyelerinin sıklaşması aynı etki değildir."
+        "equation": "Si (Z = 14) : 1s² 2s² 2p⁶ 3s² 3p² &nbsp;·&nbsp; 3s: 2/2 &nbsp;·&nbsp; 3p: 2/6",
+        "key": "Si atomunda 14 elektron vardır; değerlikte 3s ve 3p toplam 8 spin durumu, 4 elektron taşır.",
+        "visual04": [
+          "atom"
+        ]
       },
       {
-        title: "Valans bandı, iletim bandı ve yasak aralık",
-        paragraphs: [
-          "Silisyumda 0 K için ideal basit bant resmi, dolu bir <strong>valans bandı</strong> ve boş bir <strong>iletim bandı</strong> gösterir. Aralarında izinli bant durumlarının bulunmadığı enerji aralığına <strong>yasak enerji aralığı</strong> veya bant aralığı denir.",
-          "Metalde kısmen dolu bantlar veya bant örtüşmeleri bulunabilir. Yarıiletken ve yalıtkan ayrımında bant aralığının büyüklüğü ve termal olarak uyarılabilen taşıyıcılar önemlidir."
+        "title": "N Si atomu yaklaşınca enerji bantları nasıl oluşur?",
+        "paragraphs": [
+          "Birbirinden uzak N Si atomu için 3s alt kabuğundan <strong>2N</strong>, 3p'den <strong>6N</strong> spin dâhil durum; toplam <strong>8N</strong> değerlik durumu ve <strong>4N</strong> değerlik elektronu bulunur. Atomlar yaklaşıp dalga fonksiyonları etkileştiğinde başlangıçtaki ayrık seviyeler ayrışır, genişler ve bazı enerji aralıklarında birleşir. Makroskopik N için aralıkları çok küçük olan bu durumlar bant görünümü verir.",
+          "Slaytın şematik Si modelinde 3s/3p kökenli <strong>8N durum</strong> kristal denge uzaklığına yakın iki gruba ayrılır: <strong>4N durumlu dolu valans bandı</strong> ve ideal <strong>0 K'de 4N durumlu boş iletim bandı</strong>. Çekirdek seviyeleri 1s, 2s, 2p daha yerel kaldıklarından çok daha az genişler. Kararlı atom aralığı toplam kristal enerjisinin minimumuyla belirlenir; çizilen bant sınırları, gerçek malzemenin E(k) hesabının yerine geçmez."
         ],
-        equation: "E<sub>g</sub> = E<sub>c</sub> − E<sub>v</sub>",
-        key: "Bant aralığı, iletim bandı alt kenarı ile valans bandı üst kenarı arasındaki enerji farkıdır."
+        "equation": "3s: 2N + 3p: 6N = 8N durum &nbsp;·&nbsp; 4N e⁻ &nbsp;→&nbsp; valans 4N (dolu) + iletim 4N (boş, ideal 0 K)",
+        "key": "N atom için durum sayısı N ile ölçeklenir; 4N elektron, ideal 0 K'de 4N valans durumunu doldurur.",
+        "visual04": [
+          "split"
+        ]
       },
       {
-        title: "Bant diyagramındaki enerji işaretleri",
-        paragraphs: [
-          "<strong>E<sub>c</sub></strong> iletim bandı altını, <strong>E<sub>v</sub></strong> valans bandı üstünü, <strong>E<sub>0</sub></strong> vakum seviyesini temsil eder. <strong>Elektron ilgisi (χ)</strong>, vakum seviyesi ile iletim bandı kenarı arasındaki enerji farkıdır.",
-          "Silisyum için 300 K civarında E<sub>g</sub> yaklaşık 1,12 eV ve χ yaklaşık 4,05 eV alınabilir. E<sub>g</sub> ile χ farklı fiziksel niceliklerdir; enerji ekseninde yerlerini karıştırmamak gerekir."
+        "title": "Bant diyagramını okumak: vakum, valans ve iletim",
+        "paragraphs": [
+          "Bant diyagramında dikey yön <strong>elektron enerjisidir</strong>. <strong>E₀</strong> vakum referansı, <strong>Eᶜ</strong> iletim bandı minimumu ve <strong>Eᵛ</strong> valans bandı maksimumudur. <strong>E₉ = Eᶜ − Eᵛ</strong> yasak enerji aralığıdır; <strong>χ = E₀ − Eᶜ</strong> elektron ilgisidir. χ, band gap değildir. Şeklin sol tarafı izinli bantların ve derin 1s/2s/2p durumlarının yerini, sağ tarafı standart enerji referansını anlatır.",
+          "0 K'deki öz ve ideal Si modelinde valans bandındaki bütün elektron durumları dolu, iletim bandındakiler boş kabul edilir. Sonlu sıcaklıkta iletim bandında elektronlar ve valans bandında holler oluşabilir. <strong>Fermi seviyesi</strong> bir doluluk parametresidir; bant sınırı veya vakum seviyesiyle aynı kavram değildir."
         ],
-        equation: "E<sub>g</sub> = E<sub>c</sub> − E<sub>v</sub> &nbsp;·&nbsp; χ = E<sub>0</sub> − E<sub>c</sub>",
-        key: "Vakum seviyesi, iletim bandı ve valans bandı arasındaki farkların her birinin ayrı anlamı vardır."
+        "equation": "E₉ = Eᶜ − Eᵛ &nbsp;·&nbsp; χ = E₀ − Eᶜ",
+        "key": "E₀, Eᶜ ve Eᵛ enerji referanslarıdır; E₉ ve χ ise birbirinden farklı iki enerji farkıdır.",
+        "visual04": [
+          "bands"
+        ]
       },
       {
-        title: "Bağ modeli olaylarını bantlarda gösterme",
-        paragraphs: [
-          "Bir elektron valans bandından iletim bandına uyarıldığında üst bantta elektron, alt bantta hol oluşur. Yeniden birleşmede elektron daha düşük enerjiye döner ve holü doldurur.",
-          "Böylece 03. dersteki bağ modeli, bant diyagramında enerji değişimi olarak yeniden okunabilir. Bu anlatım kimyasal bağ kırılmasını doğrudan bant aralığıyla özdeşleştirmeden yapılmalıdır."
+        "title": "Silisyumu gerçek enerji ölçeğinde çizmek",
+        "paragraphs": [
+          "Yaklaşık <strong>300 K</strong> ve yaygın kullanılan Si değerleriyle <strong>χ ≈ 4,05 eV</strong>, <strong>E₉ ≈ 1,12 eV</strong> alınır. Vakum enerjisine <strong>E₀ = 0 eV</strong> dersek <strong>Eᶜ = −4,05 eV</strong> ve <strong>Eᵛ = −5,17 eV</strong> çıkar. Dolayısıyla grafikte 4,05 eV'luk vakum–iletim arası uzaklık, 1,12 eV'luk bant aralığından yaklaşık <strong>3,62 kat</strong> uzun gösterilmelidir; bu diyagram enerjinin düşey ekseninde ölçeklidir.",
+          "Bu değerler örnek ders parametreleridir: özellikle <strong>elektron ilgisi χ</strong> yüzey yönelimi, sonlandırma ve yüzey dipollerinden etkilenebilir; her Si yüzeyi için evrensel sabit gibi kullanılmamalıdır. Mutlak bant kenarları seçilen vakum referansına göre verilir. Elektron ilgisi χ ile <strong>iş fonksiyonu Φ = E₀ − Eᶠ</strong> aynı şey değildir; Φ, Fermi seviyesine ve koşullara da bağlıdır."
         ],
-        key: "Aynı elektron–hol olayı, bağ modelinde yerel hareket; bant modelinde kuantum durumları arası geçiştir."
+        "equation": "E₀ = 0 eV &nbsp;·&nbsp; Eᶜ = −4,05 eV &nbsp;·&nbsp; Eᵛ = −5,17 eV &nbsp;·&nbsp; E₉ = 1,12 eV",
+        "key": "E₉ = 1,12 eV, χ = 4,05 eV: ölçekli bir Si diyagramında 4,05 eV'luk bölüm 1,12 eV'den çok daha uzundur.",
+        "visual04": [
+          "scale"
+        ]
       },
       {
-        title: "Bant eğriliği ve etkin kütleye giriş",
-        paragraphs: [
-          "Elektronun kristal içindeki dış kuvvete verdiği tepki, boşluktaki serbest elektronla aynı değildir. <strong>Etkin kütle</strong>, bant yapısının bu tepkiye etkisini pratik biçimde ifade eder.",
-          "Basit bir bant ekstremumu yakınında etkin kütle, E(k) eğriliğiyle bağlantılıdır. İletkenlik etkin kütlesi ile durum yoğunluğu etkin kütlesi aynı amaçla kullanılmaz; sayısal hesaplarda bu ayrım 05. derste açılır."
+        "title": "Bağ modeli ↔ bant modeli: aynı olayın iki anlatımı",
+        "paragraphs": [
+          "<strong>Bağ modeli:</strong> Her Si atomu dört komşusuyla kovalent bağ kurar; N atom için ortak sayımda yaklaşık <strong>2N bağ</strong> ve bunları dolduran <strong>4N değerlik elektronu</strong> vardır. Bir elektron daha yüksek enerjili hareketli duruma uyarılınca yerel resimde <em>boş bağ</em> (hol) kalır. Komşu değerlik elektronlarının boşluğu doldurması holün ilerlemesi gibi gözükür.",
+          "<strong>Bant modeli:</strong> 4N elektron dolu valans bant durumlarından uygun bir uyarılmayla iletim bandındaki boş duruma geçebilir. Son durumda <strong>iletim elektronu (−)</strong> ve <strong>valans holü (+)</strong> oluşur; yeniden birleşmede elektron boş valans durumunu doldurur. Yerel bağ resmi yaklaşık bir sezgi sağlar; gerçek kristalde elektron ve hol Bloch durumlarıyla tanımlanabilir. <strong>E₉, tek Si–Si kimyasal bağını kırma enerjisi olarak alınmaz.</strong>"
         ],
-        equation: "m* ≈ ℏ² / (d²E/dk²)  (tek boyutlu, parabolik bant)",
-        key: "Etkin kütle atomun gerçek kütlesi değil, kristaldeki enerji-momentum ilişkisine ait bir parametredir."
+        "equation": "2N bağ × 2 e⁻/bağ = 4N valans e⁻ &nbsp;↔&nbsp; 4N dolu valans durumu",
+        "key": "Bağdaki eksik elektron ile valans bandındaki hol aynı taşıyıcıyı iki farklı düzeyde tarif eder; band gap kimyasal bağ enerjisi değildir.",
+        "visual04": [
+          "bond-band"
+        ]
+      },
+      {
+        "title": "Bant eğriliği ve etkin kütleye giriş",
+        "paragraphs": [
+          "Bantlar yalnız hangi enerjilerin izinli olduğunu değil, elektron enerjisinin kristal momentumu k ile nasıl değiştiğini de belirtir. <strong>E(k) eğriliği</strong>, taşıyıcının uygulanan kuvvete verdiği tepkiyi belirleyen etkin kütleyle ilişkilidir; bu nedenle kristaldeki taşıyıcı bir serbest elektronla aynı ivmeyi göstermek zorunda değildir.",
+          "Basit tek boyutlu parabolik bant kenarı için <strong>m* = ℏ²/(d²E/dk²)</strong> kullanılır. Gerçek Si'nin iletim vadileri yön bağımlıdır; valans bantları da çok bantlıdır. Dolayısıyla iletkenlik etkin kütlesi, durum yoğunluğu etkin kütlesi ve yalın tek-bant yaklaşımı birbirinin yerine kullanılamaz."
+        ],
+        "equation": "m* = ℏ² / (d²E/dk²) &nbsp;—&nbsp; parabolik bant, tek boyutlu yaklaşım",
+        "key": "Bant eğriliği, kuvvete karşı dinamik tepkiyi açıklar; etkin kütle elektronun gerçek durgun kütlesi değildir."
       }
     ],
-    outcomes: [
+    "outcomes": [
       "Enerji seviyesi ile kuantum durumunun farkını açıklarım.",
       "Pauli ilkesini enerji durumlarının doluluğuna uygularım.",
       "N atomun etkileşmesiyle bant oluşumunu açıklarım.",
       "Valans, iletim ve yasak bant aralığını diyagramda gösteririm.",
       "E₀, Eᶜ, Eᵛ, Eᵍ ve χ terimlerini doğru eşleştiririm.",
       "Elektron–hol üretimi ve birleşmesini bant diyagramında açıklarım.",
-      "Bant eğriliği ile etkin kütle arasındaki ilişkiyi nitel olarak yorumlarım."
+      "Bant eğriliği ile etkin kütle arasındaki ilişkiyi nitel olarak yorumlarım.",
+      "Bağ modelinin üç nicel eksikliğini ve bant modeline neden geçildiğini açıklarım.",
+      "Bant modelinin üç ilkesini (izinli durum, DOS, doluluk) ve ilgili integralleri ayırırım.",
+      "Si için 3s/3p ve N atom durum sayılarını; vakuma göre ölçekli Eᶜ, Eᵛ değerlerini hesaplarım."
     ],
-    future: {
-      grafikler: ["Atomik seviyelerden bant oluşumuna geçiş", "Gerçek ölçekle Si enerji bant diyagramı"],
-      simulasyonlar: ["Atomlar arası mesafe ve bant ayrışması", "Valans–iletim bandı uyarılma animasyonu"],
-      sorular: ["Pauli ilkesi ve durum sayımı", "Eᶜ, Eᵛ, Eᵍ, χ diyagram soruları"],
-      oyunlar: ["Bant diyagramını tamamla", "Metal–yarıiletken–yalıtkan karşılaştırması"]
+    "future": {
+      "grafikler": [
+        "Atomik seviyelerden bant oluşumuna geçiş",
+        "Gerçek ölçekle Si enerji bant diyagramı"
+      ],
+      "simulasyonlar": [
+        "Atomlar arası mesafe ve bant ayrışması",
+        "Valans–iletim bandı uyarılma animasyonu"
+      ],
+      "sorular": [
+        "Pauli ilkesi ve durum sayımı",
+        "Eᶜ, Eᵛ, Eᵍ, χ diyagram soruları"
+      ],
+      "oyunlar": [
+        "Bant diyagramını tamamla",
+        "Metal–yarıiletken–yalıtkan karşılaştırması"
+      ]
     }
   },
   {

@@ -49,7 +49,7 @@ test("a one-column viewport stacks reading before outcomes without overlapping s
 });
 
 test("step controls scroll to topic, show current article and permit keyboard navigation", () => {
-  assert.match(app, /topics\[index\]\?\.scrollIntoView\(/);
+  assert.match(app, /scrollToCourseTopic\(topics\[index\]\)/);
   assert.match(app, /aria-current", "step"/);
   assert.match(app, /window\.addEventListener\("scroll", scheduleUpdate, \{ passive: true \}\)/);
   assert.match(app, /\["ArrowLeft", "ArrowRight", "Home", "End"\]/);
@@ -57,6 +57,15 @@ test("step controls scroll to topic, show current article and permit keyboard na
   assert.match(app, /resizeObserver\?\.disconnect\(\)/);
   assert.match(app, /clearTopicNavigation\(\);\s*document\.documentElement\.lang/);
   assert.match(app, /ResizeObserver\(\(\) => \{ refreshTopicNavigationOffsets\(\)/);
+});
+
+test("topic jumps use one measured sticky boundary without double scroll-padding", () => {
+  assert.match(app, /function scrollToCourseTopic\(target\)/);
+  assert.match(app, /siteHeight \+ stickyHeight \+ guideHeight \+ 9/);
+  assert.match(app, /window\.scrollTo\(\{ top, behavior: "instant" \}\)/);
+  assert.doesNotMatch(app, /topics\[index\]\?\.scrollIntoView\(/);
+  assert.match(app, /getBoundingClientRect\(\)\.bottom \+ 16/);
+  assert.match(app, /atPageEnd \? topics\.length - 1 : index/);
 });
 
 test("learning outcomes have a single compact title and keep completion counters", () => {
@@ -88,6 +97,9 @@ test("other learning modes and translations remain reachable", () => {
 
 test("click, scroll tracking and cleanup work with a minimal DOM harness", () => {
   const fragment = app.slice(
+    app.indexOf("  function scrollToCourseTopic("),
+    app.indexOf("  function navigateToTopic(")
+  ) + "\n" + app.slice(
     app.indexOf("  function refreshTopicNavigationOffsets()"),
     app.indexOf("  function renderNarration(")
   );
@@ -105,8 +117,7 @@ test("click, scroll tracking and cleanup work with a minimal DOM harness", () =>
   const guide = {querySelector(){return strip;},getBoundingClientRect(){return {height:52,bottom:170};}};
   let positions=[200,700,1300];
   const topics=positions.map((_, i) => ({
-    getBoundingClientRect(){return {top:positions[i]};},
-    scrollIntoView(options){this.lastScroll=options;}
+    getBoundingClientRect(){return {top:positions[i]};}
   }));
   const document = {
     documentElement:{style:{setProperty(key,value){properties[key]=value;}}},
@@ -117,6 +128,8 @@ test("click, scroll tracking and cleanup work with a minimal DOM harness", () =>
   const cancelFrame=id=>{frames=frames.filter(frame=>frame.id!==id);};
   const runFrames=()=>{while(frames.length)frames.shift().handler();};
   const window={
+    scrollY:0,innerHeight:600,
+    scrollTo(options){this.lastScroll=options;},
     matchMedia:()=>({matches:false}),
     addEventListener(type,handler){listeners[type]=handler;},
     removeEventListener(type,handler){if(listeners[type]===handler)delete listeners[type];}
@@ -138,8 +151,10 @@ test("click, scroll tracking and cleanup work with a minimal DOM harness", () =>
   assert.equal(buttons[0].attrs["aria-current"],"step");
   assert.equal(properties["--topic-navigation-height"],"52px");
   buttons[2].events.click();
-  assert.equal(topics[2].lastScroll.block,"start");
-  positions=[-700,-100,90];
+  assert.equal(window.lastScroll.behavior,"instant");
+  assert.equal(window.lastScroll.top,1300-52-9);
+  assert.equal(buttons[2].attrs["aria-current"],"step");
+  positions=[-700,-100,guide.getBoundingClientRect().bottom+8];
   listeners.scroll();
   runFrames();
   assert.equal(buttons[2].attrs["aria-current"],"step");

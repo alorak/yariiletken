@@ -22,8 +22,8 @@ test("navbar spans viewport, with brand and lessons left and controls right", ()
   assert.match(css, /\.lesson-nav\s*\{[^}]*flex:\s*0 1 auto;/s);
   assert.match(css, /\.lesson-list\s*\{[^}]*display:\s*flex;/s);
   assert.match(css, /\.header-actions\s*\{[^}]*margin-left:\s*auto;/s);
-  assert.match(css, /@media \(max-width: 960px\) \{[^}]*\.lesson-nav\s*\{[^}]*flex:\s*0 1 260px;/s);
-  assert.match(css, /@media \(max-width: 600px\) \{[^}]*\.header-inner\s*\{[^}]*display:\s*grid;/s);
+  assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.lesson-nav\s*\{[^}]*flex:\s*0 1 260px;/);
+  assert.match(css, /@media \(max-width: 600px\) \{[\s\S]*?\.header-inner\s*\{[^}]*display:\s*grid;/);
 });
 
 test("lesson title and all five tabs share one sticky container", () => {

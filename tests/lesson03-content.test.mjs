@@ -7,7 +7,7 @@ const read = name => readFileSync(new URL("../" + name, import.meta.url), "utf8"
 const window = {};
 for(const file of [
   "lessons.js", "lessons.en.js", "activities.js", "lesson03-questions.js",
-  "lesson03-figures.js", "lesson03-mechanisms.js", "lesson03-hole-sim.js", "intrinsic-density-questions.js"
+  "lesson03-figures.js", "lesson03-mechanisms.js", "lesson03-hole-sim.js", "intrinsic-density-questions.js", "lesson02-04-questions.js"
 ]) runInNewContext(read(file), { window }, { filename:file });
 
 const getLesson = (id,locale) =>
@@ -111,7 +111,7 @@ test("qualitative p-model and quantitative band model are separated",()=>{
 
 test("expanded quiz covers all nine topics in both languages, with feedback",()=>{
   const q=window.COURSE_ACTIVITIES["03"].questions;
-  assert.equal(q.length,19);
+  assert.equal(q.length,25);
   assert.equal(new Set(q.map(x=>x.topic)).size,9);
   for(const item of q){
     assert.ok(item.topic>=0&&item.topic<9);
@@ -123,7 +123,7 @@ test("expanded quiz covers all nine topics in both languages, with feedback",()=
       for(const x of [...item.options,...item.reasons])assert.ok(x[locale]);
     }
   }
-  assert.equal(window.COURSE_ACTIVITIES["02"].questions.length,8);
+  assert.equal(window.COURSE_ACTIVITIES["02"].questions.length,13);
 });
 
 test("inline hole simulation moves vacancies opposite to electrons and respects bounds",()=>{

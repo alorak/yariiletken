@@ -399,6 +399,9 @@
   }
 
   function renderPlanned(lesson, tabId) {
+    if (lesson.id === "04" && window.BandTheory04Lab?.mount({
+      container: $("#content-panel"), language, tabId
+    })) return;
     if (window.CourseActivity?.render({ lessonId: lesson.id, tabId, language, container: $("#content-panel") })) {
       if (lesson.id === "03") window.IntrinsicDensityLab?.mount({
         container: $("#content-panel"), language, tabId

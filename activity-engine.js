@@ -42,7 +42,7 @@
       finish: "Sonuçları gör", retry: "Soruları sıfırla", answered: "Yanıtlanan",
       right: "Doğru", completed: "Değerlendirme özeti",
       summary: "Yanıtlarınızı gözden geçirebilir veya soruları yeniden çözebilirsiniz.",
-      questionLabel: "Yanıt seçenekleri",
+      questionLabel: "Yanıt seçenekleri", questionNavigation: "Sorular arasında geçiş", unanswered: "Yanıtlanmadı",
       readout: "Eğrinin örneklenen değeri", activePulse: "Üretim açık (0–4 µs)",
       noPulse: "Üretim kapalı (4 µs sonrası)",
       phi: "t = ", time: "Zaman",
@@ -81,7 +81,7 @@
       finish: "View results", retry: "Reset questions", answered: "Answered",
       right: "Correct", completed: "Assessment summary",
       summary: "You can review your answers or take the questions again.",
-      questionLabel: "Answer choices",
+      questionLabel: "Answer choices", questionNavigation: "Question navigation", unanswered: "Unanswered",
       readout: "Sampled curve value", activePulse: "Generation on (0–4 µs)",
       noPulse: "Generation off (after 4 µs)",
       phi: "t = ", time: "Time",
@@ -443,27 +443,48 @@
   function quizUI(questionData,lang,lessonId){
     const b=labels[lang],node=document.createElement("section");
     node.className="lab-quiz";
-    const questions=questionData,answers=savedQuizzes[lessonId]||{};
+    const questions=questionData;
+    const answers=savedQuizzes[lessonId]||{};
     let index=quizPosition[lessonId]??0;
-    if(index>=questions.length)index=0;
+    if(index>questions.length||index<0)index=0;
+    const isAnswered=i=>Number.isInteger(answers[i])&&answers[i]>=0&&answers[i]<questions[i].options.length;
+    const stepper=()=>'<nav class="lab-quiz-stepper" aria-label="'+escapeText(b.questionNavigation)+'">'+
+      questions.map((question,i)=>{
+        const answered=isAnswered(i),right=answered&&answers[i]===question.correct;
+        return '<button type="button" data-step="'+i+'" class="lab-quiz-step'+
+          (i===index?' is-active':'')+(answered?(right?' is-right':' is-wrong'):'')+
+          '" aria-label="'+escapeText(b.question+' '+(i+1)+' / '+questions.length+
+            ' · '+(answered?(right?b.correct:b.incorrect):b.unanswered))+'"'+
+          (i===index?' aria-current="step"':'')+'>'+
+          String(i+1)+'</button>';
+      }).join("")+'</nav>';
+    const bindSteps=()=>{
+      node.querySelectorAll("[data-step]").forEach(button=>button.addEventListener("click",()=>{
+        index=Number(button.dataset.step);
+        draw();
+      }));
+    };
     const draw=()=>{
       quizPosition[lessonId]=index;
-      const answeredCount=Object.keys(answers).filter(k=>Number.isInteger(Number(k))&&answers[k]>=0).length;
-      const rightCount=questions.filter((q,i)=>answers[i]===q.correct).length;
+      const answeredCount=questions.filter((_,i)=>isAnswered(i)).length;
+      const rightCount=questions.filter((q,i)=>isAnswered(i)&&answers[i]===q.correct).length;
       if(index===questions.length){
-        node.innerHTML='<div class="lab-quiz-summary"><span class="eyebrow">'+b.completed+
+        node.innerHTML=stepper()+'<div class="lab-quiz-summary"><span class="eyebrow">'+b.completed+
           '</span><h3>'+b.right+': '+rightCount+' / '+questions.length+'</h3>'+
           '<p>'+b.answered+': '+answeredCount+' / '+questions.length+'. '+b.summary+'</p>'+
           '<button type="button" class="lab-primary-button" data-again>'+b.retry+'</button>'+
           '<button type="button" class="lab-secondary-button" data-back>'+b.previous+'</button></div>';
+        bindSteps();
         $(node,"[data-again]").addEventListener("click",()=>{
-          Object.keys(answers).forEach(k=>delete answers[k]);saveQuiz();index=0;draw();
+          Object.keys(answers).forEach(k=>delete answers[k]);
+          savedQuizzes[lessonId]=answers;saveQuiz();index=0;draw();
         });
         $(node,"[data-back]").addEventListener("click",()=>{index=questions.length-1;draw();});
         return;
       }
-      const q=questions[index], selected=answers[index],hasAnswer=Number.isInteger(selected);
-      node.innerHTML='<div class="lab-quiz-head"><span class="eyebrow">'+b.question+' '+(index+1)+' '+b.of+' '+questions.length+'</span>'+
+      const q=questions[index],selected=answers[index],hasAnswer=isAnswered(index);
+      node.innerHTML=stepper()+
+        '<div class="lab-quiz-head"><span class="eyebrow">'+b.question+' '+(index+1)+' '+b.of+' '+questions.length+'</span>'+
         '<span class="lab-quiz-score">'+b.answered+': '+answeredCount+' · '+b.right+': '+rightCount+'</span></div>'+
         '<div class="lab-quiz-progress"><i style="width:'+((index+1)/questions.length*100)+'%"></i></div>'+
         '<h3 class="lab-question-title">'+escapeText(t(q.q,lang))+'</h3>'+
@@ -480,14 +501,15 @@
           :'<p>'+b.select+'</p>')+'</div>'+
         '<div class="lab-quiz-navigation"><button type="button" data-prev class="lab-secondary-button" '+
         (index===0?"disabled":"")+'>'+b.previous+'</button>'+
-        '<button type="button" data-next class="lab-primary-button" '+(!hasAnswer?"disabled":"")+'>'+
+        '<button type="button" data-next class="lab-primary-button">'+
         (index===questions.length-1?b.finish:b.next)+'</button></div>';
+      bindSteps();
       node.querySelectorAll("[data-answer]").forEach(button=>button.addEventListener("click",()=>{
         answers[index]=Number(button.dataset.answer);
         savedQuizzes[lessonId]=answers;saveQuiz();draw();
       }));
       $(node,"[data-prev]").addEventListener("click",()=>{index=Math.max(0,index-1);draw();});
-      $(node,"[data-next]").addEventListener("click",()=>{index+=1;draw();});
+      $(node,"[data-next]").addEventListener("click",()=>{index=Math.min(questions.length,index+1);draw();});
     };
     draw();return node;
   }

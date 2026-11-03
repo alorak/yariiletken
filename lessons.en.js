@@ -171,14 +171,15 @@
           "The bond picture shows local covalent bonds, electron–hole pair creation and vacancy-like hole motion, but it does not determine <strong>which electron energies are allowed, how many states exist per unit volume, or how likely they are to be occupied</strong>.",
           "It therefore cannot predict quantitative minority carrier populations, the Fermi level, intrinsic carrier concentrations or temperature dependence on its own. Bands describe extended crystal quantum states and their occupations, rather than individual Si–Si chemical bonds.",
           "Band-gap energy E<sub>g</sub> must not be identified with the dissociation energy of a single Si–Si chemical bond. The two models are complementary.",
+          "The lecture's bond model succeeds at qualitative trends: two carriers, intrinsic concentration far smaller than atomic density, and a steep thermal rise. It cannot compute the <strong>numeric excitation probability</strong> or precise nᵢ without the energy distribution and occupation model.",
           "The bond picture gives intuition; band theory provides the quantitative state-energy and occupancy framework."
         ],
         [
           "Three principles of the band model",
-          "<strong>1. Allowed quantum states.</strong> Electron states arise from the crystal Hamiltonian; they do not span every energy. Several spatial or spin states can have the same energy; an ideal gap has no bulk band states.",
-          "<strong>2. Pauli exclusion.</strong> Two electrons cannot occupy the exact same quantum state. Each spatial orbital has two possible spin states, so three 3p orbitals contain six spin states.",
-          "<strong>3. Energy-dependent occupation.</strong> At 0 K electrons fill the lowest accessible states consistent with Pauli. At nonzero temperature Fermi–Dirac statistics describes occupancy.",
-          "Allowed states, Pauli exclusion and occupation determine the filled valence and empty conduction bands."
+          "<strong>1 — Allowed quantum states (quantum mechanics):</strong> The crystal Hamiltonian permits certain states. Pauli exclusion belongs here: two electrons cannot occupy the same <em>complete quantum state</em>, but distinct degenerate spin/orbital states can have <strong>the same energy</strong>. 'Lowest states first' refers to the <strong>0 K ground state</strong>.",
+          "<strong>2 — Distribution of states over energy N(E) or g(E) (quantum mechanics):</strong> How many spin-resolved states are there between E and E+dE? Volume-normalized DOS has units cm⁻³ eV⁻¹. The lecture's N(E) is not the number N of atoms.",
+          "<strong>3 — Equilibrium occupied fraction f(E,T) (statistical mechanics):</strong> Fermi–Dirac statistics gives the probability a state is occupied. At T&gt;0 K the 0-K step picture no longer suffices. Conduction electrons are counted with ∫gᶜ(E)f(E,T)dE and valence holes with ∫gᵛ(E)[1−f(E,T)]dE.",
+          "Three principles: allowed states including Pauli; distribution N(E); equilibrium occupied fraction f(E,T)."
         ],
         [
           "One isolated silicon atom: electronic energy states",
@@ -192,6 +193,9 @@
           "For N widely separated Si atoms the 3s subshell provides <strong>2N spin states / 2N electrons</strong>, while 3p provides <strong>6N states / 2N electrons</strong>; the valence total is 8N states and 4N electrons.",
           "Approaching atoms cause orbital overlap and quantum coupling. Initially identical levels split into closely spaced energies; valence-derived bands broaden and mix. At equilibrium spacing bonding and antibonding branches become distinct.",
           "Core 1s, 2s and 2p levels remain relatively narrow in this schematic. The actual electronic structure depends on the periodic potential and wave vector k.",
+          "While N atoms are <strong>still far apart</strong>, the state/electron counts are 1s: 2N/2N, 2s: 2N/2N, 2p: 6N/6N, 3s: 2N/2N, 3p: <strong>6N/2N</strong>. Partial isolated-atom 3p occupancy alone does not prove a semiconductor gap; band formation depends on coupling.",
+          "<strong>Coupled oscillators:</strong> A single k–m oscillator has ω₀=√(k/m). Three masses coupled to nearest neighbors by k<sub>c</sub> have <strong>ω₀=√(k/m)</strong>, <strong>ω₁=√((k+k<sub>c</sub>)/m)</strong>, and <strong>ω₂=√((k+3k<sub>c</sub>)/m)</strong>. A level splitting into many modes is the analogy; mechanical modes are not electron band energies.",
+          "<strong>Coupling controls width, N controls density:</strong> Raising k<sub>c</sub>/k spreads frequencies apart. N=20 versus N=3 at fixed coupling adds more closely spaced modes, not a 20-times wider band. In crystals, atomic coupling/interatomic separation mainly control bandwidth, while N controls the number of discrete levels.",
           "State count scales with N, while bandwidth depends on the coupling between atoms."
         ],
         [
@@ -199,6 +203,7 @@
           "In the simplified silicon band model, 3s/3p-derived <strong>8N spin states</strong> separate into a lower group of 4N valence states and an upper group of 4N conduction states.",
           "Four valence electrons per atom give <strong>4N electrons</strong>, filling the 4N lower states at ideal 0 K; the upper 4N states are empty. The forbidden gap separates the allowed bands.",
           "The 4N count refers to this simplified valence-derived band grouping, not all higher bands. Defects may produce localized states inside a real gap.",
+          "A <strong>metal</strong> can have a partly occupied band or overlapping bands. A filled band separated from an empty band by a gap gives semiconductor or insulating behavior depending on the gap and conditions. Temperature, impurities and defects also matter.",
           "At ideal 0 K the lower 4N states are full and the upper 4N states are empty."
         ],
         [
@@ -206,6 +211,7 @@
           "A conventional edge diagram displays the vacuum level E<sub>0</sub>, conduction minimum E<sub>c</sub> and valence maximum E<sub>v</sub>. In an ideal bulk crystal the gap between E<sub>c</sub> and E<sub>v</sub> has no allowed extended band states.",
           "<strong>E<sub>g</sub>=E<sub>c</sub>−E<sub>v</sub></strong>, whereas <strong>χ=E<sub>0</sub>−E<sub>c</sub></strong>. Thus E<sub>0</sub>−E<sub>v</sub>=χ+E<sub>g</sub>. Electron affinity is surface-dependent in practice.",
           "This is an energy-axis edge diagram, not a dispersion E(k) plot; silicon's indirect gap cannot be inferred from these horizontal lines.",
+          "The horizontal axis in this simple band-edge schematic <strong>has no physical meaning</strong>. Later, spatial band diagrams use position x and dispersion plots use crystal wavevector k. The slide's 'bond strength' analogy for E₉ is not the chemical dissociation energy of one Si–Si bond.",
           "Do not confuse the gap between bands with electron affinity to vacuum."
         ],
         [
@@ -213,6 +219,7 @@
           "Using common 300 K reference values <strong>E<sub>g</sub>≈1.12 eV</strong> and <strong>χ≈4.05 eV</strong>, and setting E<sub>0</sub>=0, one obtains <strong>E<sub>c</sub>=−4.05 eV</strong> and <strong>E<sub>v</sub>=−5.17 eV</strong>.",
           "The figure makes the <strong>4.05 eV vacuum-to-conduction</strong> and <strong>1.12 eV conduction-to-valence</strong> distances proportional in height. Therefore E<sub>0</sub>−E<sub>v</sub>=5.17 eV. This difference is not the energy of separating an individual Si–Si bond.",
           "The gap varies with temperature. Real electron affinity changes with surface orientation, termination and dipoles. Only the displayed reference edge separations, not the full band widths, are drawn to scale.",
+          "The source's scaled Si figure also shows a <strong>valence-band width ≈12 eV</strong>: with E<sub>v</sub>=−5.17 eV its bottom is approximately <strong>E<sub>B</sub>=−17.17 eV</strong>. From valence top to vacuum the separation is <strong>χ+E₉=5.17 eV</strong>. Valence bandwidth (≈12 eV), electronic gap (1.12 eV), and electron affinity (4.05 eV) are distinct approximate quantities.",
           "With E₀=0, the reference edges are Eᶜ=−4.05 eV and Eᵛ=−5.17 eV."
         ],
         [
@@ -220,6 +227,7 @@
           "The bond model shows localized covalent bonds: exciting an electron leaves an empty valence bond, and neighboring electron transfers offer a useful picture of hole motion.",
           "In the band model the same pair creation corresponds to an electron occupying a conduction state and a missing electron (hole) in a valence state. Recombination fills that vacancy, without necessarily breaking or restoring a particular isolated chemical bond.",
           "Band theory and statistical occupations are required to calculate n, p, temperature effects, Fermi levels and effective masses; the local bond drawing alone cannot.",
+          "Four band events from the lecture: <strong>(a) generation</strong> excites a valence electron into conduction, <strong>(b) recombination</strong> fills the valence vacancy, <strong>(c) kinetic energy</strong> sends a conduction electron upward on the electron-energy axis while a hole gains energy <strong>downward</strong> within the valence band, and <strong>(d) escape</strong> to vacuum needs χ from the conduction edge or <strong>χ+E₉</strong> from the valence top. These are energy differences, not full transition-rate predictions.",
           "Local electron/vacancy pictures correspond to occupied/empty quantum states in the band description."
         ],
         [
@@ -227,6 +235,7 @@
           "An energy-edge diagram gives the positions of band edges, but the full dispersion is <strong>E(k)</strong>. Silicon's conduction minimum and valence maximum occur at different crystal wave vectors, making it an indirect-gap semiconductor.",
           "Near a parabolic one-dimensional band extremum, <strong>m*=ℏ²/(d²E/dk²)</strong> describes the effect of band curvature on the carrier response to force, not a change to the electron's rest mass.",
           "Density-of-states and conductivity effective masses represent distinct concepts; these are developed in Lesson 05.",
+          "Transition to the next lesson's <strong>density of states N(E)</strong>: Si's atomic density ≈5×10²² cm⁻³ means <strong>4×5×10²² = 2×10²³ spin-resolved valence states/cm³</strong>. Their distribution across the ≈12 eV width is not uniform; <strong>∫ from E<sub>B</sub> to E<sub>v</sub> N(E)dE≈2×10²³ cm⁻³</strong>. The slide denotes valence bottom E<sub>B</sub> and the illustrated upper conduction boundary E<sub>T</sub>; Fermi–Dirac f(E,T) determines occupancy.",
           "Scaled edge diagrams cannot replace the k-dependent dispersion or describe effective mass by themselves."
         ]
       ],
@@ -241,7 +250,10 @@
         "I can calculate 4.05+1.12=5.17 eV and interpret an appropriately scaled Si edge diagram.",
         "I can connect electron–hole creation, hole motion and recombination in bond and band models.",
         "I can distinguish the electronic gap from chemical Si–Si bond dissociation.",
-        "I can explain why E(k) and band curvature matter for effective mass."
+        "I can explain why E(k) and band curvature matter for effective mass.",
+        "I can calculate the coupled-oscillator modes and distinguish coupling-controlled bandwidth from N-controlled level density.",
+        "I can compare electron and hole energy directions for generation, recombination, kinetic excitation and escape to vacuum.",
+        "I can relate the ≈12 eV Si valence-band width and ≈2×10²³ cm⁻³ state count to an integral over N(E)."
       ],
       "future": {
         "grafikler": [
@@ -262,7 +274,7 @@
         ]
       }
     },
-    "05": {
+        "05": {
       navTitle: "Fermi & DOS",
       title: "Density of States, Fermi Statistics and Carrier Calculations",
       kicker: "Quantitative physics",
@@ -423,7 +435,15 @@
         if (source.id === "04") {
           const [title, ...parts] = translation.topics[index];
           const key = parts.pop();
-          return { ...original, title, paragraphs: parts, key };
+          const equation04 = {
+            3: "3s: 2N states / 2N electrons · 3p: 6N states / 2N electrons",
+            4: "8N states = 4N valence + 4N conduction · 4N electrons (0 K)",
+            5: "E<sub>g</sub> = E<sub>c</sub> − E<sub>v</sub> · χ = E<sub>0</sub> − E<sub>c</sub>",
+            6: "E<sub>0</sub>−E<sub>v</sub> = χ + E<sub>g</sub> = 4.05 + 1.12 = 5.17 eV",
+            8: "m* ≈ ℏ²/(d²E/dk²) (1D, parabolic approximation)"
+          };
+          return { ...original, title, paragraphs: parts, key,
+            ...(Object.hasOwn(equation04, index) ? { equation: equation04[index] } : {}) };
         }
         const [title, first, second, key, equation] = translation.topics[index];
         // Equations are shared verbatim except for language-specific annotations.

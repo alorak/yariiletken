@@ -96,6 +96,26 @@ test("illustrations are included only in Lesson 04 narration with scripts in cor
  assert.match(app,/0:2,1:1,2:4,3:5,4:6,5:8,6:10/);
 });
 
+test("bond and band models show before/after excitation and reverse recombination",()=>{
+ for(const lang of ["tr","en"]){
+  const fig=window.BandTheory04Visuals.render("bridge",lang);
+  assert.equal((fig.match(/class="b04-frame"/g)||[]).length,4);
+  assert.equal((fig.match(/class="b04-hole"/g)||[]).length,2);
+  assert.match(fig,/Generation|Üretim/);
+  assert.match(fig,/Recombination|Yeniden birleşme/);
+  assert.match(fig,/After excitation|Uyarılma sonrası/);
+ }
+});
+
+test("the three principles are distinct, visible and localized",()=>{
+ for(const lang of ["tr","en"]){
+  const fig=window.BandTheory04Visuals.render("principles",lang);
+  assert.equal((fig.match(/class="b04-principle"/g)||[]).length,3);
+  assert.match(fig,/Pauli/);
+  assert.match(fig,/Fermi/);
+ }
+});
+
 test("search and numbered navigation handle newly added topics",()=>{
  const tr=window.COURSE_LESSONS, en=window.COURSE_LESSONS_EN;
  assert.deepEqual(Array.from(tr,l=>l.topics.length),[6,9,9,7,8]);

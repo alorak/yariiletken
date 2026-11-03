@@ -342,6 +342,9 @@
         ? topic.visual03.map(kind => window.Lesson03Mechanisms?.render(kind, language) ||
             window.Lesson03Figures.render(kind, language)).join("")
         : "") +
+      (lesson.id === "04" && Array.isArray(topic.visual04) && window.Lesson04Figures
+        ? topic.visual04.map(kind => window.Lesson04Figures.render(kind, language)).join("")
+        : "") +
       (lesson.id === "03" && index === 2 ? '<div id="lesson03-hole-inline"></div>' : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");

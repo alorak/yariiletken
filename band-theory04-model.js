@@ -23,6 +23,12 @@ function densityArea(W,nAtom=5e22){
   if(!finite(W,nAtom)||W<=0||nAtom<=0)throw new RangeError("DOS");
   return 4*nAtom; // integral of the illustrative 6u(1-u) distribution.
 }
+/* N-site open nearest-neighbor chain with one orbital per site:
+ * N levels ε_j = −2t cos(jπ/(N+1)). Demonstrates splitting, not Si sp³ bands. */
+function splitLevels(N,t){
+  if(!Number.isInteger(N)||N<2||N>200||!finite(t)||t<0)throw new RangeError("splitting");
+  return Array.from({length:N},(_,i)=>-2*t*Math.cos((i+1)*Math.PI/(N+1)));
+}
 function energy(k,t){
   if(!finite(k,t)||t<=0)throw new RangeError("tight binding");
   return -2*t*Math.cos(k);
@@ -60,6 +66,17 @@ function graph(kind,p,lang="tr"){
         ["8N",s.valenceStates+" "+(english?"states":"durum")],
         ["4N",s.valenceElectrons+" e⁻"],["1s–3p",s.totalStates+" / "+s.totalElectrons]]};
   }
+  if(kind==="splitting"){
+    const N=p.N,t=p.t,levels=splitLevels(N,t);
+    return {xMin:0,xMax:1.2,yMin:-2.5,yMax:2.5,marker:t,
+      xLabel:english?"Orbital hopping t (eV)":"Orbital kuplajı t (eV)",
+      yLabel:english?"Allowed energies (eV)":"İzinli enerjiler (eV)",
+      curves:levels.map((_,j)=>({label:"j="+(j+1),ghost:N>7&&j>2&&j<N-3,
+        f:x=>-2*x*Math.cos((j+1)*Math.PI/(N+1))})),
+      info:[["N",String(N)],["t",t.toFixed(2)+" eV"],
+        [english?"Level count":"Seviye sayısı",String(N)],
+        [english?"Span ΔE":"Dağılım ΔE",(levels[N-1]-levels[0]).toFixed(3)+" eV"]]};
+  }
   if(kind==="modes"){
     const r=p.r,small=[0,1,2].map(j=>({label:"N=3, j="+j,f:x=>oscillator(j,3,x)}));
     const big=Array.from({length:20},(_,j)=>({label:"N=20, j="+j,ghost:true,f:x=>oscillator(j,20,x)}));
@@ -92,5 +109,5 @@ function graph(kind,p,lang="tr"){
   }
   throw new RangeError("graph");
 }
-window.BandTheory04Model={states,oscillator,density,densityArea,energy,mass,edges,event,graph};
+window.BandTheory04Model={states,oscillator,density,densityArea,splitLevels,energy,mass,edges,event,graph};
 })();

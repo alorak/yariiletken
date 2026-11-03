@@ -15,7 +15,7 @@ const labels={
   bandCounts:"Denge uzaklığında iki bant",val:"Valans bandı",cond:"İletim bandı",filled:"4N durum / 4N elektron",unfilled:"4N durum / 0 elektron (0 K)",gap:"Yasak aralık Eᵍ",countNote:"Bu 8N spin durumu/4N elektron sayımı 3s–3p kökenli temel öğretim modelidir.",
   diagram:"Bant diyagramı — iki gösterim",allowed:"(a) Yalnız izinli enerji bölgeleri",standard:"(b) Geleneksel bant kenarı gösterimi",vacuum:"Vakum",chi:"Elektron ilgisi",diagramNote:"Eᵍ = Eᶜ − Eᵛ; χ = E₀ − Eᶜ. Ölçekli olmayan genel şema; Fermi seviyesi gösterilmez.",
   scaled:"Si · 300 K · ortak düşey enerji ölçeği",scaleNote:"E₀ = 0 referansı; Eᶜ = −4,05 eV; Eᵛ = −5,17 eV. Çizimde 4,05/1,12 uzaklıkları orantılıdır. χ yüzey durumuna göre değişebilir.",
-  bridge:"Aynı üretim olayı, iki fiziksel dil",before:"Önce",after:"Uyarılma sonrası",vacancy:"Hol (+)",electron:"Elektron (−)",bridgeNote:"Bant geçişi bir Si–Si bağının kimyasal ayrılması değildir. Şemalar birebir atomistik hesap değildir."
+  bridge:"Aynı üretim olayı, iki fiziksel dil",before:"Önce",after:"Uyarılma sonrası",generation:"Üretim ↓",recombination:"Yeniden birleşme ↑",vacancy:"Hol (+)",electron:"Elektron (−)",bridgeNote:"Bant geçişi bir Si–Si bağının kimyasal ayrılması değildir. Şemalar birebir atomistik hesap değildir."
  },
  en:{
   why:"Why is the bond model insufficient?",bond:"Bond picture",band:"Band picture",local:"Localized covalent bond / vacancy",global:"Quantum states + occupation",whyFoot:"The bond model cannot compute n, p or Fermi levels without allowed energies and densities of states.",
@@ -25,7 +25,7 @@ const labels={
   bandCounts:"Two bands at the equilibrium spacing",val:"Valence band",cond:"Conduction band",filled:"4N states / 4N electrons",unfilled:"4N states / 0 electrons (0 K)",gap:"Forbidden gap Eᵍ",countNote:"The 8N spin states and 4N electrons count is a simplified 3s/3p-derived teaching model.",
   diagram:"Band diagram — two representations",allowed:"(a) Allowed energy regions",standard:"(b) Conventional band edges",vacuum:"Vacuum",chi:"Electron affinity",diagramNote:"Eᵍ = Eᶜ − Eᵛ; χ = E₀ − Eᶜ. General schematic, not to scale; the Fermi level is not shown.",
   scaled:"Si · 300 K · one common vertical energy scale",scaleNote:"Reference E₀ = 0, Eᶜ = −4.05 eV and Eᵛ = −5.17 eV. The 4.05/1.12 distances are proportional. Actual electron affinity depends on surface conditions.",
-  bridge:"One excitation, two physical languages",before:"Before",after:"After excitation",vacancy:"Hole (+)",electron:"Electron (−)",bridgeNote:"An electronic band transition does not chemically dissociate an individual Si–Si bond. These are conceptual diagrams, not atomistic calculations."
+  bridge:"One excitation, two physical languages",before:"Before",after:"After excitation",generation:"Generation ↓",recombination:"Recombination ↑",vacancy:"Hole (+)",electron:"Electron (−)",bridgeNote:"An electronic band transition does not chemically dissociate an individual Si–Si bond. These are conceptual diagrams, not atomistic calculations."
  }
 };
 function txt(x,y,t,cls="b04-label",anchor="start"){return '<text x="'+x+'" y="'+y+'" class="'+cls+'" text-anchor="'+anchor+'">'+esc(t)+'</text>';}
@@ -150,22 +150,50 @@ function scaled(d){
  return fig(d,"scaled",svg(content,855,494,d.scaled),d.scaleNote);
 }
 function bridge(d){
- const panels=[{x:12,title:d.bond},{x:395,title:d.band}];
- const graphic=svg(panels.map((p,i)=>'<g>'+
- '<rect x="'+p.x+'" y="13" width="365" height="248" rx="13" class="b04-frame"/>'+
- txt(p.x+20,45,p.title,"b04-title")+
- (i===0?'<circle cx="'+(p.x+105)+'" cy="136" r="23" class="b04-atom"/>'+
- '<circle cx="'+(p.x+252)+'" cy="136" r="23" class="b04-atom"/>'+
- '<path d="M'+(p.x+128)+' 136 H'+(p.x+230)+'" class="b04-bond"/>'+
- '<circle cx="'+(p.x+179)+'" cy="136" r="12" class="b04-hole"/>'+txt(p.x+179,142,'+',"b04-charge","middle")+
- '<circle cx="'+(p.x+264)+'" cy="83" r="12" class="b04-electron"/>'+txt(p.x+264,89,'−',"b04-charge","middle"):
- '<rect x="'+(p.x+44)+'" y="78" width="277" height="50" class="b04-upper"/>'+
- '<rect x="'+(p.x+44)+'" y="183" width="277" height="50" class="b04-lower"/>'+
- '<path d="M'+(p.x+183)+' 173 V135 m-7 8 7 -8 7 8" class="b04-measure"/>'+
- '<circle cx="'+(p.x+250)+'" cy="102" r="13" class="b04-electron"/>'+txt(p.x+250,108,'−',"b04-charge","middle")+
- '<circle cx="'+(p.x+250)+'" cy="208" r="13" class="b04-hole"/>'+txt(p.x+250,214,'+',"b04-charge","middle"))+
- '</g>').join(''),780,290,d.bridge);
- return fig(d,"bridge",graphic,d.bridgeNote);
+ const cell=(x,y,isBond,after)=>{
+  let elements='';
+  if(isBond){
+   elements='<circle cx="87" cy="93" r="21" class="b04-atom"/>'+
+    '<circle cx="258" cy="93" r="21" class="b04-atom"/>'+
+    '<path d="M108 93 H237" class="b04-bond"/>'+
+    txt(87,99,'Si',"b04-small","middle")+txt(258,99,'Si',"b04-small","middle");
+   if(after){
+    elements+='<circle cx="160" cy="93" r="12" class="b04-hole"/>'+
+       txt(160,99,'+',"b04-charge","middle")+
+       '<circle cx="220" cy="38" r="12" class="b04-electron"/>'+
+       txt(220,44,'−',"b04-charge","middle");
+   } else {
+    elements+='<circle cx="155" cy="93" r="10" class="b04-electron"/>'+
+      txt(155,98,'−',"b04-charge","middle")+
+      '<circle cx="184" cy="93" r="10" class="b04-electron"/>'+
+      txt(184,98,'−',"b04-charge","middle");
+   }
+  }else{
+   elements='<rect x="65" y="45" width="244" height="44" rx="6" class="b04-upper"/>'+
+    '<rect x="65" y="115" width="244" height="44" rx="6" class="b04-lower"/>'+
+    txt(70,37,d.cond,"b04-small")+txt(70,178,d.val,"b04-small");
+   if(after){
+    elements+='<circle cx="245" cy="66" r="12" class="b04-electron"/>'+txt(245,72,'−',"b04-charge","middle")+
+      '<circle cx="245" cy="137" r="12" class="b04-hole"/>'+txt(245,143,'+',"b04-charge","middle");
+   }else{
+    elements+='<circle cx="245" cy="137" r="12" class="b04-electron"/>'+txt(245,143,'−',"b04-charge","middle");
+   }
+  }
+  return '<g transform="translate('+x+' '+y+')">'+
+   '<rect x="0" y="0" width="370" height="185" rx="10" class="b04-frame"/>'+
+   txt(16,22,after?d.after:d.before,"b04-small")+elements+'</g>';
+ };
+ const body=txt(24,34,d.bond,"b04-title")+
+  txt(472,34,d.band,"b04-title")+
+  cell(20,46,true,false)+cell(462,46,false,false)+
+  cell(20,283,true,true)+cell(462,283,false,true)+
+  '<path d="M204 232 V280 m-7 -9 7 9 7 -9 M244 279 V233 m-7 9 7 -9 7 9" class="b04-measure"/>'+
+  '<path d="M645 232 V280 m-7 -9 7 9 7 -9 M685 279 V233 m-7 9 7 -9 7 9" class="b04-measure"/>'+
+  txt(155,250,d.generation,"b04-small","end")+
+  txt(254,270,d.recombination,"b04-small")+
+  txt(596,250,d.generation,"b04-small","end")+
+  txt(697,270,d.recombination,"b04-small");
+ return fig(d,"bridge",svg(body,870,480,d.bridge),d.bridgeNote);
 }
 function render(kind,lang="tr"){
  const d=labels[lang==="en"?"en":"tr"];

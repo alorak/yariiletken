@@ -11,9 +11,9 @@ const api=window.CourseSearch;
 const tr=api.buildIndex(window.COURSE_LESSONS);
 const en=api.buildIndex(window.COURSE_LESSONS_EN);
 
-test("all 37 topics from lessons 02–06 are included in both localized search indexes",()=>{
+test("all 38 topics from lessons 02–06 are included in both localized search indexes",()=>{
   for(const index of [tr,en]){
-    assert.equal(index.length,37);
+    assert.equal(index.length,38);
     assert.deepEqual([...new Set(index.map(x=>x.lessonId))],["02","03","04","05","06"]);
     assert.ok(index.every(x=>Number.isInteger(x.topicIndex)&&x.topicIndex>=0&&x.title));
     assert.ok(index.every(x=>x.paragraphs.length>=2));

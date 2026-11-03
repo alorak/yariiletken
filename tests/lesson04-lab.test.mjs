@@ -21,7 +21,7 @@ test("N spin-resolved states: exact 1s–3p and valence electron budget",()=>{
     assert.equal(c.valenceBand,c.conductionBand);
     assert.equal(c.valenceBand,4*N);
   }
-  for(const N of [0,-2,1.2,201,Infinity])assert.throws(()=>M.states(N),RangeError);
+  for(const N of [0,-2,1.2,201,Infinity])assert.throws(()=>M.states(N),{name:"RangeError"});
 });
 
 test("three free-end coupled masses give normalized 1, sqrt(1+r), sqrt(1+3r)",()=>{
@@ -41,7 +41,7 @@ test("N=20 has 20 ordered modes and coupling changes width, not count",()=>{
   }
   assert.ok(M.oscillator(19,20,2)-1 > M.oscillator(19,20,.5)-1);
   for(const args of [[-1,3,1],[3,3,1],[1,1,1],[0,3,-1],[0,3,NaN]])
-    assert.throws(()=>M.oscillator(...args),RangeError);
+    assert.throws(()=>M.oscillator(...args),{name:"RangeError"});
 });
 
 test("N-site tight-binding splitting preserves N states and approach from degeneracy",()=>{
@@ -61,19 +61,19 @@ test("N-site tight-binding splitting preserves N states and approach from degene
 
 test("level splitting rejects invalid N and hopping parameters",()=>{
   for(const x of [[1,1],[201,1],[3,-.1],[3,NaN],[2,Infinity]])
-    assert.throws(()=>M.splitLevels(...x),RangeError);
+    assert.throws(()=>M.splitLevels(...x),{name:"RangeError"});
 });
 
 test("illustrative valence DOS has exact integrated state count 4*n_atom",()=>{
   for(const W of [8,12,16]){
     const n=5e22,steps=2000,dx=W/steps;
     const integral=Array.from({length:steps+1},(_,i)=>{
-      const weight=i===0||i===steps?.5:1;
+      const weight=(i===0||i===steps)?0.5:1;
       return weight*M.density(-W+i*dx,W,n)*dx;
     }).reduce((a,b)=>a+b,0);
     near(integral/M.densityArea(W,n),1,5e-7);
     near(M.densityArea(W,n),2e23,1e8);
-    near(M.density(-W/2,W,n),6*n/(4*W));
+    near(M.density(-W/2,W,n),6*n/W,1e8);
     assert.equal(M.density(-W-1,W,n),0);
     assert.equal(M.density(1,W,n),0);
   }
@@ -82,7 +82,7 @@ test("illustrative valence DOS has exact integrated state count 4*n_atom",()=>{
 
 test("density rejects invalid energy, width, density or non-finite parameters",()=>{
   for(const p of [[0,-1,5e22],[NaN,12,5e22],[0,12,0],[0,12,Infinity]])
-    assert.throws(()=>M.density(...p),RangeError);
+    assert.throws(()=>M.density(...p),{name:"RangeError"});
 });
 
 test("tight-binding endpoints and band-edge effective mass obey 1/t and 1/a²",()=>{
@@ -93,7 +93,7 @@ test("tight-binding endpoints and band-edge effective mass obey 1/t and 1/a²",(
   assert.ok(mass>0&&Number.isFinite(mass));
   near(M.mass(1.4,.54),mass/2);
   near(M.mass(.7,1.08),mass/4);
-  assert.throws(()=>M.mass(0,.5),RangeError);
+  assert.throws(()=>M.mass(0,.5),{name:"RangeError"});
 });
 
 test("300 K silicon relative energy edges distinguish chi, Eg and W",()=>{
@@ -105,7 +105,7 @@ test("300 K silicon relative energy edges distinguish chi, Eg and W",()=>{
   near(x.Ec-x.Ev,1.12);
   near(x.E0-x.Ec,4.05);
   near(x.Ev-x.Eb,12);
-  assert.throws(()=>M.edges(4.05,NaN,12),RangeError);
+  assert.throws(()=>M.edges(4.05,NaN,12),{name:"RangeError"});
 });
 
 test("generation and recombination preserve physical electron–hole state sequence",()=>{
@@ -137,7 +137,7 @@ test("kinetic acceleration preserves carrier number; escape leaves valence hole"
 
 test("six events reject invalid mode/state and negative energy",()=>{
   for(const p of [[-1,2,"none"],[6,2,"none"],[0,-1,"none"],[0,2,"unknown"],[0,NaN,"none"]])
-    assert.throws(()=>M.event(...p),RangeError);
+    assert.throws(()=>M.event(...p),{name:"RangeError"});
 });
 
 test("five interactive graph configurations return finite bounded sample values",()=>{
@@ -168,7 +168,7 @@ test("user interface mounts on lesson 04 graph/simulation tabs before placeholde
   assert.match(app,/lesson\.id === "04" && window\.BandTheory04Lab\?\.mount/);
   assert.match(app,/window\.CourseActivity\?\.render/);
   assert.match(css,/\.b04lab-card/);
-  assert.match(css,/\.b04lab-sim/); // verify simulator styling
+  assert.match(css,/\.b04lab-bandgrid/); // verify simulator styling
   assert.match(ui,/\[simOne,simFour,simTwo,simThree\]/);
   assert.match(ui,/const eventRoutes=\[/);
 });

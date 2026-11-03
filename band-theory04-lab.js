@@ -191,6 +191,45 @@ function simTwo(lang,i){
   p[input.dataset.key]=Number(input.value);node.querySelector('[data-output="'+input.dataset.key+'"]').textContent=format(input.value,2);update();
  }));update();return node;
 }
+function simFour(lang,i){
+ const q=L[lang],node=document.createElement("article");node.className="lab-card b04lab-card";
+ const p={r:.7,phase:0},modeVectors=[[1,1,1],[1,0,-1],[.5,-1,.5]],xs=[168,390,612];
+ let mode=0;
+ node.innerHTML=header(q,"S4","S4d",i,"4")+
+ '<div class="b04lab-controls"><label class="b04lab-control"><span>'+esc(q.modeSelect)+'</span>'+
+ '<select data-mode aria-label="'+esc(q.modeSelect)+'">'+q.modeNames.map((name,j)=>
+ '<option value="'+j+'">'+esc(name)+'</option>').join("")+'</select></label>'+
+ slider("r",q.r,0,2,.05,p.r)+slider("phase",q.phase,0,360,5,p.phase)+'</div>'+
+ '<div data-visual></div><div class="b04lab-stats" data-stats aria-live="polite"></div>'+
+ assumptions(q,"limitS4");
+ const update=()=>{
+  const c=Math.cos(p.phase*Math.PI/180),ys=modeVectors[mode].map(v=>162-v*c*43);
+  const spring=(x1,y1,x2,y2)=>'<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" class="b04lab-spring"/>';
+  const svg='<svg class="b04lab-trans-svg" viewBox="0 0 790 310" role="img" aria-label="'+
+   esc(q.S4)+'"><title>'+esc(q.S4)+'</title>'+
+   '<line x1="98" y1="47" x2="693" y2="47" class="b04lab-axis"/>'+
+   '<line x1="98" y1="162" x2="693" y2="162" class="b04lab-grid"/>'+
+   xs.map((x,j)=>spring(x,47,x,ys[j]-30)+
+    '<rect x="'+(x-31)+'" y="'+(ys[j]-30)+'" width="62" height="60" rx="7" class="b04lab-mass"/>'+
+    '<text x="'+x+'" y="'+(ys[j]+8)+'" class="b04lab-axis-label" text-anchor="middle">m</text>').join("")+
+   [0,1].map(j=>spring(xs[j]+35,ys[j],xs[j+1]-35,ys[j+1])).join("")+
+   '<text x="389" y="282" class="b04lab-axis-label" text-anchor="middle">'+
+   esc(q.modeNames[mode])+'</text></svg>';
+  node.querySelector("[data-visual]").innerHTML=svg;
+  node.querySelector("[data-stats]").innerHTML=stat("ω / ω₀",M.oscillator(mode,3,p.r).toFixed(3))+
+    stat("kᶜ / k",p.r.toFixed(2))+
+    stat(q.phase,p.phase+"°")+
+    stat(q.modeSelect,q.modeNames[mode]);
+ };
+ node.querySelector("[data-mode]").addEventListener("change",event=>{mode=Number(event.target.value);update();});
+ node.querySelectorAll("input[data-key]").forEach(input=>input.addEventListener("input",()=>{
+  p[input.dataset.key]=Number(input.value);
+  node.querySelector('[data-output="'+input.dataset.key+'"]').textContent=
+   format(p[input.dataset.key],Number(input.step)<1?2:0);
+  update();
+ }));
+ update();return node;
+}
 function simThree(lang,i){
  const q=L[lang],node=document.createElement("article");node.className="lab-card b04lab-card";
  let mode=0,energy=1.5,state="none",last=false;
@@ -242,7 +281,7 @@ function mount({container,language="tr",tabId}){
  section.className="lab-section b04lab-section";
  section.innerHTML='<div class="lab-section-intro"><span class="eyebrow">'+esc(tabId==="grafikler"?q.charts:q.sims)+'</span></div>';
  if(tabId==="grafikler")specs.forEach((meta,i)=>section.append(graphCard(meta,lang,i+1)));
- else [simOne,simTwo,simThree].forEach((fn,i)=>section.append(fn(lang,i+1)));
+ else [simOne,simFour,simTwo,simThree].forEach((fn,i)=>section.append(fn(lang,i+1)));
  container.replaceChildren(section);return true;
 }
 window.BandTheory04Lab={mount};

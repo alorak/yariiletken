@@ -18,12 +18,12 @@ test("navbar spans viewport, with brand and lessons left and controls right", ()
   const theme = html.indexOf('id="theme-toggle"');
   assert.ok(brand >= 0 && brand < lessons && lessons < actions);
   assert.ok(actions < search && search < language && language < theme);
-  assert.match(css, /\\.header-inner\\s*\\{[^}]*width:\\s*100%;[^}]*padding-inline:\\s*clamp\\(14px,\\s*2vw,\\s*32px\\)/s);
-  assert.match(css, /\\.lesson-nav\\s*\\{[^}]*flex:\\s*0 1 auto;/s);
-  assert.match(css, /\\.lesson-list\\s*\\{[^}]*display:\\s*flex;/s);
-  assert.match(css, /\\.header-actions\\s*\\{[^}]*margin-left:\\s*auto;/s);
-  assert.match(css, /@media \\(max-width: 960px\\) \\{[^}]*\\.lesson-nav\\s*\\{[^}]*flex:\\s*0 1 260px;/s);
-  assert.match(css, /@media \\(max-width: 600px\\) \\{[^}]*\\.header-inner\\s*\\{[^}]*display:\\s*grid;/s);
+  assert.match(css, /\.header-inner\s*\{[^}]*width:\s*100%;[^}]*padding-inline:\s*clamp\(14px,\s*2vw,\s*32px\)/s);
+  assert.match(css, /\.lesson-nav\s*\{[^}]*flex:\s*0 1 auto;/s);
+  assert.match(css, /\.lesson-list\s*\{[^}]*display:\s*flex;/s);
+  assert.match(css, /\.header-actions\s*\{[^}]*margin-left:\s*auto;/s);
+  assert.match(css, /@media \(max-width: 960px\) \{[^}]*\.lesson-nav\s*\{[^}]*flex:\s*0 1 260px;/s);
+  assert.match(css, /@media \(max-width: 600px\) \{[^}]*\.header-inner\s*\{[^}]*display:\s*grid;/s);
 });
 
 test("lesson title and all five tabs share one sticky container", () => {

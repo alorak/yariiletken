@@ -29,7 +29,7 @@ const L={
   limit4:"E(k)=−2t cos(ka), m*=ℏ²/(2ta²) sadece 1B komşu-atlama, bant kenarı yaklaşımıdır. Si'nin gerçek dolaylı E(k) yapısını veya anisotropik kütlesini vermez.",
   limitS1:"İdeal 0 K öz Si'de 4N alt durum dolu, 4N üst durum boştur. Sürgüyle oluşturulan çiftler dış uyarılmayı temsil eder; termal denge yoğunluğu değildir.",
   limitS2:"E₀=0; Eᶜ=−χ; Eᵛ=−(χ+Eᵍ); Eᴮ=−(χ+Eᵍ+W). Enerji aralıkları tek doğrusal düşey ölçekle çizilir. χ yüzeye, Eᵍ sıcaklığa bağlıdır; W yaklaşık öğretici değerdir.",
-  limitS3:"Bu model yalnız enerji eşiklerini ve mevcut elektron/hol durumunu denetler. Si dolaylı bant aralıklıdır; optik geçişte fonon ve momentum koşulları gerekebilir. Gerçek cihazdaki emisyon, soğurma, saçılma ve rekombinasyon olasılıkları hesaplanmaz.",
+  limitS3:"Bu model yalnız enerji eşiklerini ve mevcut elektron/hol durumunu denetler. Si dolaylı bant aralıklıdır; optik geçişte fonon ve momentum koşulları gerekebilir. Gerçek cihazdaki emisyon, soğurma, saçılma ve rekombinasyon olasılıkları hesaplanmaz. Okların yüksekliği ölçekli değildir; seçilen fiziksel olayın yönünü gösterir.",
   upper:"İletim bandı · 4N durum",lower:"Valans bandı · 4N durum",total:"Toplam izinli durum",electrons:"Değerlik elektronu",holes:"Hol",pairsLabel:"Çift",
   apply:"Olayı uygula",reset:"Sıfırla",notApplied:"Uygulanmadı",applied:"Uygulandı",allowed:"Enerji ve durum koşulu sağlanıyor.",
   denied:"Enerji eşiği veya durum koşulu sağlanmıyor.",needPair:"Önce çift oluştur.",needsReset:"Yeni bir çift için sıfırla.",
@@ -62,7 +62,7 @@ const L={
   limit4:"E(k)=−2t cos(ka) and m*=ℏ²/(2ta²) describe a 1D nearest-neighbor model near the parabolic edge, not real anisotropic, indirect Si band structure.",
   limitS1:"At ideal 0 K, the lower 4N spin states are filled and upper 4N are empty. Created pairs represent external excitation, not thermal-equilibrium concentration.",
   limitS2:"E₀=0, Eᶜ=−χ, Eᵛ=−(χ+Eᵍ), Eᴮ=−(χ+Eᵍ+W). All intervals use one linear energy scale. χ depends on surface and Eᵍ on temperature; W is approximate.",
-  limitS3:"Only energy thresholds and carrier-state requirements are modeled. Indirect Si transitions can require phonon/momentum assistance. Real optical rates, scattering and emission probabilities are not simulated.",
+  limitS3:"Only energy thresholds and carrier-state requirements are modeled. Indirect Si transitions can require phonon/momentum assistance. Real optical rates, scattering and emission probabilities are not simulated. Arrow lengths are schematic, not to scale; they show the selected process direction.",
   upper:"Conduction · 4N states",lower:"Valence · 4N states",total:"Total available states",electrons:"Valence electrons",holes:"Holes",pairsLabel:"Pairs",
   apply:"Apply event",reset:"Reset",notApplied:"Not applied",applied:"Applied",allowed:"Energy and state conditions satisfied.",
   denied:"Energy threshold or carrier state condition not satisfied.",needPair:"Generate a pair first.",needsReset:"Reset before creating another pair.",
@@ -242,16 +242,36 @@ function simThree(lang,i){
  '<div class="b04lab-stats" data-stats aria-live="polite"></div>'+assumptions(q,"limitS3");
  const draw=()=>{
   const result=M.event(mode,energy,state),pair=state==="pair";
-  let svg='<svg class="b04lab-trans-svg" role="img" aria-label="'+esc(q.S3)+'" viewBox="0 0 770 280"><title>'+
-   esc(q.S3)+'</title><rect x="100" y="43" width="540" height="64" class="b04lab-cb"/>'+
-   '<rect x="100" y="190" width="540" height="64" class="b04lab-vb"/>'+
-   '<text x="130" y="69" class="b04lab-axis-label">Eᶜ</text>'+
-   '<text x="130" y="216" class="b04lab-axis-label">Eᵛ</text>'+
-   '<text x="130" y="146" class="b04lab-tick">Eᵍ ≈ 1.12 eV</text>'+
-   (pair?'<circle cx="530" cy="75" r="20" class="b04lab-e"/><text x="530" y="82" class="b04lab-sign" text-anchor="middle">−</text>':"")+
-   (state!=="none"?'<circle cx="530" cy="222" r="20" class="b04lab-h"/><text x="530" y="229" class="b04lab-sign" text-anchor="middle">+</text>':"")+
-   '<line x1="406" y1="111" x2="406" y2="183" class="b04lab-marker"/>'+
-   '<text x="430" y="153" class="b04lab-tick">'+(mode===3?"h⁺ ↓":mode===1?"e⁻ ↓":"e⁻ ↑")+'</text></svg>';
+  // This is a schematic direction diagram, not a drawing to energy scale.
+  const eventRoutes=[
+    {from:190,to:112,symbol:"e⁻ ↑",label:"Eᵍ"},      // pair generation
+    {from:112,to:190,symbol:"e⁻ ↓",label:"Eᵍ"},      // recombination
+    {from:92,to:56,symbol:"e⁻ ↑",label:"ΔE"},        // hot electron
+    {from:212,to:244,symbol:"h⁺ ↓",label:"ΔE"},      // hot hole (electron energy axis)
+    {from:76,to:24,symbol:"e⁻ ↑",label:"χ"},         // conduction to vacuum
+    {from:214,to:24,symbol:"e⁻ ↑",label:"χ + Eᵍ"}    // valence to vacuum
+  ];
+  const route=eventRoutes[mode],x=420,sign=route.to<route.from?-1:1;
+  const arrow='<path d="M'+x+' '+route.from+' V'+route.to+
+    ' l-7 '+(-sign*8)+' m7 '+(sign*8)+' l7 '+(-sign*8)+
+    '" class="b04lab-event-arrow"/>';
+  const svg='<svg class="b04lab-trans-svg" role="img" aria-label="'+esc(q.S3)+
+    '" viewBox="0 0 770 280"><title>'+esc(q.S3)+'</title>'+
+    '<line x1="100" y1="24" x2="640" y2="24" class="b04lab-level"/>'+
+    '<text x="128" y="19" class="b04lab-tick">E₀</text>'+
+    '<rect x="100" y="43" width="540" height="64" class="b04lab-cb"/>'+
+    '<rect x="100" y="190" width="540" height="64" class="b04lab-vb"/>'+
+    '<text x="128" y="69" class="b04lab-axis-label">'+esc(q.upper)+' · Eᶜ</text>'+
+    '<text x="128" y="216" class="b04lab-axis-label">'+esc(q.lower)+' · Eᵛ</text>'+
+    '<text x="128" y="146" class="b04lab-tick">Eᵍ ≈ 1.12 eV</text>'+
+    (pair?'<circle cx="530" cy="75" r="20" class="b04lab-e"/>'+
+      '<text x="530" y="82" class="b04lab-sign" text-anchor="middle">−</text>':"")+
+    (state!=="none"?'<circle cx="530" cy="222" r="20" class="b04lab-h"/>'+
+      '<text x="530" y="229" class="b04lab-sign" text-anchor="middle">+</text>':"")+
+    (mode===5&&state==="none"?'<circle cx="340" cy="222" r="13" class="b04lab-e"/>'+
+      '<text x="340" y="227" class="b04lab-sign" text-anchor="middle">−</text>':"")+
+    arrow+'<text x="448" y="151" class="b04lab-tick">'+
+    esc(route.symbol+" · "+route.label)+'</text></svg>';
   node.querySelector("[data-visual]").innerHTML=svg;
   const stateText=state==="pair"?q.states[1]:state==="hole"?q.states[2]:q.states[0];
   const reason=!result.stateOk?(mode===0||mode===5?q.needsReset:q.needPair):(result.energyOk?q.allowed:q.denied);

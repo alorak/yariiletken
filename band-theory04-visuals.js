@@ -9,7 +9,7 @@ const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"
 const labels={
  tr:{
   why:"Bağ modeli neden tek başına yeterli değil?",bond:"Bağ resmi",band:"Bant resmi",local:"Yerel kovalent bağ / boşluk",global:"Kuantum durumları + doluluk",whyFoot:"Bağ modeli n, p ve Fermi seviyesini hesaplayacak enerji/durum yoğunluğu bilgisini vermez.",
-  principles:"Bant modelinin üç ilkesi",principleNames:["1. İzinli durum","2. Pauli","3. Doluluk"],principleNotes:["Kristalde belirli kuantum durumları vardır.","Aynı tam kuantum durumunu iki elektron paylaşamaz.","0 K'de düşük enerji dolu; T>0 için Fermi–Dirac."],
+  principles:"Bant modelinin üç ilkesi",principleNames:["1. İzinli durum · Pauli","2. Dağılım N(E)","3. Dolu oran f(E,T)"],principleNotes:["Kuantum mekaniği: izinli enerjiler, Pauli dışarlama ve dejenere durumlar.","Kuantum mekaniği: enerjiye göre izinli durum sayısı N(E).","İstatistiksel mekanik: termal dengede Fermi–Dirac doluluğu."],
   atom:"Yalıtılmış bir Si atomunda 14 elektron",energy:"Elektron enerjisi ↑",states:"spin durumu",occupied:"dolu",empty:"boş",out:"işaretli daire = dolu; boş daire = boş durum. Enerji aralıkları ölçekli değildir.",shells:["2 durum / 2 dolu","2 durum / 2 dolu","6 durum / 6 dolu","2 durum / 2 dolu","6 durum / 2 dolu"],
   split:"N atom yaklaşırken izinli enerji seviyeleri",sep:"Atomlar arası uzaklık →",eq:"Si kristalinin denge aralığı",bandUpper:"Üst bant: 4N durum / 0 e⁻ (0 K)",bandLower:"Alt bant: 4N durum / 4N e⁻",merged:"3s–3p karışımı / 8N durum",core:"İç kabuklar dar kalır (şematik)",splitNote:"Şema enerjilerin atomlar arası uzaklıkla değişimini nitel gösterir; bant genişlikleri ölçekli değildir.",
   bandCounts:"Denge uzaklığında iki bant",val:"Valans bandı",cond:"İletim bandı",filled:"4N durum / 4N elektron",unfilled:"4N durum / 0 elektron (0 K)",gap:"Yasak aralık Eᵍ",countNote:"Bu 8N spin durumu/4N elektron sayımı 3s–3p kökenli temel öğretim modelidir.",
@@ -19,7 +19,7 @@ const labels={
  },
  en:{
   why:"Why is the bond model insufficient?",bond:"Bond picture",band:"Band picture",local:"Localized covalent bond / vacancy",global:"Quantum states + occupation",whyFoot:"The bond model cannot compute n, p or Fermi levels without allowed energies and densities of states.",
-  principles:"Three principles of the band model",principleNames:["1. Allowed states","2. Pauli exclusion","3. Occupation"],principleNotes:["Only certain quantum states exist in the crystal.","Two electrons cannot share one complete quantum state.","Low energies fill at 0 K; Fermi–Dirac at T>0."],
+  principles:"Three principles of the band model",principleNames:["1. Allowed states · Pauli","2. Distribution N(E)","3. Occupied fraction f(E,T)"],principleNotes:["Quantum mechanics: allowed energies, Pauli exclusion and degeneracy.","Quantum mechanics: how states are distributed over energy N(E).","Statistical mechanics: Fermi–Dirac equilibrium occupation."],
   atom:"14 electrons in an isolated Si atom",energy:"Electron energy ↑",states:"spin states",occupied:"occupied",empty:"empty",out:"Crossed circle = occupied; open circle = empty. Energy separations are not to scale.",shells:["2 states / 2 occupied","2 states / 2 occupied","6 states / 6 occupied","2 states / 2 occupied","6 states / 2 occupied"],
   split:"Allowed energies as N atoms approach",sep:"Interatomic separation →",eq:"Equilibrium Si crystal spacing",bandUpper:"Upper band: 4N states / 0 e⁻ (0 K)",bandLower:"Lower band: 4N states / 4N e⁻",merged:"3s–3p mixing / 8N states",core:"Core levels remain narrow (schematic)",splitNote:"Qualitative level splitting vs atomic separation; band widths are not drawn to scale.",
   bandCounts:"Two bands at the equilibrium spacing",val:"Valence band",cond:"Conduction band",filled:"4N states / 4N electrons",unfilled:"4N states / 0 electrons (0 K)",gap:"Forbidden gap Eᵍ",countNote:"The 8N spin states and 4N electrons count is a simplified 3s/3p-derived teaching model.",
@@ -56,7 +56,7 @@ function reason(d){
 function principles(d){
  const cards=d.principleNames.map((x,i)=>'<div class="b04-principle">'+
  '<strong>'+esc(x)+'</strong><p>'+esc(d.principleNotes[i])+'</p>'+
- '<div class="b04-principle-symbol">'+(["E₁, E₂, …","↑↓","f(E)"][i])+'</div></div>').join("");
+ '<div class="b04-principle-symbol">'+(["E₁, E₂, …","N(E)","f(E,T)"][i])+'</div></div>').join("");
  return '<figure class="lesson-figure b04-figure"><figcaption>'+esc(d.principles)+'</figcaption>'+
  '<div class="b04-principles">'+cards+'</div></figure>';
 }
@@ -127,27 +127,38 @@ function diagram(d){
  return fig(d,"diagram",svg(content,860,372,d.diagram),d.diagramNote);
 }
 function scaled(d){
- // Vacuum to conduction = 4.05 eV, conduction to valence = 1.12 eV.
- // All THREE line heights computed with identical px/eV scaling, not an illustrative ratio.
- const y0=55,unit=70,yc=y0+4.05*unit,yv=y0+5.17*unit;
- const content='<path d="M92 468 V30 l-7 10 m7 -10 7 10" class="b04-axis"/>'+
- [0,-1,-2,-3,-4,-5].map(e=>{
-  const y=y0-e*unit;
-  return '<line x1="92" x2="690" y1="'+y+'" y2="'+y+'" class="b04-grid"/>'+
-    txt(79,y+4,String(e),"b04-small","end");
+ // Slide 12: the 1.12 eV gap is small relative to the ~12 eV valence bandwidth.
+ // All marked vertical separations have exactly one px/eV constant.
+ const y0=54,unit=25,yc=y0+4.05*unit,yv=y0+5.17*unit,yb=yv+12*unit;
+ const content='<path d="M92 520 V27 l-7 10 m7 -10 7 10" class="b04-axis"/>'+
+ [0,-4.05,-5.17,-10,-15,-17.17].map(e=>{
+   const y=y0-e*unit;
+   return '<line x1="92" x2="700" y1="'+y+'" y2="'+y+'" class="b04-grid"/>'+
+     txt(80,y+4,String(e),"b04-small","end");
  }).join('')+
  txt(15,20,'E (eV)',"b04-small")+
+ '<rect x="155" y="'+(y0-26)+'" width="382" height="'+(yc-y0+26)+'" class="b04-upper"/>'+
+ '<rect x="155" y="'+yv+'" width="382" height="'+(yb-yv)+'" class="b04-lower"/>'+
+ '<rect x="155" y="'+yc+'" width="382" height="'+(yv-yc)+'" class="b04-gap-area"/>'+
  '<path d="M155 '+y0+' H628 M155 '+yc+' H628 M155 '+yv+' H628" class="b04-level"/>'+
- '<rect x="185" y="'+(yc+3)+'" width="352" height="'+(yv-yc-6)+'" class="b04-gap-area"/>'+
- '<path d="M568 '+y0+' V'+yc+' m-6 -9 6 9 6 -9 M568 '+yc+' V'+yv+' m-6 -9 6 9 6 -9" class="b04-measure"/>'+
- txt(645,y0+6,'E₀ = 0',"b04-orb")+txt(645,yc+6,'Eᶜ = −4.05',"b04-label")+txt(645,yv+6,'Eᵛ = −5.17',"b04-label")+
- txt(548,(y0+yc)/2+6,'χ = 4.05 eV',"b04-small","end")+
- txt(548,(yc+yv)/2+6,'Eᵍ = 1.12 eV',"b04-small","end")+
- '<rect x="181" y="'+(yc-45)+'" width="350" height="38" rx="6" class="b04-upper"/>'+
- txt(197,yc-20,d.cond,"b04-label")+
- '<rect x="181" y="'+(yv+6)+'" width="350" height="39" rx="6" class="b04-lower"/>'+
- txt(197,yv+31,d.val,"b04-label");
- return fig(d,"scaled",svg(content,855,494,d.scaled),d.scaleNote);
+ '<path d="M155 '+yb+' H628" class="b04-level"/>'+
+ '<path d="M568 '+y0+' V'+yc+' M568 '+yc+' V'+yv+'" class="b04-measure"/>'+
+ txt(642,y0+5,'E₀ = 0 eV',"b04-small")+
+ txt(642,yc+5,'Eᶜ = −4.05 eV',"b04-small")+
+ txt(642,yv+5,'Eᵛ = −5.17 eV',"b04-small")+
+ txt(642,yb+5,'Eᴮ ≈ −17.17 eV',"b04-small")+
+ txt(535,(y0+yc)/2,'χ = 4.05 eV',"b04-small","end")+
+ txt(535,(yc+yv)/2+4,'Eᵍ = 1.12 eV',"b04-small","end")+
+ txt(175,102,d.cond+" ↑","b04-label")+
+ txt(175,(yv+yb)/2,'≈12 eV · '+d.val,"b04-title")+
+ '<path d="M555 '+yv+' V'+yb+' m-6 -10 6 10 6 -10" class="b04-measure"/>'+
+ txt(585,(yv+yb)/2+25,d.valenceWidth,"b04-small")+
+ txt(170,yv-9,'χ + Eᵍ = 5.17 eV',"b04-annotation");
+ const metrics='<div class="b04-scaled-metrics">'+
+ [[d.gap,'1.12 eV'],[d.chiMetric,'4.05 eV'],[d.valenceWidth,'≈12 eV'],[d.freeValence,'5.17 eV']]
+ .map(([key,value])=>'<div><strong>'+esc(value)+'</strong><small>'+esc(key)+'</small></div>').join('')+
+ '</div>';
+ return fig(d,"scaled",svg(content,855,565,d.scaled)+metrics,d.scaleNote);
 }
 function bridge(d){
  const cell=(x,y,isBond,after)=>{
@@ -195,6 +206,48 @@ function bridge(d){
   txt(697,270,d.recombination,"b04-small");
  return fig(d,"bridge",svg(body,870,480,d.bridge),d.bridgeNote);
 }
+const lecture04Extensions={
+ tr:{
+ far:"N atom hâlâ uzaktayken: durum ve elektron tablosu",level:"Alt kabuk",stateCount:"Durumlar",electronCount:"Elektronlar",
+ farNote:"Tüm değerler N ile çarpılır. 3p: 6N durum, 2N elektron. Henüz kristal bant aralığı oluşmuş sayılmaz.",
+ classification:"Metal · yarıiletken · yalıtkan",classificationNames:["Metal","Yarıiletken","Yalıtkan"],
+ classificationNotes:["Kısmen dolu veya örtüşen bantlar","Tam alt bant ve küçük yasak aralık","Tam alt bant ve geniş yasak aralık"],
+ classificationNote:"İdeal bant doluluk şemasıdır; sıcaklık, katkılama ve kusurlar ölçülen iletkenliği etkiler.",
+ coupled:"Üç bağlı osilatör: bir frekans üç moda ayrılır",spring:"k",couplingSpring:"kᶜ",
+ modes:["Birlikte","Orta kütle durur","Orta kütle ters"],
+ coupledNote:"Üç aynı m kütlesi, dikey k ve komşular arasında kᶜ yayları: ω₀=√(k/m), ω₁=√((k+kᶜ)/m), ω₂=√((k+3kᶜ)/m). Bu bir mekanik analojidir, elektron bant hesabı değildir.",
+ "coupling-curves":"N=3 ve N=20: kuplaj frekans aralığını genişletir",
+ couplingAxis:"Kuplaj kᶜ/k",freqAxis:"ω/ω₀",couplingNote:"Serbest uçlu N kütle için ωⱼ/ω₀=√[1+2(kᶜ/k)(1−cos(jπ/N))]. N, mod sayısını artırır; aynı kuplajda aralığı N ile çarpmaz.",
+ transitions:"Dört olay: üretim, birleşme, kinetik enerji, kristalden çıkış",
+ transitionNames:["(a) Üretim","(b) Rekombinasyon","(c) Kinetik enerji","(d) Kristalden çıkış"],
+ signNote:"Elektron enerjisi yukarı; holün enerjisi elektron enerji ekseninde aşağı doğru artar.",
+ transitionsNote:"Eᶜ→vakum χ; Eᵛ→vakum χ+Eᵍ gerektirir. Bant kenarı diyagramı geçiş olasılığı veya yüzey bariyerinin tamamını vermez.",
+ dos:"N(E): bantta durumlar enerjiye nasıl dağılır?",valenceBottom:"Eᴮ — valans altı",conductionTop:"Eᵀ — iletim üstü",dosTotal:"≈2×10²³ durum/cm³",
+ dosNote:"N(E) birim enerji ve hacimdeki durumları verir; valans boyunca integral ≈2×10²³ cm⁻³. Doluluk ayrıca f(E,T) ile hesaplanır.",
+ valenceWidth:"Valans bandı genişliği",freeValence:"Valanstan vakuma",chiMetric:"Elektron ilgisi"
+ },
+ en:{
+ far:"N atoms, still far apart: states and electrons",level:"Subshell",stateCount:"States",electronCount:"Electrons",
+ farNote:"All entries scale by N. The isolated 3p level has 6N states but only 2N electrons; a crystal gap has not yet been demonstrated.",
+ classification:"Metal · semiconductor · insulator",classificationNames:["Metal","Semiconductor","Insulator"],
+ classificationNotes:["Partly filled or overlapping bands","Full lower band and small gap","Full lower band and large gap"],
+ classificationNote:"An idealized band occupation classification; temperature, doping and defects affect measured conduction.",
+ coupled:"Three coupled oscillators: one frequency becomes three modes",spring:"k",couplingSpring:"kᶜ",
+ modes:["In unison","Middle mass stationary","Middle mass opposite"],
+ coupledNote:"Three identical masses m with grounding springs k and nearest-neighbor coupling kᶜ: ω₀=√(k/m), ω₁=√((k+kᶜ)/m), ω₂=√((k+3kᶜ)/m). This is a mechanical analogy, not an electronic band calculation.",
+ "coupling-curves":"N=3 and N=20: coupling increases the frequency spread",
+ couplingAxis:"Coupling kᶜ/k",freqAxis:"ω/ω₀",couplingNote:"For a free-end chain, ωⱼ/ω₀=√[1+2(kᶜ/k)(1−cos(jπ/N))]. More N increases mode count, not the spread by a factor of N at fixed coupling.",
+ transitions:"Four processes: generation, recombination, kinetic energy and escape",
+ transitionNames:["(a) Generation","(b) Recombination","(c) Kinetic energy","(d) Escape to vacuum"],
+ signNote:"Electron energy increases upward; hole energy increases downward on the electron-energy axis.",
+ transitionsNote:"From Eᶜ to vacuum needs χ; from Eᵛ to vacuum needs χ+Eᵍ. These edge diagrams do not predict transition rates or all surface barriers.",
+ dos:"N(E): how states are distributed across a band",valenceBottom:"Eᴮ — valence bottom",conductionTop:"Eᵀ — conduction top",dosTotal:"≈2×10²³ states/cm³",
+ dosNote:"N(E) counts states per unit energy and volume; its integral over valence ≈2×10²³ cm⁻³. Occupation requires f(E,T).",
+ valenceWidth:"Valence-band width",freeValence:"Valence top to vacuum",chiMetric:"Electron affinity"
+ }
+};
+for(const language of ["tr","en"])Object.assign(labels[language],lecture04Extensions[language]);
+
 function render(kind,lang="tr"){
  const d=labels[lang==="en"?"en":"tr"];
  const renders={why:reason,principles,atom:atomic,splitting,bands,diagram,scaled,bridge};

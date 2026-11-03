@@ -248,9 +248,132 @@ const lecture04Extensions={
 };
 for(const language of ["tr","en"])Object.assign(labels[language],lecture04Extensions[language]);
 
+
+function far(d){
+ const levels=["1s","2s","2p","3s","3p"];
+ const states=["2N","2N","6N","2N","6N"],electrons=["2N","2N","6N","2N","2N"];
+ const row=(title,data)=>'<tr><th scope="row">'+esc(title)+'</th>'+
+ data.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>';
+ const body='<div class="b04-table-wrap"><table class="b04-atom-table">'+
+ '<thead><tr><th>'+esc(d.level)+'</th>'+levels.map(v=>'<th scope="col">'+v+'</th>').join('')+'</tr></thead>'+
+ '<tbody>'+row(d.stateCount,states)+row(d.electronCount,electrons)+'</tbody></table></div>'+
+ '<div class="b04-summary-pair"><span>4N '+(d.electronCount)+'</span><span>8N '+(d.stateCount)+' (3s + 3p)</span></div>';
+ return fig(d,"far",body,d.farNote);
+}
+function classification(d){
+ const states=[["b04-metal",true,5],["b04-semiconductor",false,20],["b04-insulator",false,60]];
+ const figure=states.map(([cl,metal,gap],i)=>{
+  const lineY=103;
+  return '<g transform="translate('+(i*296+13)+' 12)">'+
+    '<rect x="0" y="0" width="281" height="247" rx="10" class="b04-frame"/>'+
+    txt(14,27,d.classificationNames[i],"b04-title")+
+    '<rect x="30" y="64" width="220" height="42" class="b04-upper"/>'+
+    '<rect x="30" y="'+(111+gap)+'" width="220" height="42" class="b04-lower"/>'+
+    (metal?'<rect x="30" y="85" width="220" height="23" class="b04-metal-fill"/>':'')+
+    txt(18,190,d.classificationNotes[i],"b04-small")+
+    (metal?txt(140,221,"f(E) ≠ 0/1","b04-small","middle"):txt(140,221,"Eᵍ","b04-title","middle"))+
+    '</g>';
+ }).join('');
+ return fig(d,"classification",svg(figure,908,275,d.classification),d.classificationNote);
+}
+function coupled(d){
+ const xs=[170,348,526],by=176;
+ const spring=(x1,y1,x2,y2,vertical=false)=>{
+  const points=[],steps=14;
+  for(let i=0;i<=steps;i++){
+   const f=i/steps,offset=i===0||i===steps?0:(i%2?8:-8);
+   const x=vertical?x1+offset:x1+(x2-x1)*f;
+   const y=vertical?y1+(y2-y1)*f:y1+offset;
+   points.push(x.toFixed(1)+","+y.toFixed(1));
+  }
+  return '<polyline points="'+points.join(" ")+'" class="b04-spring"/>';
+ };
+ let g='<path d="M75 42 H620" class="b04-level"/>';
+ for(const [i,x] of xs.entries()){
+  g+=spring(x,42,x,by-28,true)+
+    '<rect x="'+(x-32)+'" y="'+(by-28)+'" width="64" height="56" class="b04-mass"/>'+
+    txt(x,by+6,'m',"b04-title","middle")+
+    txt(x+19,105,d.spring,"b04-small");
+  if(i<2)g+=spring(x+34,by,xs[i+1]-34,by)+txt((x+xs[i+1])/2,by-15,d.couplingSpring,"b04-small","middle");
+ }
+ const modes=[
+ ["ω₀ = √(k/m)","↑ ↑ ↑"],
+ ["ω₁ = √((k + kᶜ)/m)","↑ 0 ↓"],
+ ["ω₂ = √((k + 3kᶜ)/m)","↑ ↓ ↑"]
+ ];
+ for(let i=0;i<3;i++){
+  const y=70+i*76;
+  g+=txt(665,y,d.modes[i],"b04-label")+
+    txt(665,y+20,modes[i][0],"b04-small")+
+    txt(665,y+40,modes[i][1],"b04-small");
+ }
+ return fig(d,"coupled",svg(g,950,310,d.coupled),d.coupledNote);
+}
+function couplingCurves(d){
+ const freq=(j,N,r)=>Math.sqrt(1+2*r*(1-Math.cos(j*Math.PI/N)));
+ const panels=[{N:3,x:65},{N:20,x:500}],w=300,top=56,bottom=305;
+ let content=txt(20,22,d.freqAxis,"b04-label");
+ for(const {N,x} of panels){
+   content+='<path d="M'+x+' '+top+' V'+bottom+' H'+(x+w)+'" class="b04-axis"/>'+
+     txt(x+w/2,32,'N = '+N,"b04-title","middle")+
+     txt(x+w/2,357,d.couplingAxis,"b04-small","middle");
+   for(const tick of [1,1.5,2,2.5]){
+     const y=bottom-(tick-1)/1.5*(bottom-top);
+     content+='<path d="M'+x+' '+y+' H'+(x+w)+'" class="b04-grid"/>'+
+        txt(x-9,y+5,String(tick),"b04-small","end");
+   }
+   for(const tick of [0,.5,1])content+=txt(x+tick*w,bottom+22,String(tick),"b04-small","middle");
+   for(let j=0;j<N;j++){
+      const path=Array.from({length:46},(_,m)=>{
+       const r=m/45,yy=bottom-(freq(j,N,r)-1)/1.5*(bottom-top);
+       return (m?"L":"M")+(x+r*w).toFixed(2)+" "+yy.toFixed(2);
+      }).join(" ");
+      content+='<path d="'+path+'" class="'+(N===3?"b04-mode-strong":"b04-mode-curve")+'"/>';
+   }
+ }
+ return fig(d,"coupling-curves",svg(content,875,380,d["coupling-curves"]),d.couplingNote);
+}
+function transitions(d){
+ const names=d.transitionNames;
+ function panel(i,x,y){
+   let g='<g transform="translate('+x+' '+y+')">'+
+    '<rect x="0" y="0" width="412" height="222" rx="10" class="b04-frame"/>'+
+    txt(14,24,names[i],"b04-title")+
+    '<path d="M42 54 H332 M42 110 H332 M42 171 H332" class="b04-level"/>'+
+    txt(344,58,'E₀',"b04-small")+txt(344,114,'Eᶜ',"b04-small")+txt(344,175,'Eᵛ',"b04-small");
+   const charge=(xx,yy,kind)=>'<circle cx="'+xx+'" cy="'+yy+'" r="10" class="'+(kind==="e"?"b04-electron":"b04-hole")+'"/>'+
+     txt(xx,yy+4,kind==="e"?"−":"+","b04-charge","middle");
+   const arrow=(x1,y1,x2,y2)=>'<path d="M'+x1+' '+y1+' L'+x2+' '+y2+' m-5 '+(y2<y1?8:-8)+' 5 '+(y2<y1?-8:8)+' 5 '+(y2<y1?8:-8)+'" class="b04-event-arrow"/>';
+   if(i===0)g+=charge(155,171,"h")+charge(155,110,"e")+arrow(197,169,197,114);
+   if(i===1)g+=charge(155,171,"h")+charge(155,110,"e")+arrow(197,114,197,168);
+   if(i===2)g+=charge(131,110,"e")+charge(237,171,"h")+
+     arrow(131,106,131,81)+arrow(237,172,237,206)+
+     txt(150,86,"e⁻ ↑","b04-small")+txt(257,199,"h⁺ ↓","b04-small");
+   if(i===3)g+=charge(135,110,"e")+charge(236,171,"e")+
+     arrow(135,105,135,57)+arrow(236,165,236,57)+
+     txt(144,83,"χ","b04-small")+txt(244,84,"χ + Eᵍ","b04-small");
+   return g+'</g>';
+ }
+ let g=panel(0,18,10)+panel(1,458,10)+panel(2,18,245)+panel(3,458,245);
+ return fig(d,"transitions",svg(g,890,485,d.transitions),
+   d.signNote+" "+d.transitionsNote);
+}
+function dos(d){
+ const yB=380,yV=292,yC=218,yT=89;
+ let g='<path d="M104 416 V45 l-7 9 m7 -9 7 9 M104 416 H675" class="b04-axis"/>'+
+   txt(25,34,"E","b04-title")+txt(600,433,"N(E)","b04-title");
+ for(const [y,label] of [[yB,d.valenceBottom],[yV,"Eᵛ"],[yC,"Eᶜ"],[yT,d.conductionTop]]){
+   g+='<path d="M104 '+y+' H650" class="b04-grid"/>'+txt(114,y-6,label,"b04-small");
+ }
+ g+='<path d="M104 '+yB+' C170 '+(yB-6)+' 230 '+(yB-70)+' 356 '+(yV+15)+' L104 '+yV+' Z" class="b04-lower-shape"/>'+
+   '<path d="M104 '+yC+' C184 '+(yC-3)+' 268 '+(yC-98)+' 346 '+yT+' L104 '+yT+' Z" class="b04-upper-shape"/>'+
+   txt(374,335,d.val,"b04-label")+txt(374,160,d.cond,"b04-label")+
+   txt(345,399,d.dosTotal,"b04-title");
+ return fig(d,"dos",svg(g,790,470,d.dos),d.dosNote);
+}
 function render(kind,lang="tr"){
  const d=labels[lang==="en"?"en":"tr"];
- const renders={why:reason,principles,atom:atomic,splitting,bands,diagram,scaled,bridge};
+ const renders={why:reason,principles,atom:atomic,far,splitting,coupled,"coupling-curves":couplingCurves,bands,classification,diagram,scaled,bridge,transitions,dos};
  return renders[kind]?renders[kind](d):"";
 }
 window.BandTheory04Visuals={render};

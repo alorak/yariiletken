@@ -358,6 +358,8 @@
       (lesson.id === "04" && Array.isArray(topic.visual04) && window.BandTheory04Visuals
         ? topic.visual04.map(kind => window.BandTheory04Visuals.render(kind, language)).join("")
         : "") +
+      (topic.lectureFigure && window.Lecture0506Lab?.figure
+        ? window.Lecture0506Lab.figure(topic.lectureFigure, language) : "") +
       (lesson.id === "03" && index === 2 ? '<div id="lesson03-hole-inline"></div>' : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
@@ -399,6 +401,9 @@
   }
 
   function renderPlanned(lesson, tabId) {
+    if (window.Lecture0506Lab?.mount({
+      container: $("#content-panel"), lessonId: lesson.id, language, tabId
+    })) return;
     if (lesson.id === "04" && window.BandTheory04Lab?.mount({
       container: $("#content-panel"), language, tabId
     })) return;

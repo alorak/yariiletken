@@ -188,3 +188,101 @@ test("lesson 04 narrative and outcomes remain intact",()=>{
   assert.equal(l.outcomes.length,14);assert.equal(en.outcomes.length,14);
   assert.equal(window.COURSE_LESSONS.reduce((a,x)=>a+x.topics.length,0),39);
 });
+
+
+function fakeBrowser(){
+  class FakeNode {
+    constructor(){
+      this.children=[];this.nodes=new Map();this.inputs=[];this.handlers={};
+      this.dataset={};this.style={};this.value="";this.textContent="";this.disabled=false;
+      this._html="";
+    }
+    set innerHTML(value){
+      this._html=String(value);this.nodes=new Map();this.inputs=[];
+      const re=/<input\b[^>]*data-key="([^"]+)"[^>]*>/g;
+      for(const match of this._html.matchAll(re)){
+        const field=new FakeNode(),tag=match[0];
+        field.dataset.key=match[1];
+        field.value=/value="([^"]*)"/.exec(tag)?.[1]||"";
+        field.step=/step="([^"]*)"/.exec(tag)?.[1]||"1";
+        field.max=/max="([^"]*)"/.exec(tag)?.[1]||"100";
+        this.inputs.push(field);
+      }
+    }
+    get innerHTML(){return this._html;}
+    querySelectorAll(selector){
+      if(selector==="input[data-key]")return this.inputs;
+      return [];
+    }
+    querySelector(selector){
+      if(selector.startsWith("input[data-key"))return this.inputs[0]||null;
+      if(selector.startsWith('[data-key="')){
+        const key=/data-key="([^"]+)"/.exec(selector)?.[1];
+        return this.inputs.find(x=>x.dataset.key===key)||null;
+      }
+      if(!this.nodes.has(selector))this.nodes.set(selector,new FakeNode());
+      return this.nodes.get(selector);
+    }
+    addEventListener(event,listener){this.handlers[event]=listener;}
+    append(child){this.children.push(child);}
+    replaceChildren(...children){this.children=[...children];}
+  }
+  const document={createElement(){return new FakeNode();}};
+  const local={BandTheory04Model:M};
+  runInNewContext(read("band-theory04-lab.js"),{window:local,document});
+  return {lab:local.BandTheory04Lab,FakeNode};
+}
+
+test("both language graph tabs create five complete rendered plots",()=>{
+  const {lab,FakeNode}=fakeBrowser();
+  for(const language of ["tr","en"]){
+    const root=new FakeNode();
+    assert.equal(lab.mount({container:root,language,tabId:"grafikler"}),true);
+    assert.equal(root.children.length,1);
+    const cards=root.children[0].children;
+    assert.equal(cards.length,5);
+    for(const card of cards){
+      assert.match(card.querySelector("[data-plot]").innerHTML,/<svg/);
+      assert.match(card.querySelector("[data-stats]").innerHTML,/b04lab-stat/);
+      assert.ok(card.inputs.length>0);
+    }
+    // Changing the N slider on the atom count graph actually redraws output.
+    const count=cards[0],n=count.inputs.find(x=>x.dataset.key==="N");
+    assert.ok(n);
+    const before=count.querySelector("[data-stats]").innerHTML;
+    n.value="10";n.handlers.input();
+    assert.notEqual(count.querySelector("[data-stats]").innerHTML,before);
+  }
+});
+
+test("simulation tab creates four working activities including event buttons",()=>{
+  const {lab,FakeNode}=fakeBrowser();
+  for(const language of ["tr","en"]){
+    const root=new FakeNode();
+    assert.equal(lab.mount({container:root,language,tabId:"simulasyonlar"}),true);
+    const cards=root.children[0].children;
+    assert.equal(cards.length,4);
+    for(const card of cards){
+      assert.match(card.querySelector("[data-visual]").innerHTML,/<svg|b04lab-bandgrid/);
+      assert.match(card.querySelector("[data-stats]").innerHTML,/b04lab-stat/);
+    }
+    const transition=cards[3],button=transition.querySelector("[data-apply]");
+    assert.equal(button.disabled,false);
+    button.handlers.click(); // 1.5 eV photon-like generation
+    assert.match(transition.querySelector("[data-stats]").innerHTML,/pair|hol|çift|Elektron/i);
+    const select=transition.querySelector("[data-mode]");
+    select.value="1";select.handlers.change({target:select});
+    assert.equal(button.disabled,false);
+    button.handlers.click(); // recombination
+    const stats=transition.querySelector("[data-stats]").innerHTML;
+    assert.match(stats,/pair|çift|No pair|Çift yok/);
+    transition.querySelector("[data-reset]").handlers.click();
+    assert.equal(transition.querySelector("[data-mode]").value,"0");
+  }
+});
+
+test("the Lesson 04 laboratory does not take over other content tabs",()=>{
+  const {lab,FakeNode}=fakeBrowser();
+  assert.equal(lab.mount({container:new FakeNode(),language:"tr",tabId:"sorular"}),false);
+  assert.equal(lab.mount({container:null,language:"tr",tabId:"grafikler"}),false);
+});

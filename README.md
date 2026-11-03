@@ -5,10 +5,10 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 ## Özellikler (ilk aşama)
 
 - Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
-- Sağ üstte **TR / EN** dil anahtarı: arayüz, 38 konu anlatımı, 51 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 39 konu anlatımı, 55 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **38 açıklamalı konu başlığı** ve **51 ölçülebilir öğrenme kazanımı**.
+- Beş ders için **39 açıklamalı konu başlığı** ve **52 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
@@ -23,7 +23,7 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 |---|---|---:|---:|
 | 02 | Yarıiletken malzemeler, kristal yapısı, termal denge | 6 | 10 |
 | 03 | Elektron, hol, fonon/foton, üretim/rekombinasyon, etkin kütle ve nᵢ | 9 | 13 |
-| 04 | Bağ modeli, üç bant ilkesi, Si durum sayımı, N atom, ölçekli bant diyagramı | 8 | 10 |
+| 04 | Bant modeli, atomik seviyeler, kuplaj ve Si bant diyagramı | 9 | 14 |
 | 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 8 |
 | 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 10 |
 
@@ -133,7 +133,7 @@ Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece 
 
 - **02 · Öz taşıyıcı yoğunluğu – sıcaklık:** Y ekseni artık doğrudan `nᵢ (cm⁻³)` gösterir; `log₁₀` dönüşümü uygulanmaz. Si/Ge/GaAs malzeme seçicisi her malzemenin eğrisini **kendi doğrusal ölçeğinde** gösterir. Sıcaklık kontrolü seçilen noktanın çevresinde yaklaşık ±50 K aralığına odaklanır; sağa/sola sınırda 200–500 K aralığına kırpılır. Eksen değerleri bilimsel gösterimde (örn. 2×10¹¹) yazılabilir; bu bir logaritmik eksen değildir.
 - Sıcaklığa bağlı nᵢ hesaplarında 300 K referansları ve sabit bant aralığı yaklaşımı değişmedi. Ayrı **bant aralığı duyarlılığı** grafiğinin `log₁₀` gösterimi bu PR kapsamında değiştirilmedi.
-- Önceki aşamada 02 ve 06 kazanımları genişletildi; bu PR ile 03'ün yeni anlatımı da eklendi. Önceki aşamada toplam **37 konu, 48 kazanım**. Önceki işaretlemelerin indeksleri korunur.
+- Önceki aşamada 02 ve 06 kazanımları genişletildi; bu PR ile 03'ün yeni anlatımı da eklendi. Güncel toplam **39 konu, 52 kazanım**. Önceki işaretlemelerin indeksleri korunur.
 - 02'de Si atom yoğunluğu ile yaklaşık öz taşıyıcı yoğunluğunun fiziksel mertebe farkı da konu anlatımına eklendi. Varsayımlara uygun yaklaşık hesaplar kullanılır; bunlar tam malzeme ölçümü değildir.
 
 Kontrol komutu: `node --test tests/*.test.mjs`.
@@ -152,7 +152,7 @@ Kontrol komutu: `node --test tests/*.test.mjs`.
 
 **Bilimsel sınırlama:** Slaytın “42 parçacık aynı bağda buluşur” anlatısı nicel fizik mekanizması olarak aktarılmaz; `E/kT≈42` yalnızca sezgisel oran olarak açıklanır. 1,1–1,12 eV değeri doğrudan kimyasal Si–Si bağ kopma enerjisiyle özdeşleştirilmez.
 
-Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Bu önceki aşamanın sonunda depoda **37 konu, 48 kazanım** bulunuyordu.
+Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Böylece depoda toplam **39 konu, 52 kazanım** bulunur.
 
 Test komutu: `node --test tests/*.test.mjs`. Canlı tarayıcıda mobil/masaüstü görsel test ayrıca yapılmalıdır.
 
@@ -226,7 +226,7 @@ Kaynaklar / yaklaşık parametre referansları:
 ## Navbar'da konu arama ve konu gezgini senkronizasyonu
 
 - Üst menüde tema ve dil seçicilerinin yanında tek renkli **büyüteç düğmesi** yer alır. Düğmeye basınca aşağı açılan erişilebilir metin arama kutusu görünür. `Ctrl+K` / `⌘K` ile açılır, `Esc` ile kapanır. Sonuçlarda klavyeyle yukarı/aşağı gezinme ve Enter ile seçme desteklenir.
-- Arama **yalnızca cihazda**, mevcut `lessons.js` / `lessons.en.js` verilerinden yapılır. 02–06 derslerindeki 38 konu başlığı, açıklama paragrafı, temel denklem ve ana fikir taranır. İnternet API'si, sunucuya gönderilen sorgu veya bağımsız arama veritabanı kullanılmaz.
+- Arama **yalnızca cihazda**, mevcut `lessons.js` / `lessons.en.js` verilerinden yapılır. 02–06 derslerindeki 39 konu başlığı, açıklama paragrafı, temel denklem ve ana fikir taranır. İnternet API'si, sunucuya gönderilen sorgu veya bağımsız arama veritabanı kullanılmaz.
 - Türkçe karakterler / aksanlar normalize edilir; örneğin `oz tasiyici` ile `öz taşıyıcı`, `n_i` ile `nᵢ` aranabilir. Dil değişince indeks ve sonuçlar o dile güncellenir; boş aramalarda açıklama, eşleşmeyenlerde sonuç yok mesajı görünür.
 - Her sonuçta **ders adı, konu numarası, başlık ve bağlam metni** yer alır. Sonuca basıldığında ilgili `#ders-XX/anlatim` sayfasına gidilir, metindeki eşleşme `<mark>` ile vurgulanır ve doğrudan aranan noktaya kaydırılır.
 - Önceden konu numarasına tıklanınca sonraki konu başlığının olması gerekenden aşağıda kalması ve önceki konu numarasının aktif görünmesi, `scrollIntoView` için `scroll-margin` ile `scroll-padding` boşluklarının iki kez hesaplanmasından kaynaklanıyordu. Yeni `scrollToCourseTopic`, gerçek sabit header + ders başlığı/sekmeler + sol konu gezgininin yüksekliklerini ölçer ve **tek bir kaydırma ofseti** kullanır. Son sayfa sınırında son konu numarası seçilir. Gezinme mevcut sağ kazanımlar panelinden bağımsızdır.
@@ -234,21 +234,42 @@ Kaynaklar / yaklaşık parametre referansları:
 
 Testler: `node --test tests/course-search.test.mjs tests/topic-stepper.test.mjs tests/sticky-layout.test.mjs`; tam regresyon: `node --test tests/*.test.mjs`.
 
-## Ders 04 — Bant teorisi: kaynak slayt sıralı yeniden yapılandırma
 
-Konu anlatımı **8 konu, 10 kazanım** olarak TR/EN güncellendi. 02/03/05/06 konuları ve kayıtlı kazanımları korunur; **genel toplam 38 konu / 51 kazanım**.
+## Ders 04 — Atomik seviyelerden bant modeline (kaynak çizimlerine dayalı yeniden çizimler)
 
-1. **Why leave the bond model?** Yerel bağ modelinin enerji seviyeleri, yoğunluğu ve doluluk hesabını verememesinin somut nedenleri.
-2. **Three principles of the band model:** İzinli enerji durumları, durum yoğunluğu `g(E)`, Fermi–Dirac doluluk `f(E)`; n,p integralleri.
-3. **Start from one isolated silicon atom:** `1s² 2s² 2p⁶ 3s² 3p²`, 14 elektron; spin dâhil 1s=2/2, 2s=2/2, 2p=6/6, 3s=2/2, 3p=2/6 durum sayımı. Eş enerjili durumlar Pauli ve Hund kurallarıyla ayrılır.
-4. **Bring the atoms together:** `3s 2N + 3p 6N = 8N` değerlik durumu; 4N elektron. İdeal 0 K Si'de 4N dolu valans / 4N boş iletim; çekirdek seviyeleri görece dar. Atomlar arası denge uzaklığı toplam enerjinin minimumuyla seçilir.
-5. **The band diagram:** E₀ (vakum), Eᶜ, Eᵛ, χ, E₉, derin çekirdek seviyeleri; izinli-bant ve standart diyagram karşılaştırması.
-6. **Silicon drawn to scale:** 300 K'de öğretici Si parametreleriyle `E₀=0`, `Eᶜ=−4.05 eV`, `Eᵛ=−5.17 eV`; vakum–iletim mesafesi **4.05 eV**, bant aralığı **1.12 eV**. Düşey uzaklıklar **1 eV=66 SVG birimi** ile doğrusal ölçeklidir; atomik bant genişlikleri değil yalnızca bu enerji farkları ölçeklidir. Elektron ilgisi χ yüzey koşullarına bağlıdır, iş fonksiyonu Φ=E₀−Eᶠ değildir.
-7. **Bond model ↔ band model:** N atomun 2N yerel bağı (4N e⁻) ile 4N dolu valans durumu ilişkisi; boş bağ/hol ve VB→CB elektron uyarılması. Band gap ile tek bir Si–Si bağın kimyasal ayrışması özdeşleştirilmez.
-8. **Effective mass:** E(k) eğriliği, etkin kütle ve modelin sınırları.
+PR #16 üzerinde **04 Bant Teorisi**, **9 konu ve 14 kazanım** olacak şekilde TR/EN, yüklenen 15 sayfalık **lec04.pdf** ile doğrudan karşılaştırılarak tamamlandı. Üç kullanıcı görselindeki **tek Si atomu spin durumları**, **N atom için 3s/3p seviyelerinin ayrışması** ve **standart bant kenarı gösterimi**, özgün ve erişilebilir SVG olarak yeniden çizildi. *Kaynak görsellerin bitmap kopyaları değildir; içerikte durum sayımı, adlandırma ve enerji bağıntıları korunarak hazırlanan vektör şemalardır.*
 
-Yeni `lesson04-figures.js`, yedi **özgün ve erişilebilir SVG öğretim şeması** oluşturur (`why`, `principles`, `atom`, `split`, `bands`, `scale`, `bond-band`), açık/koyu tema CSS'iyle birlikte. Şemalar kullanıcının sağladığı üç slayt ekran görüntüsündeki kavram ve yapıya göre yeniden çizilmiştir; ekran görüntülerinin birebir piksel kopyası veya DFT hesabı değildir.
+1. **Why leave the bond model?** Yerel bağ resmi elektron/hol sezgisi sağlar; izinli kuantum enerji durumlarını, durum yoğunluğunu, Fermi doluluğunu ve azınlık taşıyıcılarını nicel olarak vermez.
+2. **Three principles:** İzinli kuantum durumları; Pauli ve spin; enerjiye göre doluluk/0 K temel durum, sonlu T için Fermi–Dirac.
+3. **Isolated Si atom:** `1s²2s²2p⁶3s²3p²`, Z=14; 3p'de spin dahil 6 durumdan 2'si dolu. SVG'de toplam 18 (1s/2s/2p/3s/3p) spin durumu ve 14 dolu durum; enerji mesafeleri ölçekli değil.
+4. **N atoms together:** 3s kökenli 2N durum/2N elektron, 3p kökenli 6N durum/2N elektron, toplam 8N durum/4N elektron. Seviye ayrışması/karışması ve iç kabukların daha dar kalması.
+5. **4N / 4N:** 0 K ideal öğretim modelinde alt valans bandında 4N dolu durum ve üst iletim bandında 4N boş durum, yasak bant aralığı Eᵍ.
+6. **Conventional band diagram:** E₀ vakum, Eᶜ iletim alt sınırı, Eᵛ valans üst sınırı, Eᵍ=Eᶜ−Eᵛ, χ=E₀−Eᶜ.
+7. **Silicon drawn to scale:** Yaklaşık 300 K'de Eᵍ=1,12 eV, χ=4,05 eV; E₀=0 referansıyla Eᶜ=−4,05 eV ve Eᵛ=−5,17 eV. Düşey E₀–Eᶜ ve Eᶜ–Eᵛ *mesafeleri aynı px/eV ölçeğiyle* çizilir. Bu üç kenar dışındaki bant genişlikleri ölçekli değildir. χ gerçek yüzey sonlanmasına/orientasyonuna duyarlı olabilir.
+8. **Bond model ↔ band model:** Aynı elektron–hol üretimi ve yeniden birleşmesi yerel bağ boşluğu ile dolu/boş kristal durumları üzerinden karşılaştırılır. Eᵍ tek Si–Si bağının kimyasal kopma enerjisi değildir.
+9. **E(k), k ve etkin kütle:** Kenar diyagramının dispersiyon grafiği olmadığı, Si'nin dolaylı bant aralığı ve E(k) eğriliği açıklanır.
 
-**Kaynak doğrulama:** Üç görsel kullanıcının eklediği slaytlardan; 04'ün diğer başlıkları kullanıcı tarafından belirtilmiş ancak orijinal tam lec04.pdf dosyası mevcut dosya kütüphanesinde bulunamamıştır. 'Three principles' terminolojisi mevcut diğer ders kaynağındaki 'allowed levels / density of states / occupied fraction' ile uyumludur. 300 K Si sayısal referansı için BYU Cleanroom Semiconductor Constants tablosu kullanılabilir: https://www.cleanroom.byu.edu/Semiconductor-Constants .
+Teknik: `band-theory04-visuals.js` (8 TR/EN açıklamalı SVG), `lessons.js`, `lessons.en.js`, `app.js`, `index.html`, `styles.css`, `tests/lesson04-band-theory.test.mjs`. Toplam **39 konu, 55 kazanım**. 04'ün eski 7 kazanımı kullanıcı için yanlışlıkla aynı indekslerle işaretli kalmasın diye bir defalık **anlamsal eşleştirme** ile yeni 11 kazanımdaki karşılıklarına taşınır. 02,03,05,06 kazanım kayıtları etkilenmez.
 
-Test: `node --test tests/lesson04-band-theory.test.mjs tests/topic-stepper.test.mjs tests/course-search.test.mjs`; tam test `node --test tests/*.test.mjs`.
+**Dayanak:** Kullanıcının yüklediği `lec04.pdf` (15 sayfa) artık doğrudan incelendi. İçerik karşılaştırması s. 3–14 üzerinden yapıldı. Slayt görselleri yeniden çizilmiş erişilebilir öğretim şekilleridir; bitmap kopyaları değildir. Slaytın E₉'yi 'bond strength' olarak ifade etmesi tek kimyasal Si–Si bağının ayrışma enerjisi olarak aktarılmadı; bu fiziksel ayrım sayfada özellikle açıklanır.
+
+300 K Si referans değerleri:
+- <https://www.cleanroom.byu.edu/Semiconductor-Constants>
+- <https://doc.comsol.com/6.3/doc/com.comsol.help.comsol/comsol_ref_materials.25.47.html>
+
+Test: `node --test tests/*.test.mjs` (özellikle `tests/lesson04-band-theory.test.mjs`).
+
+### PR #16 — lec04.pdf ile eklenen eksik içerikler (sayfa bazında)
+
+- **s. 3–4:** Bağ modelinin nicel hesap eksikliği ve tam **üç ilke**: (1) izinli kuantum durumları/Pauli ve 0 K, (2) durumların enerjiye dağılımı `N(E)`, (3) Fermi–Dirac doluluk oranı `f(E,T)`. Önceki 'Pauli = ikinci ilke' hatası düzeltildi.
+- **s. 5–6:** 14 dolu/18 izinli spin durumu, 1s–3p sayımı ve **N atom hâlâ ayrı iken** `durumlar: 2N,2N,6N,2N,6N` ile `elektronlar: 2N,2N,6N,2N,2N` için erişilebilir tablo.
+- **s. 7–8:** 3s/3p'den 8N durum/4N elektron ve 0 K'de 4N dolu +4N boş bant; metal/küçük aralıklı yarıiletken/büyük aralıklı yalıtkan karşılaştırması.
+- **s. 9:** Standart bant diyagramının yatay ekseninin bu çizimde bir fiziksel değişken olmadığı, sonrasında konum veya k eksenleriyle ayrılacağı açıklaması.
+- **s. 10–11:** Üç kütle-yay osilatörü için `ω₀=√(k/m)`, `ω₁=√((k+kᶜ)/m)`, `ω₂=√((k+3kᶜ)/m)`. `N=3` ve `N=20` için normal modların kuplaja bağlı, fiziksel denklemlerden üretilen özgün grafikleri. Kuplaj bant genişliğini; N ise ayrık durum sayısını belirler. Mekanik model elektron bant hesabı değildir.
+- **s. 12:** Ortak doğrusal enerji ölçeğinde `χ≈4,05 eV`, `E₉≈1,12 eV`, `E₀−Eᵛ≈5,17 eV`, **yaklaşık 12 eV valans bant genişliği** ve `Eᴮ≈−17,17 eV`. Bu değerler Si için öğretici yaklaşık parametrelerdir; χ yüzey koşullarına bağlı olabilir.
+- **s. 13:** Üretim, rekombinasyon, elektron ve hol kinetik enerjisi yönleri, kristalden vakuma çıkış için χ ve χ+E₉; dört bağımsız işaretli bant olayı diyagramı.
+- **s. 14:** `5×10²²` Si atomu/cm³, **`2×10²³` spin dâhil valans durumu/cm³**, `N(E)` eğrisi ve integral toplamı; `Eᴮ`, `Eᵀ` etiketlerinin ders kaynağındaki anlamları. Ders 05'e hazırlık.
+
+Yeni `visual04` alt tipleri: `far` (HTML tablo), `coupled`, `coupling-curves`, `classification`, `transitions`, `dos`. Önceki 8 şekil türü korunmuştur; toplam 14 açıklamalı figür türü vardır. Eski 11 kazanımın indeksleri korunup üç ölçülebilir kazanım sona eklendi. **Son durum 04: 9 konu / 14 kazanım; tüm program: 39 konu / 55 kazanım.**
+
+Doğrulama: `node --test tests/*.test.mjs`. Akademik kullanımda şekiller kavramsal/öğretici olarak etiketli, fiziksel cihaz ölçümü veya DFT sonucu değildir.

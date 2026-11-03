@@ -17,7 +17,7 @@ const c={
  ["2 · Durum yoğunluğu","E ile E+dE arasında hacim başına kaç durum var?","g(E) dE"],
  ["3 · Doluluk","Bu durumun elektronla dolu olma olasılığı kaç?","f(E,T)"]],
  foot:"Elektron sayısı = izinli durumların ağırlıklı toplamı. Hol için [1−f(E)] kullanılır."},
- atom:{title:"Yalıtılmış silisyum atomunda spin dâhil kuantum durumları",occupied:"dolu durum (×)",empty:"boş durum",energy:"Elektron enerjisi ↑",notes:"3p: 6 durumdan 2'si dolu. Daireler spin durumlarını temsil eder; çizimdeki enerji farkları ölçekli değildir."},
+ atom:{title:"Yalıtılmış silisyum atomunda spin dâhil kuantum durumları",occupied:"dolu durum (×)",empty:"boş durum",states:"durum",occupiedCount:"dolu",energy:"Elektron enerjisi ↑",notes:"3p: 6 durumdan 2'si dolu. Daireler spin durumlarını temsil eder; çizimdeki enerji farkları ölçekli değildir."},
  split:{title:"N atom yaklaşınca seviyelerin yayılıp bantlaşması",energy:"Elektron enerjisi",sep:"Atomlar arası uzaklık →",crystal:"Si denge uzaklığı",upper:"İletim: 4N durum, 0 K'de boş",lower:"Valans: 4N durum, 0 K'de dolu",merged:"3s + 3p → 8N durum / 4N e⁻",core:"İç 1s, 2s, 2p: dar bant",note:"Şema: sağda birbirinden uzak atomların ayrık seviyeleri, solda yaklaşan atomların bantları. 0 K doluluğu ideal öz Si içindir; hesaplanmış E(k) veya atomik uzaklık grafiği değildir."},
  bands:{title:"İzinli bantlardan standart enerji diyagramına",energy:"Elektron enerjisi",vacuum:"Vakum seviyesi",cb:"İletim bandı",vb:"Valans bandı",gap:"Yasak aralık",electronAffinity:"Elektron ilgisi",core:"Derin çekirdek seviyeleri",left:"İzinli enerjiler",right:"Geleneksel diyagram",note:"Bu şema ölçekli değildir. E₀ vakum seviyesidir, χ = E₀ − Eᶜ ve E₉ = Eᶜ − Eᵛ birbirinden farklıdır."},
  scale:{title:"Silisyum bantları — enerji ekseni ölçekli (300 K, örnek değerler)",vacuum:"Vakum",conduction:"İletim",valence:"Valans",gap:"Bant aralığı",affinity:"Elektron ilgisi",note:"Vakum referansı E₀=0 eV; Eᶜ=−4,05 eV, Eᵛ=−5,17 eV. Düşey mesafeler gerçek eV oranında çizildi. χ yüzeye bağlıdır; tek bir Si yüzeyi için mutlak garanti değildir. Bu şemada bant genişlikleri değil, bant kenarları ölçeklidir."},
@@ -34,7 +34,7 @@ const c={
  ["2 · Density of states","How many states per volume lie between E and E+dE?","g(E) dE"],
  ["3 · Occupancy","What fraction of states is occupied by electrons?","f(E,T)"]],
  foot:"The electron count sums allowed states weighted by occupancy. Holes use [1−f(E)]."},
- atom:{title:"Spin-resolved states of one isolated silicon atom",occupied:"occupied state (×)",empty:"empty state",energy:"Electron energy ↑",notes:"3p: 2 of 6 states occupied. Circles denote individual spin states; energy spacings are not to scale."},
+ atom:{title:"Spin-resolved states of one isolated silicon atom",occupied:"occupied state (×)",empty:"empty state",states:"states",occupiedCount:"occupied",energy:"Electron energy ↑",notes:"3p: 2 of 6 states occupied. Circles denote individual spin states; energy spacings are not to scale."},
  split:{title:"From separated N atoms to the band structure of a crystal",energy:"Electron energy",sep:"Interatomic separation →",crystal:"Si crystal spacing",upper:"Conduction: 4N states, empty at 0 K",lower:"Valence: 4N states, full at 0 K",merged:"3s + 3p → 8N states / 4N e⁻",core:"Core 1s, 2s, 2p: narrow",note:"Schematic: widely separated atomic levels to the right, broadened bands to the left. 0-K occupancy assumes ideal intrinsic Si; this is not a numerical E(k) or atomic-spacing calculation."},
  bands:{title:"From allowed energies to the conventional band diagram",energy:"Electron energy",vacuum:"Vacuum level",cb:"Conduction band",vb:"Valence band",gap:"Forbidden gap",electronAffinity:"Electron affinity",core:"Deep core levels",left:"Allowed energies",right:"Conventional diagram",note:"Not to scale. E₀ is the vacuum reference; χ=E₀−Eᶜ and E₉=Eᶜ−Eᵛ denote two different separations."},
  scale:{title:"Silicon band edges on a proportional electron-energy scale (300 K)",vacuum:"Vacuum",conduction:"Conduction",valence:"Valence",gap:"Band gap",affinity:"Electron affinity",note:"Vacuum reference E₀=0 eV; Eᶜ=−4.05 eV, Eᵛ=−5.17 eV. Vertical intervals are proportional to real energy in eV. χ depends on the surface and is not a universal constant for every Si termination. Only band edges, not entire bandwidths, are drawn to scale."},
@@ -64,7 +64,7 @@ function atom(d){
      body+='<circle cx="'+x+'" cy="'+g.y+'" r="10" class="b04-state"/>';
      if(j<g.occ)body+=line(x-6,g.y-6,x+6,g.y+6,"b04-cross")+line(x-6,g.y+6,x+6,g.y-6,"b04-cross");
    }
-   body+=text(505,g.y+6,g.name,"b04-orbital")+text(569,g.y+5,g.n+" states · "+g.occ+" occupied","b04-small");
+   body+=text(505,g.y+6,g.name,"b04-orbital")+text(569,g.y+5,g.n+" "+d.states+" · "+g.occ+" "+d.occupiedCount,"b04-small");
  }
  body+='<circle cx="224" cy="406" r="9" class="b04-state"/>'+line(219,401,229,411,"b04-cross")+line(219,411,229,401,"b04-cross")+
  text(239,411,d.occupied,"b04-small")+'<circle cx="493" cy="406" r="9" class="b04-state"/>'+

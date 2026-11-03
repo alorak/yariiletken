@@ -5,10 +5,10 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 ## Özellikler (ilk aşama)
 
 - Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
-- Sağ üstte **TR / EN** dil anahtarı: arayüz, 37 konu anlatımı, 48 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 39 konu anlatımı, 52 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **37 açıklamalı konu başlığı** ve **48 ölçülebilir öğrenme kazanımı**.
+- Beş ders için **39 açıklamalı konu başlığı** ve **52 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
@@ -133,7 +133,7 @@ Ek görseller `lesson-figures.js` içinde TR/EN olarak tutulur; `app.js` sadece 
 
 - **02 · Öz taşıyıcı yoğunluğu – sıcaklık:** Y ekseni artık doğrudan `nᵢ (cm⁻³)` gösterir; `log₁₀` dönüşümü uygulanmaz. Si/Ge/GaAs malzeme seçicisi her malzemenin eğrisini **kendi doğrusal ölçeğinde** gösterir. Sıcaklık kontrolü seçilen noktanın çevresinde yaklaşık ±50 K aralığına odaklanır; sağa/sola sınırda 200–500 K aralığına kırpılır. Eksen değerleri bilimsel gösterimde (örn. 2×10¹¹) yazılabilir; bu bir logaritmik eksen değildir.
 - Sıcaklığa bağlı nᵢ hesaplarında 300 K referansları ve sabit bant aralığı yaklaşımı değişmedi. Ayrı **bant aralığı duyarlılığı** grafiğinin `log₁₀` gösterimi bu PR kapsamında değiştirilmedi.
-- Önceki aşamada 02 ve 06 kazanımları genişletildi; bu PR ile 03'ün yeni anlatımı da eklendi. Güncel toplam **37 konu, 48 kazanım**. Önceki işaretlemelerin indeksleri korunur.
+- Önceki aşamada 02 ve 06 kazanımları genişletildi; bu PR ile 03'ün yeni anlatımı da eklendi. Güncel toplam **39 konu, 52 kazanım**. Önceki işaretlemelerin indeksleri korunur.
 - 02'de Si atom yoğunluğu ile yaklaşık öz taşıyıcı yoğunluğunun fiziksel mertebe farkı da konu anlatımına eklendi. Varsayımlara uygun yaklaşık hesaplar kullanılır; bunlar tam malzeme ölçümü değildir.
 
 Kontrol komutu: `node --test tests/*.test.mjs`.
@@ -152,7 +152,7 @@ Kontrol komutu: `node --test tests/*.test.mjs`.
 
 **Bilimsel sınırlama:** Slaytın “42 parçacık aynı bağda buluşur” anlatısı nicel fizik mekanizması olarak aktarılmaz; `E/kT≈42` yalnızca sezgisel oran olarak açıklanır. 1,1–1,12 eV değeri doğrudan kimyasal Si–Si bağ kopma enerjisiyle özdeşleştirilmez.
 
-Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Böylece depoda toplam **37 konu, 48 kazanım** bulunur.
+Teknik olarak: `lesson03-figures.js` (TR/EN açıklamalı SVG, bağımsız), `lesson03-questions.js` (mevcut 8 soruya eklenen 7 TR/EN soru) ve `tests/lesson03-content.test.mjs` eklendi. 03 için **9 konu, 13 kazanım ve 15 soru** vardır; 02, 04, 05 ve 06 konuları değiştirilmedi. Var olan kazanım ve soru indeksleri korunur. Böylece depoda toplam **39 konu, 52 kazanım** bulunur.
 
 Test komutu: `node --test tests/*.test.mjs`. Canlı tarayıcıda mobil/masaüstü görsel test ayrıca yapılmalıdır.
 
@@ -226,7 +226,7 @@ Kaynaklar / yaklaşık parametre referansları:
 ## Navbar'da konu arama ve konu gezgini senkronizasyonu
 
 - Üst menüde tema ve dil seçicilerinin yanında tek renkli **büyüteç düğmesi** yer alır. Düğmeye basınca aşağı açılan erişilebilir metin arama kutusu görünür. `Ctrl+K` / `⌘K` ile açılır, `Esc` ile kapanır. Sonuçlarda klavyeyle yukarı/aşağı gezinme ve Enter ile seçme desteklenir.
-- Arama **yalnızca cihazda**, mevcut `lessons.js` / `lessons.en.js` verilerinden yapılır. 02–06 derslerindeki 37 konu başlığı, açıklama paragrafı, temel denklem ve ana fikir taranır. İnternet API'si, sunucuya gönderilen sorgu veya bağımsız arama veritabanı kullanılmaz.
+- Arama **yalnızca cihazda**, mevcut `lessons.js` / `lessons.en.js` verilerinden yapılır. 02–06 derslerindeki 39 konu başlığı, açıklama paragrafı, temel denklem ve ana fikir taranır. İnternet API'si, sunucuya gönderilen sorgu veya bağımsız arama veritabanı kullanılmaz.
 - Türkçe karakterler / aksanlar normalize edilir; örneğin `oz tasiyici` ile `öz taşıyıcı`, `n_i` ile `nᵢ` aranabilir. Dil değişince indeks ve sonuçlar o dile güncellenir; boş aramalarda açıklama, eşleşmeyenlerde sonuç yok mesajı görünür.
 - Her sonuçta **ders adı, konu numarası, başlık ve bağlam metni** yer alır. Sonuca basıldığında ilgili `#ders-XX/anlatim` sayfasına gidilir, metindeki eşleşme `<mark>` ile vurgulanır ve doğrudan aranan noktaya kaydırılır.
 - Önceden konu numarasına tıklanınca sonraki konu başlığının olması gerekenden aşağıda kalması ve önceki konu numarasının aktif görünmesi, `scrollIntoView` için `scroll-margin` ile `scroll-padding` boşluklarının iki kez hesaplanmasından kaynaklanıyordu. Yeni `scrollToCourseTopic`, gerçek sabit header + ders başlığı/sekmeler + sol konu gezgininin yüksekliklerini ölçer ve **tek bir kaydırma ofseti** kullanır. Son sayfa sınırında son konu numarası seçilir. Gezinme mevcut sağ kazanımlar panelinden bağımsızdır.

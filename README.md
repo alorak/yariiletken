@@ -233,3 +233,28 @@ Kaynaklar / yaklaşık parametre referansları:
 - UI varsayılan TR, EN, açık/koyu tema ve mobil yatay konu gezginiyle uyumludur. Arama açıkken dışarı tıklamak paneli kapatır; arama girdisi kullanıcıya aittir ve HTML olarak çalıştırılmaz.
 
 Testler: `node --test tests/course-search.test.mjs tests/topic-stepper.test.mjs tests/sticky-layout.test.mjs`; tam regresyon: `node --test tests/*.test.mjs`.
+
+
+## Ders 04 — Atomik seviyelerden bant modeline (kaynak çizimlerine dayalı yeniden çizimler)
+
+Bu güncellemede **04 Bant Teorisi**, birbirini takip eden **9 konu ve 11 kazanım** olacak şekilde TR/EN yeniden yapılandırıldı. Üç kullanıcı görselindeki **tek Si atomu spin durumları**, **N atom için 3s/3p seviyelerinin ayrışması** ve **standart bant kenarı gösterimi**, özgün ve erişilebilir SVG olarak yeniden çizildi. *Kaynak görsellerin bitmap kopyaları değildir; içerikte durum sayımı, adlandırma ve enerji bağıntıları korunarak hazırlanan vektör şemalardır.*
+
+1. **Why leave the bond model?** Yerel bağ resmi elektron/hol sezgisi sağlar; izinli kuantum enerji durumlarını, durum yoğunluğunu, Fermi doluluğunu ve azınlık taşıyıcılarını nicel olarak vermez.
+2. **Three principles:** İzinli kuantum durumları; Pauli ve spin; enerjiye göre doluluk/0 K temel durum, sonlu T için Fermi–Dirac.
+3. **Isolated Si atom:** `1s²2s²2p⁶3s²3p²`, Z=14; 3p'de spin dahil 6 durumdan 2'si dolu. SVG'de toplam 18 (1s/2s/2p/3s/3p) spin durumu ve 14 dolu durum; enerji mesafeleri ölçekli değil.
+4. **N atoms together:** 3s kökenli 2N durum/2N elektron, 3p kökenli 6N durum/2N elektron, toplam 8N durum/4N elektron. Seviye ayrışması/karışması ve iç kabukların daha dar kalması.
+5. **4N / 4N:** 0 K ideal öğretim modelinde alt valans bandında 4N dolu durum ve üst iletim bandında 4N boş durum, yasak bant aralığı Eᵍ.
+6. **Conventional band diagram:** E₀ vakum, Eᶜ iletim alt sınırı, Eᵛ valans üst sınırı, Eᵍ=Eᶜ−Eᵛ, χ=E₀−Eᶜ.
+7. **Silicon drawn to scale:** Yaklaşık 300 K'de Eᵍ=1,12 eV, χ=4,05 eV; E₀=0 referansıyla Eᶜ=−4,05 eV ve Eᵛ=−5,17 eV. Düşey E₀–Eᶜ ve Eᶜ–Eᵛ *mesafeleri aynı px/eV ölçeğiyle* çizilir. Bu üç kenar dışındaki bant genişlikleri ölçekli değildir. χ gerçek yüzey sonlanmasına/orientasyonuna duyarlı olabilir.
+8. **Bond model ↔ band model:** Aynı elektron–hol üretimi ve yeniden birleşmesi yerel bağ boşluğu ile dolu/boş kristal durumları üzerinden karşılaştırılır. Eᵍ tek Si–Si bağının kimyasal kopma enerjisi değildir.
+9. **E(k), k ve etkin kütle:** Kenar diyagramının dispersiyon grafiği olmadığı, Si'nin dolaylı bant aralığı ve E(k) eğriliği açıklanır.
+
+Teknik: `band-theory04-visuals.js` (8 TR/EN açıklamalı SVG), `lessons.js`, `lessons.en.js`, `app.js`, `index.html`, `styles.css`, `tests/lesson04-band-theory.test.mjs`. Toplam **39 konu, 52 kazanım**. 04'ün eski 7 kazanımı kullanıcı için yanlışlıkla aynı indekslerle işaretli kalmasın diye bir defalık **anlamsal eşleştirme** ile yeni 11 kazanımdaki karşılıklarına taşınır. 02,03,05,06 kazanım kayıtları etkilenmez.
+
+**Dayanaklar:** kullanıcı tarafından paylaşılan üç slayt görüntüsü. "Why leave the bond model?", "Three principles of the band model", "Bond model ↔ band model" metinlerinin tam slayt dosyası bu oturumda bulunamadığı için bu bölümler kullanıcı başlıkları ve doğrulanan fiziksel ilkelerle yeniden ifade edildi; slayttan kelimesi kelimesine aktarım iddiası yoktur.
+
+300 K Si referans değerleri:
+- <https://www.cleanroom.byu.edu/Semiconductor-Constants>
+- <https://doc.comsol.com/6.3/doc/com.comsol.help.comsol/comsol_ref_materials.25.47.html>
+
+Test: `node --test tests/*.test.mjs` (özellikle `tests/lesson04-band-theory.test.mjs`).

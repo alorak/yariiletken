@@ -295,5 +295,13 @@
     container.append(section);
     return true;
   }
-  window.Lecture0506Lab={mount};
+  function figure(kind,language="tr") {
+    const lang=language==="en"?"en":"tr";
+    if(!["dos","fd","product","arr","nd","sources"].includes(kind))return "";
+    const titles={dos:L[lang].dos,fd:L[lang].fd,product:L[lang].product,
+      arr:L[lang].arr,nd:L[lang].ndGraph,sources:L[lang].balanceGraph};
+    return '<figure class="l56-topic-figure"><figcaption>'+esc(titles[kind])+
+      '</figcaption>'+graph(kind,lang)+'</figure>';
+  }
+  window.Lecture0506Lab={mount,figure};
 })();

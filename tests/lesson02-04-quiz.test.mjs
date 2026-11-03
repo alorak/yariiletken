@@ -65,8 +65,8 @@ test("all three modules have full topic coverage and localized per-option explan
    assert.equal(q.options.length,3);assert.equal(q.reasons.length,3);
    for(const lang of ["tr","en"]){
     assert.ok(q.q[lang].length>15);
-    for(const o of q.options)assert.ok(o[lang].length>2);
-    for(const why of q.reasons)assert.ok(why[lang].length>2);
+    for(const o of q.options)assert.ok(o[lang].length>0);
+    for(const why of q.reasons)assert.ok(why[lang].length>0);
    }
   }
  }

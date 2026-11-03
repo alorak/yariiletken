@@ -70,7 +70,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 
 ## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–04
 
-02 ve 03'ün üç etkinlik sekmesi; 04'ün grafik ve simülasyon sekmeleri çalışır durumdadır (TR/EN).
+02–06 derslerinin Grafikler, Simülasyonlar ve Sorular sekmeleri çalışır durumdadır (TR/EN).
 
 | Ders | Grafikler | Simülasyonlar | Sorular |
 |---|---|---|---|

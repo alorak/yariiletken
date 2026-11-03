@@ -1,0 +1,43 @@
+/* Interactive DOS/Fermi and dopant laboratories for lectures 05–06. */
+.l56-section { display: grid; gap: 16px; padding-top: 4px; }
+.l56-section > .eyebrow { margin: 0; }
+.l56-card,.l56-topic-figure {
+  min-width: 0; background: var(--surface); border: 1px solid var(--stroke);
+  border-radius: 15px; box-shadow: var(--shadow); padding: 20px 22px;
+}
+.l56-head { display: flex; align-items: flex-start; gap: 12px; }
+.l56-head h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.32; }
+.l56-head p { margin: 0; font-size: 12px; line-height: 1.65; color: var(--ink-soft); }
+.l56-plot { min-width: 0; margin-top: 15px; }
+.l56-plot svg { display: block; max-width: 100%; width: 100%; height: auto; min-height: 180px; overflow: visible; }
+.l56-grid { stroke: var(--stroke); stroke-width: 1; }
+.l56-axis { stroke: var(--ink-soft); stroke-width: 1.4; }
+.l56-tick,.l56-axis-label { fill: var(--ink-soft); font-size: 12px; font-family: system-ui,Arial,sans-serif; }
+.l56-axis-label { font-size: 13px; font-weight: 650; }
+.l56-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; margin: 1px 0 6px; }
+.l56-legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-soft); }
+.l56-legend-item i { width: 17px; height: 3px; border-radius: 2px; display: block; }
+.l56-note { margin: 6px 0 0; font-size: 11px; line-height: 1.65; color: var(--muted); }
+.l56-topic-figure { margin: 18px 0 6px; padding: 12px; box-shadow: none; }
+.l56-topic-figure figcaption { font-size: 12px; font-weight: 700; color: var(--accent-dark); padding: 2px 7px 0; }
+.l56-topic-figure .l56-plot { margin-top: 5px; }
+.l56-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(205px,1fr)); gap: 12px; margin-top: 17px; }
+.l56-control { display: flex; min-width: 0; flex-direction: column; justify-content: end; gap: 7px; padding: 13px; background: var(--surface-alt); border: 1px solid var(--stroke); border-radius: 10px; font-size: 12px; color: var(--ink-soft); }
+.l56-control strong { color: var(--ink); }
+.l56-control input[type="range"] { width: 100%; min-width: 0; accent-color: var(--accent); cursor: pointer; }
+.l56-control select { width: 100%; min-height: 36px; border: 1px solid var(--stroke); border-radius: 7px; padding: 5px 8px; background: var(--surface); color: var(--ink); font: inherit; }
+.l56-results { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; margin-top: 15px; }
+.l56-stat { min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 11px 13px; border: 1px solid var(--stroke); border-radius: 9px; background: var(--surface-alt); overflow-wrap: anywhere; }
+.l56-stat small { font-size: 11px; color: var(--muted); }
+.l56-stat strong { font-size: 13px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.l56-dynamic { margin-top: 12px; border-left: 3px solid var(--accent); border-radius: 6px; padding: 8px 12px; background: var(--accent-soft); color: var(--ink-soft); font-size: 12px; line-height: 1.65; }
+@media(max-width:600px) {
+  .l56-card { padding: 15px 13px; }
+  .l56-topic-figure { padding: 8px 7px; }
+  .l56-head h3 { font-size: 15px; }
+  .l56-control { padding: 10px; }
+  .l56-results { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; }
+  .l56-stat { padding: 9px; }
+  .l56-legend { gap: 6px 11px; }
+}
+@media(max-width:390px) { .l56-results { grid-template-columns: 1fr; } }

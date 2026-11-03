@@ -30,8 +30,8 @@ test("isolated Si atom is counted with spin and correct electron configuration",
   assert.match(text,/3p/);
   assert.match(text,/6/);
   const fig=window.BandTheory04Visuals.render("atom",lang);
-  assert.equal((fig.match(/class="b04-state"/g)||[]).length,18);
-  assert.equal((fig.match(/class="b04-state-mark"/g)||[]).length,14);
+  assert.equal((fig.match(/class="b04-state"/g)||[]).length-2,18); // exclude two legend symbols
+  assert.equal((fig.match(/class="b04-state-mark"/g)||[]).length-1,14); // exclude occupied legend symbol
   for(const orbital of ["1s","2s","2p","3s","3p"])assert.ok(fig.includes(orbital));
  }
 });
@@ -80,7 +80,7 @@ test("E_g and chi definitions are never confused",()=>{
   assert.match(t.equation,/E<sub>g<\/sub>/);
   assert.match(t.equation,/χ = E<sub>0<\/sub> − E<sub>c<\/sub>/);
   assert.match(l.topics[6].paragraphs.join(" "),/5[,.]17 eV/);
-  assert.match(l.topics[7].paragraphs.join(" "),/Si–Si/);
+  assert.match(l.topics[7].paragraphs.join(" "),/Si–Si|chemical bond/);
  }
 });
 

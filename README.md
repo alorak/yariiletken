@@ -15,7 +15,7 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 - URL hash ile doğrudan ders/sekme bağlantısı (ör. `#ders-05/anlatim`).
 - Harici kütüphane, derleme, API veya izleme gerektirmez.
 
-**Güncel durum:** 02–03 için grafikler, simülasyonlar ve açıklamalı sorular çalışır. **04 Bant Teorisi için beş etkileşimli grafik ve dört simülasyon** eklenmiştir; 04'ün Sorular/Oyunlar sekmeleri ve 05–06'nın etkinlikleri plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
+**Güncel durum:** 02–03 için grafikler ve simülasyonlar; **02, 03, 04 için güncel açıklamalı sorular** çalışır. **04 Bant Teorisi için beş etkileşimli grafik ve dört simülasyon** eklenmiştir; 04'ün Oyunlar sekmesi ve 05–06'nın etkinlikleri plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
 
 ## Ders haritası
 
@@ -74,9 +74,9 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 
 | Ders | Grafikler | Simülasyonlar | Sorular |
 |---|---|---|---|
-| **02 · Kristal ve Denge** | nᵢ–T (Si/Ge/GaAs), Eᵍ–nᵢ duyarlılığı | 3B tetrahedral Si bağlarının izdüşümü, termal denge / dış uyarımlı kararlı durum | 8 soruluk açıklamalı test |
-| **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 15 soruluk açıklamalı test |
-| **04 · Bant Teorisi** | 5 grafik: durum sayımı, N-seviye ayrışması, kuplaj modları, N(E), E(k)/m* | 4 simülasyon: 4N dolu/boş durum, üç osilatör modu, ölçekli Si bantları, altı bant olayı | Planlandı |
+| **02 · Kristal ve Denge** | nᵢ–T (Si/Ge/GaAs), Eᵍ–nᵢ duyarlılığı | 3B tetrahedral Si bağlarının izdüşümü, termal denge / dış uyarımlı kararlı durum | 13 soruluk açıklamalı test |
+| **03 · Elektron ve Hol** | Tek ömürlü taşıyıcı sönümü, sonlu üretim darbesi yanıtı | 1B hol-hareketi benzetmesi, elektron–hol çifti üretimi / yeniden birleşme | 25 soruluk açıklamalı test |
+| **04 · Bant Teorisi** | 5 grafik: durum sayımı, N-seviye ayrışması, kuplaj modları, N(E), E(k)/m* | 4 simülasyon: 4N dolu/boş durum, üç osilatör modu, ölçekli Si bantları, altı bant olayı | 22 soruluk açıklamalı test |
 
 ### Bilimsel kapsam ve sınırlamalar
 
@@ -88,7 +88,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 - Elektron–hol görseli, **hν≥Eᵍ gerekli enerji koşulunu** test eder. Si dolaylı bant aralıklı olduğundan foton soğurulması için momentum/olası fonon koşulları ayrıca önemlidir. Görsel soğurulma olasılığı iddia etmez.
 - Sorularda doğru **ve yanlış** her seçenek için TR/EN gerekçe bulunur. Yanıtlar `yariiletken-quiz-v1` anahtarında yerel tarayıcıya kaydedilir; dil değişiminde korunur.
 
-Ders **04** için Grafikler ve Simülasyonlar çalışır; Sorular plan görünümündedir. **05–06** için Grafikler, Simülasyonlar ve Sorular henüz planlanmıştır. Oyunlar henüz geliştirilmemiştir.
+Ders **04** için Grafikler, Simülasyonlar ve Sorular çalışır; **05–06** için Grafikler, Simülasyonlar ve Sorular henüz planlanmıştır. Oyunlar henüz geliştirilmemiştir.
 
 ### Tests
 
@@ -299,4 +299,18 @@ Doğrulama: `node --test tests/*.test.mjs`. Akademik kullanımda şekiller kavra
 - **Ölçekli Si:** `χ≈4,05 eV`, `Eᵍ≈1,12 eV`, `W≈12 eV` ile E₀=0, Eᶜ≈−4,05, Eᵛ≈−5,17 ve Eᴮ≈−17,17 eV. χ yüzeye, Eᵍ sıcaklığa bağlıdır; W yaklaşık öğretici parametredir.
 - **Geçişler:** Enerji eşiği ve önceki taşıyıcı durumuna dayalı karar modeli. Fotonun gerçek soğurulması, fonon/momentum koşulları, cihaz akımı ve rekombinasyon hızı çözülmez; olay okları ölçekli değildir.
 
-Yerel doğrulama: `node --test tests/lesson04-lab.test.mjs`; tüm testler: `node --test tests/*.test.mjs`. Bir sonraki aşama için 04 Sorular ve Oyunlar sekmeleri dokuz konuya ve kazanımlara göre tamamlanabilir.
+Yerel doğrulama: `node --test tests/lesson04-lab.test.mjs`; tüm testler: `node --test tests/*.test.mjs`. Bir sonraki aşamada 04 Oyunlar sekmesi, dokuz konuya ve kazanımlara göre tamamlanabilir.
+
+### PR #17 — 02–04 soru bankası kapsam denetimi ve soru numaralandırması
+
+**Güncel soru sayıları:** 02 = **13** (8 eski + 5 ek); 03 = **25** (19 eski + 6 ek); 04 = **22** (sıfırdan). 02'de 6/6, 03'te 9/9, 04'te 9/9 konu en az bir soru içerir; toplam **60 soru**. 04'ün 14 kazanımı, bant ilkeleri, atomik/spin durum sayımı, N atom ve normal modlar, 0 K bant doluluğu, E₀/Eᶜ/Eᵛ, χ ve Eᵍ, ölçekli Si, elektron–hol süreçleri, N(E) ve E(k)/m* sorularıyla kapsanır.
+
+- **02 — bulunan eksikler ve eklenen sorular:** [001] iki boyutlu izdüşüm ile gerçek z yüksekliği; Si atom/öz taşıyıcı yoğunluğu oranı (5×10¹²); p–n ekleminde karşıt sürüklenme/difüzyon akımları; aydınlatma altında kararlı durum ve termal denge ayrımı; **doğrudan nᵢ (cm⁻³)** grafiğinin yorumu.
+- **03 — bulunan eksikler ve eklenen sorular:** fotonla üretim ile çarpışma iyonlaşması, ışımayla rekombinasyon, SRH tuzak mekanizması, Auger üçüncü taşıyıcıya enerji aktarımı, kT≈0,026 eV ile Eᵍ≈1,12 eV'nin ayrımı, nᵢ'nin T/Nᶜ/Nᵛ/Eᵍ bağımlılığı.
+- **04 — yeni 22 soruluk banka:** tüm 9 anlatım başlığı için kavram + hesaplama soruları; özellikle Pauli/N(E)/f(E,T) üçlüsü, 6N/2N, 8N/4N, √(1+3r), χ/Eᵍ farkı, 12 eV valans genişliği, DOS integrali, hol kinetik yönü ve 1B etkin kütle.
+
+**Soru gezgini:** Sorular sekmesinde dinamik olarak bankanın `questions.length` değeri kadar **numaralı tıklanabilir kutu** çizilir. Sorular arasında doğrudan geçiş, Önceki/Sonraki ile sıralı ilerleme, yanıt vermeden ilerleyip geri dönme, işaretlenmiş/doğru/yanlış ve seçili soru durumları, ekran okuyucu etiketleri ve klavye odağı desteklenir. İlerleme tarayıcıda mevcut `yariiletken-quiz-v1` anahtarıyla tutulur; 02/03'ün önceki soruları **sona ekleme** yoluyla genişletildiği için eski yanıt indeksleri değişmez. Soruların doğru ve yanlış her seçeneği TR/EN gerekçelidir. Sıfırla düğmesi yalnız ilgili dersin yanıtlarını temizler.
+
+Yeni soru dosyası: `lesson02-04-questions.js` (mevcut uzantılardan sonra, `activity-engine.js` öncesi yüklenir). Test: `tests/lesson02-04-quiz.test.mjs`; güncel soru sayımı için `tests/activity-model.test.mjs` ve `tests/lesson03-content.test.mjs` de güncellendi.
+
+**Doğrulama:** 10/10 soru ve numaralandırma testi, 70/70 önceki ders/arama/yerleşim regresyonu, 27/27 laboratuvar modeli ve arayüz denetimi başarılı (kaynaklar izole JS ortamında çalıştırıldı). Gerçek tarayıcı piksel testi ve native Node CI koşumu ayrıca doğrulanmalıdır.

@@ -5,10 +5,10 @@ Ders 02–07 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 ## Özellikler (ilk aşama)
 
 - Navbar üzerinden dersler arasında **yalnızca ders adlarıyla** geçiş; mobilde açılır liste.
-- Sağ üstte **TR / EN** dil anahtarı: arayüz, 39 konu anlatımı, 55 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
+- Sağ üstte **TR / EN** dil anahtarı: arayüz, 49 konu anlatımı, 67 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Altı ders için **49 açıklamalı konu başlığı** ve **64 ölçülebilir öğrenme kazanımı**.
+- Altı ders için **49 açıklamalı konu başlığı** ve **67 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
@@ -24,8 +24,8 @@ Ders 02–07 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 | 02 | Yarıiletken malzemeler, kristal yapısı, termal denge | 6 | 10 |
 | 03 | Elektron, hol, fonon/foton, üretim/rekombinasyon, etkin kütle ve nᵢ | 9 | 13 |
 | 04 | Bant modeli, atomik seviyeler, kuplaj ve Si bant diyagramı | 9 | 14 |
-| 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 8 |
-| 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 10 |
+| 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 9 |
+| 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 11 |
 | 07 | Katkılı bant modeli, Fermi seviyesi, g faktörü, iyonlaşma, kompanzasyon ve derin seviyeler | 10 | 10 |
 
 İçerik, ders 02–07 PDF notlarındaki kavramlar temel alınarak **ön koşul sırasına göre yeniden düzenlenmiştir**. Metinler doğrudan ders notlarının tam kopyası değildir. İlgili yaklaşımların geçerlilik sınırları gerektiğinde açıklanır.
@@ -69,7 +69,7 @@ Yeni içerik eklerken `lessons.js` ve `lessons.en.js` birlikte güncellenmelidir
 
 Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilmeli; arayüzde çalışan model ile yalnızca kavramsal şema ayırt edilmelidir.
 
-## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–04
+## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–07
 
 02–07 derslerinin Grafikler, Simülasyonlar ve Sorular sekmeleri çalışır durumdadır (TR/EN).
 

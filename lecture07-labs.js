@@ -166,8 +166,9 @@
   });
   const log = v => Math.log10(Math.max(1e-200,v));
   const solve = (T,Nd,Na,g=1) => m.neutrality(T,Nd,Na,g,g===1?1:4);
-  const energy = state => EG/2 + m.kT(state.T)/2*Math.log(m.nv(state.T)/m.nc(state.T)) +
-    state.efMinusEi;
+  // Use the same conduction-band relation as the charge-balance plot. The
+  // separate measured n_i(300 K) reference need not reproduce Nc,Nv,Eg exactly.
+  const energy = state => EG-m.kT(state.T)*Math.log(m.nc(state.T)/state.n);
   const inRange = state => {
     const Ef = energy(state), d=3*m.kT(state.T);
     return Ef >= d && EG-Ef >= d;
@@ -271,7 +272,9 @@
         xMin:13,xMax:19,yMin:0,yMax:EG,xAxis:"log₁₀ N (cm⁻³)",
         yAxis:"E_F−E_v (eV)",xTicks:[13,14,15,16,17,18,19],yTicks:[0,.28,.56,.84,1.12]}),
         detail:"kT ln10 = "+(d*Math.log(10)*1e3).toFixed(1)+" meV / decade",
-        warning:b.notValid};
+        warning:lang==="tr"?
+          "Çizgilerin bant kenarına 3kT'den fazla yaklaştığı kısımlar Boltzmann yaklaşımının dışındadır.":
+          "Parts of the lines within 3kT of a band edge exceed Boltzmann accuracy."};
     }
     if(kind==="temperature"||kind==="arrhenius"){
       const inverse=kind==="arrhenius",lo=inverse?1.3:40,hi=inverse?25:770;

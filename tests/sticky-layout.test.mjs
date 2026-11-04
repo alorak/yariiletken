@@ -75,3 +75,12 @@ test("existing lesson navigation, bilingual controls and progress tracking are r
   assert.match(app, /data-outcome/);
   assert.match(app, /window\.CourseActivity\?\.render/);
 });
+
+
+test("footer attributes the lecture notes in Turkish and English", () => {
+  assert.match(html, /id="footer-attribution">Prof\. Dr\. Barış Akaoğlu'nun ders notlarından yararlanılmıştır\.<\/p>/);
+  assert.match(app, /footerAttribution: "Prof\. Dr\. Barış Akaoğlu'nun ders notlarından yararlanılmıştır\."/);
+  assert.match(app, /footerAttribution: "Based on lecture notes by Prof\. Dr\. Barış Akaoğlu\."/);
+  assert.match(app, /\$\("#footer-attribution"\)\.textContent = t\(\)\.footerAttribution;/);
+  assert.match(css, /\.footer-attribution\s*\{[^}]*padding-bottom:\s*24px;/);
+});

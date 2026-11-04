@@ -288,7 +288,9 @@
         xMin:lo,xMax:hi,yMin:7,yMax:20,xAxis:inverse?"1000/T (K⁻¹)":"T (K)",
         yAxis:"log₁₀ n (cm⁻³)",xTicks:inverse?[2,5,10,15,20,25]:[100,200,300,400,500,600,700],
         yTicks:[8,10,12,14,16,18,20]}),
-        detail:lang==="tr"?"Sağdaki soğuk bölge: eksik iyonlaşma; soldaki sıcak bölge: termal üretim.":"Right side is colder in inverse temperature; thermal generation dominates the hotter side."};
+        detail:inverse?
+          (lang==="tr"?"1000/T ekseninde sağ taraf soğuk, sol taraf sıcaktır.":"With 1000/T, the right side is cold and the left side is hot."):
+          (lang==="tr"?"T arttıkça freeze-out → ekstrinsik plato → öz rejim izlenir.":"As T rises, observe freeze-out → extrinsic plateau → intrinsic regime.")};
     }
     if(kind==="compensation"){
       const selectedT=Number(settings.T??600);
@@ -430,7 +432,7 @@
   }
   function chartControls(kind,lang) {
     const b=labels[lang];
-    if(kind==="levels")return selectInput(b.type,"type",[["i",b.intrinsic],["n",b.donor],["p",b.acceptor]])+
+    if(kind==="levels")return selectInput(b.type,"type",[["n",b.donor],["p",b.acceptor],["i",b.intrinsic]])+
       numberInput("log₁₀ N (cm⁻³)","exp",16,13,17,.1);
     if(kind==="dos")return selectInput(b.type,"type",[["both","n + p"],["n",b.donor],["p",b.acceptor]]);
     if(kind==="ionization")return numberInput(b.x,"x",3,-5,8,.1);

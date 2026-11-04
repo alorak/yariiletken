@@ -19,13 +19,13 @@
   const dosC = delta => Math.sqrt(Math.max(0, delta));
   // Charge balance: n + NA- = p + ND+, with np=ni².
   // Donor and acceptor occupancy degeneracy factors are illustrative choices.
-  function neutrality(T, Nd, Na) {
+  function neutrality(T, Nd, Na, gD = 2, gA = 4) {
     const intrinsic = ni(T), ci = nc(T), vi = nv(T);
     const intr2 = intrinsic * intrinsic;
     const state = logN => {
       const n = Math.exp(logN), p = intr2 / n;
-      const donors = Nd / (1 + 2 * n / ci * clampExp(ED / kT(T)));
-      const acceptors = Na / (1 + 4 * p / vi * clampExp(EA / kT(T)));
+      const donors = Nd / (1 + gD * n / ci * clampExp(ED / kT(T)));
+      const acceptors = Na / (1 + gA * p / vi * clampExp(EA / kT(T)));
       return { n, p, donors, acceptors,
         residual: n + acceptors - p - donors };
     };

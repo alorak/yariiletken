@@ -416,9 +416,22 @@
   }
 
   function renderPlanned(lesson, tabId) {
-    if (window.Lecture07Lab?.mount({
-      container: $("#content-panel"), lessonId: lesson.id, language, tabId
-    })) return;
+    if (lesson.id === "07" && (tabId === "grafikler" || tabId === "simulasyonlar")) {
+      try {
+        if (!window.Lecture07Lab?.mount({
+          container: $("#content-panel"), lessonId: lesson.id, language, tabId
+        })) throw new Error(window.Lecture07Lab?.error || "Lecture 07 lab did not load");
+      } catch (error) {
+        console.error("Lecture 07 lab render failed", error);
+        const heading = language === "en" ? "Unable to render the lecture 07 lab" : "07. ders laboratuvarı görüntülenemedi";
+        const detail = language === "en"
+          ? "Reload the page. If this persists, verify that lecture05-06-labs.js and lecture07-labs.js both loaded."
+          : "Sayfayı yenileyin. Sorun sürerse lecture05-06-labs.js ve lecture07-labs.js dosyalarının yüklendiğini kontrol edin.";
+        $("#content-panel").innerHTML =
+          '<section class="placeholder" role="alert"><h2>' + heading + '</h2><p>' + detail + '</p></section>';
+      }
+      return;
+    }
     if (window.Lecture0506Lab?.mount({
       container: $("#content-panel"), lessonId: lesson.id, language, tabId
     })) return;

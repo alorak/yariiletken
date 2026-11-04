@@ -157,5 +157,24 @@ for(const [lang,rows,outcomes] of [["tr",tr,outTr],["en",en,outEn]]){
  if(!Array.isArray(target)||target.some(x=>x.id==="07"))throw Error("Cannot register lecture 07");
  target.push(lesson);
 }
+// The preceding bond-model lesson also mentions ionization; clarify why
+// its default simulator uses standard factors while lecture 07 uses g=1.
+const guide06={
+  tr:{
+    title:"g faktörü hangi aşamada önemlidir?",
+    intro:"Katkı iyonlaşmasını <strong>g=1</strong> varsayımıyla öğrenmek, elektronun donörden ayrılması veya akseptöre geçmesi ve yük nötrlüğünün nasıl kurulduğunu kavramak için yeterlidir. g, bu fiziksel mekanizmayı değiştirmeyen bir istatistiksel çokluk düzeltmesidir.",
+    caveat:"<strong>Sayısal sonuçlarda fark vardır:</strong> 06 simülasyonunda g_D=2 ve g_A=4 varsayılır. Yeni 07 dersinde g=1 eğitim hesabıyla bu standart faktörlerin iyonlaşma yüzdelerine etkisini karşılaştırabilirsiniz. Özellikle düşük sıcaklıkta fark artar.",
+    short:"g=1 → kavramsal başlangıç · g_D=2, g_A=4 → daha ayrıntılı sayım."
+  },
+  en:{
+    title:"When does the g factor matter?",
+    intro:"Using <strong>g=1</strong> is sufficient to learn donor/acceptor charge transfer and charge neutrality; g is a statistical multiplicity correction, not a different physical mechanism.",
+    caveat:"<strong>Numerical results do change:</strong> the 06 simulator defaults to g_D=2 and g_A=4. Lecture 07 compares those standard factors with g=1, especially in low-temperature freeze-out.",
+    short:"g=1 → conceptual starting point · g_D=2, g_A=4 → more detailed counting."
+  }
+};
+for (const [lang,arr] of [["tr",window.COURSE_LESSONS],["en",window.COURSE_LESSONS_EN]]) {
+  const six=arr.find(l=>l.id==="06"); if(six)six.gGuide=guide06[lang];
+}
 window.Lecture07Guide=globalGuide;
 })();

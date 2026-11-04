@@ -1,6 +1,6 @@
 # Yarıiletken Fiziği
 
-Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık öğrenme arayüzü**.
+Ders 02–07 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık öğrenme arayüzü**.
 
 ## Özellikler (ilk aşama)
 
@@ -8,14 +8,14 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 - Sağ üstte **TR / EN** dil anahtarı: arayüz, 39 konu anlatımı, 55 kazanım, formül açıklamaları ve planlanan etkinlikler iki dilde. Varsayılan Türkçe; seçim tarayıcıda saklanır.
 - İçerik sekmelerinde yatay kaydırma mobilde kullanılabilir, ancak scrollbar gösterilmez.
 - Her ders için altta **Konu Anlatımı, Grafikler, Simülasyonlar, Sorular, Oyunlar** sekmeleri.
-- Beş ders için **39 açıklamalı konu başlığı** ve **54 ölçülebilir öğrenme kazanımı**.
+- Altı ders için **49 açıklamalı konu başlığı** ve **64 ölçülebilir öğrenme kazanımı**.
 - Konu içi hızlı gezinme, ana bağıntılar ve kısa “ana fikir” kutuları.
 - Kazanım işaretleme ve tamamlanma göstergesi (yalnızca tarayıcıda `localStorage`).
 - Açık/koyu tema, telefon/tablet/masaüstü uyumu, erişilebilir klavye sekmeleri.
 - URL hash ile doğrudan ders/sekme bağlantısı (ör. `#ders-05/anlatim`).
 - Harici kütüphane, derleme, API veya izleme gerektirmez.
 
-**Güncel durum:** 02–06 için çalışan grafikler, simülasyonlar ve açıklamalı sorular vardır. **04 Bant Teorisi için beş grafik ve dört simülasyon; 05 Fermi–DOS için dört grafik ve iki simülasyon; 06 Katkılama için iki grafik ve bir yük-nötrlüğü simülasyonu** eklenmiştir. 05–06 derslerinde 16'şar açıklamalı soru bulunur. Oyunlar sekmesindeki etkinlikler plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
+**Güncel durum:** 02–07 için çalışan grafikler, simülasyonlar ve açıklamalı sorular vardır. **04 Bant Teorisi için beş grafik ve dört simülasyon; 05 Fermi–DOS için dört grafik ve iki simülasyon; 06 Katkılama için iki grafik ve bir yük-nötrlüğü simülasyonu** eklenmiştir. 05–06 derslerinde 16'şar açıklamalı soru bulunur. Oyunlar sekmesindeki etkinlikler plan görünümündedir. 04'teki sıkı-bağ, osilatör ve DOS modelleri gerçek Si bant hesabı olarak sunulmaz. Kazanım işaretlemeleri kişisel öz değerlendirmedir; sınav başarısı sayılmaz.
 
 ## Ders haritası
 
@@ -26,8 +26,9 @@ Ders 02–06 için Türkçe, responsive, bağımlılıksız bir **tek sayfalık 
 | 04 | Bant modeli, atomik seviyeler, kuplaj ve Si bant diyagramı | 9 | 14 |
 | 05 | Durum yoğunluğu, Fermi–Dirac, Boltzmann, nᵢ ve kütle etkisi | 7 | 8 |
 | 06 | Donör/akseptör, yük nötrlüğü, kompanzasyon ve sıcaklık rejimleri | 8 | 10 |
+| 07 | Katkılı bant modeli, Fermi seviyesi, g faktörü, iyonlaşma, kompanzasyon ve derin seviyeler | 10 | 10 |
 
-İçerik, ders 02–06 PDF notlarındaki kavramlar temel alınarak **ön koşul sırasına göre yeniden düzenlenmiştir**. Metinler doğrudan ders notlarının tam kopyası değildir. İlgili yaklaşımların geçerlilik sınırları gerektiğinde açıklanır.
+İçerik, ders 02–07 PDF notlarındaki kavramlar temel alınarak **ön koşul sırasına göre yeniden düzenlenmiştir**. Metinler doğrudan ders notlarının tam kopyası değildir. İlgili yaklaşımların geçerlilik sınırları gerektiğinde açıklanır.
 
 ## Yerel çalışma
 
@@ -70,7 +71,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 
 ## Etkileşimli grafikler, simülasyonlar ve sorular: Ders 02–04
 
-02–06 derslerinin Grafikler, Simülasyonlar ve Sorular sekmeleri çalışır durumdadır (TR/EN).
+02–07 derslerinin Grafikler, Simülasyonlar ve Sorular sekmeleri çalışır durumdadır (TR/EN).
 
 | Ders | Grafikler | Simülasyonlar | Sorular |
 |---|---|---|---|
@@ -79,6 +80,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 | **04 · Bant Teorisi** | 5 grafik: durum sayımı, N-seviye ayrışması, kuplaj modları, N(E), E(k)/m* | 4 simülasyon: 4N dolu/boş durum, üç osilatör modu, ölçekli Si bantları, altı bant olayı | 22 soruluk açıklamalı test |
 | **05 · Fermi ve DOS** | Bant kenarı DOS, 0/300/600 K Fermi, N(E)f(E), nᵢ–1000/T | 3kT hata deneyi; Nᶜ/Nᵛ ve n/p hesaplayıcı | 16 soruluk açıklamalı test |
 | **06 · Katkılama** | Üç Nᴅ düzeyinde n–1000/T, doğrusal T ve iki taşıyıcı kaynağı | Nᴅ/Nᴀ/T ile kısmi iyonlaşma ve yük nötrlüğü | 16 soruluk açıklamalı test |
+| **07 · Katkılı Bant Modeli** | 8 bant/durum şeması ve nicel grafik: iyonlaşma, yük nötrlüğü, E_F, üç sıcaklık rejimi, Arrhenius, kompanzasyon | 2 hesaplayıcı: g=1 ↔ g_D/g_A ve freeze-out/E_F | 20 soruluk açıklamalı test |
 
 ### Bilimsel kapsam ve sınırlamalar
 
@@ -90,7 +92,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 - Elektron–hol görseli, **hν≥Eᵍ gerekli enerji koşulunu** test eder. Si dolaylı bant aralıklı olduğundan foton soğurulması için momentum/olası fonon koşulları ayrıca önemlidir. Görsel soğurulma olasılığı iddia etmez.
 - Sorularda doğru **ve yanlış** her seçenek için TR/EN gerekçe bulunur. Yanıtlar `yariiletken-quiz-v1` anahtarında yerel tarayıcıya kaydedilir; dil değişiminde korunur.
 
-Ders **02–06** için Grafikler, Simülasyonlar ve Sorular çalışır. Oyunlar sekmesindeki etkinlikler henüz geliştirilmemiştir.
+Ders **02–07** için Grafikler, Simülasyonlar ve Sorular çalışır. Oyunlar sekmesindeki etkinlikler henüz geliştirilmemiştir.
 
 ### Ders 05–06: Slaytların kapsanması ve model sınırları
 
@@ -100,6 +102,19 @@ Ders **02–06** için Grafikler, Simülasyonlar ve Sorular çalışır. Oyunlar
 - Katkı simülasyonu **non-degenerate parabolik bant**, sabit Si Eᵍ=1,12 eV, Nᶜ/Nᵛ∝T³ᐟ² ve izole sığ katkı kabul eder. Donör/akseptör işgal çarpanları öğretici olarak gᴅ=2/gᴀ=4 seçilmiştir. Yük nötrlüğü sayısal kök aramayla çözülür, n·p=nᵢ² korunur. Ağır katkı, gerçek bant daralması, mobilite ve kesin geçiş sıcaklıkları iddia edilmez.
 - **Not:** Slaytlardaki '1,1 eV ile Si–Si bağını koparmak' ifadesi elektronik bant aralığı ile kimyasal bağ koparma enerjisini eşitlemek için kullanılmadı.
 - Yeni doğrulama: `node --test tests/lecture05-06-slides.test.mjs` ve tüm testler için `node --test tests/*.test.mjs`.
+
+
+### Ders 07: Katkılı bant modeli ve g faktörü yaklaşımı
+
+Kaynak **lec07.pdf (58 slayt)**; önceki Ders 05–06 ile karşılaştırılarak, tekrarları uzatmak yerine yeni **07 — Katkılı Bant Modeli** dersi açıldı:
+
+- On konu: öz banttan katkılı banda, E_D/E_A seviyeleri ve delta DOS, iyonlaşma ve istatistiksel çokluk, dört denklemle yük nötrlüğü, kütle etkisi, iki E_F hesabı ve 60 meV kuralı, freeze-out denklemi, üç sıcaklık rejimi/Arrhenius/T_i, kompanzasyonun 300/600 K örneği, sığ/derin/amfoterik katkılar.
+- **g=1 açıklama kutusu**, hem Ders 06 hem Ders 07'de anlatım, grafik, simülasyon ve soru sekmelerinin başında yer alır. Ders 07 içinde uygun konularda kısa hatırlatma da bulunur.
+- **Pedagoji:** g=1 seçimi donörün elektron vermesi, akseptörün elektron kabul etmesi, E_F'nin değişmesi ve yük nötrlüğünün öğrenilmesi için yeterli bir kavramsal sadeleştirmedir; ancak nicel iyonlaşmada g önemsiz değildir. Si:P, 77 K ve N_D=10¹⁵ cm⁻³ örneğinde g=1 ile ≈%83; g_D=2 ile ≈%74 iyonlaşma bulunur. Standart sığ Si için g_D=2/g_A=4 örnekleri gösterilir.
+- Ders 06 mevcut hesaplayıcısının **varsayılanı g_D=2/g_A=4 korunur**. Ders 07'de g=1 referansı ve standart faktörler yan yana karşılaştırılır; nicel modelde kısmi iyonlaşma ile yük nötrlüğü birlikte çözülür.
+- 07'de sekiz görsel/grafik, iki sayısal laboratuvar ve **20 adet, her seçenek için açıklamalı TR/EN soru** eklendi. Oyunlar sekmesi plan görünümündedir.
+- lec07'nin klasik n_i(300 K)=1,5×10¹⁰ cm⁻³ referansı ile önceki derslerin 9,65×10⁹ cm⁻³ referansı açıkça ayrıldı; farklı sayıların tek işlemde karıştırılmaması gerektiği belirtilir. Simülasyonlar eski 05–06 fizik modelinin 9,65×10⁹ referansını kullanır. Sabit E_g ve non-degenerate yaklaşım nedeniyle tahminler gerçek cihaz verisi değildir.
+- Regresyon testleri: \`node --test tests/lecture07-band-model.test.mjs\` ve \`node --test tests/*.test.mjs\`.
 
 ### Tests
 

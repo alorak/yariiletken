@@ -28,6 +28,11 @@ test("lecture 07 registers as the sixth lesson in both languages", () => {
   assert.ok(tr.gGuide.intro.includes("g=1"));
   assert.ok(tr.gGuide.caveat.includes("g_D=2"));
   assert.ok(en.gGuide.title.includes("g=1"));
+  const sixTr=window.COURSE_LESSONS.find(l=>l.id==="06");
+  const sixEn=window.COURSE_LESSONS_EN.find(l=>l.id==="06");
+  assert.ok(sixTr.gGuide.title.includes("g"));
+  assert.ok(sixEn.gGuide.title.includes("g"));
+  assert.ok(sixTr.gGuide.caveat.includes("g_D=2"));
   for(let i=0;i<10;i++){
     assert.equal(tr.topics[i].paragraphs.length,en.topics[i].paragraphs.length);
     assert.ok(tr.topics[i].slideReference.includes("lec07.pdf"));

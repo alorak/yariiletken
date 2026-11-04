@@ -80,7 +80,7 @@ Her yeni aşamada kullanılan formüller ve veri kaynakları açıkça belirtilm
 | **04 · Bant Teorisi** | 5 grafik: durum sayımı, N-seviye ayrışması, kuplaj modları, N(E), E(k)/m* | 4 simülasyon: 4N dolu/boş durum, üç osilatör modu, ölçekli Si bantları, altı bant olayı | 22 soruluk açıklamalı test |
 | **05 · Fermi ve DOS** | Bant kenarı DOS, 0/300/600 K Fermi, N(E)f(E), nᵢ–1000/T | 3kT hata deneyi; Nᶜ/Nᵛ ve n/p hesaplayıcı | 16 soruluk açıklamalı test |
 | **06 · Katkılama** | Üç Nᴅ düzeyinde n–1000/T, doğrusal T ve iki taşıyıcı kaynağı | Nᴅ/Nᴀ/T ile kısmi iyonlaşma ve yük nötrlüğü | 16 soruluk açıklamalı test |
-| **07 · Katkılı Bant Modeli** | 8 bant/durum şeması ve nicel grafik: iyonlaşma, yük nötrlüğü, E_F, üç sıcaklık rejimi, Arrhenius, kompanzasyon | 2 hesaplayıcı: g=1 ↔ g_D/g_A ve freeze-out/E_F | 20 soruluk açıklamalı test |
+| **07 · Katkılı Bant Modeli** | 8 çalışan grafik/şema: katkı bantları, delta DOS, iyonlaşma yüzdeleri, yük nötrlüğü kesişimi, Fermi–katkı, n(T), Arrhenius ve kompanzasyon | 3 etkileşimli laboratuvar: g karşılaştırması, freeze-out, kompanzasyon; hazır deneyler ve yorumlar | 20 soruluk açıklamalı test |
 
 ### Bilimsel kapsam ve sınırlamalar
 
@@ -112,9 +112,9 @@ Kaynak **lec07.pdf (58 slayt)**; önceki Ders 05–06 ile karşılaştırılarak
 - **g=1 açıklama kutusu**, hem Ders 06 hem Ders 07'de anlatım, grafik, simülasyon ve soru sekmelerinin başında yer alır. Ders 07 içinde uygun konularda kısa hatırlatma da bulunur.
 - **Pedagoji:** g=1 seçimi donörün elektron vermesi, akseptörün elektron kabul etmesi, E_F'nin değişmesi ve yük nötrlüğünün öğrenilmesi için yeterli bir kavramsal sadeleştirmedir; ancak nicel iyonlaşmada g önemsiz değildir. Si:P, 77 K ve N_D=10¹⁵ cm⁻³ örneğinde g=1 ile ≈%83; g_D=2 ile ≈%74 iyonlaşma bulunur. Standart sığ Si için g_D=2/g_A=4 örnekleri gösterilir.
 - Ders 06 mevcut hesaplayıcısının **varsayılanı g_D=2/g_A=4 korunur**. Ders 07'de g=1 referansı ve standart faktörler yan yana karşılaştırılır; nicel modelde kısmi iyonlaşma ile yük nötrlüğü birlikte çözülür.
-- 07'de sekiz görsel/grafik, iki sayısal laboratuvar ve **20 adet, her seçenek için açıklamalı TR/EN soru** eklendi. Oyunlar sekmesi plan görünümündedir.
+- 07'de sekiz çalışan grafik/şema ve üç sayısal laboratuvar bulunmaktadır. Grafikler bant konumunu, DOS'u, donör iyonlaşmasını, yük nötrlüğü kesişimini, 60 meV kuralını, sıcaklık rejimlerini, Arrhenius eğimlerini ve kompanzasyonu kapsar. Laboratuvarlarda **77 K freeze-out / 300 K ekstrinsik / 600 K kompanzasyon / tam kompanzasyon** hazır deneyleri, canlı hesaplanan sonuçlar, gözlem ve mini-kontrol kutuları bulunur. **20 açıklamalı TR/EN soru** korunmuştur; Oyunlar sekmesi plan görünümündedir.
 - lec07'nin klasik n_i(300 K)=1,5×10¹⁰ cm⁻³ referansı ile önceki derslerin 9,65×10⁹ cm⁻³ referansı açıkça ayrıldı; farklı sayıların tek işlemde karıştırılmaması gerektiği belirtilir. Simülasyonlar eski 05–06 fizik modelinin 9,65×10⁹ referansını kullanır. Sabit E_g ve non-degenerate yaklaşım nedeniyle tahminler gerçek cihaz verisi değildir.
-- Regresyon testleri: \`node --test tests/lecture07-band-model.test.mjs\` ve \`node --test tests/*.test.mjs\`.
+- Regresyon testleri: `node --test tests/lecture07-band-model.test.mjs tests/lecture07-interactivity.test.mjs` ve tüm testler için `node --test tests/*.test.mjs`. Grafik veya laboratuvar yüklenmezse kullanıcıya boş alan yerine hata açıklaması gösterilir.
 
 ### Tests
 

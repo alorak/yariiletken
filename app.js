@@ -39,8 +39,9 @@
       proposed: "PLANLANAN",
       proposedNote: "Bu etkinlik için arayüz alanı ayrıldı; henüz etkin değildir.",
       back: "Konu anlatımına dön",
-      footerLeft: "Yarıiletken Fiziği · Ders 02–06",
+      footerLeft: "Yarıiletken Fiziği · Ders 02–07",
       footerRight: "Her kazanım, grafik ve uygulama adım adım geliştiriliyor.",
+      footerAttribution: "Prof. Dr. Barış Akaoğlu'nun ders notlarından yararlanılmıştır.",
       descriptions: {
         grafikler: "Bu bölümde veriye dayalı eğriler ve bilimsel diyagramlar adım adım eklenecek. İlk aşamada ders anlatımı ile kazanımlar tamamlandı.",
         simulasyonlar: "Kontrol edilebilir fiziksel modeller sonraki geliştirmede burada çalışacak. Henüz çalışır bir simülasyon bulunduğu iddia edilmez.",
@@ -69,8 +70,9 @@
       proposed: "PLANNED",
       proposedNote: "Space has been reserved for this activity; it is not yet interactive.",
       back: "Return to lessons",
-      footerLeft: "Semiconductor Physics · Lessons 02–06",
+      footerLeft: "Semiconductor Physics · Lessons 02–07",
       footerRight: "Learning outcomes, graphs and activities are being developed step by step.",
+      footerAttribution: "Based on lecture notes by Prof. Dr. Barış Akaoğlu.",
       descriptions: {
         grafikler: "Scientific curves and diagrams will be added progressively. The first phase covers lesson explanations and learning outcomes.",
         simulasyonlar: "Controllable physical models will be added here in a later phase. No working simulation is currently claimed.",
@@ -467,6 +469,7 @@
     $("#content-panel").setAttribute("aria-label", t().panel);
     $("#footer-left").textContent = t().footerLeft;
     $("#footer-right").textContent = t().footerRight;
+    $("#footer-attribution").textContent = t().footerAttribution;
     updateThemeLabel();
     renderLessonNav(lesson);
     renderHero(lesson);

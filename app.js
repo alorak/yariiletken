@@ -335,6 +335,16 @@
     };
   }
 
+  function guideMarkup(lesson) {
+    if (!lesson.gGuide) return "";
+    const g = lesson.gGuide;
+    // Course copy is trusted, local bilingual HTML.
+    return '<aside class="lecture-g-guide" aria-label="' + g.title + '">' +
+      '<div class="lecture-g-guide-header"><strong>' + g.title + '</strong>' +
+      '<span>g = 1</span></div><p>' + g.intro + '</p><p>' + g.caveat +
+      '</p><small>' + g.short + '</small></aside>';
+  }
+
   function renderNarration(lesson) {
     const strings = t();
     const checked = new Set(getChecked(lesson));
@@ -360,6 +370,9 @@
         : "") +
       (topic.lectureFigure && window.Lecture0506Lab?.figure
         ? window.Lecture0506Lab.figure(topic.lectureFigure, language) : "") +
+      (topic.visual07 && window.Lecture07Lab?.figure
+        ? window.Lecture07Lab.figure(topic.visual07, language) : "") +
+      (topic.gContext && lesson.gGuide ? '<p class="lecture-g-context">' + lesson.gGuide.short + '</p>' : "") +
       (lesson.id === "03" && index === 2 ? '<div id="lesson03-hole-inline"></div>' : "") +
       '<div class="key-point">' + topic.key + '</div></article>'
     ).join("");
@@ -378,7 +391,7 @@
         '" aria-label="' + strings.topic + ' ' + (index + 1) + ': ' + topic.title +
         '" title="' + topic.title + '"' + (index === 0 ? ' aria-current="step"' : '') +
         '><span aria-hidden="true">' + (index + 1) + '</span></button>'
-      ).join("") + '</div></nav>' + topics + '</div>' +
+      ).join("") + '</div></nav>' + guideMarkup(lesson) + topics + '</div>' +
       '<aside class="outcomes-card" aria-labelledby="outcomes-title">' +
       '<div class="outcomes-header"><h2 id="outcomes-title">' + strings.outcomes + '</h2>' +
       '<span class="outcome-counter" id="outcome-counter"></span></div>' +
@@ -401,6 +414,9 @@
   }
 
   function renderPlanned(lesson, tabId) {
+    if (window.Lecture07Lab?.mount({
+      container: $("#content-panel"), lessonId: lesson.id, language, tabId
+    })) return;
     if (window.Lecture0506Lab?.mount({
       container: $("#content-panel"), lessonId: lesson.id, language, tabId
     })) return;
@@ -457,6 +473,9 @@
     renderTabs(lesson.id, tabId);
     if (tabId === "anlatim") renderNarration(lesson);
     else renderPlanned(lesson, tabId);
+    if (tabId !== "anlatim" && lesson.gGuide) {
+      $("#content-panel").insertAdjacentHTML("afterbegin", guideMarkup(lesson));
+    }
     // Refresh immediately after localized titles reflow, before scrolling into the reading pane.
     refreshStickyOffsets();
     if (pendingTopic && tabId === "anlatim" && pendingTopic.lessonId === lesson.id) {

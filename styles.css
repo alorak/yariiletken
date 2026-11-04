@@ -120,7 +120,8 @@ html[data-theme="dark"] .moon-icon { display: none; }
 .back-button { background: var(--accent); color: var(--bg); border: 0; border-radius: 9px; padding: 11px 16px; margin-top: 22px; font-weight: 750; font-size: 12px; }
 html[data-theme="dark"] .back-button { color: #08222e; }
 .site-footer { border-top: 1px solid var(--stroke); color: var(--muted); font-size: 11px; }
-.footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 23px; padding-bottom: 28px; }
+.footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 23px; padding-bottom: 8px; }
+.footer-attribution { margin-top: 0; margin-bottom: 0; padding-bottom: 24px; color: var(--ink-soft); line-height: 1.5; }
 .noscript { background: #fff4e5; color: #7c3904; padding: 14px; text-align: center; }
 @media (max-width: 1120px) {
   .header-inner { gap: 10px; }

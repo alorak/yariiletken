@@ -34,7 +34,7 @@ const tr = [
   "Düşük sıcaklıkta tam iyonlaşma varsayımı kontrol edilmeden uygulanmaz.", "33–37"],
  ["Üç sıcaklık rejimi, E_F(T), Arrhenius ve T_i",
   "I — <strong>Freeze-out</strong>: n≈N<sub>D</sub>⁺. II — <strong>Extrinsic</strong>: n≈N<sub>D</sub>. III — <strong>Intrinsic</strong>: n≈p≈nᵢ. Tᵢ yaklaşık olarak nᵢ(Tᵢ)=N<sub>D</sub> eşitliğiyle tanımlanır, ancak tam iyonlaşma durumunda Tᵢ anında elektron yoğunluğu N<sub>D</sub> değil yaklaşık <strong>1,618N<sub>D</sub></strong>'dir.",
-  "n–1000/T log grafiğinin sağında (düşük T) freeze-out eğimi yaklaşık −E<sub>ion</sub>/(2k), solunda (yüksek T) öz eğimi yaklaşık −E<sub>g</sub>/(2k)'dir; N<sub>c</sub>∝T³ᐟ² çarpanı eğim çıkarırken düzeltilmelidir. T boyunca E<sub>F</sub> ekstrinsik rejimde E<sub>i</sub>'ye yaklaşır; yüksek katkı öz rejime geçişi daha yüksek sıcaklığa iter. E<sub>g</sub>(T) modeli geçiş sayısını değiştirir.",
+  "n–1000/T log grafiğinin sağında (düşük T) freeze-out eğimi yaklaşık −E<sub>ion</sub>/(2k), solunda (yüksek T) öz eğimi yaklaşık −E<sub>g</sub>/(2k)'dir; N<sub>c</sub>∝T³ᐟ² çarpanı eğim çıkarırken düzeltilmelidir. Kompanzasyon yokken T→0 limitinde E<sub>F</sub> yaklaşık (E<sub>c</sub>+E<sub>D</sub>)/2'ye, 0&lt;N<sub>A</sub>&lt;N<sub>D</sub> kompanzasyonunda ise E<sub>D</sub>'ye yaklaşır. T artarken E<sub>F</sub> ekstrinsik bölgede E<sub>i</sub>'ye ilerler; yüksek katkı öz rejime geçişi daha yüksek sıcaklığa iter. E<sub>g</sub>(T) modeli geçiş sayısını değiştirir.",
   "Üç bölge için tek denklem yerine her bölgenin varsayımını ve geçerliliğini kontrol et.", "38–46"],
  ["Telafili katkılama ve 300/600 K örnekleri",
   "İki katkı da tam iyonlaşmışsa net fark ΔN=N<sub>D</sub>−N<sub>A</sub> taşıyıcı türünü belirler. Ancak saçılma merkezleri yaklaşık <strong>N<sub>D</sub>+N<sub>A</sub></strong> toplamıyla ilgilidir. N<sub>D</sub>=N<sub>A</sub> ise n=p=nᵢ olabilir; kristal yine de toplam 2N<sub>D</sub> yüklü iyon içerir.",
@@ -76,7 +76,7 @@ const en=[
   "Do not assume complete ionization in freeze-out.", "33–37"],
  ["Three regimes, E_F(T), Arrhenius and T_i",
   "I: freeze-out n≈N_D⁺. II: extrinsic plateau n≈N_D. III: intrinsic n≈p≈n_i. Crossover T_i is conventionally defined by n_i(T_i)=N_D, but at T_i the actual n=φN_D≈<strong>1.618N_D</strong> for fully ionized donors.",
-  "On ln n versus 1/T, the low-temperature slope is about −E_ion/(2k), while high-temperature intrinsic slope is about −E_g/(2k); account for the slowly varying T³ᐟ² DOS factor. During the plateau E_F moves toward E_i as T rises. More doping moves the intrinsic crossover to higher T.",
+  "On ln n versus 1/T, the low-temperature slope is about −E_ion/(2k), while high-temperature intrinsic slope is about −E_g/(2k); account for the slowly varying T³ᐟ² DOS factor. As T→0, uncompensated donors give E_F→(E_c+E_D)/2; with 0&lt;N_A&lt;N_D compensation E_F→E_D. During the plateau E_F moves toward E_i as T rises; more doping delays intrinsic crossover.",
   "Use each limiting formula only in the regime where its assumptions hold.", "38–46"],
  ["Compensation and 300/600 K examples",
   "For fully ionized mixed dopants, the net N_D−N_A sets the carrier type; <strong>N_D+N_A</strong> gives the count of charged impurity scatterers. Perfect compensation N_D=N_A can give n=p=n_i while leaving twice the concentration of charged centers.",
@@ -127,13 +127,13 @@ const globalGuide={
  tr:{
   title:"g faktörü: fiziği anlamak için neden g=1 ile başlıyoruz?",
   intro:"Bu derste temel mekanizmayı öğrenirken <strong>g=1</strong> seçimini kullanıyoruz. Böylece dikkatimizi <strong>E_F−E_D/E_A, sıcaklık, iyonlaşma ve yük nötrlüğü</strong> ilişkilerine verebiliyoruz. g, farklı mikroskobik durumların sayımına ilişkin istatistiksel düzeltmedir; yeni bir fiziksel taşıyıcı türü veya yeni bir enerji seviyesi değildir.",
-  caveat:"<strong>Önemli sınır:</strong> g sayısal hesapta tamamen önemsiz değildir. Özellikle freeze-out'ta iyonlaşma yüzdesi değişir; standart sığ Si katkıları için çoğunlukla g_D=2 ve g_A=4 kullanılır. Slayttaki g=1 sonuçlarını deneysel kesin değer olarak yorumlamayın.",
+  caveat:"<strong>Önemli sınır:</strong> g sayısal hesapta tamamen önemsiz değildir. Özellikle freeze-out'ta iyonlaşma yüzdesi değişir; standart sığ Si katkıları için çoğunlukla g_D=2 ve g_A=4 kullanılır. Slayttaki g=1 sonuçlarını deneysel kesin değer olarak yorumlamayın. Önceki 06. dersteki hesaplayıcı standart faktörleri varsayar; bu 07. derste iki seçimi karşılaştırabilirsiniz.",
   short:"Referans: g=1 (öğrenme modeli) · Ayrıntılı: g_D=2, g_A=4 (standart sayım)."
  },
  en:{
   title:"Why we use g=1 to learn the physics",
   intro:"This course starts with <strong>g=1</strong> to focus on <strong>E_F−E_D/E_A, temperature, ionization and charge neutrality</strong>. The g factor counts microscopic configurations; it is not a new carrier type or energy level.",
-  caveat:"<strong>Important limit:</strong> g is not numerically irrelevant. Ionized fractions can differ substantially in freeze-out. Standard shallow Si statistics often use g_D=2 and g_A=4; a teaching g=1 result must not be labeled an exact measured value.",
+  caveat:"<strong>Important limit:</strong> g is not numerically irrelevant. Ionized fractions can differ substantially in freeze-out. Standard shallow Si statistics often use g_D=2 and g_A=4; a teaching g=1 result must not be labeled an exact measured value. The 06 simulator defaults to standard factors; this 07 lesson compares both.",
   short:"Reference: g=1 (learning model) · Detailed: g_D=2, g_A=4 (standard counting)."
  }
 };
